@@ -1,0 +1,46 @@
+[
+  {
+    "prompt": "Why must a pipeline run tasks in dependency order?",
+    "options": [
+      "A task needs its inputs, so a prerequisite must finish before the task starts",
+      "Order makes the code shorter",
+      "Dependencies are optional",
+      "Tasks are always independent"
+    ],
+    "answerIndex": 0,
+    "explanation": "Running a task before its inputs exist produces errors or stale results."
+  },
+  {
+    "prompt": "What is feature leakage?",
+    "options": [
+      "Training on values that were not available at prediction time",
+      "A feature that is too small",
+      "A feature stored in the wrong format",
+      "A feature with missing values"
+    ],
+    "answerIndex": 0,
+    "explanation": "Using future information makes offline results look better than production will be."
+  },
+  {
+    "prompt": "What does a point-in-time join do?",
+    "options": [
+      "It takes, for each example, the feature value that was current at that example's time",
+      "It joins the newest values to every row",
+      "It removes the time column",
+      "It sorts the data randomly"
+    ],
+    "answerIndex": 0,
+    "explanation": "Matching by time prevents the future from leaking into the training data."
+  },
+  {
+    "prompt": "What does a cache's time-to-live control?",
+    "options": [
+      "How long a stored value is considered fresh enough to serve",
+      "The size of the cache",
+      "The number of users",
+      "The model's architecture"
+    ],
+    "answerIndex": 0,
+    "explanation": "After the time-to-live, a value must be recomputed, which bounds how stale a served feature can be."
+  }
+]

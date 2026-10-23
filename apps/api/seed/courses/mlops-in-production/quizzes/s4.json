@@ -1,0 +1,68 @@
+[
+  {
+    "prompt": "What does a population stability index measure?",
+    "options": [
+      "How much the distribution of a feature has shifted from the reference",
+      "The accuracy of the model",
+      "The size of the training data",
+      "The speed of the server"
+    ],
+    "answerIndex": 0,
+    "explanation": "PSI compares the binned distribution of a feature in production with its reference distribution."
+  },
+  {
+    "prompt": "Why require several consecutive days above a threshold before retraining?",
+    "options": [
+      "A single noisy day should not trigger an expensive retrain",
+      "Retraining is always free",
+      "Thresholds are never reached",
+      "Consecutive days are always identical"
+    ],
+    "answerIndex": 0,
+    "explanation": "Requiring persistence guards against false alarms from a single unusual day."
+  },
+  {
+    "prompt": "What should a retraining decision be checked against before release?",
+    "options": [
+      "The new model's evaluation on held-out data, compared with the current model",
+      "The name of the engineer",
+      "The number of features only",
+      "The date of the last holiday"
+    ],
+    "answerIndex": 0,
+    "explanation": "A retrained model must be shown to be better on evaluation data before it replaces the current one."
+  },
+  {
+    "prompt": "Why bin the feature values in a drift check?",
+    "options": [
+      "To compare the proportions of values in matching ranges between two datasets",
+      "To make the model smaller",
+      "To remove missing values",
+      "To rename the features"
+    ],
+    "answerIndex": 0,
+    "explanation": "Binning turns two samples into comparable distributions."
+  },
+  {
+    "prompt": "Why is point-in-time correctness important for offline evaluation?",
+    "options": [
+      "Without it, the evaluation uses information that production would not have, and the scores are too optimistic",
+      "It makes the dataset larger",
+      "It removes the need for a test set",
+      "It makes training faster"
+    ],
+    "answerIndex": 0,
+    "explanation": "Leakage inflates offline metrics, so the model disappoints once it is served."
+  },
+  {
+    "prompt": "What is the reason to version the code, data and model together?",
+    "options": [
+      "So any past result can be reproduced from the exact inputs that produced it",
+      "So the files are smaller",
+      "So the model trains faster",
+      "So no one needs to write documentation"
+    ],
+    "answerIndex": 0,
+    "explanation": "Reproducibility needs all three to be pinned, otherwise a result cannot be traced back."
+  }
+]

@@ -70,42 +70,6 @@ const VID = [
 export const sampleVideo = (i) => VID[i % VID.length];
 
 export const courses = [
-  {
-    slug: "mlops-in-production",
-    title: "MLOps: Shipping Models to Production",
-    subtitle: "Pipelines, feature stores, CI/CD for ML, serving, monitoring and drift detection.",
-    category: "mlops",
-    instructor: "arjun",
-    level: "advanced",
-    price: 0,
-    compareAt: null,
-    accent: 140,
-    featured: false,
-    students: 13280,
-    tags: ["MLOps", "Docker", "Monitoring", "CI/CD"],
-    learn: [
-      "Version data, code and models reproducibly",
-      "Build training pipelines and feature stores",
-      "Serve models with low latency",
-      "Set up CI/CD and automated evaluation for ML",
-      "Detect drift and monitor model quality",
-    ],
-    requirements: ["Experience training ML models", "Comfort with the command line and Docker basics"],
-    audience: ["ML engineers", "Data scientists shipping their first models", "Platform engineers"],
-    snippet: `@app.post("/predict")\nasync def predict(req: PredictRequest):\n    features = feature_store.get(req.user_id)\n    with latency.time():\n        score = model.predict_proba([features])[0, 1]\n    log_prediction(req.user_id, features, score)\n    return {"score": float(score)}`,
-    sections: [
-      ["The ML Lifecycle", ["v|Why most models never ship|10", "a|Maturity levels of MLOps|9"]],
-      ["Reproducibility", ["v|Versioning data and models|15", "v|Experiment tracking|13", "q|Checkpoint: reproducibility"]],
-      ["Pipelines & Features", ["v|Orchestrating training pipelines|18", "v|Feature stores|14", "a|Batch vs online features|11"]],
-      ["Serving", ["v|Model serving patterns|17", "v|Optimizing inference latency|16"]],
-      ["Monitoring", ["v|Data and concept drift|15", "v|Alerting and retraining loops|13", "q|Final assessment"]],
-    ],
-    quiz: [
-      ["Concept drift means…", ["The input distribution changed", "The relationship between inputs and the target changed", "The model file is corrupted", "Latency increased"], 1, "P(y|x) shifts over time, so a once-good model degrades."],
-      ["A feature store primarily helps to…", ["Train larger models", "Serve consistent features for training and inference", "Label data", "Replace databases"], 1, "It prevents training/serving skew."],
-      ["Shadow deployment means…", ["Deploying at night", "Running a new model on live traffic without affecting responses", "Deleting old models", "Training on production data"], 1, "Compare predictions safely before switching."],
-    ],
-  },
 ];
 
 export const paths = [
