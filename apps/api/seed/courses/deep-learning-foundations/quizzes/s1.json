@@ -1,0 +1,47 @@
+[
+  {
+    "prompt": "A neuron computes z = w · x + b and then applies an activation. Which parameters does the neuron learn?",
+    "options": ["Only the inputs x", "The weights w and the bias b", "Only the activation function", "The learning rate"],
+    "answerIndex": 1,
+    "explanation": "The inputs come from the data. Training adjusts the weights and the bias, which are the neuron's parameters."
+  },
+  {
+    "prompt": "Why does a network need a non-linear activation between layers?",
+    "options": [
+      "To make training faster",
+      "Without one, stacked linear layers collapse into a single linear map",
+      "To keep the weights between 0 and 1",
+      "To reduce the number of parameters"
+    ],
+    "answerIndex": 1,
+    "explanation": "W2 (W1 x) is just (W2 W1) x. A non-linearity between the layers is what lets depth add expressive power."
+  },
+  {
+    "prompt": "A batch of 32 examples with 10 features goes through a dense layer with 4 outputs. What is the shape of the output Z = X @ W + b?",
+    "options": ["(10, 4)", "(32, 10)", "(32, 4)", "(4,)"],
+    "answerIndex": 2,
+    "explanation": "X is (32, 10) and W is (10, 4). The matrix product is (32, 4), one row of four outputs per example."
+  },
+  {
+    "prompt": "Which statement about the chain rule in backpropagation is correct?",
+    "options": [
+      "Gradients are multiplied along the path from the output back to the parameter",
+      "Gradients are added along the path from the output back to the parameter",
+      "Each gradient is computed independently of the others",
+      "Gradients only exist for the last layer"
+    ],
+    "answerIndex": 0,
+    "explanation": "For a chain of functions, the derivative of the composition is the product of the local derivatives. Backprop multiplies them as it walks backwards."
+  },
+  {
+    "prompt": "For a network with a loss L, what does the gradient ∂L/∂w tell you?",
+    "options": [
+      "The exact value of the loss after training",
+      "How much the loss changes for a small change in w, which tells you which way to move w",
+      "The number of times w was used",
+      "The best value for w"
+    ],
+    "answerIndex": 1,
+    "explanation": "The gradient is the local rate of change. Gradient descent moves each weight a small step in the direction that decreases the loss."
+  }
+]

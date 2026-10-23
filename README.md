@@ -31,13 +31,14 @@ Lessons of type `interactive` are Markdown with live cells. Learners write, run 
 - **Progress:** solved challenges are stored per learner (`exercise_progress`). Solving every challenge completes the lesson. Solutions are stripped from learner payloads and fetched on demand.
 - **Authoring:** in the studio, set the lesson type to *Interactive*, insert cells from the toolbar, then **Preview & run** and **Validate**.
 
-Ten fully interactive courses ship with the seed data:
+Eleven fully interactive courses ship with the seed data:
 
 | Course | Folder | Content |
 |---|---|---|
 | **Python Basics** | `apps/api/seed/courses/python-basics` | 30 lessons (3 capstone projects) and 8 quizzes, for complete beginners |
 | **NumPy Mastery** | `apps/api/seed/courses/numpy` | 28 lessons and 8 quizzes |
 | **Mathematics for Machine Learning** | `apps/api/seed/courses/math-for-machine-learning` | 16 lessons and 4 quizzes: vectors, matrices, eigenvalues, SVD and PCA, calculus and gradient descent, probability and maximum likelihood |
+| **Deep Learning Foundations** | `apps/api/seed/courses/deep-learning-foundations` | 21 lessons and 5 quizzes: neurons, backpropagation from scratch, training networks, PyTorch in practice, CNNs, attention and a capstone image classifier. PyTorch code is shown for you to run locally; each idea also has a runnable NumPy version |
 | **JavaScript Basics** | `apps/api/seed/courses/javascript-basics` | 25 lessons (3 capstone projects) and 7 quizzes, from `console.log` to JSON and classes |
 | **JavaScript Advanced** | `apps/api/seed/courses/javascript-advanced` | 24 lessons (3 capstone projects) and 7 quizzes: closures, prototypes, the event loop, async patterns |
 | **Java Basics** | `apps/api/seed/courses/java-basics` | A complete first course, run in the browser through CheerpJ |
@@ -52,8 +53,10 @@ See [`apps/api/seed/courses/AUTHORING.md`](apps/api/seed/courses/AUTHORING.md) f
 cd apps/api && node seed/courses/validate.mjs numpy           # all lessons; add a file filter and --verbose
 cd apps/api && node seed/courses/validate.mjs python-basics
 cd apps/api && node seed/courses/validate.mjs math-for-machine-learning      # NumPy cells, same runtime as the course
+cd apps/api && node seed/courses/validate.mjs deep-learning-foundations       # NumPy cells; PyTorch snippets are static
 cd apps/api && node seed/courses/validate.mjs html-css-basics 04 --verbose   # headless Chrome
 pnpm --filter @latent/api db:course:math-for-machine-learning:local           # add or refresh one course without re-seeding everything
+pnpm --filter @latent/api db:course:deep-learning-foundations:local            # same for deep-learning-foundations
 pnpm --filter @latent/api db:course:python-basics:local       # add or refresh one course without re-seeding everything
 pnpm --filter @latent/api db:course:javascript-basics:local   # same for javascript-basics and javascript-advanced
 pnpm --filter @latent/api db:course:html-css-basics:local     # HTML/CSS courses have the same one-course refresh

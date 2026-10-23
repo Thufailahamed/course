@@ -1,0 +1,58 @@
+[
+  {
+    "prompt": "A model reaches 99% training accuracy but 70% validation accuracy. What is the most likely diagnosis?",
+    "options": ["Underfitting", "Overfitting", "A learning rate that is too small", "A corrupted optimizer"],
+    "answerIndex": 1,
+    "explanation": "A large gap between training and validation performance is the classic sign that the model has memorized the training data."
+  },
+  {
+    "prompt": "Momentum accelerates gradient descent. What does it accumulate?",
+    "options": [
+      "The exact loss values",
+      "An exponentially weighted average of past gradients",
+      "The number of training steps",
+      "The validation set"
+    ],
+    "answerIndex": 1,
+    "explanation": "The velocity v is a running average of recent gradients. Directions that keep agreeing build up speed, and oscillating directions cancel out."
+  },
+  {
+    "prompt": "Inverted dropout with keep probability p scales the surviving activations by 1/p during training. Why?",
+    "options": [
+      "To make training faster",
+      "So the expected value of each activation is the same with and without dropout",
+      "To make the weights larger",
+      "Because dropout removes the bias"
+    ],
+    "answerIndex": 1,
+    "explanation": "Dropout zeroes some activations, which lowers their average. Dividing the survivors by p keeps the expected activation unchanged, so no rescaling is needed at test time."
+  },
+  {
+    "prompt": "Why do we initialize weights randomly instead of with zeros?",
+    "options": [
+      "Zeros make the forward pass fail",
+      "Identical weights receive identical gradients, so the neurons in a layer never differentiate",
+      "Random weights train faster on every problem",
+      "Zeros are not allowed in NumPy"
+    ],
+    "answerIndex": 1,
+    "explanation": "If every weight in a layer starts the same, every neuron computes the same thing and gets the same update forever. Random initialization breaks that symmetry."
+  },
+  {
+    "prompt": "A layer has fan_in = 256 inputs. Roughly what standard deviation does He initialization use for its weights?",
+    "options": ["1.0", "sqrt(2 / 256)", "256", "0.01 exactly"],
+    "answerIndex": 1,
+    "explanation": "He initialization uses a standard deviation of sqrt(2 / fan_in), which keeps the variance of ReLU activations roughly stable from layer to layer."
+  },
+  {
+    "prompt": "Early stopping means…",
+    "options": [
+      "Stopping the GPU when it overheats",
+      "Ending training when the validation loss stops improving",
+      "Stopping after exactly one epoch",
+      "Reducing the learning rate to zero"
+    ],
+    "answerIndex": 1,
+    "explanation": "Training loss keeps falling as the model memorizes. Validation loss usually bottoms out first, and stopping there keeps the model that generalizes best."
+  }
+]
