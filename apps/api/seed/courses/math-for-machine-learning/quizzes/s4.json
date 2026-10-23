@@ -1,0 +1,87 @@
+[
+  {
+    "prompt": "What is the expected value of a fair six-sided die?",
+    "options": ["3", "3.5", "3.67", "4"],
+    "answerIndex": 1,
+    "explanation": "Each face has probability 1/6, so E[X] = (1 + 2 + 3 + 4 + 5 + 6) / 6 = 3.5, even though the die never shows 3.5."
+  },
+  {
+    "prompt": "For a random variable X and constants a and b, what is Var(aX + b)?",
+    "options": ["a · Var(X) + b", "a² · Var(X)", "a · Var(X)", "Var(X) + b²"],
+    "answerIndex": 1,
+    "explanation": "Shifting by b changes the mean but not the spread. Scaling by a multiplies the standard deviation by |a|, so the variance is multiplied by a²."
+  },
+  {
+    "prompt": "Which expression is Bayes' rule for P(A | B)?",
+    "options": [
+      "P(A) P(B | A)",
+      "P(B | A) P(A) / P(B)",
+      "P(A) + P(B) - P(A and B)",
+      "P(B | A) / P(A)"
+    ],
+    "answerIndex": 1,
+    "explanation": "Bayes' rule turns the likelihood P(B | A) and the prior P(A) into the posterior P(A | B), normalized by the evidence P(B)."
+  },
+  {
+    "prompt": "A test for a rare disease is 95% sensitive and has a 5% false-positive rate. Why can a positive result still be more likely to be a false alarm than a true case?",
+    "options": [
+      "Because tests are never accurate",
+      "Because the healthy population is so large that its false positives outnumber the true cases",
+      "Because positive results are always rounded down",
+      "Because sensitivity and specificity must always be equal"
+    ],
+    "answerIndex": 1,
+    "explanation": "This is the base-rate effect. With 1% prevalence, about 4.95% of everyone is a healthy false positive (99% × 5%), while only about 0.95% is a sick true positive (1% × 95%). Most positives are false."
+  },
+  {
+    "prompt": "What is the maximum likelihood estimate of the success probability p of a Bernoulli model, from observed 0/1 data?",
+    "options": [
+      "The number of successes",
+      "The fraction of successes among the observations",
+      "The median of the data",
+      "1 - the fraction of successes"
+    ],
+    "answerIndex": 1,
+    "explanation": "Setting the derivative of the log-likelihood to zero gives p̂ = (number of 1s) / n. This is the observed frequency."
+  },
+  {
+    "prompt": "Least-squares regression is equivalent to maximum likelihood under which noise assumption?",
+    "options": ["Uniform noise", "Gaussian noise", "Exponential noise", "No noise at all"],
+    "answerIndex": 1,
+    "explanation": "The Gaussian log-likelihood is a constant minus a sum of squared errors, so maximizing it is the same as minimizing the squared error."
+  },
+  {
+    "prompt": "Why do practitioners maximize the log-likelihood rather than the likelihood?",
+    "options": [
+      "The log changes which parameter values are optimal",
+      "The log turns products into sums, which avoids numerical underflow, and has the same maximizer",
+      "The likelihood cannot be computed",
+      "The log makes the likelihood always positive"
+    ],
+    "answerIndex": 1,
+    "explanation": "The logarithm is increasing, so the maximizer is unchanged. Multiplying many probabilities underflows to zero in floating point, while sums of logs stay finite."
+  },
+  {
+    "prompt": "What is Cov(X, X), the covariance of a variable with itself?",
+    "options": ["0", "1", "Var(X)", "E[X]"],
+    "answerIndex": 2,
+    "explanation": "Covariance measures how two variables vary together. With the same variable twice, that is exactly its variance."
+  },
+  {
+    "prompt": "Within what range does the Pearson correlation coefficient always lie?",
+    "options": ["From 0 to 1", "From -1 to 1", "From -∞ to ∞", "From -2 to 2"],
+    "answerIndex": 1,
+    "explanation": "Correlation is the covariance divided by the product of the standard deviations, which by the Cauchy–Schwarz inequality keeps it between -1 and 1."
+  },
+  {
+    "prompt": "Power iteration, repeatedly multiplying a vector by A and normalizing, converges to which eigenvector?",
+    "options": [
+      "The eigenvector with the smallest eigenvalue",
+      "The eigenvector with the largest absolute eigenvalue",
+      "The zero vector",
+      "The eigenvector that is orthogonal to the starting vector"
+    ],
+    "answerIndex": 1,
+    "explanation": "Each multiplication amplifies the component along the dominant eigenvector most strongly, so the direction converges to it, provided the starting vector has a component along it."
+  }
+]

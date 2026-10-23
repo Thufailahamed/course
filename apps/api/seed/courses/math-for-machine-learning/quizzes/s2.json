@@ -1,0 +1,47 @@
+[
+  {
+    "prompt": "An eigenvector v of a matrix A, with eigenvalue λ, satisfies…",
+    "options": ["A v = 0", "A v = λ v", "A v = v · λ²", "vᵀ A = λ"],
+    "answerIndex": 1,
+    "explanation": "Multiplying an eigenvector by A only scales it, by λ. The direction is unchanged."
+  },
+  {
+    "prompt": "Which NumPy function should you use to find eigenvalues and eigenvectors of a symmetric matrix?",
+    "options": ["np.linalg.inv", "np.linalg.svd", "np.linalg.eigh", "np.linalg.det"],
+    "answerIndex": 2,
+    "explanation": "np.linalg.eigh exploits symmetry. It returns real eigenvalues in ascending order and orthogonal eigenvectors as columns."
+  },
+  {
+    "prompt": "How are the singular values of a matrix A related to eigenvalues?",
+    "options": [
+      "They are the eigenvalues of A itself",
+      "They are the square roots of the eigenvalues of AᵀA",
+      "They are always equal to the trace",
+      "They have no relation to eigenvalues"
+    ],
+    "answerIndex": 1,
+    "explanation": "AᵀA is symmetric and positive semidefinite, so its eigenvalues are non-negative, and their square roots are the singular values of A."
+  },
+  {
+    "prompt": "Why is truncating the SVD to its top k components a good approximation?",
+    "options": [
+      "It gives the best rank-k approximation in the least-squares sense",
+      "It always gives an exact answer",
+      "It makes the matrix symmetric",
+      "It sets the smallest eigenvalues to zero"
+    ],
+    "answerIndex": 0,
+    "explanation": "The Eckart–Young theorem says that keeping the top k singular values and vectors gives the closest rank-k matrix to A, measured by the Frobenius norm."
+  },
+  {
+    "prompt": "In PCA, what is the first principal component?",
+    "options": [
+      "The mean of the data",
+      "The feature with the largest variance",
+      "The eigenvector of the covariance matrix with the largest eigenvalue",
+      "The first row of the data matrix"
+    ],
+    "answerIndex": 2,
+    "explanation": "The top eigenvector of the covariance matrix points along the direction of greatest variance, and its eigenvalue is the variance along that direction."
+  }
+]
