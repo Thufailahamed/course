@@ -1,0 +1,79 @@
+[
+  {
+    "prompt": "A dataset contains orders from one customer several times. What does df['customer'].nunique() return?",
+    "options": [
+      "The number of orders",
+      "The number of distinct customers",
+      "The number of missing customers",
+      "The total of all customer ids"
+    ],
+    "answerIndex": 1,
+    "explanation": "nunique counts distinct values, so repeat orders from the same customer count once."
+  },
+  {
+    "prompt": "Why is it wrong to fill missing prices with zero before computing revenue?",
+    "options": [
+      "Zero is not a valid number",
+      "It invents sales of zero value where the price is simply unknown, which pulls averages down",
+      "It makes the calculation slower",
+      "pandas does not allow zeros in numeric columns"
+    ],
+    "answerIndex": 1,
+    "explanation": "A missing price is not a zero price. Filling with zero silently treats unknown values as real zeros, so totals and averages are biased."
+  },
+  {
+    "prompt": "Which result is a correct use of df.isna()?",
+    "options": [
+      "df.isna().sum() counts missing values in each column",
+      "df.isna() drops the missing rows",
+      "df.isna() replaces missing values with zero",
+      "df.isna() returns the number of rows"
+    ],
+    "answerIndex": 0,
+    "explanation": "isna marks each missing entry as True. Summing those marks counts the missing values per column. It does not change the table."
+  },
+  {
+    "prompt": "You want the share of orders returned in each city, given a True/False column returned. Which expression is correct?",
+    "options": [
+      "df.groupby('city')['returned'].sum()",
+      "df.groupby('city')['returned'].mean()",
+      "df.groupby('city')['returned'].size()",
+      "df['returned'].value_counts()"
+    ],
+    "answerIndex": 1,
+    "explanation": "The mean of a True/False column is the fraction of True values, which is the share returned within each group."
+  },
+  {
+    "prompt": "In a chart of revenue per city, what is the most important reason to start the bars at zero?",
+    "options": [
+      "It makes the chart load faster",
+      "Bar length encodes value, so a truncated baseline exaggerates differences",
+      "It is required by matplotlib",
+      "It removes outliers"
+    ],
+    "answerIndex": 1,
+    "explanation": "Readers judge bars by their length. A baseline above zero makes small differences look large, which misleads."
+  },
+  {
+    "prompt": "An IQR rule flags a value far above the others. What is the right next step?",
+    "options": [
+      "Delete it immediately",
+      "Investigate why it is extreme before deciding whether to keep it",
+      "Replace it with the mean",
+      "Ignore it because the rule flagged it"
+    ],
+    "answerIndex": 1,
+    "explanation": "A flag is a question. An extreme value can be an error, or a real and important case such as a large wholesale order."
+  },
+  {
+    "prompt": "After resampling daily sales to months with resample('ME').sum(), a month with no sales appears in the result. What value does it have?",
+    "options": [
+      "NaN",
+      "0",
+      "The previous month's total",
+      "It is left out of the result"
+    ],
+    "answerIndex": 1,
+    "explanation": "resample creates every period in the range, and summing an empty period gives 0. This keeps the calendar complete for trends and charts."
+  }
+]

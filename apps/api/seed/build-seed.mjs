@@ -8,6 +8,7 @@ import * as data from "./content.mjs";
 import * as numpyCourse from "./courses/numpy/course.mjs";
 import * as mathForMachineLearningCourse from "./courses/math-for-machine-learning/course.mjs";
 import * as deepLearningFoundationsCourse from "./courses/deep-learning-foundations/course.mjs";
+import * as pythonForDataScienceCourse from "./courses/python-for-data-science/course.mjs";
 import * as pythonBasicsCourse from "./courses/python-basics/course.mjs";
 import * as javascriptBasicsCourse from "./courses/javascript-basics/course.mjs";
 import * as javascriptAdvancedCourse from "./courses/javascript-advanced/course.mjs";
@@ -25,6 +26,7 @@ const interactiveCourses = [
   ["numpy", numpyCourse],
   ["math-for-machine-learning", mathForMachineLearningCourse],
   ["deep-learning-foundations", deepLearningFoundationsCourse],
+  ["python-for-data-science", pythonForDataScienceCourse],
   ["python-basics", pythonBasicsCourse],
   ["javascript-basics", javascriptBasicsCourse],
   ["javascript-advanced", javascriptAdvancedCourse],

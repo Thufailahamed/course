@@ -1,0 +1,57 @@
+[
+  {
+    "prompt": "You want the number of rows per city, counting rows whose units value is missing. Which call does this?",
+    "options": [
+      "df.groupby('city')['units'].count()",
+      "df.groupby('city')['units'].size()",
+      "df.groupby('city').sum()",
+      "df['city'].count()"
+    ],
+    "answerIndex": 1,
+    "explanation": "size() counts every row in each group, including missing values. count() skips missing values, so it can give a smaller number."
+  },
+  {
+    "prompt": "Which operation keeps every row of the orders table, adding region data where a match exists?",
+    "options": [
+      "orders.merge(regions, on='city', how='inner')",
+      "orders.merge(regions, on='city', how='left')",
+      "regions.merge(orders, on='city', how='right')",
+      "pd.concat([orders, regions])"
+    ],
+    "answerIndex": 1,
+    "explanation": "A left join keeps all rows of the left table. An inner join would drop orders with no matching region, and concat stacks rows rather than joining them."
+  },
+  {
+    "prompt": "What does pd.to_numeric(values, errors='coerce') do with a value such as 'n/a'?",
+    "options": [
+      "Raises an error and stops",
+      "Converts it to 0",
+      "Converts it to a missing value (NaN)",
+      "Keeps it as text"
+    ],
+    "answerIndex": 2,
+    "explanation": "With errors='coerce', unreadable values become NaN, so you can count them and decide how to handle them."
+  },
+  {
+    "prompt": "A lookup table has two rows for the same key, and you merge it into a table of orders. What is the likely result?",
+    "options": [
+      "Each order is kept once, with the first region",
+      "The orders are duplicated, which inflates totals",
+      "pandas removes the duplicate lookup rows automatically",
+      "The merge fails and nothing is returned"
+    ],
+    "answerIndex": 1,
+    "explanation": "A many-to-many or one-to-many match multiplies the rows. Validating the join, for example with validate='many_to_one', catches this."
+  },
+  {
+    "prompt": "Why should you call sort_index() before computing a rolling average of a time series?",
+    "options": [
+      "Rolling averages require the index to be numbers",
+      "Rolling windows use the previous rows, so the rows must be in time order",
+      "It makes the calculation faster",
+      "It removes missing values"
+    ],
+    "answerIndex": 1,
+    "explanation": "A rolling window looks at the previous rows, not the previous dates. If the rows are out of time order, the averages mix up different periods."
+  }
+]
