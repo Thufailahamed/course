@@ -1,0 +1,57 @@
+[
+  {
+    "prompt": "Why should the imputer and the scaler be fitted on training rows only?",
+    "options": [
+      "Because the test rows are too few to matter",
+      "Because the learned numbers would otherwise carry information from the rows the model is judged on",
+      "Because fitting on all rows is slower",
+      "Because scalers cannot be fitted twice"
+    ],
+    "answerIndex": 1,
+    "explanation": "A learned statistic that includes the test rows leaks information about them into the preprocessing, and the score becomes optimistic."
+  },
+  {
+    "prompt": "A column is only filled in after a customer cancels, and it predicts cancellation perfectly. What is the right action?",
+    "options": [
+      "Keep it, since it predicts well",
+      "Remove it, because it is target leakage and will not be available when predictions are needed",
+      "Scale it more carefully",
+      "Use it only in the test set"
+    ],
+    "answerIndex": 1,
+    "explanation": "A feature that is only known after the outcome makes a perfect score meaningless. It cannot be used on the day predictions are needed."
+  },
+  {
+    "prompt": "What does one-hot encoding a category column do?",
+    "options": [
+      "Assigns each category a number that increases with its importance",
+      "Gives each category its own 0/1 column, so the model does not assume an order",
+      "Removes rare categories",
+      "Averages the target for each category"
+    ],
+    "answerIndex": 1,
+    "explanation": "Numbers assigned to categories imply an order and a distance that do not exist. Separate 0/1 columns avoid that assumption."
+  },
+  {
+    "prompt": "In a grid search, what is the honest way to estimate the score of the chosen setting?",
+    "options": [
+      "Report the best cross-validation score",
+      "Evaluate the chosen setting once on a test set that the search never saw",
+      "Report the training score",
+      "Average the scores of all settings"
+    ],
+    "answerIndex": 1,
+    "explanation": "The cross-validation score that selected the setting is optimistic, because the search picked the best of many. Only a test set untouched by the search gives an unbiased estimate."
+  },
+  {
+    "prompt": "Permutation importance of a feature is large. What does that tell you?",
+    "options": [
+      "The feature causes the target",
+      "The model's error rises a lot when the feature is shuffled, so the model relies on it",
+      "The feature has the largest values",
+      "The feature has no correlation with other features"
+    ],
+    "answerIndex": 1,
+    "explanation": "Permutation importance measures reliance by the model, not causation. Correlated features can also share credit, so the ranking needs care."
+  }
+]
