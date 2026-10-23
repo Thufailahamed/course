@@ -1,0 +1,44 @@
+[
+  {
+    "prompt": "What does this print?\n\n```js\nconst base = { greet() { return \"hi\"; } };\nconst obj = Object.create(base);\nobj.name = \"x\";\nconsole.log(Object.keys(obj).length, obj.greet === base.greet);\n```",
+    "options": ["0 true", "1 true", "2 false", "1 false"],
+    "answerIndex": 1,
+    "explanation": "`obj` has one own property, `name`, so `Object.keys` returns one key. `greet` isn't copied onto `obj`. Lookup finds it on `base`, so `obj.greet` is the same function as `base.greet`. The tempting `1 false` assumes inherited methods are copied rather than shared."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconst parent = { list: [], n: 0 };\nconst child = Object.create(parent);\nchild.n += 1;\nchild.list.push(\"a\");\nconsole.log(parent.n, parent.list.length);\n```",
+    "options": ["1 1", "0 0", "0 1", "1 0"],
+    "answerIndex": 2,
+    "explanation": "`child.n += 1` reads the inherited `0`, then assigns `1` as an own property of `child`, which shadows the parent's value and leaves `parent.n` at `0`. `child.list.push` never assigns to `list`, so it mutates the shared array that `parent` owns. The lesson is that numbers get shadowed on write, but objects are shared through the chain."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nclass Base {\n  constructor() {\n    this.x = this.compute();\n  }\n  compute() {\n    return 1;\n  }\n}\nclass Child extends Base {\n  base = 10;\n  compute() {\n    return this.base;\n  }\n}\nconsole.log(new Child().x);\n```",
+    "options": ["10", "1", "undefined", "NaN"],
+    "answerIndex": 2,
+    "explanation": "`Child`'s fields are initialized after `super()` returns. While `Base`'s constructor is running, `Child.prototype.compute` is already the method being called, but `this.base` doesn't exist yet, so it reads `undefined`. The value `1` would come from `Base.prototype.compute`, which `Child` overrides, so it never runs."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nclass Vault {\n  #secret = 42;\n}\nconsole.log(Object.keys(new Vault()).length, \"secret\" in new Vault());\n```",
+    "options": ["1 true", "0 true", "1 false", "0 false"],
+    "answerIndex": 3,
+    "explanation": "The field is private, so it doesn't appear in `Object.keys`. The `in` operator checks for a string property named `secret`, and the private field is named `#secret` in a separate namespace, so `\"secret\" in` is `false`. Private fields are invisible to reflection and to any string-keyed check."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconst p = new Proxy(\n  { a: 1 },\n  { get: (t, k) => (k in t ? t[k] : \"missing\") }\n);\nconsole.log(p.a, p.b);\n```",
+    "options": ["1 undefined", "1 missing", "undefined missing", "TypeError"],
+    "answerIndex": 1,
+    "explanation": "The `get` trap runs for every read through the proxy. For `a`, the key exists, so the handler returns `1`. For `b`, the trap returns the fallback string `\"missing\"`. The option `1 undefined` is what you'd get without the proxy, which shows the trap really did run."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconst frozen = Object.freeze({ n: 1 });\nconsole.log(Reflect.set(frozen, \"n\", 2), frozen.n);\n```",
+    "options": ["true 2", "true 1", "false 1", "false 2"],
+    "answerIndex": 2,
+    "explanation": "`Reflect.set` returns a boolean instead of throwing. A frozen object refuses the write, so `Reflect.set` returns `false`, and `frozen.n` still holds `1`. Plain assignment would also fail, but in sloppy mode it does so silently, which is why `Reflect` is the clearer way to test a write."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nfunction* gen() {\n  console.log(\"started\");\n  yield 1;\n}\nconst it = gen();\nconsole.log(\"created\");\nit.next();\n```",
+    "options": ["created, then started", "started, then created", "only created", "only started"],
+    "answerIndex": 0,
+    "explanation": "Calling a generator function returns a generator object and doesn't run the body. `created` prints first. The body runs only when `it.next()` is called, and then `started` prints before the `yield` pauses it. Calling `gen()` is lazy, which is what makes generators good for infinite or expensive sequences."
+  }
+]

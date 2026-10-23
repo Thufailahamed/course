@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "How do you read the number of elements in an array named `scores`?",
+    "options": [
+      "`scores.size()`",
+      "`scores.length()`",
+      "`scores.length`",
+      "`length(scores)`"
+    ],
+    "answerIndex": 2,
+    "explanation": "An array's `length` is a field, so it has no parentheses. `ArrayList` uses `size()` instead."
+  },
+  {
+    "prompt": "What is the last valid index of `int[] values = new int[5]`?",
+    "options": [
+      "`5`",
+      "`4`",
+      "`6`",
+      "`0`"
+    ],
+    "answerIndex": 1,
+    "explanation": "Indexes start at 0, so an array of length 5 has indexes 0 through 4. Reading `values[5]` throws `ArrayIndexOutOfBoundsException`."
+  },
+  {
+    "prompt": "What is the initial value of each element in `new int[3]`?",
+    "options": [
+      "`null`",
+      "`0`",
+      "`1`",
+      "Undefined until assigned"
+    ],
+    "answerIndex": 1,
+    "explanation": "New numeric arrays are filled with zero. Boolean arrays start as `false`, and object arrays start as `null`."
+  },
+  {
+    "prompt": "Why is `Arrays.toString(values)` useful?",
+    "options": [
+      "It sorts the array",
+      "It prints a readable list of the elements",
+      "It returns the array's length",
+      "It converts the array to an `ArrayList`"
+    ],
+    "answerIndex": 1,
+    "explanation": "Printing an array directly shows a reference-like value. `Arrays.toString` builds a string such as `[1, 2, 3]`."
+  },
+  {
+    "prompt": "In an enhanced `for` loop (`for (int value : values)`), what does `value` hold?",
+    "options": [
+      "The index of the current element",
+      "A copy of the current element's value",
+      "A reference that can resize the array",
+      "The array's length"
+    ],
+    "answerIndex": 1,
+    "explanation": "The enhanced loop assigns each element to the variable. Changing `value` does not change the array, because it is a copy."
+  },
+  {
+    "prompt": "Which call returns the number of items in an `ArrayList` named `items`?",
+    "options": [
+      "`items.length`",
+      "`items.length()`",
+      "`items.size()`",
+      "`items.count`"
+    ],
+    "answerIndex": 2,
+    "explanation": "`ArrayList` is a class, so it exposes `size()` as a method. Arrays use the `length` field."
+  },
+  {
+    "prompt": "For `ArrayList<String> list = new ArrayList<>(Arrays.asList(\"a\", \"b\", \"c\"));`, what does `list.remove(1)` remove?",
+    "options": [
+      "The value `\"1\"`",
+      "The element at index 1, which is `\"b\"`",
+      "The first element",
+      "Nothing, because `remove` only accepts strings"
+    ],
+    "answerIndex": 1,
+    "explanation": "An `int` argument selects the overload that removes by index. Index 1 holds `\"b\"`."
+  },
+  {
+    "prompt": "What does `map.get(\"missing\")` return for a `HashMap<String, Integer>`?",
+    "options": [
+      "`0`",
+      "`null`",
+      "`-1`",
+      "It throws an exception"
+    ],
+    "answerIndex": 1,
+    "explanation": "A missing key returns `null`. Use `getOrDefault` if you need a numeric fallback."
+  },
+  {
+    "prompt": "What is the size of a `HashSet` after adding `\"a\"`, `\"a\"`, and `\"b\"`?",
+    "options": [
+      "`1`",
+      "`2`",
+      "`3`",
+      "`0`"
+    ],
+    "answerIndex": 1,
+    "explanation": "A set ignores duplicates. It contains `\"a\"` and `\"b\"`, so its size is `2`."
+  },
+  {
+    "prompt": "What does `Arrays.sort(values)` do to the array?",
+    "options": [
+      "Returns a new sorted copy and leaves the original alone",
+      "Sorts the array in place and returns nothing",
+      "Reverses the array",
+      "Only works on `String[]`"
+    ],
+    "answerIndex": 1,
+    "explanation": "`Arrays.sort` mutates the array in place. If you need to keep the original order, copy the array first."
+  }
+]

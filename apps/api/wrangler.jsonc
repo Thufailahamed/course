@@ -1,0 +1,44 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "latent-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  // Production config. Replace the ids below with the ones printed by
+  // `wrangler d1 create latent-db` and `wrangler kv namespace create KV`.
+  "vars": {
+    "APP_URL": "https://latent.example.com",
+    "APP_NAME": "Latent",
+    "CURRENCY": "USD",
+    "PRO_MONTHLY_CENTS": "2900",
+    "PRO_YEARLY_CENTS": "24900",
+    "AI_MODEL": "@cf/meta/llama-3.1-8b-instruct-fast"
+  },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "latent-db", "database_id": "00000000-0000-0000-0000-000000000000", "migrations_dir": "migrations" }
+  ],
+  "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "latent-media" }],
+  "kv_namespaces": [{ "binding": "KV", "id": "00000000000000000000000000000000" }],
+  "ai": { "binding": "AI" },
+
+  "env": {
+    // Local development: everything simulated by Miniflare, no Cloudflare login needed.
+    // Workers AI has no local simulator; use `pnpm dev:ai` (after `wrangler login`) to enable the AI tutor locally.
+    "dev": {
+      "vars": {
+        "APP_URL": "http://localhost:3000",
+        "APP_NAME": "Latent",
+        "CURRENCY": "USD",
+        "PRO_MONTHLY_CENTS": "2900",
+        "PRO_YEARLY_CENTS": "24900",
+        "AI_MODEL": "@cf/meta/llama-3.1-8b-instruct-fast"
+      },
+      "d1_databases": [
+        { "binding": "DB", "database_name": "latent-db", "database_id": "00000000-0000-0000-0000-000000000000", "migrations_dir": "migrations" }
+      ],
+      "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "latent-media" }],
+      "kv_namespaces": [{ "binding": "KV", "id": "00000000000000000000000000000000" }]
+    }
+  }
+}

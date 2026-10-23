@@ -1,0 +1,79 @@
+[
+  {
+    "prompt": "`a = np.arange(24)`. What is `a.reshape(4, -1).shape`?",
+    "options": [
+      "(4, 24)",
+      "(4, 6)",
+      "(6, 4)",
+      "It raises an error because -1 is not a valid size"
+    ],
+    "answerIndex": 1,
+    "explanation": "`-1` tells NumPy to infer that dimension from the total size: 24 / 4 = 6."
+  },
+  {
+    "prompt": "You need a 1-D version of an array that you will modify, and the original must stay unchanged. Which should you use?",
+    "options": [
+      "a.ravel()",
+      "a.reshape(-1)",
+      "a.flatten()",
+      "a.squeeze()"
+    ],
+    "answerIndex": 2,
+    "explanation": "`ravel()` and `reshape(-1)` return views whenever possible, so in-place changes would write through to the original. `flatten()` always returns an independent copy."
+  },
+  {
+    "prompt": "`m` has shape (2, 3), with students as rows and subjects as columns. Which expression gives one row per subject, with each row holding every student's grade for that subject?",
+    "options": [
+      "m.reshape(3, 2)",
+      "m.ravel()",
+      "np.resize(m, (3, 2))",
+      "m.T"
+    ],
+    "answerIndex": 3,
+    "explanation": "Only a transpose moves columns into rows. `reshape(3, 2)` has the right shape but re-reads the elements in row order, scrambling the data."
+  },
+  {
+    "prompt": "A model outputs `out` with shape (batch, 1). Which expression reliably returns shape (batch,), even when batch == 1?",
+    "options": [
+      "out.squeeze(axis=1)",
+      "out.squeeze()",
+      "out.ravel()[0]",
+      "out.T"
+    ],
+    "answerIndex": 0,
+    "explanation": "A bare `squeeze()` removes every length-1 axis, so a batch of one collapses to shape (). `squeeze(axis=1)` removes only the feature axis."
+  },
+  {
+    "prompt": "`images` has shape (32, 64, 64, 3) in (N, H, W, C) order. Which call produces (N, C, H, W) for PyTorch?",
+    "options": [
+      "images.reshape(32, 3, 64, 64)",
+      "images.T",
+      "np.swapaxes(images, 0, 3)",
+      "np.moveaxis(images, -1, 1)"
+    ],
+    "answerIndex": 3,
+    "explanation": "`moveaxis(images, -1, 1)` moves the channel axis to position 1 and keeps the others in order. `reshape` would scramble pixels, `.T` reverses all axes, and swapping axes 0 and 3 exchanges batch and channels."
+  },
+  {
+    "prompt": "`a` and `b` both have shape (5, 3). What are the shapes of `np.concatenate([a, b])` and `np.stack([a, b])`?",
+    "options": [
+      "(10, 3) and (2, 5, 3)",
+      "(2, 5, 3) and (10, 3)",
+      "(10, 3) and (10, 3)",
+      "(5, 6) and (5, 3, 2)"
+    ],
+    "answerIndex": 0,
+    "explanation": "`concatenate` lengthens an existing axis (axis 0 by default: 5 + 5 rows). `stack` adds a new axis of size 2 in front."
+  },
+  {
+    "prompt": "`table` has shape (3, 4) and `row` has shape (4,). Why does `np.concatenate([table, row])` fail, and what fixes it?",
+    "options": [
+      "The dtypes differ; use row.astype(float)",
+      "concatenate only accepts two 1-D arrays; use np.append",
+      "The arrays have a different number of dimensions; use row[np.newaxis, :] or np.vstack([table, row])",
+      "The row is too short; pad it to 12 elements"
+    ],
+    "answerIndex": 2,
+    "explanation": "`concatenate` requires the same number of dimensions. Making the row 2-D with shape (1, 4) fixes it, and `vstack` does that automatically."
+  }
+]

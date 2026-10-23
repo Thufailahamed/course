@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "What is the main difference between a transition and an animation?",
+    "options": [
+      "Transitions can only animate colors; animations can animate anything",
+      "A transition animates between two states in response to a change; an animation can define multiple keyframes and run independently",
+      "Animations do not support timing functions",
+      "Transitions require JavaScript"
+    ],
+    "answerIndex": 1,
+    "explanation": "Transitions interpolate from an old value to a new value when a property changes, such as on hover. Animations use `@keyframes` to describe multiple stages and can run on their own with iteration, direction and fill modes. Both can be pure CSS."
+  },
+  {
+    "prompt": "What does `animation-fill-mode: forwards` do?",
+    "options": [
+      "It reverses the animation",
+      "It keeps the final keyframe's styles applied after the animation ends",
+      "It makes the animation loop forever",
+      "It delays the animation start"
+    ],
+    "answerIndex": 1,
+    "explanation": "Without a fill mode, an element snaps back to its pre-animation styles when the animation ends. `forwards` retains the last keyframe. `backwards` applies the first keyframe during the delay, and `both` does both."
+  },
+  {
+    "prompt": "In `cubic-bezier(0.2, 0.8, 0.2, 1)`, what does the curve control?",
+    "options": [
+      "The animation's color interpolation",
+      "The pace of the animation over time",
+      "The number of keyframes",
+      "The element's z-index during animation"
+    ],
+    "answerIndex": 1,
+    "explanation": "A cubic Bézier defines the timing function: how much of the change happens at each point in time. It can create ease-in, ease-out, overshoot or a custom feel. It does not change what is animated, only the pacing."
+  },
+  {
+    "prompt": "How should a large translate-and-scale entrance animation respond to `prefers-reduced-motion: reduce`?",
+    "options": [
+      "Ignore it and run the animation anyway",
+      "Replace the movement with an instant change or a short opacity fade",
+      "Slow the animation down to ten seconds",
+      "Make the animation repeat"
+    ],
+    "answerIndex": 1,
+    "explanation": "Reduced motion is a request to avoid vestibular triggers such as large movement, scaling, parallax and spinning. A short opacity fade or an immediate state change preserves the content and feedback without the motion. Slowing it down can make it worse."
+  },
+  {
+    "prompt": "Why use `:focus-visible` instead of `:focus` for a custom focus ring?",
+    "options": [
+      "`:focus` does not work on buttons",
+      "`:focus-visible` generally shows the ring for keyboard navigation while avoiding it after a mouse click",
+      "`:focus-visible` removes focus from the tab order",
+      "They are identical in every browser"
+    ],
+    "answerIndex": 1,
+    "explanation": "`:focus` matches whenever an element has focus, including after a click. `:focus-visible` matches when the browser determines that a visible focus indicator is helpful, usually for keyboard users. It lets you keep a polished mouse experience without sacrificing keyboard accessibility."
+  },
+  {
+    "prompt": "What is the advantage of `:user-invalid` over `:invalid` for form styling?",
+    "options": [
+      "It only matches after the user has interacted with the field, avoiding red errors on a pristine form",
+      "It validates the value on the server",
+      "It disables native validation",
+      "It only works on checkboxes"
+    ],
+    "answerIndex": 0,
+    "explanation": "`:invalid` can match immediately on page load for an empty required field, which feels like the form is shouting before the user has done anything. `:user-invalid` waits until the user has interacted and the value is still invalid. Browser support is good in modern engines."
+  },
+  {
+    "prompt": "You style a custom checkbox with `appearance: none`. What must you preserve?",
+    "options": [
+      "The default browser border",
+      "A visible focus indicator and the native checked/disabled semantics",
+      "A JavaScript click handler",
+      "The `size` attribute"
+    ],
+    "answerIndex": 1,
+    "explanation": "`appearance: none` removes the native look, not the semantics. Keep the input focusable, show a clear focus style, and reflect `:checked` and `:disabled` visually. Use the real input (or a label connected to it) so keyboard and screen-reader users still get the control."
+  },
+  {
+    "prompt": "How should an inline form error be associated with its input?",
+    "options": [
+      "Put the error in a `<div>` after the form and hope it is noticed",
+      "Give the error an `id` and reference it from the input's `aria-describedby`",
+      "Set the error as the input's placeholder",
+      "Use `aria-hidden=\"true\"` on the error"
+    ],
+    "answerIndex": 1,
+    "explanation": "`aria-describedby` points to the error text, so assistive technology announces it when the field receives focus. The error should also be visible and specific. A placeholder disappears and is not a reliable error channel; hiding the error from assistive tech makes it useless."
+  },
+  {
+    "prompt": "Why is placeholder text often a contrast problem?",
+    "options": [
+      "Placeholders are always black",
+      "Browsers often render placeholders at a lower opacity, which can fall below the 4.5:1 AA threshold",
+      "Placeholders cannot be styled",
+      "Placeholders only appear in dark mode"
+    ],
+    "answerIndex": 1,
+    "explanation": "The default placeholder color is intentionally muted, and some browsers apply opacity on top. That can produce low contrast. Check the actual rendered color and never use a placeholder as the only label — when the user types, the hint disappears."
+  },
+  {
+    "prompt": "What does `accent-color` do?",
+    "options": [
+      "Changes the page's background",
+      "Sets the accent color used by native controls such as checkboxes, radio buttons and range inputs",
+      "Applies a CSS filter to images",
+      "Sets the focus ring width"
+    ],
+    "answerIndex": 1,
+    "explanation": "`accent-color` themes the built-in UI of native form controls in supporting browsers. It is a small, accessible way to make controls match a brand without rebuilding them. It does not replace custom focus styles or contrast checks."
+  }
+]

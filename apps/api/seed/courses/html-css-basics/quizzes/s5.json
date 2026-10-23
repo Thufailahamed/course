@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "In a flex container with the default settings, which way does the main axis run?",
+    "options": [
+      "Vertically, top to bottom",
+      "Horizontally, left to right in a left-to-right writing mode",
+      "Diagonally",
+      "It depends on the number of children"
+    ],
+    "answerIndex": 1,
+    "explanation": "The default `flex-direction` is `row`, so the main axis runs horizontally and items are laid out left to right (in left-to-right writing modes). `justify-content` distributes items along that main axis."
+  },
+  {
+    "prompt": "What is the difference between `justify-content` and `align-items`?",
+    "options": [
+      "They are aliases",
+      "`justify-content` aligns along the main axis; `align-items` aligns along the cross axis",
+      "`justify-content` only works in Grid",
+      "`align-items` changes the flex direction"
+    ],
+    "answerIndex": 1,
+    "explanation": "`justify-content` positions items along the main axis (horizontal in a row). `align-items` positions them along the cross axis (vertical in a row). Swap to `flex-direction: column` and those axes swap too."
+  },
+  {
+    "prompt": "Why prefer `gap` over margins between flex items?",
+    "options": [
+      "`gap` is the only property that works with flexbox",
+      "`gap` creates space only between items, without adding outer margins or collapsing",
+      "`gap` makes items equal width",
+      "`gap` is required for wrapping"
+    ],
+    "answerIndex": 1,
+    "explanation": "`gap` adds space between tracks/items but not around the outside, and it does not collapse like margins. It keeps spacing logic in the container instead of scattering margin rules across children. Flexbox and Grid both support it."
+  },
+  {
+    "prompt": "What does `flex: 1` on a flex child usually do?",
+    "options": [
+      "Fixes the child at 1px wide",
+      "Lets the child grow and shrink from a zero basis to share available space",
+      "Makes the child the first item",
+      "Turns the child into a flex container"
+    ],
+    "answerIndex": 1,
+    "explanation": "`flex: 1` expands to `flex-grow: 1; flex-shrink: 1; flex-basis: 0%`. The zero basis means free space is distributed from the container's full width, so equal `flex: 1` children tend to end up equal width (subject to min-content limits)."
+  },
+  {
+    "prompt": "`grid-template-columns: repeat(3, 1fr)` creates what?",
+    "options": [
+      "Three equal-width tracks that share the available space",
+      "Three rows of fixed height",
+      "One column repeated three times",
+      "Three gaps between one column"
+    ],
+    "answerIndex": 0,
+    "explanation": "`repeat(3, 1fr)` is shorthand for three `1fr` tracks. The `fr` unit distributes the free space after gaps and fixed tracks, so the three columns share the width equally."
+  },
+  {
+    "prompt": "What does `grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))` do?",
+    "options": [
+      "Always creates exactly 220 columns",
+      "Creates as many columns as fit at 220px minimum, then expands them to fill the row",
+      "Creates one column that is always 220px",
+      "Only works inside a flex container"
+    ],
+    "answerIndex": 1,
+    "explanation": "`auto-fit` creates as many tracks as fit while respecting the `minmax` minimum, then collapses empty tracks. Each track grows up to `1fr` to fill the row. This is the basis of many responsive card grids without media queries."
+  },
+  {
+    "prompt": "What is the usual advantage of a mobile-first media query?",
+    "options": [
+      "It loads faster because the CSS file is smaller",
+      "It starts with the simplest layout and adds complexity only when there is room",
+      "It only works on Android",
+      "It removes the need for a viewport meta tag"
+    ],
+    "answerIndex": 1,
+    "explanation": "Mobile-first CSS starts with the base layout and uses `min-width` queries to enhance it as space increases. That keeps the constrained case simple and avoids undoing desktop styles. It does not remove the need for the viewport meta tag."
+  },
+  {
+    "prompt": "Which rule keeps an image from overflowing its container on a narrow screen?",
+    "options": [
+      "`img { width: 800px; }`",
+      "`img { max-width: 100%; height: auto; }`",
+      "`img { position: absolute; }`",
+      "`img { display: block; }`"
+    ],
+    "answerIndex": 1,
+    "explanation": "`max-width: 100%` caps the image at its container's width, and `height: auto` preserves its aspect ratio. A fixed width larger than the container causes horizontal scrolling. `display: block` can remove inline whitespace but does not make the image responsive."
+  },
+  {
+    "prompt": "What does `font-size: clamp(2rem, 6vw, 4rem)` mean?",
+    "options": [
+      "The font size is always 6vw",
+      "The size scales with the viewport between a 2rem minimum and a 4rem maximum",
+      "The size is chosen randomly between 2rem and 4rem",
+      "The size is 2rem on mobile and 4rem on desktop, with no values in between"
+    ],
+    "answerIndex": 1,
+    "explanation": "`clamp(min, preferred, max)` keeps the fluid middle value within the two bounds. Here the preferred size is `6vw`; it never drops below 2rem or rises above 4rem. That produces fluid type without tiny or comically large text."
+  },
+  {
+    "prompt": "Which selector shows a style only when a keyboard user focuses an element, not when it is clicked?",
+    "options": [
+      "`:hover`",
+      "`:active`",
+      "`:focus-visible`",
+      "`:visited`"
+    ],
+    "answerIndex": 2,
+    "explanation": "`:focus-visible` matches when the browser judges that focus should be visibly indicated, typically after keyboard navigation. It avoids showing a focus ring after a mouse click while preserving it for keyboard users. Never remove focus styles without providing an equally visible replacement."
+  }
+]

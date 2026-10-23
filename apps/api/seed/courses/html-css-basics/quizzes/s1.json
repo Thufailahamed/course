@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "What does `<!doctype html>` do at the top of a document?",
+    "options": [
+      "It creates the page's main heading",
+      "It tells the browser to use modern standards mode instead of quirks mode",
+      "It loads the browser's default stylesheet",
+      "It is required for CSS to work at all"
+    ],
+    "answerIndex": 1,
+    "explanation": "The doctype is a mode switch. Without it, browsers fall back to quirks mode, a compatibility mode with different box-sizing and layout rules. It does not create a heading or load CSS — those are separate jobs."
+  },
+  {
+    "prompt": "Where does the `<title>` element belong?",
+    "options": [
+      "Inside `<body>`, at the top",
+      "Inside `<head>`",
+      "Inside the first `<h1>`",
+      "Anywhere; the browser moves it automatically"
+    ],
+    "answerIndex": 1,
+    "explanation": "`<title>` describes the document itself, so it belongs in `<head>`. It appears in the browser tab, bookmarks and search results, not in the page body. Putting it in the body is invalid and browsers may move or ignore it."
+  },
+  {
+    "prompt": "Which heading should name the main topic of a page?",
+    "options": [
+      "`<h6>`",
+      "`<h3>`",
+      "`<h1>`",
+      "Whichever heading is styled largest"
+    ],
+    "answerIndex": 2,
+    "explanation": "`<h1>` is the top-level heading. Choose heading levels by meaning and document outline, not by the size the browser gives them. Styling can change the size later without changing the semantics."
+  },
+  {
+    "prompt": "Which snippet nests the elements correctly?",
+    "options": [
+      "`<p>Hello <strong>world</p></strong>`",
+      "`<p>Hello <strong>world</strong></p>`",
+      "`<strong><p>Hello world</strong></p>`",
+      "`<p>Hello <strong>world</p>`"
+    ],
+    "answerIndex": 1,
+    "explanation": "Elements must close in the reverse order they opened. The `strong` element opens inside the paragraph, so it must close before the paragraph does. The other options overlap tags or leave one unclosed."
+  },
+  {
+    "prompt": "Which element creates a numbered list?",
+    "options": [
+      "`<ul>`",
+      "`<ol>`",
+      "`<dl>`",
+      "`<list>`"
+    ],
+    "answerIndex": 1,
+    "explanation": "`<ol>` is an ordered list and displays numbers by default. `<ul>` is unordered and shows bullets. `<dl>` is a description list for term/definition pairs, and `<list>` is not an HTML element."
+  },
+  {
+    "prompt": "What is the difference between `<strong>` and `<em>`?",
+    "options": [
+      "`<strong>` is bold and `<em>` is italic; both are purely visual",
+      "`<strong>` means importance and `<em>` means stress emphasis",
+      "`<strong>` is for headings and `<em>` is for paragraphs",
+      "They are identical and interchangeable"
+    ],
+    "answerIndex": 1,
+    "explanation": "Browsers usually render `strong` bold and `em` italic, but the meaning matters more than the default look. `strong` marks importance; `em` marks stress emphasis that can change the sentence's meaning. Screen readers can announce both."
+  },
+  {
+    "prompt": "How does a browser treat this markup?\n\n```\n<p>One   line\nand another</p>\n```",
+    "options": [
+      "It preserves every space and line break exactly",
+      "It collapses the runs of whitespace into single spaces",
+      "It turns the line break into a `<br>`",
+      "It refuses to render the paragraph"
+    ],
+    "answerIndex": 1,
+    "explanation": "HTML collapses consecutive spaces, tabs and newlines into one space. That is why indentation in your source does not create gaps on the page. Use CSS for spacing and `<br>` only for a meaningful line break such as a postal address."
+  },
+  {
+    "prompt": "When is `<br>` the right choice?",
+    "options": [
+      "Between every two paragraphs to make them closer",
+      "Inside a postal address or a poem, where the line break is part of the content",
+      "To make a heading wrap on a narrow screen",
+      "To create space between two buttons"
+    ],
+    "answerIndex": 1,
+    "explanation": "`<br>` represents a line break that belongs to the content, such as an address or song lyrics. For spacing between blocks, use margins; for wrapping text, let the browser wrap it. Using `<br>` for layout makes the page harder to style and to read."
+  },
+  {
+    "prompt": "Which document skeleton is valid and complete?",
+    "options": [
+      "`<html><body><h1>Hi</h1></body></html>`",
+      "`<!doctype html><html lang=\"en\"><head><title>Hi</title></head><body><h1>Hi</h1></body></html>`",
+      "`<head><title>Hi</title></head><body><h1>Hi</h1></body>`",
+      "`<!doctype html><body><h1>Hi</h1></body>`"
+    ],
+    "answerIndex": 1,
+    "explanation": "A complete modern document has the doctype, an `<html>` root with a language, a `<head>` with a title, and a `<body>`. The other snippets omit required parts; browsers may repair them, but you should not rely on that."
+  },
+  {
+    "prompt": "Two headings use no CSS. Which renders larger by default?",
+    "options": [
+      "`<h2>`",
+      "`<h3>`",
+      "They are always the same size",
+      "`<h1>`"
+    ],
+    "answerIndex": 3,
+    "explanation": "The browser's default stylesheet gives higher-level headings larger font sizes: `h1` is largest, then `h2`, and so on. This is a visual hint about the outline, not the definition of the level. You can change the size with CSS while keeping the level."
+  }
+]

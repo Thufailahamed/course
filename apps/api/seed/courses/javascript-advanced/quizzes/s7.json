@@ -1,0 +1,67 @@
+[
+  {
+    "prompt": "What does this print?\n\n```js\nfunction make() {\n  let n = 0;\n  return () => ++n;\n}\nconst c = make();\nc();\nconsole.log(c(), make()());\n```",
+    "options": ["2 2", "1 1", "0 1", "2 1"],
+    "answerIndex": 3,
+    "explanation": "Each call to make creates a new closure with its own n. The first counter has been called once, so the next call returns 2. The second call to make() starts a fresh counter at 1, so the output is 2 1, not a shared count."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconst o = { n: 1, get() { return this.n; } };\nconsole.log(o.get.call({ n: 5 }), o.get());\n```",
+    "options": ["1 5", "5 1", "undefined 1", "TypeError"],
+    "answerIndex": 1,
+    "explanation": "The value of this comes from the call site. call supplies a different object, so the first read gives 5, and the plain o.get() call uses o itself, giving 1. A method copied out of its object and called alone would lose its receiver, which is the classic this bug."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nfunction A() {}\nA.prototype.hi = () => 'hi';\nconsole.log(new A().hi(), Object.hasOwn(new A(), 'hi'));\n```",
+    "options": ["hi true", "undefined false", "hi false", "TypeError"],
+    "answerIndex": 2,
+    "explanation": "hi is found through the prototype chain, so the call works, but it is not an own property of the instance. Object.hasOwn checks only own properties, so it returns false. Methods shared through the prototype take no per-instance memory."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nfunction* g() {\n  yield 1;\n  return 2;\n}\nconsole.log([...g()]);\n```",
+    "options": ["[ 1, 2 ]", "[ 2 ]", "[ 1 ]", "2"],
+    "answerIndex": 2,
+    "explanation": "Spreading a generator collects the values it yields. The return value 2 is the final result of the iterator, marked done, and spread ignores it. To read the return value, call next() directly and inspect the result object."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconst p = new Proxy({ a: 1 }, {\n  get: (t, k) => (k in t ? t[k] : 'missing'),\n});\nconsole.log(p.b);\n```",
+    "options": ["undefined", "missing", "TypeError", "null"],
+    "answerIndex": 1,
+    "explanation": "The get trap runs for every property read on the proxy. Because b is not in the target, the trap returns 'missing'. Traps let a proxy intercept the language's own operations, which is how validation and tracing layers are built."
+  },
+  {
+    "prompt": "What is the logged order of these three lines?\n\n```js\nPromise.resolve().then(() => console.log('a'));\nsetTimeout(() => console.log('b'), 0);\nqueueMicrotask(() => console.log('c'));\n```",
+    "options": ["a, b, c", "b, a, c", "a, c, b", "c, a, b"],
+    "answerIndex": 2,
+    "explanation": "Both promise callbacks and queueMicrotask run in the microtask queue, in the order they were scheduled, before any macrotask. The setTimeout callback is a macrotask, so it runs last, even with a delay of zero. That ordering is the core of the event loop."
+  },
+  {
+    "prompt": "What does this log?\n\n```js\nPromise.allSettled([Promise.reject(1), 2]).then((r) => console.log(r.map((x) => x.status)));\n```",
+    "options": ["[ 'rejected', 'fulfilled' ]", "[ 'fulfilled', 'rejected' ]", "[ 'rejected', 'rejected' ]", "It throws"],
+    "answerIndex": 0,
+    "explanation": "allSettled never rejects. It waits for every input and reports each outcome as an object with a status of fulfilled or rejected, in input order. The rejected entry carries a reason, and the fulfilled entry carries a value."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconst a = [3, 1, 2];\nconst b = a.toSorted();\nconsole.log(a.join(), b.join());\n```",
+    "options": ["1,2,3 1,2,3", "3,1,2 1,2,3", "1,2,3 3,1,2", "3,1,2 3,1,2"],
+    "answerIndex": 1,
+    "explanation": "toSorted returns a new sorted array and leaves the original alone, which is the non-mutating counterpart of sort. sort would have changed a in place. Prefer toSorted when the input belongs to someone else."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconsole.log(/^\\d{3}-\\d{4}$/.test('555-1234 '));\n```",
+    "options": ["true", "undefined", "TypeError", "false"],
+    "answerIndex": 3,
+    "explanation": "The anchors require the whole string to match, and the trailing space is outside the pattern, so the match fails and test returns false. Forgetting the anchors would have accepted the string, and the trailing space is exactly the kind of input that anchors exist to reject."
+  },
+  {
+    "prompt": "Promise.all receives three promises, and the second one rejects before the others settle. What does Promise.all do?",
+    "options": [
+      "It resolves with the values of the promises that succeeded",
+      "It waits for all three and resolves with undefined",
+      "It rejects with the first rejection reason, without waiting for the rest",
+      "It throws synchronously when it is called"
+    ],
+    "answerIndex": 2,
+    "explanation": "Promise.all rejects as soon as any input rejects, with that reason, and the other promises keep running without affecting the result. If you need every outcome, use allSettled. Promise.all also never throws synchronously for rejected inputs, because the rejection flows through the promise."
+  }
+]

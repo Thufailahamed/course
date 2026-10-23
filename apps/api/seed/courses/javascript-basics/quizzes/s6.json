@@ -1,0 +1,44 @@
+[
+  {
+    "prompt": "What does this print?\n\n```js\ntry {\n  throw new Error(\"disk full\");\n} catch (e) {\n  console.log(e.message);\n}\n```",
+    "options": ["Error", "disk full", "e", "undefined"],
+    "answerIndex": 1,
+    "explanation": "The `catch` block receives the error object, and its `message` property holds the text passed to `new Error`. The tempting `Error` is the error's type name, which is `e.name`, not its message."
+  },
+  {
+    "prompt": "A `try` block returns a value. When does its `finally` block run?",
+    "options": ["Only when no error happens", "Never, because `return` ends the function first", "Always, before the function actually exits", "Only after the caller uses the returned value"],
+    "answerIndex": 2,
+    "explanation": "`finally` runs whether the `try` block returns, throws or finishes normally, and it runs before the function exits. That makes it the right place for cleanup. The idea that `return` skips `finally` is a common misconception."
+  },
+  {
+    "prompt": "What does `console.log(JSON.stringify({ n: undefined, ok: true }))` print?",
+    "options": ["{\"n\":null,\"ok\":true}", "{\"ok\":true}", "{}", "{\"n\":undefined,\"ok\":true}"],
+    "answerIndex": 1,
+    "explanation": "JSON has no `undefined`, so a property whose value is `undefined` is left out of the text entirely. The tempting `null` appears only for array items that are `undefined`, where the position has to be kept."
+  },
+  {
+    "prompt": "Which input makes `JSON.parse` throw a SyntaxError?",
+    "options": ["`[1, 2]`", "`{\"a\": 1}`", "`\"text\"`", "`{'a': 1}`"],
+    "answerIndex": 3,
+    "explanation": "JSON requires double quotes around keys and strings. `{'a': 1}` uses single quotes, so it's invalid JSON and throws. The other three are valid JSON: an array, an object and a string."
+  },
+  {
+    "prompt": "What month does `new Date(Date.UTC(2026, 0, 15))` fall in?",
+    "options": ["January", "December", "February", "The date is invalid"],
+    "answerIndex": 0,
+    "explanation": "`Date.UTC` counts months from zero, so `0` is January. The day `15` is the 15th of that month. The tempting December assumes the month is one-based, which is the usual trap with date arithmetic."
+  },
+  {
+    "prompt": "What does `new Date(Date.UTC(2026, 1, 31)).toISOString().slice(0, 10)` print?",
+    "options": ["2026-02-28", "2026-02-31", "2026-03-03", "Invalid Date"],
+    "answerIndex": 2,
+    "explanation": "February 2026 has 28 days. The extra three days roll forward into March, so the result is 3 March. JavaScript never throws for an impossible day; it quietly rolls the date forward, which is why you should validate input from users."
+  },
+  {
+    "prompt": "You save a `Date` with `JSON.stringify` and then parse the text. What comes back?",
+    "options": ["The same Date object", "A number of milliseconds", "A string in ISO format", "undefined"],
+    "answerIndex": 2,
+    "explanation": "`JSON.stringify` converts a Date to its ISO string, and JSON has no date type, so `JSON.parse` returns that string. To get a Date back, you would call `new Date(text)` yourself. The tempting number answer comes from `getTime()`, which is a different method."
+  }
+]

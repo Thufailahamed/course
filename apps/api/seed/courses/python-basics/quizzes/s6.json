@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "A traceback ends with `KeyError: 'coffee'`. Where should you look first to understand what went wrong?",
+    "options": [
+      "The first line of the traceback, because that's where the program started",
+      "The last line, then the code line just above it, then work upward through the calls",
+      "Only at the line numbers, since the message is usually misleading",
+      "At the `import` statements at the top of the file"
+    ],
+    "answerIndex": 1,
+    "explanation": "Read tracebacks bottom-up: the last line says what went wrong (a missing dictionary key), the line above it shows where, and the frames above that show how the program got there."
+  },
+  {
+    "prompt": "A `try` block runs `n = int(\"3.5\")` and then `print(\"ok\")`. It has an `except ValueError:` block that prints `bad`, and a `finally:` block that prints `done`. What is printed?",
+    "options": [
+      "ok, then done",
+      "bad",
+      "3, then ok, then done",
+      "bad, then done"
+    ],
+    "answerIndex": 3,
+    "explanation": "`int(\"3.5\")` raises `ValueError` (int() can't parse a decimal point), so `print(\"ok\")` is skipped and the `except` block prints `bad`. `finally` always runs, so `done` prints too."
+  },
+  {
+    "prompt": "Why is a bare `except:` (with no exception type) considered dangerous?",
+    "options": [
+      "It's a SyntaxError in modern Python",
+      "It only catches the first error and then crashes on the second",
+      "It also catches bugs you didn't expect, like a NameError from a typo, and hides them silently",
+      "It makes the program run much more slowly"
+    ],
+    "answerIndex": 2,
+    "explanation": "A bare `except:` catches everything, including typos in your own code and even Ctrl+C. Catch the specific exception you expect, such as `except ValueError:`, so real bugs still crash where you can see them."
+  },
+  {
+    "prompt": "You're writing `set_age(age)` and someone passes `-4`. What's the most professional response inside the function?",
+    "options": [
+      "`raise ValueError(\"age can't be negative\")`",
+      "`print(\"bad age\")` and carry on",
+      "Quietly change the age to 0",
+      "`return None` with no message"
+    ],
+    "answerIndex": 0,
+    "explanation": "Raising an exception refuses bad input loudly and clearly. The caller can catch the `ValueError` if they know how to handle it; otherwise the problem surfaces right away instead of causing confusing results later."
+  },
+  {
+    "prompt": "`notes.txt` contains three lines. What happens after running `with open(\"notes.txt\", \"w\") as f: f.write(\"new idea\\n\")`?",
+    "options": [
+      "The file has four lines, with \"new idea\" at the end",
+      "The file contains only \"new idea\"",
+      "Python raises FileExistsError because the file already exists",
+      "The file has four lines, with \"new idea\" at the start"
+    ],
+    "answerIndex": 1,
+    "explanation": "Mode `\"w\"` erases the file as soon as it's opened, then writes. To add to the end of an existing file, open it in append mode, `\"a\"`."
+  },
+  {
+    "prompt": "A CSV has a `price` column. After `rows = list(csv.DictReader(f))`, what is the type of `rows[0][\"price\"]`?",
+    "options": [
+      "float",
+      "int or float, depending on the value",
+      "Decimal",
+      "str"
+    ],
+    "answerIndex": 3,
+    "explanation": "A CSV file is plain text, and the `csv` module doesn't guess types. Every value is a string until you convert it with `int()` or `float()`. Comparing prices as strings gives wrong answers, for example `\"4.50\" > \"12.00\"` is True."
+  },
+  {
+    "prompt": "What does `json.dumps({\"done\": False, \"note\": None})` return?",
+    "options": [
+      "`{\"done\": false, \"note\": null}`",
+      "`{'done': False, 'note': None}`",
+      "`{\"done\": False, \"note\": None}`",
+      "`{\"done\": \"False\", \"note\": \"None\"}`"
+    ],
+    "answerIndex": 0,
+    "explanation": "JSON has its own spellings: double-quoted strings, lowercase `true`/`false`, and `null` for Python's `None`. `json.loads` converts them back to Python values."
+  },
+  {
+    "prompt": "`import random` followed by `roll = randint(1, 6)` crashes with `NameError: name 'randint' is not defined`. Which fix is right?",
+    "options": [
+      "Change the first line to `import randint`",
+      "Write `roll = random.randint(1, 6)`",
+      "Write `roll = random(randint(1, 6))`",
+      "Add `randint = 6` before the roll"
+    ],
+    "answerIndex": 1,
+    "explanation": "`import random` creates only the name `random`; its functions stay inside the module, reached with a dot. Alternatively, `from random import randint` makes `randint` available directly."
+  },
+  {
+    "prompt": "What does `Counter([\"red\", \"blue\", \"red\", \"green\", \"red\"]).most_common(1)` return? (`Counter` comes from the `collections` module.)",
+    "options": [
+      "`\"red\"`",
+      "`(\"red\", 3)`",
+      "`[(\"red\", 3)]`",
+      "`{\"red\": 3}`"
+    ],
+    "answerIndex": 2,
+    "explanation": "`most_common(n)` always returns a list of `(item, count)` tuples, most common first, even when n is 1."
+  },
+  {
+    "prompt": "A file `tools.py` ends with `if __name__ == \"__main__\": run_demo()`. When does `run_demo()` run?",
+    "options": [
+      "Every time anything imports `tools`",
+      "Never, because `__name__` is always \"tools\"",
+      "Only when `tools.py` is run directly as the main program, not when it's imported",
+      "Only the second time it is imported"
+    ],
+    "answerIndex": 2,
+    "explanation": "Python sets `__name__` to \"__main__\" for the file it runs directly, and to the module's own name (\"tools\") when it's imported. The guard lets a file work both as a runnable script and as an importable module."
+  }
+]

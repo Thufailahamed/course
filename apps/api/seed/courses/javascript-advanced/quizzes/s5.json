@@ -1,0 +1,64 @@
+[
+  {
+    "prompt": "A module is imported by three other modules in the same app. How many times does its body run?",
+    "options": [
+      "Once for each module that imports it",
+      "Once, however many modules import it",
+      "Once for each import statement",
+      "Every time the module is required"
+    ],
+    "answerIndex": 1,
+    "explanation": "The first import evaluates the module body, and every later import receives the same cached exports. That caching is why a singleton or a shared store created at module level exists exactly once. Modules with side effects at load time run once, at the moment the graph first reaches them."
+  },
+  {
+    "prompt": "A module exports `export let count = 0` and a function that increments it. Another module imports `count`, and after the function runs, the importer reads `count`. What does it see?",
+    "options": [
+      "0, because imports are copies of the value",
+      "The updated value, because imports are live bindings",
+      "A TypeError, because imports are read-only",
+      "undefined, until the exporting module finishes"
+    ],
+    "answerIndex": 1,
+    "explanation": "An ES module import is a live view of the exporter's variable, so each read sees the current value. CommonJS require returns a copy of the value at the time of the call, which is the difference that surprises people. The importer still cannot assign to the import."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconst calls = [];\nconst spy = (...a) => { calls.push(a); return a[0] * 2; };\nspy(1, 2);\nspy(3);\nconsole.log(calls.length, spy(5), calls.length);\n```",
+    "options": ["2 10 2", "3 10 3", "2 6 3", "2 10 3"],
+    "answerIndex": 3,
+    "explanation": "The first argument reads calls.length as 2 before the spy(5) call in the argument list runs. spy(5) returns 10 and records a third call, so the final calls.length is 3. Arguments are evaluated left to right, so the count is read at the moment it appears in the list."
+  },
+  {
+    "prompt": "A fake clock has two timers, one at 10 ms that pushes 'a' into `log` and one at 20 ms that pushes 'b'. The test calls `clock.advance(15)`. What is `log`?",
+    "options": ["[]", "[ 'a' ]", "[ 'a', 'b' ]", "[ 'b' ]"],
+    "answerIndex": 1,
+    "explanation": "advance(15) runs every timer that is due by time 15, which is only the 10 ms timer. The 20 ms timer stays scheduled until the clock moves past 20. A fake clock lets a test run the same timing logic as production, without waiting."
+  },
+  {
+    "prompt": "A test is written as `async () => { expectRejects(fetchUser(-1)); }` and never awaits the helper. Why can it pass even when the function does not reject as expected?",
+    "options": [
+      "Async functions never throw",
+      "The runner moves on before the promise settles, so the outcome is never reported to it",
+      "JavaScript ignores errors inside arrow functions",
+      "Tests run in a separate thread that cannot see failures"
+    ],
+    "answerIndex": 1,
+    "explanation": "Without await or return, the test body finishes before the promise settles. The runner records a pass, and the later rejection or failed assertion happens with nothing waiting for it. Every async assertion needs an await in front of it, which is why linters flag floating promises."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconsole.log(typeof {square: () => 1}['toString']);\n```",
+    "options": ["undefined", "function", "string", "object"],
+    "answerIndex": 1,
+    "explanation": "Plain objects inherit from Object.prototype, so 'toString' is found even though the literal never defined it. A factory or strategy table that looks names up this way can run inherited functions by accident. A Map, or Object.hasOwn, only sees the keys you actually supplied."
+  },
+  {
+    "prompt": "An event emitter loops over its live listeners array with a for loop. The first listener unsubscribes itself during the loop. What can go wrong?",
+    "options": [
+      "The listener right after it is skipped for that event",
+      "The loop throws a RangeError",
+      "The listener runs twice",
+      "Nothing, because arrays are copied before iteration starts"
+    ],
+    "answerIndex": 0,
+    "explanation": "Removing the current element shifts the next one into its index, and the loop then increments past it, so that next listener never runs for this event. The fix is to iterate over a snapshot, such as [...listeners], so changes to the array during the loop do not affect the iteration."
+  }
+]

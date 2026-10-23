@@ -1,0 +1,57 @@
+[
+  {
+    "prompt": "Why does a hash table's insert function compare keys before allocating a new entry?",
+    "options": [
+      "The allocator is slower when the key already exists",
+      "So that an existing key is updated in place rather than duplicated",
+      "Because strcmp must run before malloc can be called",
+      "To make the bucket count grow automatically"
+    ],
+    "answerIndex": 1,
+    "explanation": "The search for an existing key ensures each key appears once. If the key exists, its value is updated. Otherwise a new entry is linked at the front of its bucket's chain."
+  },
+  {
+    "prompt": "What must a qsort comparator return to place the first argument before the second?",
+    "options": [
+      "Zero",
+      "A positive number",
+      "A negative number",
+      "The first argument's value"
+    ],
+    "answerIndex": 2,
+    "explanation": "A negative result means the first element comes earlier in the sorted order. Zero means they are equal, and positive means the first element comes after the second."
+  },
+  {
+    "prompt": "Which expression clears bit 2 of the unsigned variable flags, leaving every other bit as it was?",
+    "options": [
+      "flags |= 1u << 2",
+      "flags ^= 1u << 2",
+      "flags &= ~(1u << 2)",
+      "flags &= 1u << 2"
+    ],
+    "answerIndex": 2,
+    "explanation": "Setting a bit uses OR, and toggling uses XOR. To clear a bit, AND with the inverted mask, which keeps every other bit and turns off the chosen one. Ending with &= 1u << 2 would keep only bit 2."
+  },
+  {
+    "prompt": "Why can sizeof(struct s) be larger than the sum of its members' sizes?",
+    "options": [
+      "Because sizeof counts a hidden header for each struct",
+      "Because the compiler inserts padding so each member meets its alignment",
+      "Because struct members are always stored as pointers",
+      "Because sizeof includes the size of the struct's name"
+    ],
+    "answerIndex": 1,
+    "explanation": "Each type has an alignment requirement. The compiler adds padding between members, and after the last one, so every member starts at a suitably aligned address and every element of an array stays aligned."
+  },
+  {
+    "prompt": "What is the portable way to reinterpret the bytes of a float as a uint32_t?",
+    "options": [
+      "Cast the float pointer to uint32_t * and dereference it",
+      "Store the float in a union and read the uint32_t member",
+      "Use memcpy to copy the bytes into the uint32_t",
+      "Use the bitwise AND operator with the float value"
+    ],
+    "answerIndex": 2,
+    "explanation": "memcpy copies the representation without breaking the strict aliasing rules, and it is the form compilers optimize well. Pointer casts and reading an inactive union member are undefined behavior in strict C."
+  }
+]

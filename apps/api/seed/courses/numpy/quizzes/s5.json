@@ -1,0 +1,69 @@
+[
+  {
+    "prompt": "What is the difference between `np.max(a)` and `np.maximum(a, b)`?",
+    "options": [
+      "They are aliases for the same function",
+      "`np.max` returns the single largest value of `a`; `np.maximum` compares `a` and `b` element by element and returns an array",
+      "`np.max` works on 1-D arrays only; `np.maximum` works on any shape",
+      "`np.maximum` returns the index of the largest value"
+    ],
+    "answerIndex": 1,
+    "explanation": "`np.max` is an aggregation that collapses an array, while `np.maximum` is a ufunc that returns the larger of each pair. `np.maximum(z, 0)` is the ReLU activation."
+  },
+  {
+    "prompt": "What shape does `np.ones((5, 1)) + np.ones(3)` produce?",
+    "options": ["(5, 1)", "(3,)", "(5, 3)", "It raises a broadcasting error"],
+    "answerIndex": 2,
+    "explanation": "Align from the right: (5, 1) vs (1, 3). Each pair contains a 1, so both are stretched and the result is (5, 3)."
+  },
+  {
+    "prompt": "`X` has shape (100, 3): 100 samples, 3 features. Which expression subtracts each sample's (row's) mean from that row?",
+    "options": [
+      "X - X.mean(axis=0)",
+      "X - X.mean(axis=1)",
+      "X - X.mean(axis=1, keepdims=True)",
+      "X - X.mean()"
+    ],
+    "answerIndex": 2,
+    "explanation": "`X.mean(axis=1)` has shape (100,), which can't broadcast against the 3 columns. `keepdims=True` keeps shape (100, 1), which broadcasts down the rows. `axis=0` would center the columns instead."
+  },
+  {
+    "prompt": "`data` has shape (7, 24, 3). What is the shape of `data.sum(axis=(0, 1))`?",
+    "options": ["(3,)", "(7, 24)", "(24, 3)", "A single number"],
+    "answerIndex": 0,
+    "explanation": "The axis argument names the dimensions that disappear. Removing axes 0 and 1 from (7, 24, 3) leaves (3,), one total per sensor."
+  },
+  {
+    "prompt": "Why does `np.where((age > 18) and (age < 65), 1, 0)` raise an error on an array `age`?",
+    "options": [
+      "`np.where` needs exactly one argument",
+      "Python's `and` needs a single True/False, but each comparison is a whole boolean array; use `&` instead",
+      "Comparisons don't work on integer arrays",
+      "The parentheses are in the wrong place; it should be `age > 18 & age < 65`"
+    ],
+    "answerIndex": 1,
+    "explanation": "`and`, `or` and `not` ask for the truth value of an entire array, which is ambiguous. Use the element-wise operators `&`, `|` and `~`, and keep the parentheses, because `&` binds more tightly than `>`."
+  },
+  {
+    "prompt": "Why does a numerically stable softmax compute `np.exp(z - z.max())` instead of `np.exp(z)`?",
+    "options": [
+      "It makes the function faster",
+      "Subtracting a constant from every score doesn't change softmax, and it prevents `np.exp` from overflowing to inf (which would produce nan)",
+      "It rounds the probabilities so they sum exactly to 1",
+      "It turns the scores into a one-hot vector"
+    ],
+    "answerIndex": 1,
+    "explanation": "softmax(z) = softmax(z - c) for any constant c. Choosing c = max(z) makes the largest exponent e^0 = 1, so large scores like 800 no longer overflow."
+  },
+  {
+    "prompt": "Which statement about `np.vectorize` is true?",
+    "options": [
+      "It compiles a Python function to C, making it as fast as a ufunc",
+      "It is a convenience wrapper that still calls the Python function once per element",
+      "It only works on functions that already use NumPy",
+      "It runs the function on multiple CPU cores"
+    ],
+    "answerIndex": 1,
+    "explanation": "Despite the name, `np.vectorize` is essentially a loop. Real speedups come from expressing the computation with ufuncs, broadcasting and reductions."
+  }
+]

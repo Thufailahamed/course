@@ -1,0 +1,90 @@
+[
+  {
+    "prompt": "What does `console.log(7 % 3, -7 % 3)` print?",
+    "options": [
+      "1 2",
+      "2 -1",
+      "1 -1",
+      "-1 1"
+    ],
+    "answerIndex": 2,
+    "explanation": "The remainder of 7 divided by 3 is 1. The remainder keeps the sign of the left operand, so `-7 % 3` is `-1`, not `2`. The option `2 -1` mixes up the two results, and `-1 1` swaps them."
+  },
+  {
+    "prompt": "What does `0.1 + 0.2 === 0.3` evaluate to?",
+    "options": [
+      "true",
+      "false",
+      "0.3",
+      "undefined"
+    ],
+    "answerIndex": 1,
+    "explanation": "Decimal fractions like 0.1 cannot be stored exactly in binary floating point, so the sum is `0.30000000000000004`, which is not identical to the stored `0.3`. Compare with a tolerance, such as `Math.abs(a - b) < Number.EPSILON`, when you need to test a decimal sum. The option `0.3` assumes the sum is exact."
+  },
+  {
+    "prompt": "Which expression gives 12.35 as a number, not as text, for `12.3456`?",
+    "options": [
+      "(12.3456).toFixed(2)",
+      "Math.round(12.3456 * 100) / 100",
+      "Math.floor(12.3456 * 100)",
+      "12.3456.round(2)"
+    ],
+    "answerIndex": 1,
+    "explanation": "Scaling by 100, rounding and dividing by 100 keeps the result numeric. `toFixed(2)` looks right but returns the string `\"12.35\"`, so arithmetic on it or a strict comparison with `12.35` would fail. `Math.floor` rounds down to `12.34`, and `round` is not a method on numbers in JavaScript."
+  },
+  {
+    "prompt": "What does `console.log(\"3\" + 1 + 2)` print?",
+    "options": [
+      "6",
+      "33",
+      "312",
+      "Error"
+    ],
+    "answerIndex": 2,
+    "explanation": "The first `+` has a string on its left, so it joins the text `\"31\"`. The next `+` joins again, giving `\"312\"`. JavaScript does not add the numbers first. The option `33` would need the `+` operations to add `1` and `2` before joining, and `6` would need every value to be a number."
+  },
+  {
+    "prompt": "Which of these values is falsy in a condition?",
+    "options": [
+      "\"0\"",
+      "[]",
+      "\"\"",
+      "{}"
+    ],
+    "answerIndex": 2,
+    "explanation": "The empty string is one of the few falsy values, along with `0`, `false`, `null`, `undefined` and `NaN`. The text `\"0\"` is truthy because it is a non-empty string. The empty array and empty object are both truthy, so testing `if (list)` will not detect an empty list."
+  },
+  {
+    "prompt": "What does `null == 0` evaluate to?",
+    "options": [
+      "undefined",
+      "TypeError",
+      "true",
+      "false"
+    ],
+    "answerIndex": 3,
+    "explanation": "Loose equality has a special rule for `null` and `undefined`: they equal each other, and nothing else under `==`. So `null == 0` is `false`, even though `null` looks like nothing. Strict equality `===` gives the same answer here, and you should prefer it because its rules are simpler."
+  },
+  {
+    "prompt": "With `const savedVolume = 0;`, which expression returns `0` rather than `50`?",
+    "options": [
+      "savedVolume ?? 50",
+      "savedVolume || 50",
+      "savedVolume + 50",
+      "Math.max(savedVolume, 50)"
+    ],
+    "answerIndex": 0,
+    "explanation": "`??` falls back only for `null` and `undefined`, so the real zero is kept. `||` treats `0` as falsy and returns 50, which is the bug this lesson covers. Adding 50 or taking the maximum with 50 both produce 50 for a zero volume."
+  },
+  {
+    "prompt": "What does this print?\n\n```\nswitch (1) {\n  case 1:\n    console.log(\"a\");\n  case 2:\n    console.log(\"b\");\n    break;\n  default:\n    console.log(\"c\");\n}\n```",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "a then b on separate lines"
+    ],
+    "answerIndex": 3,
+    "explanation": "The value `1` matches `case 1`, which prints `a` and has no `break`, so execution falls through to `case 2`. That prints `b`, and the `break` then stops the switch before `default`. The output is two lines, `a` and `b`. A single `a` would appear only if `case 1` had a `break`."
+  }
+]

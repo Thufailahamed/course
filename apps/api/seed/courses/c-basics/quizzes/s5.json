@@ -1,0 +1,57 @@
+[
+  {
+    "prompt": "After `int n = 7; int *p = &n; *p = 12;`, what is the value of `n`?",
+    "options": [
+      "7",
+      "12",
+      "The address of n",
+      "It is undefined"
+    ],
+    "answerIndex": 1,
+    "explanation": "`p` holds the address of `n`, and `*p` refers to `n` itself. Writing `*p = 12` therefore changes `n` to 12."
+  },
+  {
+    "prompt": "In the declaration `int *p;`, what does `*` mean?",
+    "options": [
+      "p is a pointer to an int",
+      "p is multiplied by an int",
+      "p is an int that is never used",
+      "p is a function"
+    ],
+    "answerIndex": 0,
+    "explanation": "In a declaration, the star says the variable is a pointer. In an expression, `*p` means the value at the address `p` holds."
+  },
+  {
+    "prompt": "For `int nums[] = {10, 20, 30}; int *p = nums + 2;`, what is `*p`?",
+    "options": [
+      "10",
+      "20",
+      "30",
+      "The address of the array"
+    ],
+    "answerIndex": 2,
+    "explanation": "`nums + 2` points two elements past the first element, which is `nums[2]`, the value 30. Pointer arithmetic moves by elements, not bytes."
+  },
+  {
+    "prompt": "Why should you check the return value of `malloc` before using the block?",
+    "options": [
+      "Because malloc always returns zero bytes",
+      "Because malloc returns NULL when the request fails, and dereferencing NULL is undefined behavior",
+      "Because malloc frees memory automatically",
+      "Because malloc must be called twice"
+    ],
+    "answerIndex": 1,
+    "explanation": "When memory is unavailable, `malloc` returns `NULL`. Using that pointer leads to undefined behavior, usually a crash, so always check first."
+  },
+  {
+    "prompt": "What is the result of `sizeof *s` where `char *s = NULL;`?",
+    "options": [
+      "0",
+      "The size of a pointer, which is 8 on most systems",
+      "1",
+      "It is a compile error, because s is NULL"
+    ],
+    "answerIndex": 2,
+    "explanation": "`sizeof` measures the object that `*s` would refer to, which has type `char`, and the standard defines `sizeof(char)` as 1. The null pointer is never read, because `sizeof` does not evaluate its operand's value here."
+  }
+]

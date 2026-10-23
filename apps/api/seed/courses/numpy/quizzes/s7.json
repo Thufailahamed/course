@@ -1,0 +1,53 @@
+[
+  {
+    "prompt": "`values` is a float array that may contain NaN. Which expression correctly counts the missing entries?",
+    "options": ["(values == np.nan).sum()", "np.isnan(values).sum()", "(values is np.nan).sum()", "values.count(np.nan)"],
+    "answerIndex": 1,
+    "explanation": "NaN never compares equal to anything, including itself, so `values == np.nan` is all False. `np.isnan` returns a boolean mask, and summing it counts the True values."
+  },
+  {
+    "prompt": "Why does `np.isclose(1e-9, 2e-9)` return `True` with default arguments?",
+    "options": [
+      "Because both numbers round to zero in float64",
+      "Because the default absolute tolerance `atol=1e-08` is larger than their difference",
+      "Because `isclose` only compares the first 7 significant digits",
+      "Because `rtol` is relative to the larger number, which makes any two small numbers equal"
+    ],
+    "answerIndex": 1,
+    "explanation": "`isclose` checks `|a - b| <= atol + rtol * |b|`. The difference is 1e-9, which is below the default `atol` of 1e-8. When working with tiny magnitudes, set `atol` explicitly (often `atol=0`)."
+  },
+  {
+    "prompt": "An image `img` has dtype uint8. What is the safest way to brighten it by 80?",
+    "options": [
+      "img + 80",
+      "np.clip(img + 80, 0, 255)",
+      "np.clip(img.astype(np.int16) + 80, 0, 255).astype(np.uint8)",
+      "(img + 80).astype(np.uint8)"
+    ],
+    "answerIndex": 2,
+    "explanation": "uint8 arithmetic wraps around modulo 256, so `img + 80` overflows before any clipping can happen. Widen the dtype first, compute, clip to [0, 255], then convert back to uint8."
+  },
+  {
+    "prompt": "You saved an int16 array with `np.savetxt` and read it back with `np.loadtxt` (no `dtype=` argument). What dtype do you get?",
+    "options": ["int16", "int64", "float64", "object"],
+    "answerIndex": 2,
+    "explanation": "Text files carry no type information, and `np.loadtxt` parses numbers as float64 by default. The binary `.npy` format (`np.save` / `np.load`) preserves the exact dtype and shape."
+  },
+  {
+    "prompt": "`a = np.zeros((3, 4), dtype=np.float64)`. What are the strides of `a.T`?",
+    "options": ["(32, 8)", "(8, 32)", "(8, 24)", "(24, 8)"],
+    "answerIndex": 1,
+    "explanation": "`a` is C-ordered with strides (4 × 8, 8) = (32, 8). Transposing creates a view that simply reverses the strides, giving (8, 32). No data is copied."
+  },
+  {
+    "prompt": "Which statement about `np.lib.stride_tricks.sliding_window_view(x, 5)` is true?",
+    "options": [
+      "It copies every window into a new array, so memory grows 5×",
+      "It returns a read-only view whose overlapping windows share x's memory",
+      "It only works on 2-D arrays",
+      "Writing to one window safely updates only that window"
+    ],
+    "answerIndex": 1,
+    "explanation": "The windows are built purely with strides, so no data is copied and the windows overlap in memory. That's why NumPy makes the view read-only: a single write would change several windows at once."
+  }
+]

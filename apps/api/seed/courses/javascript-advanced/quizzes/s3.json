@@ -1,0 +1,50 @@
+[
+  {
+    "prompt": "What does this print?\n\n```js\nPromise.resolve().then(() => console.log(\"A\"));\nconsole.log(\"B\");\n```",
+    "options": ["A B", "B A", "A", "B"],
+    "answerIndex": 1,
+    "explanation": "A `then` callback is always asynchronous. Even an already-resolved promise queues its callback as a microtask, which runs only after the current script finishes. So `B` prints during the script, and `A` prints afterward."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nPromise.resolve(2)\n  .then((n) => {\n    n * 2;\n  })\n  .then((v) => console.log(v));\n```",
+    "options": ["2", "4", "undefined", "NaN"],
+    "answerIndex": 2,
+    "explanation": "The first callback uses braces and no `return`, so it returns `undefined`, and the next `then` receives `undefined`. The multiplication is computed and thrown away. Writing `return n * 2;` or using an expression body without braces fixes it. This missing-return bug is the most common promise mistake."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nPromise.resolve(\"x\")\n  .finally(() => \"y\")\n  .then((v) => console.log(v));\n```",
+    "options": ["y", "undefined", "xy", "x"],
+    "answerIndex": 3,
+    "explanation": "`finally` runs its callback for cleanup, and the callback's return value is discarded. The promise it returns passes the original value through, so `x` reaches the next `then`. The tempting `y` assumes `finally` works like `then`, which would transform the value."
+  },
+  {
+    "prompt": "In what order do these lines print?\n\n```js\nsetTimeout(() => console.log(\"timer\"), 0);\nPromise.resolve().then(() => console.log(\"micro\"));\nconsole.log(\"sync\");\n```",
+    "options": ["sync, timer, micro", "sync, micro, timer", "micro, sync, timer", "timer, micro, sync"],
+    "answerIndex": 1,
+    "explanation": "The script runs first, so `sync` prints. Then the engine drains the microtask queue, so the promise callback prints `micro`. Only after that does the loop take the timer task. A zero-delay timer is still a task, so it waits behind every microtask."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nasync function run() {\n  const out = [];\n  [1, 2].forEach(async (n) => {\n    await null;\n    out.push(n);\n  });\n  return out.length;\n}\nrun().then(console.log);\n```",
+    "options": ["0", "1", "2", "TypeError"],
+    "answerIndex": 0,
+    "explanation": "`forEach` ignores the promises its async callbacks return, so `run` returns before either callback has resumed from its `await`. The array is still empty when its length is read. Use `for...of` with `await` when each step must finish before the function returns."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nPromise.all([Promise.resolve(1), Promise.reject(new Error(\"x\"))])\n  .then(() => console.log(\"ok\"), (e) => console.log(e.message));\n```",
+    "options": ["ok", "1", "x", "undefined"],
+    "answerIndex": 2,
+    "explanation": "`Promise.all` fulfills only when every input fulfills. One rejection makes the whole result reject with that reason, so the second handler runs and prints `x`. The option `ok` describes `Promise.allSettled`, which never rejects, and `allSettled` would print its results instead."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nasync function risky() {\n  throw new Error(\"boom\");\n}\nasync function f() {\n  try {\n    return risky();\n  } catch (e) {\n    return \"caught\";\n  }\n}\nf().catch((e) => console.log(\"outer\", e.message));\n```",
+    "options": ["outer boom", "caught", "boom", "nothing prints"],
+    "answerIndex": 0,
+    "explanation": "`return risky()` without `await` hands the rejected promise to the caller, and `f`'s `try` block has already exited. The `catch` never runs, so the rejection reaches the outer `.catch`. Writing `return await risky()` inside `try` makes `caught` the answer."
+  },
+  {
+    "prompt": "Which value does this print?\n\n```js\nPromise.race([\n  new Promise((r) => setTimeout(() => r(\"slow\"), 20)),\n  new Promise((r) => setTimeout(() => r(\"fast\"), 5)),\n]).then((v) => console.log(v));\n```",
+    "options": ["slow", "both", "fast", "TypeError"],
+    "answerIndex": 2,
+    "explanation": "`Promise.race` settles with whichever input settles first. The 5 ms timer fires before the 20 ms timer, so `fast` wins. The slower promise still completes, but its value is ignored. Racing is the basis of timeouts, and it doesn't cancel the losing work."
+  }
+]

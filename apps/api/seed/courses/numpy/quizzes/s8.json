@@ -1,0 +1,167 @@
+[
+  {
+    "prompt": "What does np.zeros((4, 3, 2)).ndim return?",
+    "options": [
+      "2",
+      "3",
+      "24",
+      "(4, 3, 2)"
+    ],
+    "answerIndex": 1,
+    "explanation": "ndim is the number of dimensions (axes). The shape (4, 3, 2) has three entries, so ndim is 3. 24 is .size, and (4, 3, 2) is .shape."
+  },
+  {
+    "prompt": "Which is the recommended way to generate reproducible random numbers in modern NumPy?",
+    "options": [
+      "np.random.seed(42) followed by np.random.rand(...)",
+      "rng = np.random.default_rng(42) and then methods such as rng.normal(...)",
+      "import random; random.seed(42)",
+      "Random numbers in NumPy cannot be made reproducible"
+    ],
+    "answerIndex": 1,
+    "explanation": "default_rng creates an independent Generator with a better algorithm (PCG64) and no hidden global state. The legacy np.random.seed API still works but is discouraged, and Python's random module doesn't seed NumPy at all."
+  },
+  {
+    "prompt": "After a = np.arange(5), b = a[1:3] and b[0] = 99, what is a?",
+    "options": [
+      "[0 1 2 3 4]",
+      "[99 1 2 3 4]",
+      "[0 99 2 3 4]",
+      "An error, because slices are read-only"
+    ],
+    "answerIndex": 2,
+    "explanation": "Basic slicing returns a **view** that shares memory with the original. Writing to b[0] writes to a[1]. Use a[1:3].copy() when you need independent data."
+  },
+  {
+    "prompt": "Which expression selects the elements of a that are greater than 2 **and** less than 6?",
+    "options": [
+      "a[a > 2 and a < 6]",
+      "a[(a > 2) & (a < 6)]",
+      "a[2 < a < 6]",
+      "a[a > 2 & a < 6]"
+    ],
+    "answerIndex": 1,
+    "explanation": "Element-wise logic needs &, and each comparison needs parentheses because & binds more tightly than >. and and chained comparisons ask for a single True/False and raise \"truth value of an array is ambiguous\"."
+  },
+  {
+    "prompt": "What is the shape of np.arange(12).reshape(3, -1)?",
+    "options": [
+      "(3, -1)",
+      "(3, 4)",
+      "(4, 3)",
+      "(3, 12)"
+    ],
+    "answerIndex": 1,
+    "explanation": "-1 tells NumPy to infer that dimension from the total size: 12 elements in 3 rows leaves 4 columns."
+  },
+  {
+    "prompt": "Which of these always returns a **copy** rather than a view of a?",
+    "options": [
+      "a[1:4]",
+      "a[:, 0]",
+      "a[[1, 2, 3]] (fancy indexing with a list)",
+      "a.T"
+    ],
+    "answerIndex": 2,
+    "explanation": "Indexing with an integer array or list (fancy indexing) gathers arbitrary elements into new memory, so it always copies. Slices, single-column selection with a slice, and transposes are views."
+  },
+  {
+    "prompt": "What is the shape of np.ones((5, 1)) + np.ones((1, 4))?",
+    "options": [
+      "(5, 4)",
+      "(5, 1)",
+      "(1, 4)",
+      "It raises a broadcasting error"
+    ],
+    "answerIndex": 0,
+    "explanation": "Broadcasting compares dimensions from the right: 1 vs 4 gives 4, and 5 vs 1 gives 5. Each size-1 axis is stretched, giving (5, 4). This is the trick behind outer products and pairwise distance tables."
+  },
+  {
+    "prompt": "Which pair of shapes **cannot** be broadcast together?",
+    "options": [
+      "(3, 4) and (4,)",
+      "(3, 4) and (3,)",
+      "(3, 1) and (1, 4)",
+      "(2, 3, 4) and (3, 1)"
+    ],
+    "answerIndex": 1,
+    "explanation": "Shapes align from the **right**, so (3,) is compared with the trailing 4 of (3, 4), and 3 ≠ 4. To add a per-row value, reshape it to (3, 1), for example v[:, None]."
+  },
+  {
+    "prompt": "X has shape (100, 5): 100 samples, 5 features. What is the shape of X.mean(axis=0)?",
+    "options": [
+      "(100,)",
+      "(5,)",
+      "(100, 5)",
+      "(), a single number"
+    ],
+    "answerIndex": 1,
+    "explanation": "The axis you pass is the one that disappears. Averaging over axis=0 (the samples) leaves one mean per feature: shape (5,)."
+  },
+  {
+    "prompt": "Why is keepdims=True useful in X - X.mean(axis=1, keepdims=True) when X has shape (100, 5)?",
+    "options": [
+      "It makes the mean more numerically accurate",
+      "It keeps the result shaped (100, 1), so it broadcasts to subtract each row's own mean",
+      "It prevents X from being modified in place",
+      "Without it, NumPy would average over every element"
+    ],
+    "answerIndex": 1,
+    "explanation": "Without keepdims the row means have shape (100,), which aligns with the trailing axis of length 5 and fails to broadcast. Keeping the reduced axis as size 1 gives (100, 1), which lines up row by row."
+  },
+  {
+    "prompt": "For a float array a that may contain missing values, which expression correctly counts the NaNs?",
+    "options": [
+      "(a == np.nan).sum()",
+      "np.isnan(a).sum()",
+      "np.nansum(a)",
+      "(a is np.nan).sum()"
+    ],
+    "answerIndex": 1,
+    "explanation": "NaN is not equal to anything, not even itself, so a == np.nan is always False and counts 0. np.isnan tests each element properly. np.nansum adds up the non-NaN values instead of counting NaNs."
+  },
+  {
+    "prompt": "With A of shape (3, 4) and B of shape (4, 2), what does np.einsum('ij,jk->ik', A, B) compute?",
+    "options": [
+      "The element-wise product, shape (3, 4)",
+      "The matrix product A @ B, shape (3, 2)",
+      "The outer product, shape (3, 4, 4, 2)",
+      "The sum of all elements of A times all elements of B"
+    ],
+    "answerIndex": 1,
+    "explanation": "The repeated index j is summed over, and ik is kept: C[i, k] = sum over j of A[i, j] * B[j, k]. That is exactly matrix multiplication."
+  },
+  {
+    "prompt": "To solve the linear system Ax = b, why prefer np.linalg.solve(A, b) over np.linalg.inv(A) @ b?",
+    "options": [
+      "inv only works on 2×2 matrices",
+      "solve is faster and more numerically accurate because it never forms the inverse",
+      "solve returns an approximate answer, which is usually good enough",
+      "They are identical; it's purely a matter of style"
+    ],
+    "answerIndex": 1,
+    "explanation": "solve factorizes A and back-substitutes, which takes less work and loses less precision than computing a full inverse and then multiplying. Explicit inverses are rarely needed in numerical code."
+  },
+  {
+    "prompt": "You train linear regression with gradient descent on raw features whose values range from about 0.1 to 50. The loss grows to inf within a few epochs. What is the most likely cause, and the standard fix?",
+    "options": [
+      "Too few epochs: train for longer",
+      "The learning rate is too large for the steepest feature: standardize the features (or lower the learning rate)",
+      "The bias term is missing: add a column of ones",
+      "Gradient descent cannot fit linear models: always use np.linalg.lstsq"
+    ],
+    "answerIndex": 1,
+    "explanation": "Large-valued features make the loss surface very steep along their weights, so a learning rate that is fine for the others overshoots and diverges. Standardizing to mean 0 and std 1 puts every weight on the same scale so one learning rate suits them all."
+  },
+  {
+    "prompt": "a = np.zeros((1000, 1000)) is a C-contiguous float64 array. What is a.strides, and what does it mean?",
+    "options": [
+      "(8, 8000): stepping to the next row skips 8 bytes",
+      "(8000, 8): the next row is 8,000 bytes away, the next column 8 bytes away",
+      "(1000, 1): strides are counted in elements",
+      "(1, 1000): columns are stored contiguously"
+    ],
+    "answerIndex": 1,
+    "explanation": "Strides are in **bytes**. In row-major (C) order a row holds 1000 × 8 bytes, so moving one row skips 8,000 bytes while moving one column skips a single 8-byte float. That's why iterating along the last axis is the cache-friendly direction, and why a.T can be a free view: it just swaps the strides."
+  }
+]

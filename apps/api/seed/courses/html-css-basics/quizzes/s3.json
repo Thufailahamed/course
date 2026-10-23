@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "How do you associate a `<label>` with an input?",
+    "options": [
+      "Give the label and input the same `name` attribute",
+      "Set the label's `for` attribute to the input's `id`",
+      "Put the label after the input and add `aria-hidden`",
+      "Set the input's `type` to `label`"
+    ],
+    "answerIndex": 1,
+    "explanation": "The label's `for` value must match the input's `id`. That association lets a click or tap on the label focus the input, and it gives assistive technology the input's accessible name. `name` is for the submitted form data, not label association."
+  },
+  {
+    "prompt": "Why is a placeholder not a replacement for a visible label?",
+    "options": [
+      "Placeholders are not supported in modern browsers",
+      "The placeholder disappears as soon as the user types, and its contrast is often poor",
+      "A placeholder cannot contain text",
+      "A placeholder prevents the form from submitting"
+    ],
+    "answerIndex": 1,
+    "explanation": "A placeholder is a hint, not a label. It vanishes once the field has content, leaving the user to remember what the field was for, and its default contrast often fails accessibility requirements. Keep a persistent visible label."
+  },
+  {
+    "prompt": "What is the default `type` of a `<button>` inside a form?",
+    "options": [
+      "`button`",
+      "`submit`",
+      "`reset`",
+      "`link`"
+    ],
+    "answerIndex": 1,
+    "explanation": "A `<button>` defaults to `type=\"submit\"` inside a form, which can submit unexpectedly when you meant a secondary action. Set `type=\"button\"` for non-submit controls and `type=\"submit\"` for the real submission."
+  },
+  {
+    "prompt": "How do two radio buttons become part of the same group?",
+    "options": [
+      "They share the same `id`",
+      "They share the same `name`",
+      "They are wrapped in the same `<label>`",
+      "They both have `type=\"radio\"`; that is enough"
+    ],
+    "answerIndex": 1,
+    "explanation": "Radio buttons with the same `name` form a group where selecting one clears the others. Each radio still needs its own unique `id` so its label can point at it. `type=\"radio\"` alone does not group them."
+  },
+  {
+    "prompt": "What does `<fieldset>` with a `<legend>` provide?",
+    "options": [
+      "A visual border and nothing else",
+      "A group for related controls with an accessible group name",
+      "A way to submit multiple forms at once",
+      "A replacement for every label"
+    ],
+    "answerIndex": 1,
+    "explanation": "`<fieldset>` groups related form controls, and the first `<legend>` names the group. Screen readers announce the legend when users enter the group, which is especially valuable for radio and checkbox sets. It is semantic, not just decorative."
+  },
+  {
+    "prompt": "What does the `required` attribute do?",
+    "options": [
+      "It makes the field read-only",
+      "It tells the browser the field must have a value before the form can be submitted",
+      "It changes the field's type to email",
+      "It styles the label with an asterisk automatically"
+    ],
+    "answerIndex": 1,
+    "explanation": "`required` enables native constraint validation: the browser blocks submission and shows a validation message when the field is empty. It does not replace server-side validation, and it does not add an asterisk for you."
+  },
+  {
+    "prompt": "Which link text is the most accessible?",
+    "options": [
+      "`<a href=\"/pricing\">Click here</a>`",
+      "`<a href=\"/pricing\">Read more</a>`",
+      "`<a href=\"/pricing\">See pricing and plans</a>`",
+      "`<a href=\"/pricing\">Link</a>`"
+    ],
+    "answerIndex": 2,
+    "explanation": "Screen-reader users often navigate by a list of links, where every \"click here\" sounds identical. The link text should describe the destination. \"See pricing and plans\" stands on its own even out of context."
+  },
+  {
+    "prompt": "Why prefer `<button>` over a clickable `<div>`?",
+    "options": [
+      "A button is always faster to render",
+      "A button is focusable, keyboard-operable and announced correctly without extra code",
+      "A div cannot be styled",
+      "A button is the only element that can have a click handler"
+    ],
+    "answerIndex": 1,
+    "explanation": "Native `<button>` gives you keyboard activation with Enter and Space, focus behaviour, disabled semantics and the correct role in the accessibility tree. A clickable div needs all of that reimplemented, and is usually broken for keyboard and screen-reader users."
+  },
+  {
+    "prompt": "What is a skip link?",
+    "options": [
+      "A link that removes the page's styles",
+      "A link near the start of the document that jumps keyboard users past repeated navigation to the main content",
+      "A link that skips the checkout step",
+      "A hidden link used only by search engines"
+    ],
+    "answerIndex": 1,
+    "explanation": "A skip link is usually the first focusable element on the page and points to `#main` or similar. It lets keyboard and screen-reader users bypass a long navigation bar on every page. It should become visible when focused."
+  },
+  {
+    "prompt": "Two colors have a contrast ratio of 3.2:1 for normal-sized body text. How does that compare with WCAG AA?",
+    "options": [
+      "It passes AA, which requires 3:1 for all text",
+      "It fails AA, which requires 4.5:1 for normal text",
+      "It passes only if the text is bold",
+      "Contrast ratios only apply to buttons"
+    ],
+    "answerIndex": 1,
+    "explanation": "WCAG AA requires at least 4.5:1 for normal text and 3:1 for large text (roughly 18.66px bold or 24px regular). At 3.2:1, normal body text fails. Larger text at that ratio may pass, but check the actual size and weight."
+  }
+]

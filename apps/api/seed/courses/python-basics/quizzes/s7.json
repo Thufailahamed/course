@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "Given `class Pet:` with a method `def describe(self): ...`, what does `rex.describe()` actually do?",
+    "options": [
+      "Calls `Pet.describe(rex)`, so inside the method `self` is `rex`",
+      "Calls `describe()` with no arguments at all",
+      "Creates a new Pet and calls `describe` on it",
+      "Calls `Pet.describe(Pet)`, so `self` is the class"
+    ],
+    "answerIndex": 0,
+    "explanation": "Calling a method on an object passes that object in as the first argument. `self` is just the name of the parameter that receives it: \"this particular object\"."
+  },
+  {
+    "prompt": "A `Counter` class sets `self.count = 0` in `__init__`, and its method is `def add(self): count = self.count + 1`. After `c = Counter()`, `c.add()`, `c.add()`, what does `print(c.count)` show?",
+    "options": [
+      "2",
+      "1",
+      "An AttributeError",
+      "0"
+    ],
+    "answerIndex": 3,
+    "explanation": "`count = self.count + 1` creates a local variable that vanishes when `add` returns. The object's attribute is never updated. The fix is `self.count += 1`."
+  },
+  {
+    "prompt": "Calling `rex.speak()` raises `TypeError: Pet.speak() takes 0 positional arguments but 1 was given`. What's the most likely bug?",
+    "options": [
+      "`rex` was never created",
+      "The method was defined as `def speak():` without `self`",
+      "`speak` needs to return a string",
+      "You must call it as `Pet.speak()` instead"
+    ],
+    "answerIndex": 1,
+    "explanation": "`rex.speak()` silently passes `rex` as the first argument. If the method has no `self` parameter, there's nowhere to put it, hence \"1 was given\"."
+  },
+  {
+    "prompt": "A class has `tricks = []` written directly in the class body, and a method does `self.tricks.append(trick)`. What happens when two different dogs each learn a trick?",
+    "options": [
+      "Each dog gets its own list automatically",
+      "Python raises an error because class attributes can't be changed",
+      "Both tricks end up in one list shared by every dog",
+      "Only the first dog's trick is saved"
+    ],
+    "answerIndex": 2,
+    "explanation": "A class attribute is one object shared by all instances, and `.append()` changes that shared list. Lists and dicts that each object should own must be created in `__init__` with `self.tricks = []`."
+  },
+  {
+    "prompt": "A class is defined as `class Account: rate = 0.02`. After `a = Account()`, `b = Account()` and `a.rate = 0.05`, what does `print(b.rate)` show?",
+    "options": [
+      "0.05",
+      "0.02",
+      "An AttributeError",
+      "None"
+    ],
+    "answerIndex": 1,
+    "explanation": "Assigning `a.rate = 0.05` creates a new attribute on `a` only. `b` has no `rate` of its own, so reading `b.rate` falls back to the class value, `0.02`."
+  },
+  {
+    "prompt": "A class defines both `__str__` and `__repr__`. Which one does `print([item])` use for the object inside the list?",
+    "options": [
+      "`__str__`, because `print` always uses `__str__`",
+      "Neither; lists print memory addresses",
+      "`__init__`",
+      "`__repr__`, because containers show their items with `__repr__`"
+    ],
+    "answerIndex": 3,
+    "explanation": "`print(item)` would use `__str__`, but a list builds its text from each item's `__repr__`. That's why `__repr__` is the one to write if you only write one."
+  },
+  {
+    "prompt": "Printing an object crashes with `TypeError: __str__ returned non-string (type NoneType)`. Which fix is right?",
+    "options": [
+      "Change `print(...)` inside `__str__` to `return ...`",
+      "Wrap the call as `print(str(obj))`",
+      "Rename `__str__` to `__repr__`",
+      "Add `self` to the `print` call inside `__str__`"
+    ],
+    "answerIndex": 0,
+    "explanation": "`__str__` must return a string. A `__str__` that prints its text and returns nothing hands `None` back to Python, which raises this TypeError."
+  },
+  {
+    "prompt": "In `class Rectangle`, `area` is defined with `@property`. How do you read a rectangle's area?",
+    "options": [
+      "`room.area()`",
+      "`room.area`",
+      "`Rectangle.area()`",
+      "`property(room.area)`"
+    ],
+    "answerIndex": 1,
+    "explanation": "A property is read like an attribute, without parentheses. `room.area()` would compute the number and then try to call it, raising `TypeError: 'int' object is not callable`."
+  },
+  {
+    "prompt": "`class SavingsAccount(Account)` defines its own `__init__` that only sets `self.rate = rate`. Creating one and reading `.balance` raises AttributeError. What's missing?",
+    "options": [
+      "`SavingsAccount` must also define `deposit`",
+      "A `@property` for balance",
+      "A call to `super().__init__(owner, balance)` inside the child's `__init__`",
+      "The parent class name should be in quotes"
+    ],
+    "answerIndex": 2,
+    "explanation": "When a child defines `__init__`, the parent's `__init__` no longer runs automatically. Calling `super().__init__(...)` lets `Account` set up `owner` and `balance` before the child adds `rate`."
+  },
+  {
+    "prompt": "Which design uses composition (\"has a\") rather than inheritance (\"is a\")?",
+    "options": [
+      "`class Manager(Employee)`",
+      "`class Puppy(Dog)`",
+      "`class SavingsAccount(Account)`",
+      "A `Playlist` class whose `songs` attribute holds a list of `Song` objects"
+    ],
+    "answerIndex": 3,
+    "explanation": "A playlist is not a kind of song; it has songs, so it stores them as an attribute. The other three are genuine \"is a\" relationships, where inheritance fits."
+  }
+]

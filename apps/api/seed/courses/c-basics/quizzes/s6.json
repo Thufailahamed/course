@@ -1,0 +1,57 @@
+[
+  {
+    "prompt": "After `struct point a = {1, 2}; struct point b = a; b.x = 10;`, what is `a.x`?",
+    "options": [
+      "10",
+      "1",
+      "11",
+      "It is undefined"
+    ],
+    "answerIndex": 1,
+    "explanation": "Assigning one struct to another copies all its members. `b` is an independent copy, so changing `b.x` leaves `a.x` at 1."
+  },
+  {
+    "prompt": "Given `struct item *it`, which expression changes the member `qty` through the pointer?",
+    "options": [
+      "it.qty += 5",
+      "it->qty += 5",
+      "*it.qty += 5",
+      "it::qty += 5"
+    ],
+    "answerIndex": 1,
+    "explanation": "The arrow `->` reaches a member through a pointer to a struct, and it is shorthand for `(*it).qty`. The dot works only on a struct value."
+  },
+  {
+    "prompt": "What is the value of `MEDIUM` in `enum level { LOW, MEDIUM = 5, HIGH };`?",
+    "options": [
+      "1",
+      "2",
+      "5",
+      "6"
+    ],
+    "answerIndex": 2,
+    "explanation": "`MEDIUM` is assigned the value 5 explicitly. `HIGH` would then be 6, but `MEDIUM` itself is 5."
+  },
+  {
+    "prompt": "Why does `#define SQUARE(x) x * x` give 5 for `SQUARE(2 + 1)`?",
+    "options": [
+      "Because the macro adds 1 to the argument",
+      "Because the macro expands to `2 + 1 * 2 + 1`, and multiplication happens first",
+      "Because macros evaluate their arguments in a separate scope",
+      "Because the compiler rejects the argument"
+    ],
+    "answerIndex": 1,
+    "explanation": "The preprocessor replaces the text literally, so the body becomes `2 + 1 * 2 + 1`. Wrapping the parameter and body in parentheses prevents this."
+  },
+  {
+    "prompt": "Why should `fopen` be followed by a check for `NULL`?",
+    "options": [
+      "Because fopen always returns NULL on success",
+      "Because fopen returns NULL when the file cannot be opened, and using that pointer is undefined behavior",
+      "Because the file is always open after fopen",
+      "Because fclose needs the check first"
+    ],
+    "answerIndex": 1,
+    "explanation": "If the file cannot be opened, `fopen` returns `NULL`. Passing that pointer to `fgets` or `fclose` is undefined behavior, so check the result and report the failure."
+  }
+]

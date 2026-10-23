@@ -1,0 +1,134 @@
+[
+  {
+    "prompt": "Which element describes the page itself in the browser tab?",
+    "options": [
+      "`<h1>`",
+      "`<title>`",
+      "`<header>`",
+      "`<meta name=\"description\">`"
+    ],
+    "answerIndex": 1,
+    "explanation": "`<title>` belongs in `<head>` and names the document in the tab, bookmarks and search results. `<h1>` is the visible page heading, `<header>` is a page/section landmark, and the meta description is used by search engines but is not the tab title."
+  },
+  {
+    "prompt": "Which combination is semantic and accessible for a site navigation bar?",
+    "options": [
+      "`<div class=\"nav\"><div>Home</div></div>`",
+      "`<nav aria-label=\"Main\"><a href=\"/\">Home</a></nav>`",
+      "`<menu><span>Home</span></menu>`",
+      "`<nav><div onclick=\"go()\">Home</div></nav>`"
+    ],
+    "answerIndex": 1,
+    "explanation": "`<nav>` is the navigation landmark, an `aria-label` distinguishes multiple navs, and real `<a>` elements are focusable and keyboard-operable. Divs with click handlers are not links, and `<menu>` is for a list of commands, not site navigation."
+  },
+  {
+    "prompt": "Which CSS declaration makes a block element include its padding and border inside its declared width?",
+    "options": [
+      "`box-sizing: content-box;`",
+      "`box-sizing: border-box;`",
+      "`display: inline-block;`",
+      "`overflow: hidden;`"
+    ],
+    "answerIndex": 1,
+    "explanation": "`border-box` changes the box model so width and height include content, padding and border. `content-box` is the default and adds padding and border outside the declared width. `inline-block` changes display, not sizing."
+  },
+  {
+    "prompt": "What is the visual result of `margin: 0 auto` on a block with `max-width: 60rem`?",
+    "options": [
+      "The block is centered horizontally within its container",
+      "The block's text is centered",
+      "The block is pinned to the right edge",
+      "The block's height is centered"
+    ],
+    "answerIndex": 0,
+    "explanation": "Auto left and right margins split the remaining horizontal space, centering the block. `text-align: center` would center the inline content instead. The block needs a definite width or max-width for the auto margins to do anything."
+  },
+  {
+    "prompt": "Which selector has higher specificity: `.card .title` or `#featured .title`?",
+    "options": [
+      "`.card .title`",
+      "`#featured .title`",
+      "They are equal",
+      "Specificity does not apply to descendant selectors"
+    ],
+    "answerIndex": 1,
+    "explanation": "`#featured .title` contains one ID and one class, while `.card .title` contains two classes. One ID point beats any number of class points, so the ID selector wins regardless of source order."
+  },
+  {
+    "prompt": "Which layout is the best fit for a page with a header, a sidebar and a main content area that must align in two dimensions?",
+    "options": [
+      "Flexbox on the body with `flex-wrap: wrap`",
+      "CSS Grid with named areas or explicit columns",
+      "Absolute positioning for all three regions",
+      "A table with three cells"
+    ],
+    "answerIndex": 1,
+    "explanation": "Grid is designed for two-dimensional layout: columns and rows. Named areas make the page structure explicit and responsive. Flexbox is excellent for one-dimensional rows or columns, but a full page shell with a sidebar is usually clearer in Grid."
+  },
+  {
+    "prompt": "What does `grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))` do?",
+    "options": [
+      "Creates exactly one 220px column",
+      "Creates as many columns as fit at a 220px minimum and lets them grow to fill the row",
+      "Creates a fixed 220px gap",
+      "Only works with absolutely positioned children"
+    ],
+    "answerIndex": 1,
+    "explanation": "`auto-fit` fits as many tracks as possible while respecting the `minmax` minimum, then expands them up to `1fr`. This produces a responsive card grid without explicit breakpoints. It is a Grid feature, not a Flexbox one."
+  },
+  {
+    "prompt": "Why is `outline: none` on every focusable element a problem?",
+    "options": [
+      "It makes the page load slowly",
+      "It removes the visible indication of keyboard focus, making navigation impossible for many keyboard users",
+      "It changes the element's width",
+      "It disables the element"
+    ],
+    "answerIndex": 1,
+    "explanation": "The focus indicator tells keyboard users where they are. Removing it without a replacement fails WCAG and makes a page unusable for people who cannot use a mouse. If the default ring clashes with your design, replace it with a clearly visible custom focus style."
+  },
+  {
+    "prompt": "Which rule keeps a responsive image from causing horizontal scrolling?",
+    "options": [
+      "`img { width: 1200px; }`",
+      "`img { max-width: 100%; height: auto; }`",
+      "`img { position: fixed; }`",
+      "`img { display: inline; }`"
+    ],
+    "answerIndex": 1,
+    "explanation": "`max-width: 100%` caps the image at the container width, and `height: auto` preserves the aspect ratio. A fixed width wider than the viewport overflows. The other rules do not make the image responsive."
+  },
+  {
+    "prompt": "What does the `alt` attribute provide?",
+    "options": [
+      "A tooltip that appears on hover",
+      "A text alternative for an image when it cannot be seen or when assistive technology reads it",
+      "The image's file name for search engines",
+      "A caption below the image"
+    ],
+    "answerIndex": 1,
+    "explanation": "`alt` is the image's text alternative. Screen readers announce it, and browsers show it if the image fails to load. It is not a tooltip (`title`) or a visible caption (`figcaption`). Decorative images should use `alt=\"\"`."
+  },
+  {
+    "prompt": "A form input has `id=\"email\"` and its label has `for=\"email\"`. What does this association enable?",
+    "options": [
+      "The browser validates the email format automatically",
+      "Clicking the label focuses the input, and the input gets the label's text as its accessible name",
+      "The input is submitted even if empty",
+      "The label is hidden from screen readers"
+    ],
+    "answerIndex": 1,
+    "explanation": "Matching `for` and `id` links the label to the control. That gives the input an accessible name and makes the label a larger click target. It does not by itself validate the value; that requires `type=\"email\"` and/or validation logic."
+  },
+  {
+    "prompt": "Which approach best respects `prefers-reduced-motion`?",
+    "options": [
+      "Remove all CSS and JavaScript when it is enabled",
+      "Inside the media query, replace large movement with an instant or opacity-only change",
+      "Ignore it because it is only a preference",
+      "Double the animation duration"
+    ],
+    "answerIndex": 1,
+    "explanation": "The media query asks for reduced motion, not no interface. Replace large translations, parallax or spinning with instant state changes or short opacity fades. That preserves the interaction while avoiding the motion that can trigger dizziness or nausea."
+  }
+]

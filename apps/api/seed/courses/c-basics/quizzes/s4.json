@@ -1,0 +1,57 @@
+[
+  {
+    "prompt": "What does the following program print?\n\n```c\nvoid bump(int n) { n = n + 10; }\nint main(void) { int x = 1; bump(x); printf(\"%d\", x); }\n```",
+    "options": [
+      "1",
+      "10",
+      "11",
+      "It does not compile"
+    ],
+    "answerIndex": 0,
+    "explanation": "C passes arguments by value. `bump` changes its own copy of `x`, so the caller's `x` stays 1. Passing the address of `x` is the way to let a function change it."
+  },
+  {
+    "prompt": "Which statement about a `static` local variable is true?",
+    "options": [
+      "It is recreated and reset to its initial value on every call",
+      "It keeps its value between calls, and it is initialized only once",
+      "It is visible to every file in the program",
+      "It is stored in a register, so it cannot be read"
+    ],
+    "answerIndex": 1,
+    "explanation": "A `static` local lives for the whole run of the program and keeps its value between calls. Its name is still visible only inside its block."
+  },
+  {
+    "prompt": "For `int a[5] = {1, 2};`, what are `a[1]` and `a[4]`?",
+    "options": [
+      "2 and 4",
+      "2 and 0",
+      "1 and 2",
+      "2 and an undefined value"
+    ],
+    "answerIndex": 1,
+    "explanation": "Elements missing from an initializer list are set to zero, so `a[4]` is 0, and `a[1]` is the second value, 2."
+  },
+  {
+    "prompt": "For `char name[] = \"Ada\";`, what is `strlen(name)` and what is `sizeof name`?",
+    "options": [
+      "3 and 3",
+      "3 and 4",
+      "4 and 4",
+      "4 and 3"
+    ],
+    "answerIndex": 1,
+    "explanation": "`strlen` counts the three letters, giving 3. `sizeof` measures the whole array, including the `'\\0'` terminator that the compiler adds, giving 4."
+  },
+  {
+    "prompt": "Why does `s1 == s2` compare false for two separate arrays `char s1[] = \"x\"; char s2[] = \"x\";`?",
+    "options": [
+      "Because the arrays contain different letters",
+      "Because `==` compares the addresses of the arrays, and they are different objects",
+      "Because `==` is not allowed on arrays",
+      "Because strings cannot be shorter than 2 characters"
+    ],
+    "answerIndex": 1,
+    "explanation": "Array names decay to the addresses of their first elements, and two separate arrays have different addresses. To compare text, use `strcmp`."
+  }
+]

@@ -1,0 +1,57 @@
+[
+  {
+    "prompt": "In `if (a) if (b) x(); else y();` with `a` true and `b` false, what runs?",
+    "options": [
+      "x() runs",
+      "y() runs",
+      "Both x() and y() run",
+      "Neither runs"
+    ],
+    "answerIndex": 1,
+    "explanation": "An `else` attaches to the nearest `if`, so this `else` belongs to `if (b)`. With `b` false, `y()` runs. Braces make such relationships obvious."
+  },
+  {
+    "prompt": "Which statement best describes what happens in a `switch` case with no `break`?",
+    "options": [
+      "The switch ends immediately",
+      "Execution falls through into the next case's statements",
+      "The program stops with an error",
+      "The default case always runs"
+    ],
+    "answerIndex": 1,
+    "explanation": "Without `break`, execution continues into the following case. That is fallthrough, and it is a common source of bugs unless it is intentional."
+  },
+  {
+    "prompt": "What is the difference between `while` and `do`-`while`?",
+    "options": [
+      "`do`-`while` tests its condition before the body",
+      "`do`-`while` always runs the body at least once, because it tests after the body",
+      "`while` always runs the body at least once",
+      "There is no difference"
+    ],
+    "answerIndex": 1,
+    "explanation": "A `do`-`while` loop checks its condition after each pass, so the body runs at least once. A `while` loop checks first, so its body may never run."
+  },
+  {
+    "prompt": "Inside a `for` loop, what does `continue` do?",
+    "options": [
+      "Ends the whole loop",
+      "Skips the rest of the current pass and moves to the next one, running the update",
+      "Restarts the program",
+      "Jumps to the function's first line"
+    ],
+    "answerIndex": 1,
+    "explanation": "`continue` skips the remaining statements in the body and moves on. In a `for` loop the update expression still runs before the next test."
+  },
+  {
+    "prompt": "In two nested loops, what does a `break` in the inner loop do?",
+    "options": [
+      "It leaves both loops",
+      "It leaves only the inner loop, and the outer loop continues",
+      "It restarts the outer loop from the beginning",
+      "It is a compile error"
+    ],
+    "answerIndex": 1,
+    "explanation": "`break` leaves only the innermost loop or switch. To leave both loops, use a flag or move the code into a function and `return`."
+  }
+]

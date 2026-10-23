@@ -1,0 +1,12 @@
+node_modules
+.next
+.open-next
+.wrangler
+dist
+.dev.vars
+.env*.local
+*.tsbuildinfo
+next-env.d.ts
+cloudflare-env.d.ts
+seed/seed.sql
+seed/course-*.sql

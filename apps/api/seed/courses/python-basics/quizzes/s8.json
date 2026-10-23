@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "What does `print(\"3\" + \"4\")` display?",
+    "options": ["7", "3 4", "34", "An error: you can't add strings"],
+    "answerIndex": 2,
+    "explanation": "The quotes make both values text (`str`). For strings, `+` means concatenation: it glues them together into `34`. Without the quotes, `print(3 + 4)` would do the math and print `7`."
+  },
+  {
+    "prompt": "What does `print(17 // 5, 17 % 5)` display?",
+    "options": ["3 2", "3.4 2", "3 0.4", "2 3"],
+    "answerIndex": 0,
+    "explanation": "`//` is floor division: 5 goes into 17 three whole times. `%` is the remainder left over: 17 - 15 = 2. Together they split 17 into \"3 groups of 5, plus 2\", the same trick that turns minutes into hours and minutes."
+  },
+  {
+    "prompt": "What is the value of `\"python\"[1:4]`?",
+    "options": ["'pyt'", "'yth'", "'ytho'", "'pyth'"],
+    "answerIndex": 1,
+    "explanation": "Indexing starts at 0, so index 1 is `y`. A slice includes the start and **excludes** the stop, giving indexes 1, 2 and 3: `'yth'`."
+  },
+  {
+    "prompt": "`if answer == \"yes\" or \"y\":` runs its block even when `answer` is `\"no\"`. Which fix is right?",
+    "options": [
+      "`if answer == (\"yes\" or \"y\"):`",
+      "`if answer = \"yes\" or answer = \"y\":`",
+      "`if answer is \"yes\" or \"y\":`",
+      "`if answer in (\"yes\", \"y\"):`"
+    ],
+    "answerIndex": 3,
+    "explanation": "The original reads as `(answer == \"yes\") or (\"y\")`, and a non-empty string is always truthy. Checking membership in a tuple compares `answer` with each value. `(\"yes\" or \"y\")` is just `\"yes\"`, `=` inside an `if` is a SyntaxError, and `is` has the same `or` problem."
+  },
+  {
+    "prompt": "A program runs `a = input(\"First: \")` and `b = input(\"Second: \")`. The user types `2` and then `3`. What does `print(a + b)` show?",
+    "options": ["5", "2 3", "23", "TypeError"],
+    "answerIndex": 2,
+    "explanation": "`input()` always returns a string, so `a + b` is `\"2\" + \"3\"`, which concatenates to `23`. Convert first, e.g. `int(a) + int(b)`, to get `5`."
+  },
+  {
+    "prompt": "With `score = 85`, a chain checks `if score >= 60:` (grade \"D\"), then `elif score >= 80:` (grade \"B\"), then `elif score >= 90:` (grade \"A\"). Which grade is assigned?",
+    "options": ["A", "D", "B", "None: it's an error"],
+    "answerIndex": 1,
+    "explanation": "Python runs the **first** branch whose condition is true and skips the rest. 85 is `>= 60`, so the first branch wins and the grade is \"D\". Range ladders using `>=` must start from the highest cutoff."
+  },
+  {
+    "prompt": "What is `total` after running `total = 0`, then `for i in range(1, 5): total += i`?",
+    "options": ["10", "15", "4", "14"],
+    "answerIndex": 0,
+    "explanation": "`range(1, 5)` produces 1, 2, 3 and 4. The stop value 5 is **excluded**. 1 + 2 + 3 + 4 = 10."
+  },
+  {
+    "prompt": "After `a = [1, 2, 3]`, then `b = a`, then `b.append(4)`, what does `print(a)` show?",
+    "options": ["[1, 2, 3]", "[4]", "An error", "[1, 2, 3, 4]"],
+    "answerIndex": 3,
+    "explanation": "`b = a` doesn't copy the list. It puts a second name tag on the **same** list, so appending through `b` changes what `a` sees too. Use `a.copy()` or `a[:]` when you need an independent list."
+  },
+  {
+    "prompt": "Counting words with `counts[word] += 1` crashes with a `KeyError` on the first new word. Which line is a correct replacement?",
+    "options": [
+      "`counts[word] = 1`",
+      "`counts.append(word)`",
+      "`counts[word] = counts.get(word, 0) + 1`",
+      "`counts[word] == counts[word] + 1`"
+    ],
+    "answerIndex": 2,
+    "explanation": "`.get(word, 0)` returns the current count, or 0 when the word isn't a key yet, so the first sighting becomes 1 and later ones keep adding. `= 1` would reset the count every time, dictionaries have no `append`, and `==` only compares."
+  },
+  {
+    "prompt": "What does `type({})` return?",
+    "options": ["<class 'set'>", "<class 'dict'>", "<class 'list'>", "<class 'tuple'>"],
+    "answerIndex": 1,
+    "explanation": "Empty curly braces create an empty **dictionary**, because dictionaries had the `{}` syntax first. To make an empty set, call `set()`."
+  },
+  {
+    "prompt": "What is `[n * n for n in range(6) if n % 2 == 0]`?",
+    "options": ["[0, 4, 16]", "[0, 1, 4, 9, 16, 25]", "[4, 16]", "[0, 2, 4]"],
+    "answerIndex": 0,
+    "explanation": "The `if` keeps only the even numbers from 0 to 5 (0, 2 and 4), and the expression squares each one: 0, 4 and 16."
+  },
+  {
+    "prompt": "Given `def add(item, items=[]): items.append(item); return items`, what does `add(\"a\")` followed by `print(add(\"b\"))` print?",
+    "options": ["['b']", "['a']", "['a', 'b']", "['b', 'a']"],
+    "answerIndex": 2,
+    "explanation": "A default value is created **once**, when the function is defined, so every call that relies on it shares the same list. The fix is the `None` idiom: `items=None`, then `if items is None: items = []` inside the function."
+  },
+  {
+    "prompt": "What does this print? `try:` runs `int(\"abc\")` then `print(\"A\")`; `except ValueError:` runs `print(\"B\")`; `finally:` runs `print(\"C\")`.",
+    "options": ["A, then C", "B only", "A, then B, then C", "B, then C"],
+    "answerIndex": 3,
+    "explanation": "`int(\"abc\")` raises `ValueError` immediately, so `print(\"A\")` never runs. The matching `except` prints B, and a `finally` block **always** runs at the end, printing C."
+  },
+  {
+    "prompt": "A script adds one line to `log.txt` each time it runs, using `open(\"log.txt\", \"w\")`. But the file only ever contains the latest line. What's the fix?",
+    "options": [
+      "Open the file with mode \"r\"",
+      "Open the file with mode \"a\" to append",
+      "Call `f.close()` twice",
+      "Add \"\\n\" to the end of the line"
+    ],
+    "answerIndex": 1,
+    "explanation": "Mode `\"w\"` wipes the file each time it's opened. Mode `\"a\"` (append) keeps what's there and adds to the end. You still want the `\\n` so lines don't run together, but it doesn't stop the wiping."
+  },
+  {
+    "prompt": "A class `Pet` has `def __init__(self, name): name = name`. What happens when you run `p = Pet(\"Rex\")` and then `print(p.name)`?",
+    "options": [
+      "It prints Rex",
+      "It prints None",
+      "AttributeError: 'Pet' object has no attribute 'name'",
+      "SyntaxError"
+    ],
+    "answerIndex": 2,
+    "explanation": "`name = name` just reassigns the local parameter, which vanishes when `__init__` ends. Nothing is stored on the object. To create an attribute, assign through `self`: `self.name = name`."
+  }
+]

@@ -1,0 +1,53 @@
+[
+  {
+    "prompt": "`grid` has shape (5, 8). What is the shape of `grid[2]` compared with `grid[2:3]`?",
+    "options": ["(8,) and (8,)", "(8,) and (1, 8)", "(1, 8) and (8,)", "(5,) and (1, 5)"],
+    "answerIndex": 1,
+    "explanation": "An integer index removes the axis it selects, leaving shape (8,). A slice keeps the axis, even if it has length 1, so `grid[2:3]` is (1, 8)."
+  },
+  {
+    "prompt": "You run `w = data[:100]` and then `w *= 2`. What happens to `data`?",
+    "options": [
+      "Nothing; `w` is an independent copy",
+      "Its first 100 elements are doubled, because a slice is a view",
+      "NumPy raises an error because views are read-only",
+      "All of `data` is doubled"
+    ],
+    "answerIndex": 1,
+    "explanation": "Basic slicing returns a view that shares memory with `data`, and `*=` writes in place, so the first 100 elements of `data` change too. Use `data[:100].copy()` if you need independent data."
+  },
+  {
+    "prompt": "Which of these produces a COPY of `a` rather than a view?",
+    "options": ["a[::-1]", "a.reshape(2, -1)", "a[[0, 1, 2]]", "a.T"],
+    "answerIndex": 2,
+    "explanation": "Fancy indexing with a list of positions always gathers values into new memory. Slices (including negative steps), reshapes and transposes are views whenever possible."
+  },
+  {
+    "prompt": "What is the correct way to select prices between 10 and 20 (inclusive)?",
+    "options": [
+      "prices[prices >= 10 and prices <= 20]",
+      "prices[prices >= 10 & prices <= 20]",
+      "prices[(prices >= 10) & (prices <= 20)]",
+      "prices[10 <= prices <= 20]"
+    ],
+    "answerIndex": 2,
+    "explanation": "Use the element-wise `&`, and wrap each comparison in parentheses because `&` binds more tightly than `>=`. Python's `and` (and chained comparisons, which use `and` internally) need a single True/False and raise a ValueError on arrays."
+  },
+  {
+    "prompt": "`m = np.arange(16).reshape(4, 4)`. What does `m[[0, 2], [1, 3]]` return?",
+    "options": [
+      "A 2x2 block of rows 0 and 2 crossed with columns 1 and 3",
+      "Two values: m[0, 1] and m[2, 3]",
+      "Rows 0 and 2 only",
+      "An IndexError, because you can't pass two lists"
+    ],
+    "answerIndex": 1,
+    "explanation": "Two index arrays are paired element by element into coordinates (0, 1) and (2, 3), giving `[1, 11]`. To get the 2x2 block of every combination, use `m[np.ix_([0, 2], [1, 3])]`."
+  },
+  {
+    "prompt": "`labels = np.array([0, 2, 2, 1])` and `counts = np.zeros(3)`. After `counts[labels] += 1`, what is `counts`?",
+    "options": ["[1. 1. 2.]", "[1. 1. 1.]", "[0. 1. 2.]", "[1. 2. 1.]"],
+    "answerIndex": 1,
+    "explanation": "With fancy indexing, `+=` reads the selected values once, adds 1, and writes them back, so the repeated index 2 is only incremented once. Use `np.add.at(counts, labels, 1)` or `np.bincount(labels)` to accumulate repeats correctly."
+  }
+]

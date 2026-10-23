@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "Which declaration wins in this stylesheet?\n\n```\n#hero .title { color: red; }\n.page .title { color: blue; }\n```",
+    "options": [
+      "The blue rule, because it comes later",
+      "The red rule, because the ID adds more specificity",
+      "Neither; the declarations cancel out",
+      "The browser picks randomly"
+    ],
+    "answerIndex": 1,
+    "explanation": "`#hero .title` has one ID and one class; `.page .title` has two classes. An ID point outranks any number of class points, so red wins before source order is considered. `!important` would change the result, but should not be the first tool you reach for."
+  },
+  {
+    "prompt": "What is the main effect of `:where()`?",
+    "options": [
+      "It makes a selector match only on wide screens",
+      "It matches like `:is()` but contributes zero specificity",
+      "It removes the element from the accessibility tree",
+      "It applies styles only when the element is empty"
+    ],
+    "answerIndex": 1,
+    "explanation": "`:where()` takes a selector list and matches the same way as `:is()`, but its specificity is always zero. That makes it useful in resets and base styles that should be easy for component styles to override."
+  },
+  {
+    "prompt": "In `@layer reset, base, components, utilities;`, which layer wins when specificity is equal?",
+    "options": [
+      "`reset`, because it is first",
+      "`utilities`, because later layers override earlier ones",
+      "The layer declared last in the CSS file, regardless of the statement",
+      "All layers have equal priority"
+    ],
+    "answerIndex": 1,
+    "explanation": "The order in the `@layer` statement establishes priority: later layers override earlier ones for normal declarations. The statement itself can appear near the top of the file, which is the point — you control the cascade without relying on source order throughout the stylesheet."
+  },
+  {
+    "prompt": "Which property is inherited by default?",
+    "options": [
+      "`border`",
+      "`padding`",
+      "`font-family`",
+      "`display`"
+    ],
+    "answerIndex": 2,
+    "explanation": "Typography properties such as `font-family`, `font-size`, `line-height` and `color` inherit. Box and layout properties such as border, padding and display do not. Inheritance is why setting a font stack on `body` reaches most text without repeating the rule."
+  },
+  {
+    "prompt": "What does `var(--color-brand, #0f766e)` do if `--color-brand` is not defined?",
+    "options": [
+      "Throws a CSS parse error",
+      "Uses `#0f766e` as the fallback",
+      "Removes the property",
+      "Inherits the value from the nearest sibling"
+    ],
+    "answerIndex": 1,
+    "explanation": "The second argument to `var()` is the fallback used when the custom property is invalid, unset or not inherited. Note that a defined-but-invalid value does not trigger the fallback in the same way; the property becomes invalid at computed-value time."
+  },
+  {
+    "prompt": "A component defines `--space: 1rem` on `.card`. What happens to a child of `.card` that uses `padding: var(--space)`?",
+    "options": [
+      "It inherits `1rem` from `.card`",
+      "It falls back to the initial value because custom properties do not inherit",
+      "It causes a circular dependency",
+      "It only works if the child also declares `--space`"
+    ],
+    "answerIndex": 0,
+    "explanation": "Custom properties inherit like ordinary inherited properties. Declaring `--space` on `.card` makes it available to descendants. That is why component-scoped tokens work, and why a token declared on a sibling is not visible."
+  },
+  {
+    "prompt": "Which selector matches a `<form>` that contains an invalid input?",
+    "options": [
+      "`form:invalid`",
+      "`form:has(input:invalid)`",
+      "`form:invalid input`",
+      "`input:has(form:invalid)`"
+    ],
+    "answerIndex": 1,
+    "explanation": "`:has()` lets an element match based on its descendants. `form:has(input:invalid)` selects the form when it contains an invalid input. `form:invalid` only matches if the form element itself is a form control, which it is not."
+  },
+  {
+    "prompt": "Why is `:is(.a, .b)` often safer than writing `.a, .b` when one selector is unsupported?",
+    "options": [
+      "`:is()` is faster in every browser",
+      "An invalid selector in a plain list invalidates the entire rule; `:is()` uses forgiving parsing",
+      "`:is()` disables specificity",
+      "Plain selector lists cannot contain classes"
+    ],
+    "answerIndex": 1,
+    "explanation": "In a plain selector list, one invalid selector makes the whole rule invalid. `:is()` and `:where()` use forgiving selector parsing, so the valid selectors still match. This is useful for progressive enhancement with newer pseudo-classes."
+  },
+  {
+    "prompt": "What does `revert` do in a declaration?",
+    "options": [
+      "It restores the value from the previous cascade origin (for example, the browser default) rather than from the parent",
+      "It is identical to `inherit`",
+      "It deletes the element",
+      "It forces the declaration to win with `!important`"
+    ],
+    "answerIndex": 0,
+    "explanation": "`revert` rolls the property back to the value it would have had from a lower-priority origin, such as the user-agent stylesheet. `inherit` explicitly takes the parent's computed value, and `unset` acts like `inherit` for inherited properties and `initial` for others."
+  },
+  {
+    "prompt": "When is `!important` most defensible?",
+    "options": [
+      "Whenever a selector is not winning",
+      "For a small set of utility or accessibility rules that must override third-party or inline styles, with the tradeoff documented",
+      "On every declaration in a design system",
+      "To avoid learning specificity"
+    ],
+    "answerIndex": 1,
+    "explanation": "`!important` removes a declaration from the normal specificity contest and makes future overrides harder. It is sometimes justified for utilities, reduced-motion overrides or third-party CSS you cannot edit, but it should be deliberate and rare, not a substitute for understanding the cascade."
+  }
+]

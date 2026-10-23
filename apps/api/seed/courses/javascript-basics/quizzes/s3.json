@@ -1,0 +1,90 @@
+[
+  {
+    "prompt": "How many times does the body of `for (let i = 1; i < 4; i++)` run?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "0"
+    ],
+    "answerIndex": 1,
+    "explanation": "The counter takes the values 1, 2 and 3. The check `i < 4` fails when `i` reaches 4, so the body runs three times. The option `4` comes from using `<=` by mistake, and `2` is a common off-by-one reading of the same loop."
+  },
+  {
+    "prompt": "What does this print?\n\n```\nlet total = 0;\nfor (let i = 1; i < 5; i++) {\n  total += i;\n}\nconsole.log(total);\n```",
+    "options": [
+      "10",
+      "15",
+      "9",
+      "4"
+    ],
+    "answerIndex": 0,
+    "explanation": "The loop adds 1, 2, 3 and 4, because `i < 5` stops before 5. The total is 10. The option `15` appears when the condition is `i <= 5`, which is the bug fixed in the loop-bounds challenge."
+  },
+  {
+    "prompt": "Which loop is the clearest way to visit each character of a string in order?",
+    "options": [
+      "for...of",
+      "for...in",
+      "while with no update step",
+      "switch"
+    ],
+    "answerIndex": 0,
+    "explanation": "`for...of` yields each value in order. `for...in` visits property names, which for a string are the indexes `\"0\"`, `\"1\"` and so on, not the characters. A `while` loop with no update step never moves toward its stop condition, so it runs forever."
+  },
+  {
+    "prompt": "What does `continue` do inside a loop?",
+    "options": [
+      "Ends the loop immediately",
+      "Skips the rest of this pass and moves to the next one",
+      "Restarts the loop from its first value",
+      "Pauses the loop until the next click"
+    ],
+    "answerIndex": 1,
+    "explanation": "`continue` skips the remaining statements in the current pass and goes straight to the next iteration, including the update step of a `for` loop. `break` is the statement that ends the loop entirely, so the first option describes `break`, not `continue`."
+  },
+  {
+    "prompt": "Which starting value is correct for an accumulator that adds up numbers?",
+    "options": [
+      "1",
+      "\"\"",
+      "null",
+      "0"
+    ],
+    "answerIndex": 3,
+    "explanation": "`0` is the neutral value for addition: adding it changes nothing. Starting at `1` adds an extra one to every total. The empty string is the neutral start for building text, and `null` would make `total += n` produce `null` plus a number, which is `n`, but only by accident of coercion."
+  },
+  {
+    "prompt": "What does this print?\n\n```\nlet out = \"\";\nfor (let i = 1; i <= 6; i++) {\n  if (i % 3 === 0) continue;\n  out += i;\n}\nconsole.log(out);\n```",
+    "options": [
+      "123456",
+      "1236",
+      "1245",
+      "1 2 4 5"
+    ],
+    "answerIndex": 2,
+    "explanation": "The values 3 and 6 are skipped by `continue`, and the others are joined with no spaces. The result is `1245`. The option `1 2 4 5` would need the code to add spaces, and `123456` ignores the `continue` entirely."
+  },
+  {
+    "prompt": "With `const list = [5, 6, 7];`, what does `console.log(list[list.length])` print?",
+    "options": [
+      "7",
+      "6",
+      "undefined",
+      "Error"
+    ],
+    "answerIndex": 2,
+    "explanation": "The last index is `list.length - 1`, which is 2. `list.length` is 3, which is past the end, so reading it gives `undefined` rather than an error. The option `7` is the last item, which is the answer you get with `length - 1`."
+  },
+  {
+    "prompt": "What does `console.log([10, 9, 1].sort().join(\" \"))` print?",
+    "options": [
+      "1 9 10",
+      "1 10 9",
+      "10 9 1",
+      "9 10 1"
+    ],
+    "answerIndex": 1,
+    "explanation": "With no comparison function, `sort` compares the text of each number. The text `\"1\"` comes first, then `\"10\"`, then `\"9\"`, because `\"1\"` is smaller than `\"9\"` character by character. The option `1 9 10` is the numeric order, which needs `(a, b) => a - b`."
+  }
+]

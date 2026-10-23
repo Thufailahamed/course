@@ -1,0 +1,134 @@
+[
+  {
+    "prompt": "Which declaration correctly uses a CSS custom property?",
+    "options": [
+      "`color: --brand;`",
+      "`color: var(--brand);`",
+      "`color: custom(--brand);`",
+      "`color: property(--brand);`"
+    ],
+    "answerIndex": 1,
+    "explanation": "Custom properties are read with `var(--name)`. They can be declared, inherited and overridden just like other properties. A bare `--brand` on the right-hand side is not a value."
+  },
+  {
+    "prompt": "What is the result of `color: var(--brand, #0f766e)` when `--brand` is defined as `not-a-color`?",
+    "options": [
+      "The fallback `#0f766e` is used",
+      "The property becomes invalid at computed-value time and falls back to inherited or initial color",
+      "The browser throws a JavaScript error",
+      "The text becomes transparent"
+    ],
+    "answerIndex": 1,
+    "explanation": "The fallback is for an *undefined* property, not an invalid value. A defined custom property with an invalid value makes the declaration invalid at computed-value time; the property resolves as `unset` (inherited or initial), not to the `var()` fallback. This is a common debugging trap."
+  },
+  {
+    "prompt": "In `@layer reset, base, components, utilities;`, which layer has the highest priority for normal declarations?",
+    "options": [
+      "`reset`",
+      "`base`",
+      "`components`",
+      "`utilities`"
+    ],
+    "answerIndex": 3,
+    "explanation": "Later layers override earlier ones for normal declarations. The order in the initial `@layer` statement defines the priority. `!important` reverses layer order, which is one of the subtle parts of cascade layers."
+  },
+  {
+    "prompt": "Which selector matches a card only when it contains a featured image?",
+    "options": [
+      "`.card:has(img.featured)`",
+      "`.card:contains(img.featured)`",
+      "`.card img.featured`",
+      "`.card + img.featured`"
+    ],
+    "answerIndex": 0,
+    "explanation": "`:has()` is the relational pseudo-class: it matches an element based on its descendants or siblings. `.card img.featured` styles the image inside a card, not the card itself. `:contains()` is not a standard CSS selector."
+  },
+  {
+    "prompt": "What does `minmax(0, 1fr)` fix in a grid track?",
+    "options": [
+      "It forces the track to always be 0px",
+      "It lets the track shrink below its min-content width instead of overflowing",
+      "It adds a 1px border",
+      "It creates a minimum of one column"
+    ],
+    "answerIndex": 1,
+    "explanation": "A bare `1fr` has an `auto` minimum, which can be as wide as the content's min-content size. `minmax(0, 1fr)` sets the minimum to zero so the track can shrink and the content can wrap or truncate. This is the standard fix for grid overflow."
+  },
+  {
+    "prompt": "A `position: sticky` header scrolls away with the page. What is a likely cause?",
+    "options": [
+      "The header is missing `top: 0` or an ancestor has `overflow: hidden/auto`",
+      "The header needs `position: fixed`",
+      "The header has too much padding",
+      "Sticky only works in Grid"
+    ],
+    "answerIndex": 0,
+    "explanation": "Sticky requires an inset (`top`, `bottom`, etc.) to define when it sticks. It also sticks relative to its nearest scrolling ancestor; an ancestor with `overflow: hidden`, `auto` or `scroll` can become that container and break the expected behaviour. Check both."
+  },
+  {
+    "prompt": "Why can `z-index: 9999` fail to bring an element above a sibling?",
+    "options": [
+      "z-index has a maximum of 10",
+      "An ancestor creates a stacking context, trapping the element below sibling contexts",
+      "The element needs `position: absolute`",
+      "Only Flexbox supports z-index"
+    ],
+    "answerIndex": 1,
+    "explanation": "Stacking contexts isolate their descendants. If an ancestor has `transform`, `opacity < 1`, `filter`, `isolation`, `contain` and similar properties, descendants cannot paint above elements in a higher sibling context. Raise the ancestor's context or move the overlay in the DOM."
+  },
+  {
+    "prompt": "What does `container-type: inline-size` enable?",
+    "options": [
+      "Viewport-based media queries",
+      "Container queries based on the element's inline size",
+      "A fixed-width grid",
+      "Automatic image compression"
+    ],
+    "answerIndex": 1,
+    "explanation": "It establishes an inline-size query container, allowing descendants to use `@container (min-width: …)`. This makes a component respond to the space it is placed in rather than the viewport, which is essential for reusable cards, sidebars and design systems."
+  },
+  {
+    "prompt": "Which property would you use for spacing that should adapt to right-to-left writing modes?",
+    "options": [
+      "`margin-left`",
+      "`margin-inline-start`",
+      "`padding-top`",
+      "`border-right`"
+    ],
+    "answerIndex": 1,
+    "explanation": "`margin-inline-start` maps to the start edge of the inline axis. In a left-to-right language that is the left side; in right-to-left it is the right side. Logical properties reduce the need for direction-specific overrides."
+  },
+  {
+    "prompt": "What is the best use of `prefers-reduced-motion`?",
+    "options": [
+      "Disable the entire site",
+      "Reduce or replace large motion while preserving state feedback and content",
+      "Force all animations to loop",
+      "Only apply it to video elements"
+    ],
+    "answerIndex": 1,
+    "explanation": "The preference is about motion, not about removing functionality. Keep necessary feedback, but replace large translations, scaling, parallax and spinning with instant changes or short opacity fades. Test the reduced-motion path as deliberately as the default one."
+  },
+  {
+    "prompt": "Which is the most robust way to make a card's text readable on both light and dark themes?",
+    "options": [
+      "Hard-code `color: black` on the card",
+      "Use semantic color tokens such as `--color-text` and `--color-surface` that are redefined per theme",
+      "Add `filter: invert(1)` in dark mode",
+      "Use a different HTML file for dark mode"
+    ],
+    "answerIndex": 1,
+    "explanation": "Semantic tokens describe the role (text, surface, border, accent) rather than a fixed color. A theme redefines those tokens; components stay unchanged. Hard-coded black text breaks on dark surfaces, and `filter: invert` inverts images and other content unpredictably."
+  },
+  {
+    "prompt": "What does `content-visibility: auto` risk if you skip `contain-intrinsic-size`?",
+    "options": [
+      "Nothing; it is always safe",
+      "Offscreen content may have an unknown size, causing layout jumps or inaccurate scrollbars as it renders",
+      "It blocks all CSS animations",
+      "It hides content permanently"
+    ],
+    "answerIndex": 1,
+    "explanation": "Skipping rendering for offscreen content means the browser needs an estimated size to reserve space. Without `contain-intrinsic-size`, that estimate can be wrong, causing scroll position jumps and layout shift as sections come into view. Measure representative content and provide a sensible size."
+  }
+]

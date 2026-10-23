@@ -1,0 +1,49 @@
+[
+  {
+    "prompt": "What does this print?\n\n```js\nconst o = Object.freeze({ inner: { n: 1 } });\no.inner.n = 2;\nconsole.log(o.inner.n);\n```",
+    "options": ["1", "2", "A TypeError is thrown", "undefined"],
+    "answerIndex": 1,
+    "explanation": "Object.freeze is shallow. It stops changes to the object's own properties, but inner is a separate object that is still mutable, so its n becomes 2. Deep immutability needs a recursive freeze, or copies made with spread or structuredClone."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconsole.log(new Map([[{ a: 1 }, 'x']]).get({ a: 1 }));\n```",
+    "options": ["x", "'[object Object]'", "TypeError", "undefined"],
+    "answerIndex": 3,
+    "explanation": "A Map compares object keys by identity, so the lookup with a new object literal misses and returns undefined. A plain object would have coerced both keys to the string '[object Object]', which is why Maps are the safer choice for object keys."
+  },
+  {
+    "prompt": "What is the size of this Set?\n\n```js\nconsole.log(new Set([NaN, NaN, 0, -0]).size);\n```",
+    "options": ["4", "3", "2", "1"],
+    "answerIndex": 2,
+    "explanation": "Maps and Sets compare keys with SameValueZero, so NaN equals NaN and 0 equals -0. The Set keeps one NaN and one zero, which gives a size of 2. A === comparison would have kept NaN twice."
+  },
+  {
+    "prompt": "What is `r.lastIndex` after this code runs?\n\n```js\nconst r = /o/g;\nr.test('foo');\nconsole.log(r.lastIndex);\n```",
+    "options": ["2", "1", "0", "true"],
+    "answerIndex": 0,
+    "explanation": "The g flag makes test remember where the match ended. The first o is at index 1 and the match ends at index 2, so lastIndex is 2. Reusing a global regex across unrelated strings makes results depend on earlier calls."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconsole.log('2026-10-22'.replace(/(\\d+)-(\\d+)-(\\d+)/, '$3.$2.$1'));\n```",
+    "options": ["2026.10.22", "10/22/2026", "22.10.2026", "2026-22-10"],
+    "answerIndex": 2,
+    "explanation": "The replacement string refers to the groups by number. $3 is the day, $2 the month and $1 the year, so the output is 22.10.2026. Groups are numbered by their opening parenthesis, so reordering them only means changing the numbers in the replacement."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconsole.log([...'a1b22'.matchAll(/\\d+/g)].map((m) => m[0]));\n```",
+    "options": ["[ 1, 22 ]", "[ '1', '22' ]", "[ '1b', '22' ]", "[ '1', '2', '2' ]"],
+    "answerIndex": 1,
+    "explanation": "matchAll returns one match object per match, and m[0] is the matched text, which is always a string. The pattern \\d+ matches the runs 1 and 22, so the array holds the strings '1' and '22'. Numbers would require an explicit Number conversion."
+  },
+  {
+    "prompt": "Which fix is best for a function that calls `items.includes(x)` inside a loop over a list of 100,000 items?",
+    "options": [
+      "Sort the array first and keep using includes",
+      "Replace the loop with forEach",
+      "Wrap includes in a memoized function",
+      "Build a Set once before the loop and call has(x) inside it"
+    ],
+    "answerIndex": 3,
+    "explanation": "includes scans the array, so calling it inside a loop makes the work grow with the square of the input. A Set answers has() in roughly constant time, and building it once costs a single pass. Changing the loop form or sorting does not change that growth rate."
+  }
+]

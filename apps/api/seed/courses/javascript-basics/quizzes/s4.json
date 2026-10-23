@@ -1,0 +1,44 @@
+[
+  {
+    "prompt": "What does `console.log(f(4) + 1)` print, given `function f(x) { return x * 2; }`?",
+    "options": ["8", "5", "9", "4"],
+    "answerIndex": 2,
+    "explanation": "`f(4)` returns `8`, and then `1` is added, giving `9`. The tempting `8` forgets the `+ 1`, which runs after the call returns. The `5` comes from adding `1` to `4` instead of to the return value."
+  },
+  {
+    "prompt": "A function body has no `return` statement. What does `const result = doWork();` store in `result`?",
+    "options": ["0", "null", "undefined", "An error is thrown"],
+    "answerIndex": 2,
+    "explanation": "A function that reaches its end without `return` gives back `undefined`. Nothing throws, which is why this bug is easy to miss. `null` is a value you must return on purpose, and `0` is never the default."
+  },
+  {
+    "prompt": "Given `function greet(name, greeting = \"Hello\") { return greeting + \", \" + name; }`, what does `greet(\"Ada\", null)` return?",
+    "options": ["Hello, Ada", "undefined, Ada", "null, Ada", "Ada, Hello"],
+    "answerIndex": 2,
+    "explanation": "A default parameter applies only when the argument is missing or `undefined`. `null` is a real value, so `greeting` is `null` and the result is `null, Ada`. The tempting `Hello, Ada` assumes the default applies to every falsy or empty value."
+  },
+  {
+    "prompt": "In `function square(n) { return n * n; }` and the call `square(5)`, what is `n`, and what is `5`?",
+    "options": ["`n` is an argument and `5` is a parameter", "`n` is a parameter and `5` is an argument", "Both are parameters", "`n` is a return value and `5` is a function name"],
+    "answerIndex": 1,
+    "explanation": "A parameter is the placeholder named in the function's definition, here `n`. An argument is the value you pass when you call it, here `5`. Mixing these two words is common, and it becomes important when you read error messages."
+  },
+  {
+    "prompt": "A function declares `const secret = 42;` inside its body. At the top level, after the function, what does `console.log(typeof secret)` print?",
+    "options": ["number", "object", "undefined", "ReferenceError"],
+    "answerIndex": 2,
+    "explanation": "`secret` is local to the function, so it doesn't exist at the top level. `typeof` returns the string `\"undefined\"` for a name that isn't declared, instead of throwing. Plain `secret` on its own would throw a ReferenceError."
+  },
+  {
+    "prompt": "What does this code print?\n\n```js\nfunction counter() {\n  let n = 0;\n  return () => ++n;\n}\nconst next = counter();\nnext();\nnext();\nconsole.log(next());\n```",
+    "options": ["0", "1", "2", "3"],
+    "answerIndex": 3,
+    "explanation": "The returned function remembers `n`, the variable from the scope where it was created. Each call increases `n` by one, so the third call prints `3`. The tempting `0` assumes `n` resets on every call, but it's created once inside `counter`."
+  },
+  {
+    "prompt": "A function `makeGreeter` returns a new function that uses its `greeting` parameter. Two greeters are created with different greetings. What is true of them?",
+    "options": ["They share one `greeting` variable, so they always match", "Each keeps its own `greeting`, because each call to `makeGreeter` creates a new one", "They can't see `greeting` at all after `makeGreeter` returns", "Only the first one works"],
+    "answerIndex": 1,
+    "explanation": "Every call to `makeGreeter` creates a fresh scope with its own `greeting`, and the returned function keeps a link to that scope. That's a closure. The tempting shared-variable answer is wrong, because the two calls never touch each other's scope."
+  }
+]

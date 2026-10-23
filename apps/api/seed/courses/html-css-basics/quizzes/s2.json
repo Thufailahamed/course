@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "What happens when a visitor activates `<a href=\"#pricing\">Pricing</a>`?",
+    "options": [
+      "The browser loads a new page called pricing",
+      "The browser scrolls to the element whose `id` is `pricing` on the current page",
+      "It downloads the pricing file",
+      "Nothing happens unless JavaScript is enabled"
+    ],
+    "answerIndex": 1,
+    "explanation": "A hash link targets an element by its `id` on the current page. The URL fragment `#pricing` matches `id=\"pricing\"`. Hash links are the standard way to build in-page navigation and skip links."
+  },
+  {
+    "prompt": "Why add `rel=\"noopener\"` to a link with `target=\"_blank\"`?",
+    "options": [
+      "It makes the link open faster",
+      "It prevents the new page from accessing the original page through `window.opener`",
+      "It forces the link to open in the same tab",
+      "It adds a visible warning to the link"
+    ],
+    "answerIndex": 1,
+    "explanation": "`noopener` severs the `window.opener` reference, so the new page cannot manipulate the original tab. Modern browsers imply it for `target=\"_blank\"`, but being explicit is still good practice and documents the intent."
+  },
+  {
+    "prompt": "A page at `/blog/post.html` links to `../about.html`. Which file does that resolve to?",
+    "options": [
+      "`/blog/about.html`",
+      "`/about.html`",
+      "`/blog/post.html/about.html`",
+      "A file on another website"
+    ],
+    "answerIndex": 1,
+    "explanation": "`..` moves up one directory from `/blog/` to the site root, so `../about.html` resolves to `/about.html`. A relative URL is resolved against the current document's location, which makes it portable across domains."
+  },
+  {
+    "prompt": "What is the best `alt` text for a decorative image that adds no information?",
+    "options": [
+      "`alt=\"image\"`",
+      "`alt=\"decorative\"`",
+      "`alt=\"\"` (an empty alt attribute)",
+      "Omit the alt attribute entirely"
+    ],
+    "answerIndex": 2,
+    "explanation": "An empty `alt=\"\"` tells assistive technology to ignore the image, which is correct for decoration. Omitting the attribute is different: screen readers may announce the filename. `alt=\"image\"` adds noise without describing anything."
+  },
+  {
+    "prompt": "Which element pairs an image with a visible caption?",
+    "options": [
+      "`<img>` with a `title` attribute",
+      "`<figure>` containing the `<img>` and a `<figcaption>`",
+      "`<caption>` next to the image",
+      "`<p>` with the image inside it"
+    ],
+    "answerIndex": 1,
+    "explanation": "`<figure>` groups a self-contained piece of content with an optional `<figcaption>`. The caption is visible and programmatically associated with the figure. The `title` attribute is not a reliable caption; `<caption>` is for tables."
+  },
+  {
+    "prompt": "Which landmark should wrap the primary content of a page?",
+    "options": [
+      "`<section>`",
+      "`<main>`",
+      "`<div class=\"main\">`",
+      "`<article>`"
+    ],
+    "answerIndex": 1,
+    "explanation": "`<main>` is the landmark for the dominant content of the document, and there should be one per page. A `<div>` with a class has no semantics. `<article>` is for self-contained compositions, and `<section>` is a thematic grouping inside the page."
+  },
+  {
+    "prompt": "How many `<main>` elements should a page normally have?",
+    "options": [
+      "As many as it has sections",
+      "Exactly one visible main landmark",
+      "One per article",
+      "None; `<main>` is obsolete"
+    ],
+    "answerIndex": 1,
+    "explanation": "A page should expose one main landmark. If you need multiple content areas, use `<section>` or `<article>` inside `<main>`. Multiple `main` elements make the landmark navigation ambiguous for screen-reader users."
+  },
+  {
+    "prompt": "In a data table, which markup associates a header cell with its column?",
+    "options": [
+      "`<td scope=\"col\">`",
+      "`<th scope=\"col\">`",
+      "`<thead>` alone",
+      "`<caption>`"
+    ],
+    "answerIndex": 1,
+    "explanation": "A `<th>` is a header cell, and `scope=\"col\"` says it labels the column below it. A `<td>` is a data cell. `<thead>` groups rows but does not by itself tell assistive technology which cells are headers."
+  },
+  {
+    "prompt": "What is the purpose of `<caption>` in a table?",
+    "options": [
+      "It styles the table border",
+      "It gives the table an accessible name and a visible title",
+      "It creates the first row of data",
+      "It makes the header row sticky"
+    ],
+    "answerIndex": 1,
+    "explanation": "`<caption>` is the table's title. It appears above the table by default and is announced as the table's accessible name. Use it to say what the data represents, such as \"Opening hours by day\"."
+  },
+  {
+    "prompt": "A card contains a title, a short summary and a link to a full article. Which element is the best fit?",
+    "options": [
+      "`<article>`",
+      "`<span>`",
+      "`<main>`",
+      "`<table>`"
+    ],
+    "answerIndex": 0,
+    "explanation": "An `<article>` is a self-contained composition that could stand alone or be syndicated, which fits an article card. A `<span>` has no structural meaning, `<main>` is a page-level landmark, and a table is for tabular data, not layout."
+  }
+]

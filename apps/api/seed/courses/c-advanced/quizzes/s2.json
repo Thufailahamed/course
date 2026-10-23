@@ -1,0 +1,57 @@
+[
+  {
+    "prompt": "What does calloc guarantee about the memory it returns?",
+    "options": [
+      "The bytes are uninitialized, so you must write before reading",
+      "Every byte is set to zero",
+      "Every byte is set to 0xFF",
+      "The block is aligned to a 4096-byte page"
+    ],
+    "answerIndex": 1,
+    "explanation": "calloc zeroes the block, which is why it is the safe choice for arrays that start empty. malloc leaves the bytes indeterminate, and alignment is only guaranteed to suit any standard type, not a page."
+  },
+  {
+    "prompt": "Which statement about free is correct?",
+    "options": [
+      "Calling free on NULL is undefined behavior",
+      "Calling free twice on the same pointer is safe if you do not read it",
+      "free(NULL) does nothing, so cleanup code can call it without checking",
+      "After free, the pointer can still be used if the output looks right"
+    ],
+    "answerIndex": 2,
+    "explanation": "The standard defines free(NULL) as a no-op. A second free on the same block is a double free and is undefined, and reading memory after free is undefined even when the output looks correct by luck."
+  },
+  {
+    "prompt": "realloc returns NULL. What is the safe way to handle it?",
+    "options": [
+      "The old pointer has already been freed automatically",
+      "The old block is still valid, so keep the old pointer and handle the error",
+      "The program must exit immediately, because the heap is corrupted",
+      "The new pointer is NULL and the old block must be freed by the caller"
+    ],
+    "answerIndex": 1,
+    "explanation": "When realloc fails, the original block is left untouched. Storing the result in a new pointer lets you keep the old one, free it on the error path, and avoid losing the only reference to the data."
+  },
+  {
+    "prompt": "In a queue with head and tail pointers, which operation takes constant time?",
+    "options": [
+      "Enqueue at the tail",
+      "Finding the middle element",
+      "Searching for a value",
+      "Inserting in sorted order"
+    ],
+    "answerIndex": 0,
+    "explanation": "The tail pointer lets enqueue link the new node directly, with no walk through the list. Searching, finding the middle, and sorted insertion all need to traverse nodes in a singly linked list."
+  },
+  {
+    "prompt": "In a binary search tree, where are the keys smaller than a node's key?",
+    "options": [
+      "In its right subtree",
+      "In its left subtree",
+      "Anywhere in the tree, as long as the parent is smaller",
+      "Only in the node's direct parent"
+    ],
+    "answerIndex": 1,
+    "explanation": "The ordering invariant places smaller keys in the left subtree and larger keys in the right subtree. Search depends on this rule to discard one side at each step."
+  }
+]

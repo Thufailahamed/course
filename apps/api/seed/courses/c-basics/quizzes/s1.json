@@ -1,0 +1,57 @@
+[
+  {
+    "prompt": "Which statement correctly declares an integer variable named `count` and gives it the value 3?",
+    "options": [
+      "count int = 3;",
+      "int count = 3;",
+      "int count := 3;",
+      "let count = 3;"
+    ],
+    "answerIndex": 1,
+    "explanation": "In C the type comes first, then the name, then the initializer after `=`. `let` and `:=` belong to other languages, and `count int` puts the parts in the wrong order."
+  },
+  {
+    "prompt": "What is the exit status of a program whose `main` ends with `return 0;`?",
+    "options": [
+      "1, meaning the program ran",
+      "0, meaning success",
+      "-1, meaning the program never finished",
+      "It depends on how many lines were printed"
+    ],
+    "answerIndex": 1,
+    "explanation": "By convention, `0` returned from `main` reports success to the operating system, and any non-zero value reports a problem. Scripts and build tools rely on that convention."
+  },
+  {
+    "prompt": "Why does `printf(\"Hi\"); printf(\"There\\n\");` print `HiThere` on one line?",
+    "options": [
+      "printf adds a space between calls",
+      "printf adds a newline after each call",
+      "printf prints only what you ask for, and only `\\n` ends a line",
+      "The second call overwrites the first"
+    ],
+    "answerIndex": 2,
+    "explanation": "`printf` never adds spaces or newlines on its own. Each call writes exactly its format string, so text from two calls joins together unless you include `\\n`."
+  },
+  {
+    "prompt": "What does `sizeof(char)` evaluate to on every conforming C compiler?",
+    "options": [
+      "1",
+      "2",
+      "4",
+      "It varies by machine"
+    ],
+    "answerIndex": 0,
+    "explanation": "The standard defines `char` as one byte, and `sizeof` measures in bytes, so `sizeof(char)` is always `1`. The size of `int`, by contrast, depends on the platform."
+  },
+  {
+    "prompt": "What happens when you read a local `int` variable that you declared but never assigned?",
+    "options": [
+      "It always holds 0",
+      "It holds whatever bytes were in that memory, and the behavior is undefined",
+      "The compiler stops with an error",
+      "It holds the last value any other variable had"
+    ],
+    "answerIndex": 1,
+    "explanation": "Local variables are not initialized automatically, so their value is indeterminate. Reading one is undefined behavior. Initialize every variable when you declare it, and compilers will warn you when you forget."
+  }
+]

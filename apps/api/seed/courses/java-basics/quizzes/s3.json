@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "In an `if / else if / else` chain, how many branches can run?",
+    "options": [
+      "All branches whose conditions are true",
+      "Exactly one branch at most",
+      "At least two branches",
+      "Only the `else` branch"
+    ],
+    "answerIndex": 1,
+    "explanation": "The chain checks conditions in order and stops at the first true one. At most one branch runs; `else` runs only when none matched."
+  },
+  {
+    "prompt": "What is the value of `status` after `int stock = 0; String status = stock > 0 ? \"In stock\" : \"Sold out\";`?",
+    "options": [
+      "`\"In stock\"`",
+      "`\"Sold out\"`",
+      "`0`",
+      "A compile error"
+    ],
+    "answerIndex": 1,
+    "explanation": "The condition is false, so the ternary chooses the value after the colon: `\"Sold out\"`."
+  },
+  {
+    "prompt": "A `switch` case has no `break`. What happens?",
+    "options": [
+      "The switch exits immediately",
+      "Execution falls through into the next case",
+      "The program throws an exception",
+      "The case is skipped"
+    ],
+    "answerIndex": 1,
+    "explanation": "Without `break`, execution continues into the following case, even if its value does not match. This is called fall-through."
+  },
+  {
+    "prompt": "When does the `default` branch of a `switch` run?",
+    "options": [
+      "Always, after every matching case",
+      "Only when no case matches",
+      "Only when the switch value is `null`",
+      "Only if there is no `break`"
+    ],
+    "answerIndex": 1,
+    "explanation": "`default` is the fallback. It runs when none of the case labels match the switch value."
+  },
+  {
+    "prompt": "How many times does this loop run? `int i = 5; while (i < 3) { i++; }`",
+    "options": [
+      "Zero times",
+      "Once",
+      "Twice",
+      "Forever"
+    ],
+    "answerIndex": 0,
+    "explanation": "The condition is checked before the first pass. Since `5 < 3` is false, the body never runs."
+  },
+  {
+    "prompt": "What is guaranteed about a `do-while` loop?",
+    "options": [
+      "It runs exactly once at most",
+      "Its body runs at least once",
+      "It never runs more than ten times",
+      "Its condition is checked before the body"
+    ],
+    "answerIndex": 1,
+    "explanation": "A `do-while` checks its condition after the body, so the body always executes at least once."
+  },
+  {
+    "prompt": "What does `for (int i = 1; i < 5; i++)` count through?",
+    "options": [
+      "`1, 2, 3, 4, 5`",
+      "`1, 2, 3, 4`",
+      "`0, 1, 2, 3, 4`",
+      "`2, 3, 4, 5`"
+    ],
+    "answerIndex": 1,
+    "explanation": "The loop starts at 1 and continues while `i < 5`. When `i` becomes 5, the condition is false, so 5 is not included."
+  },
+  {
+    "prompt": "What is the difference between `break` and `continue` inside a loop?",
+    "options": [
+      "`break` skips the current pass; `continue` exits the loop",
+      "`break` exits the loop; `continue` skips to the next pass",
+      "They are identical",
+      "`continue` only works in `while` loops"
+    ],
+    "answerIndex": 1,
+    "explanation": "`break` leaves the loop entirely. `continue` finishes the current pass early and goes back to the loop condition."
+  },
+  {
+    "prompt": "How many times does the inner statement run? `for (int r = 0; r < 3; r++) { for (int c = 0; c < 2; c++) { System.out.println(r + \" \" + c); } }`",
+    "options": [
+      "`5`",
+      "`6`",
+      "`3`",
+      "`2`"
+    ],
+    "answerIndex": 1,
+    "explanation": "The outer loop runs 3 times and the inner loop runs 2 times for each outer pass, so the statement runs `3 * 2 = 6` times."
+  },
+  {
+    "prompt": "Which mistake most often causes an infinite `while` loop?",
+    "options": [
+      "Using `<=` instead of `<`",
+      "Forgetting to update the loop variable inside the body",
+      "Declaring the loop variable outside the loop",
+      "Printing inside the loop"
+    ],
+    "answerIndex": 1,
+    "explanation": "If nothing changes the value in the condition, the condition stays true forever. Every loop needs a path that eventually makes it false."
+  }
+]

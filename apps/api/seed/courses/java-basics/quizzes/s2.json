@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "What is `17 % 5`?",
+    "options": [
+      "`3`",
+      "`2`",
+      "`3.4`",
+      "`0`"
+    ],
+    "answerIndex": 1,
+    "explanation": "`%` gives the remainder. 17 divided by 5 is 3 with 2 left over, so the result is `2`."
+  },
+  {
+    "prompt": "What does `System.out.println(2 + 3 * 4)` display?",
+    "options": [
+      "`20`",
+      "`14`",
+      "`24`",
+      "`11`"
+    ],
+    "answerIndex": 1,
+    "explanation": "Multiplication happens before addition, so the expression is `2 + 12`, which is `14`."
+  },
+  {
+    "prompt": "Why does `System.out.println(10 / 4)` print `2` instead of `2.5`?",
+    "options": [
+      "Java rounds every division down to the nearest even number",
+      "Both operands are `int`, so integer division discards the fraction",
+      "`println` cannot print decimals",
+      "The `4` should be in quotes"
+    ],
+    "answerIndex": 1,
+    "explanation": "When both operands are integers, `/` performs integer division. At least one operand must be a `double` for a decimal result."
+  },
+  {
+    "prompt": "What does `(int) 3.99` produce?",
+    "options": [
+      "`4`",
+      "`3`",
+      "`3.99`",
+      "`3.0`"
+    ],
+    "answerIndex": 1,
+    "explanation": "A cast to `int` truncates toward zero. It does not round. Use `Math.round` if you need `4`."
+  },
+  {
+    "prompt": "What is `\"programming\".length()`?",
+    "options": [
+      "`10`",
+      "`11`",
+      "`12`",
+      "`9`"
+    ],
+    "answerIndex": 1,
+    "explanation": "`programming` has 11 characters, so `length()` returns `11`."
+  },
+  {
+    "prompt": "What does `\"Java\".substring(1, 3)` return?",
+    "options": [
+      "`\"Jav\"`",
+      "`\"av\"`",
+      "`\"ava\"`",
+      "`\"va\"`"
+    ],
+    "answerIndex": 1,
+    "explanation": "The start index is included and the end index is excluded. Indexes 1 and 2 are `a` and `v`, so the result is `\"av\"`."
+  },
+  {
+    "prompt": "Why should you use `equals` instead of `==` to compare two strings?",
+    "options": [
+      "`==` does not compile for strings",
+      "`==` compares references, while `equals` compares the characters",
+      "`equals` is faster in every case",
+      "There is no difference in Java"
+    ],
+    "answerIndex": 1,
+    "explanation": "`==` asks whether both variables refer to the same object. Two different `String` objects can contain identical text, and only `equals` checks that text."
+  },
+  {
+    "prompt": "What does `System.out.println(\"Sum: \" + (2 + 3))` display?",
+    "options": [
+      "`Sum: 23`",
+      "`Sum: 5`",
+      "`Sum: 2 + 3`",
+      "`5`"
+    ],
+    "answerIndex": 1,
+    "explanation": "The parentheses force `2 + 3` to be calculated first. The resulting `5` is then joined to the string."
+  },
+  {
+    "prompt": "What happens when `Integer.parseInt(\"hello\")` runs?",
+    "options": [
+      "It returns `0`",
+      "It returns `null`",
+      "It throws `NumberFormatException`",
+      "It prints a warning and returns `-1`"
+    ],
+    "answerIndex": 2,
+    "explanation": "`parseInt` requires text that represents an integer. `hello` does not, so it throws `NumberFormatException`."
+  },
+  {
+    "prompt": "Why might `long total = 2_000_000_000 * 2;` produce a negative number?",
+    "options": [
+      "The underscores are invalid in numeric literals",
+      "The multiplication happens as `int` before the result is stored in the `long`",
+      "`long` cannot hold values above one billion",
+      "Java randomly overflows large literals"
+    ],
+    "answerIndex": 1,
+    "explanation": "Both operands are `int`, so the multiplication overflows in 32 bits. Write `2_000_000_000L * 2` to force 64-bit arithmetic."
+  }
+]

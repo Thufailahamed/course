@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "A function is defined as `def add_tax(price): print(price * 1.2)`. After `total = add_tax(10)`, what does `print(total)` show?",
+    "options": [
+      "`12.0`",
+      "`None`",
+      "`10`",
+      "A `NameError`, because `total` was never defined"
+    ],
+    "answerIndex": 1,
+    "explanation": "The function prints 12.0 (you see that on screen during the call) but never returns anything, so the call gives back `None` and `total` is `None`. Functions that compute a value should `return` it."
+  },
+  {
+    "prompt": "In `def greet(name, city):` and the call `greet(\"Ana\", \"Porto\")`, which statement is correct?",
+    "options": [
+      "`\"Ana\"` and `\"Porto\"` are parameters; `name` and `city` are arguments",
+      "`name` and `city` are both arguments and parameters",
+      "Python matches `\"Porto\"` to `city` because it looks like a city name",
+      "`name` and `city` are parameters; `\"Ana\"` and `\"Porto\"` are arguments"
+    ],
+    "answerIndex": 3,
+    "explanation": "Parameters are the names in the `def` line; arguments are the values passed in the call. Positional arguments are matched to parameters by order, never by meaning."
+  },
+  {
+    "prompt": "`all_positive(nums)` loops `for n in nums:` and inside has `if n <= 0: return False` followed by `else: return True`. Why does `all_positive([3, -1, 5])` return `True`?",
+    "options": [
+      "The `return True` runs on the first item, ending the function before the rest are checked",
+      "`for` loops can't contain `return` statements",
+      "`-1 <= 0` is `False` in Python",
+      "The function needs `global nums` to read the list"
+    ],
+    "answerIndex": 0,
+    "explanation": "`return` ends the function immediately. Here it returns after looking at only the first item. The fix is to remove the `else` and put `return True` after the loop, once every item has been checked."
+  },
+  {
+    "prompt": "Given `def log(item, history=[]): history.append(item); return history`, what does `print(log(\"b\"))` show if `log(\"a\")` was called just before?",
+    "options": [
+      "`['b']`",
+      "`['a']`",
+      "`['a', 'b']`",
+      "`[]`"
+    ],
+    "answerIndex": 2,
+    "explanation": "A default value is created once, when the `def` runs. Both calls share the same list, so it remembers `\"a\"`. Use `history=None` and create a new list inside the function instead."
+  },
+  {
+    "prompt": "Which function header is NOT valid Python?",
+    "options": [
+      "`def order(item, size=\"M\"):`",
+      "`def order(size=\"M\", item):`",
+      "`def order(*items, gift_wrap=False):`",
+      "`def order(item, **options):`"
+    ],
+    "answerIndex": 1,
+    "explanation": "Parameters with defaults must come after parameters without them; otherwise a call like `order(\"tea\")` would be ambiguous. Python raises a `SyntaxError` for that header."
+  },
+  {
+    "prompt": "Inside `def team(captain, *players, **settings):`, the call `team(\"Kai\", \"Lu\", \"Mo\", kit=\"red\")` gives `players` and `settings` which values?",
+    "options": [
+      "`players` is `[\"Lu\", \"Mo\"]` and `settings` is `[\"kit\", \"red\"]`",
+      "`players` is `(\"Kai\", \"Lu\", \"Mo\")` and `settings` is `{\"kit\": \"red\"}`",
+      "`players` is `(\"Lu\", \"Mo\")` and `settings` is `(\"kit\", \"red\")`",
+      "`players` is `(\"Lu\", \"Mo\")` and `settings` is `{\"kit\": \"red\"}`"
+    ],
+    "answerIndex": 3,
+    "explanation": "`captain` takes the first positional argument. `*players` collects the remaining positional arguments into a tuple, and `**settings` collects the keyword arguments into a dict."
+  },
+  {
+    "prompt": "With `coins = 10` at the top level, calling a function whose body is `coins = coins - 1` raises `UnboundLocalError`. What is the best explanation?",
+    "options": [
+      "Because `coins` is assigned inside `spend`, it's local for the whole function, so the `coins` on the right has no value yet",
+      "Functions can't read global variables at all",
+      "`coins - 1` is negative, which Python doesn't allow",
+      "`spend()` needs to be called with `coins` as an argument because it has a parameter"
+    ],
+    "answerIndex": 0,
+    "explanation": "Python decides scope before running the function: any name assigned in the body is local everywhere in it. Reading a global is fine; assigning to it needs `global`, or better, a parameter and a return value: `coins = spend(coins)`."
+  },
+  {
+    "prompt": "A program contains `sum = 0` near the top. Later, `sum([1, 2, 3])` fails with `TypeError: 'int' object is not callable`. What's the cleanest fix?",
+    "options": [
+      "Write `sum[1, 2, 3]` instead",
+      "Use `global sum` before calling it",
+      "Rename the variable to something like `total`, so it no longer shadows the built-in `sum`",
+      "Import `sum` from the `math` module"
+    ],
+    "answerIndex": 2,
+    "explanation": "Python finds names in LEGB order, and the global `sum` is found before the built-in one. Renaming your variable (or `del sum` in a notebook) lets the lookup reach the built-in function again."
+  },
+  {
+    "prompt": "What is the value of `sorted([\"10\", \"9\", \"100\"])`?",
+    "options": [
+      "`['9', '10', '100']`",
+      "`['10', '100', '9']`",
+      "`['100', '10', '9']`",
+      "A `TypeError`, because the strings contain numbers"
+    ],
+    "answerIndex": 1,
+    "explanation": "Strings compare character by character, so `\"1...\"` comes before `\"9\"`, and `\"10\"` is a prefix of `\"100\"`. To sort them as numbers, use `sorted(values, key=int)`."
+  },
+  {
+    "prompt": "Which expression gives the name of the player with the highest score, given `scores = {\"ana\": 12, \"ben\": 30, \"cy\": 21}`?",
+    "options": [
+      "`max(scores)`",
+      "`max(scores.values())`",
+      "`sorted(scores, reverse=True)[0]`",
+      "`max(scores, key=scores.get)`"
+    ],
+    "answerIndex": 3,
+    "explanation": "Looping over a dict gives its keys, so `max(scores)` compares names alphabetically (giving `'cy'`). `key=scores.get` tells `max` to compare each name's score, and it still returns the name: `'ben'`. `max(scores.values())` returns 30, not a name."
+  }
+]

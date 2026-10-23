@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "What does `scores = [70, 85, 90]` followed by `print(scores[len(scores)])` do?",
+    "options": [
+      "Prints `90`",
+      "Raises `IndexError: list index out of range`",
+      "Prints `3`",
+      "Prints `None`"
+    ],
+    "answerIndex": 1,
+    "explanation": "Positions start at 0, so a list of length 3 has indexes 0, 1 and 2. `len(scores)` is 3, one past the end. The last item is `scores[len(scores) - 1]`, or simply `scores[-1]`."
+  },
+  {
+    "prompt": "What does `nums = [3, 1, 2]; result = nums.sort(); print(result)` print?",
+    "options": [
+      "`[1, 2, 3]`",
+      "`[3, 1, 2]`",
+      "`None`",
+      "An error, because `sort` needs an argument"
+    ],
+    "answerIndex": 2,
+    "explanation": "`.sort()` sorts the list **in place** and returns `None`. `nums` is now `[1, 2, 3]`, but `result` is `None`. If you want a new sorted list back, use `sorted(nums)`."
+  },
+  {
+    "prompt": "After `a = [1, 2]`, `b = a` and `b.append(3)`, what is `a`?",
+    "options": [
+      "`[1, 2, 3]`",
+      "`[1, 2]`",
+      "`[3]`",
+      "`None`"
+    ],
+    "answerIndex": 0,
+    "explanation": "`b = a` doesn't copy anything: it gives the same list a second name. Appending through `b` changes the one shared list, so `a` sees it too. Use `a.copy()`, `a[:]` or `list(a)` to get an independent copy."
+  },
+  {
+    "prompt": "Which of these creates a tuple containing just the number 5?",
+    "options": [
+      "`(5)`",
+      "`[5]`",
+      "`tuple(5)`",
+      "`(5,)`"
+    ],
+    "answerIndex": 3,
+    "explanation": "The comma makes a tuple, not the parentheses. `(5)` is just the number 5 in brackets, `[5]` is a list, and `tuple(5)` raises a `TypeError` because 5 isn't iterable. `(5,)` (or even `5,`) is a one-element tuple."
+  },
+  {
+    "prompt": "What is `rest` after `first, *rest = [10, 20, 30, 40]`?",
+    "options": [
+      "`(20, 30, 40)`",
+      "`[20, 30, 40]`",
+      "`40`",
+      "`ValueError: too many values to unpack`"
+    ],
+    "answerIndex": 1,
+    "explanation": "`first` takes the first item, and the starred name collects everything else **as a list**, so `rest` is `[20, 30, 40]`. The star is what prevents the 'too many values' error."
+  },
+  {
+    "prompt": "Starting from `tally = {}`, what is `tally` after running `for ch in \"banana\": tally[ch] = tally.get(ch, 0) + 1`?",
+    "options": [
+      "`{'a': 3, 'b': 1, 'n': 2}`",
+      "`KeyError: 'b'`",
+      "`{'b': 1, 'a': 3, 'n': 2}`",
+      "`{'b': 1, 'a': 1, 'n': 1}`"
+    ],
+    "answerIndex": 2,
+    "explanation": "`.get(ch, 0)` returns 0 for a letter that hasn't been seen yet, so there's no `KeyError`, and each letter's count goes up by 1 every time it appears. Dictionaries keep insertion order, so the keys appear in the order first seen: b, a, n."
+  },
+  {
+    "prompt": "With `roster = {\"Ana\": 7, \"Ben\": 10}`, which expression is `True`?",
+    "options": [
+      "`\"Ana\" in roster`",
+      "`7 in roster`",
+      "`(\"Ana\", 7) in roster`",
+      "`10 in roster.keys()`"
+    ],
+    "answerIndex": 0,
+    "explanation": "`in` on a dictionary checks its **keys**, and the keys here are the names. The jersey numbers are values, so you'd need `7 in roster.values()` to search them."
+  },
+  {
+    "prompt": "You write `seen = {}` and later call `seen.add(\"Maya\")`. What happens?",
+    "options": [
+      "`\"Maya\"` is added to an empty set",
+      "`\"Maya\"` is added as a dictionary key with the value `None`",
+      "Nothing; `.add()` on an empty collection is ignored",
+      "`AttributeError`, because `{}` is an empty dictionary, which has no `.add()` method"
+    ],
+    "answerIndex": 3,
+    "explanation": "Curly braces were used for dictionaries first, so `{}` is an empty **dict**. Dictionaries don't have `.add()`. An empty set must be written `set()`."
+  },
+  {
+    "prompt": "What does `sorted({1, 2, 3} ^ {2, 3, 4})` return?",
+    "options": [
+      "`[2, 3]`",
+      "`[1, 2, 3, 4]`",
+      "`[1, 4]`",
+      "`[1]`"
+    ],
+    "answerIndex": 2,
+    "explanation": "`^` is the symmetric difference: items in exactly one of the two sets. 2 and 3 are in both, so they're left out, leaving 1 and 4. (`&` would give `[2, 3]` and `|` would give `[1, 2, 3, 4]`.)"
+  },
+  {
+    "prompt": "With `nums = [1, 2, 3, 4]`, which comprehension produces `[0, 2, 0, 4]`?",
+    "options": [
+      "`[n for n in nums if n % 2 == 0]`",
+      "`[n if n % 2 == 0 else 0 for n in nums]`",
+      "`[0 if n % 2 == 0 else n for n in nums]`",
+      "`[n for n in nums if n % 2 == 0 else 0]`"
+    ],
+    "answerIndex": 1,
+    "explanation": "To keep every position and **choose** a value for each item, `if ... else` goes at the front. An `if` at the end **filters** (giving `[2, 4]`), and an `else` at the end is a `SyntaxError`. The third option swaps the values, giving `[1, 0, 3, 0]`."
+  }
+]

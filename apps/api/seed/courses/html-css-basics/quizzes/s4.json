@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "Which selector targets every element with `class=\"card\"`?",
+    "options": [
+      "`#card`",
+      "`.card`",
+      "`card`",
+      "`*card`"
+    ],
+    "answerIndex": 1,
+    "explanation": "A class selector starts with a dot: `.card`. `#card` targets `id=\"card\"`. `card` targets `<card>` elements, which do not exist in HTML, and `*card` is not valid CSS."
+  },
+  {
+    "prompt": "Which selector has the highest specificity?",
+    "options": [
+      "`article p`",
+      "`.intro`",
+      "`#hero`",
+      "`p`"
+    ],
+    "answerIndex": 2,
+    "explanation": "IDs outrank classes, and classes outrank element selectors. `#hero` is an ID selector, so it wins over `.intro`, `article p` and `p`. Specificity is calculated before source order is considered."
+  },
+  {
+    "prompt": "With `box-sizing: border-box`, what does `width: 300px` include?",
+    "options": [
+      "Only the content area",
+      "Content plus padding plus border, but not margin",
+      "Content plus padding plus border plus margin",
+      "Only the padding"
+    ],
+    "answerIndex": 1,
+    "explanation": "`border-box` makes the declared width include content, padding and border. Margins sit outside the box and are not included. This is why many teams set `box-sizing: border-box` globally."
+  },
+  {
+    "prompt": "A `content-box` element has `width: 300px; padding: 20px; border: 2px solid`. How wide is its visible box?",
+    "options": [
+      "300px",
+      "324px",
+      "344px",
+      "340px"
+    ],
+    "answerIndex": 2,
+    "explanation": "With `content-box`, the width applies to content only. Total width is 300 + 20 + 20 (left and right padding) + 2 + 2 (left and right borders) = 344px. The margin, if any, would add space outside but does not change the border box width."
+  },
+  {
+    "prompt": "How do you horizontally center a block element with a fixed `max-width`?",
+    "options": [
+      "`text-align: center` on the element",
+      "`margin-inline: auto` (or `margin: 0 auto`) with a width or max-width",
+      "`display: inline`",
+      "`vertical-align: middle`"
+    ],
+    "answerIndex": 1,
+    "explanation": "Auto inline margins absorb the remaining horizontal space, centering the block within its containing block. `text-align: center` centers inline content inside the element, not the block itself. The element needs a width or max-width for the auto margins to have space to distribute."
+  },
+  {
+    "prompt": "Which element generates a new line by default and accepts width and height?",
+    "options": [
+      "`<span>`",
+      "`<a>`",
+      "`<div>`",
+      "`<strong>`"
+    ],
+    "answerIndex": 2,
+    "explanation": "`<div>` is `display: block` by default: it starts on a new line and fills the available width, and width/height apply. `<span>`, `<a>` and `<strong>` are inline by default, so width and height do not apply unless you change their display."
+  },
+  {
+    "prompt": "Which property is inherited from a parent by default?",
+    "options": [
+      "`margin`",
+      "`border`",
+      "`color`",
+      "`padding`"
+    ],
+    "answerIndex": 2,
+    "explanation": "Typography and color properties such as `color`, `font-family` and `line-height` inherit. Box properties such as margin, padding and border do not. That is why setting a font on `body` styles the whole page, while setting a margin on `body` does not add margins to every child."
+  },
+  {
+    "prompt": "At `font-size: 20px`, what does `line-height: 1.5` compute to?",
+    "options": [
+      "1.5px",
+      "20px",
+      "30px",
+      "150px"
+    ],
+    "answerIndex": 2,
+    "explanation": "A unitless line-height multiplies the element's own font size: 20 × 1.5 = 30px. Unitless values are preferred because they recalculate for children with different font sizes. A fixed `line-height: 30px` would not adapt."
+  },
+  {
+    "prompt": "Which declaration defines a CSS custom property?",
+    "options": [
+      "`color: --brand;`",
+      "`--brand: #0f766e;`",
+      "`var(--brand: #0f766e);`",
+      "`custom-property: brand #0f766e;`"
+    ],
+    "answerIndex": 1,
+    "explanation": "Custom properties are declared like normal properties but their names start with `--`: `--brand: #0f766e;`. You read them with `var(--brand)`. They are inherited, which makes them useful for themes and design tokens."
+  },
+  {
+    "prompt": "A paragraph has `color: #777` on a white background. What is the main accessibility concern?",
+    "options": [
+      "The color is too saturated",
+      "The contrast ratio may be below the 4.5:1 required for normal text",
+      "The paragraph will not inherit the color",
+      "Hex colors are not supported by screen readers"
+    ],
+    "answerIndex": 1,
+    "explanation": "`#777` on white is roughly 4.48:1, just under the 4.5:1 AA threshold for normal text. It may pass for large text, but body copy should be darker. Always test the actual foreground and background pair, including opacity and overlays."
+  }
+]

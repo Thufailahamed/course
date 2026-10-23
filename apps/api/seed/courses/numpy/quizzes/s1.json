@@ -1,0 +1,68 @@
+[
+  {
+    "prompt": "What does `[1, 2, 3] + [4, 5, 6]` produce for Python lists, and what does `np.array([1, 2, 3]) + np.array([4, 5, 6])` produce?",
+    "options": [
+      "Both give [5, 7, 9]",
+      "The list version gives [1, 2, 3, 4, 5, 6]; the array version gives [5 7 9]",
+      "The list version raises a TypeError; the array version gives [5 7 9]",
+      "Both give [1, 2, 3, 4, 5, 6]"
+    ],
+    "answerIndex": 1,
+    "explanation": "For lists, `+` means concatenation. For NumPy arrays, arithmetic operators work element by element."
+  },
+  {
+    "prompt": "Which is the main reason vectorized NumPy code is much faster than a Python loop over a list?",
+    "options": [
+      "NumPy automatically runs your code on the GPU",
+      "NumPy caches the results of previous calculations",
+      "Python lists are limited to 1,000 elements",
+      "Arrays store same-typed raw values in one contiguous block, so the work runs in a compiled loop without per-element Python objects"
+    ],
+    "answerIndex": 3,
+    "explanation": "A list holds pointers to separate Python objects, each needing type checks. An array is a homogeneous, contiguous buffer processed by compiled C loops."
+  },
+  {
+    "prompt": "What is the dtype of `np.array([1, 2.5, 3])`?",
+    "options": [
+      "float64",
+      "An integer dtype",
+      "object",
+      "A string dtype"
+    ],
+    "answerIndex": 0,
+    "explanation": "An array has a single dtype. One float forces every element to become a float, so the result is float64."
+  },
+  {
+    "prompt": "For `a = np.array([[1, 2, 3], [4, 5, 6]])`, which statement is correct?",
+    "options": [
+      "a.shape == (3, 2) and len(a) == 6",
+      "a.shape == (2, 3) and len(a) == 6",
+      "a.shape == (2, 3) and len(a) == 2",
+      "a.ndim == 3 and a.size == 6"
+    ],
+    "answerIndex": 2,
+    "explanation": "Two inner lists of three elements make shape (2, 3). `len` counts only the first axis (2 rows); `a.size` counts all 6 elements."
+  },
+  {
+    "prompt": "You need to collect 10,000 measurements one at a time inside a loop, then analyze them. What is the idiomatic approach?",
+    "options": [
+      "Start with np.array([]) and call np.append in the loop",
+      "Append to a Python list in the loop, then convert once with np.array(...)",
+      "Create a string and convert it to an array at the end",
+      "Use np.concatenate on every iteration"
+    ],
+    "answerIndex": 1,
+    "explanation": "Arrays have a fixed size, so np.append and np.concatenate copy the whole array every time. Lists append cheaply. Collect in a list, then convert once."
+  },
+  {
+    "prompt": "What are `ndim` and `shape` of `np.array(4.2)`?",
+    "options": [
+      "ndim 0, shape ()",
+      "ndim 1, shape (1,)",
+      "ndim 1, shape ()",
+      "ndim 0, shape (1,)"
+    ],
+    "answerIndex": 0,
+    "explanation": "Wrapping a lone number (no list) makes a 0-dimensional array: no axes, so the shape is the empty tuple ()."
+  }
+]

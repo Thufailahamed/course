@@ -1,0 +1,38 @@
+[
+  {
+    "prompt": "A has shape (32, 10, 64) and W has shape (64, 16). What is the shape of A @ W?",
+    "options": ["(32, 10, 16)", "(32, 64, 16)", "(10, 16)", "It raises an error: the batch dimensions don't match"],
+    "answerIndex": 0,
+    "explanation": "@ multiplies the last two axes, (10, 64) @ (64, 16) → (10, 16), and treats the leading 32 as a batch dimension. W broadcasts across the batch, giving (32, 10, 16)."
+  },
+  {
+    "prompt": "X has shape (100, 3) and w has shape (3,). Which expression gives one prediction per sample, with shape (100,)?",
+    "options": ["X * w", "X @ w", "w @ X", "np.outer(X, w)"],
+    "answerIndex": 1,
+    "explanation": "(100, 3) @ (3,) → (100,): each row is dotted with w. X * w broadcasts element-wise and returns a (100, 3) array; w @ X fails because its inner dimensions (3 and 100) don't match."
+  },
+  {
+    "prompt": "What does np.einsum(\"ij,ij->i\", A, B) compute for two arrays of shape (n, d)?",
+    "options": ["The full matrix product A @ B.T, shape (n, n)", "The dot product of each row of A with the matching row of B, shape (n,)", "The sum of every element of A * B, a single number", "The outer product of A and B"],
+    "answerIndex": 1,
+    "explanation": "i appears in both inputs and the output, so it's kept; j is repeated and missing from the output, so it's multiplied and summed. That gives row-wise dot products, the same as (A * B).sum(axis=1)."
+  },
+  {
+    "prompt": "You need to solve Ax = b for a square matrix A. Which approach is recommended?",
+    "options": ["x = np.linalg.inv(A) @ b, because it's the textbook formula", "x = np.linalg.solve(A, b)", "x = b / A", "x = np.linalg.det(A) * b"],
+    "answerIndex": 1,
+    "explanation": "solve factorizes A and solves directly, which is faster and more accurate than forming the inverse. Explicit inversion amplifies rounding errors, especially for ill-conditioned matrices."
+  },
+  {
+    "prompt": "You want to fit y = m·x + c with np.linalg.lstsq. What should the design matrix look like?",
+    "options": ["Just x as a single column", "Two columns: x and a column of ones", "Two columns: x and y", "A square matrix built with np.outer(x, x)"],
+    "answerIndex": 1,
+    "explanation": "Each column corresponds to one parameter. The x column multiplies the slope m, and a column of ones multiplies the intercept c. Without the ones column, the line is forced through the origin."
+  },
+  {
+    "prompt": "names and scores are aligned 1-D arrays. Which expression lists the names from highest to lowest score?",
+    "options": ["np.sort(names)[::-1]", "names[np.argsort(scores)[::-1]]", "np.sort(scores)[::-1]", "names[np.sort(scores)]"],
+    "answerIndex": 1,
+    "explanation": "argsort returns the indices that sort scores ascending, and reversing them gives descending order. Indexing names with those indices keeps every name paired with its score. np.sort(names) sorts alphabetically, ignoring the scores."
+  }
+]

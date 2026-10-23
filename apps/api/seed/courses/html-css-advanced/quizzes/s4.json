@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "How is a button's accessible name usually computed?",
+    "options": [
+      "From its `id` attribute only",
+      "From its visible text, or from `aria-labelledby`/`aria-label` when those are present",
+      "From its CSS class name",
+      "From the color of the button"
+    ],
+    "answerIndex": 1,
+    "explanation": "The accessible name comes from the element's contents first, such as the text inside a `<button>`. `aria-labelledby` can point to another element, and `aria-label` can provide a string. IDs and class names are not names; they are hooks for CSS and scripting."
+  },
+  {
+    "prompt": "Why is `aria-hidden=\"true\"` on a focusable link dangerous?",
+    "options": [
+      "It makes the link load faster",
+      "The link is removed from the accessibility tree but can still receive keyboard focus, leaving keyboard users on an invisible control",
+      "It changes the link's destination",
+      "It disables the link's hover state"
+    ],
+    "answerIndex": 1,
+    "explanation": "`aria-hidden` hides content from assistive technology, but it does not remove it from the tab order. A focusable element that is hidden from the accessibility tree becomes a trap: keyboard users can focus it, but screen readers cannot explain it. Never hide focusable content this way."
+  },
+  {
+    "prompt": "A `<div role=\"button\">` needs more than a role. What must you add?",
+    "options": [
+      "Only a hover style",
+      "Keyboard focusability, Enter/Space activation and the correct disabled/expanded semantics",
+      "A `title` attribute",
+      "A second nested div"
+    ],
+    "answerIndex": 1,
+    "explanation": "A role only tells assistive technology what the element is. A real button is focusable, activates with Enter and Space, and exposes native state. Reimplementing all of that on a div is easy to get wrong; use a `<button>` whenever possible."
+  },
+  {
+    "prompt": "Which attribute communicates whether a disclosure is open?",
+    "options": [
+      "`aria-open`",
+      "`aria-expanded`",
+      "`aria-visible`",
+      "`aria-checked`"
+    ],
+    "answerIndex": 1,
+    "explanation": "`aria-expanded=\"true|false\"` tells assistive technology whether the controlled content is expanded. It is commonly used on a button that toggles a menu or panel, often paired with `aria-controls`. The visual state and the attribute must stay in sync."
+  },
+  {
+    "prompt": "What is the WCAG AA minimum contrast ratio for normal-sized text?",
+    "options": [
+      "2:1",
+      "3:1",
+      "4.5:1",
+      "7:1"
+    ],
+    "answerIndex": 2,
+    "explanation": "AA requires 4.5:1 for normal text and 3:1 for large text. AAA raises those to 7:1 and 4.5:1. Non-text UI components and graphical objects also need 3:1 against adjacent colors. Always test the actual rendered pair."
+  },
+  {
+    "prompt": "Which media query targets a user who prefers a dark color scheme?",
+    "options": [
+      "`@media (dark-mode: true)`",
+      "`@media (prefers-color-scheme: dark)`",
+      "`@media (color: dark)`",
+      "`@media (theme: night)`"
+    ],
+    "answerIndex": 1,
+    "explanation": "`prefers-color-scheme: dark` reflects the operating system or browser preference. Pair it with a class-based theme toggle if the product allows manual overrides, and keep the tokens semantic so both themes stay consistent."
+  },
+  {
+    "prompt": "Why should status not be communicated by color alone?",
+    "options": [
+      "Color always fails WCAG",
+      "People with color vision deficiencies or monochrome displays may not perceive the difference; add text, an icon or a pattern",
+      "Color increases page weight",
+      "Screen readers cannot read colored text"
+    ],
+    "answerIndex": 1,
+    "explanation": "Color can be a useful cue, but it must not be the only one. A red dot for \"error\" is ambiguous to someone who cannot distinguish red from green. Add a label, icon or shape so the meaning survives without color perception."
+  },
+  {
+    "prompt": "What is the purpose of `srcset` on an `<img>`?",
+    "options": [
+      "It adds a caption",
+      "It offers multiple image sources so the browser can choose an appropriate resolution or format",
+      "It lazy-loads JavaScript",
+      "It makes every image the same size"
+    ],
+    "answerIndex": 1,
+    "explanation": "`srcset` provides a set of candidate images with descriptors such as `1x`/`2x` or widths. Combined with `sizes`, the browser chooses the best candidate for the viewport and pixel density. This avoids sending a huge image to a small screen."
+  },
+  {
+    "prompt": "How does `font-display: swap` help perceived performance?",
+    "options": [
+      "It downloads the font faster",
+      "It shows fallback text immediately and swaps in the custom font when it loads",
+      "It removes the need for a fallback stack",
+      "It makes the font smaller"
+    ],
+    "answerIndex": 1,
+    "explanation": "`swap` avoids invisible text while a font is loading: the fallback renders immediately, then the custom face replaces it. That improves perceived speed but can cause a visible reflow. Pair it with a well-matched fallback stack and font metrics overrides to reduce layout shift."
+  },
+  {
+    "prompt": "What does `content-visibility: auto` do?",
+    "options": [
+      "Hides content from screen readers",
+      "Lets the browser skip rendering work for offscreen content, with `contain-intrinsic-size` reducing layout jumps",
+      "Loads images from another domain",
+      "Disables CSS animations"
+    ],
+    "answerIndex": 1,
+    "explanation": "`content-visibility: auto` allows the browser to skip layout and painting for content outside the viewport until it is needed. `contain-intrinsic-size` gives the browser a placeholder size so scrollbars and layout remain stable. It can improve rendering performance on long pages, but test it with find-in-page and accessibility tools."
+  }
+]

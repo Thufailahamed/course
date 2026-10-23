@@ -1,0 +1,16 @@
+{
+  "name": "latent",
+  "private": true,
+  "packageManager": "pnpm@12.5.1",
+  "scripts": {
+    "dev": "pnpm -r --parallel --filter @latent/api --filter @latent/web run dev",
+    "dev:api": "pnpm --filter @latent/api dev",
+    "dev:web": "pnpm --filter @latent/web dev",
+    "db:generate": "pnpm --filter @latent/api db:generate",
+    "db:migrate": "pnpm --filter @latent/api db:migrate:local",
+    "db:seed": "pnpm --filter @latent/api db:seed:local",
+    "setup": "pnpm install && pnpm db:migrate && pnpm db:seed",
+    "typecheck": "pnpm -r typecheck",
+    "deploy": "pnpm --filter @latent/api deploy && pnpm --filter @latent/web deploy"
+  }
+}

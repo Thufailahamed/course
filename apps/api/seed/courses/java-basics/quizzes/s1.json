@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "What does `System.out.println(\"Java\")` display?",
+    "options": [
+      "`\"Java\"` with the quotation marks",
+      "`Java` without the quotation marks",
+      "`System.out.println`",
+      "Nothing until you call `print`"
+    ],
+    "answerIndex": 1,
+    "explanation": "The quotes mark the text in the source code. `println` prints the characters between them, not the quotes themselves."
+  },
+  {
+    "prompt": "A Java cell is missing a semicolon at the end of one statement. What happens when you run it?",
+    "options": [
+      "The earlier statements run, then the bad line is skipped",
+      "Only the bad line is skipped and the rest runs",
+      "The whole cell fails to compile and nothing runs",
+      "Java adds the semicolon automatically"
+    ],
+    "answerIndex": 2,
+    "explanation": "Java is compiled before it runs. A syntax error anywhere in the cell prevents the whole cell from compiling, so no statement executes."
+  },
+  {
+    "prompt": "What is the difference between `print` and `println`?",
+    "options": [
+      "`print` adds a newline; `println` does not",
+      "`print` only accepts strings; `println` accepts any type",
+      "`println` adds a newline after the value; `print` does not",
+      "They are identical in Java"
+    ],
+    "answerIndex": 2,
+    "explanation": "Both write a value, but `println` moves to the next line afterwards. `print` leaves the cursor on the same line."
+  },
+  {
+    "prompt": "Which declaration correctly stores the text `hello`?",
+    "options": [
+      "`String greeting = \"hello\";`",
+      "`string greeting = 'hello';`",
+      "`String greeting = 'hello';`",
+      "`str greeting = \"hello\";`"
+    ],
+    "answerIndex": 0,
+    "explanation": "`String` is capitalised, and a string uses double quotes. Single quotes are for a single `char`."
+  },
+  {
+    "prompt": "What does `System.out.println(7 / 2)` display?",
+    "options": [
+      "`3.5`",
+      "`3`",
+      "`4`",
+      "A compile error"
+    ],
+    "answerIndex": 1,
+    "explanation": "Both operands are `int`, so Java performs integer division and discards the remainder. Use `7 / 2.0` for `3.5`."
+  },
+  {
+    "prompt": "What does `System.out.println(\"Total: \" + 4 + 3)` display?",
+    "options": [
+      "`Total: 7`",
+      "`Total: 43`",
+      "`7`",
+      "`Total: 4 3`"
+    ],
+    "answerIndex": 1,
+    "explanation": "Evaluation goes left to right. `\"Total: \" + 4` becomes the string `\"Total: 4\"`, and adding `3` joins another character, giving `Total: 43`."
+  },
+  {
+    "prompt": "Which value can be stored in a `boolean` variable?",
+    "options": [
+      "`\"true\"`",
+      "`1`",
+      "`true`",
+      "`'true'`"
+    ],
+    "answerIndex": 2,
+    "explanation": "A `boolean` holds the literal `true` or `false`, without quotes. The quoted version is a `String`, `1` is an `int`, and `'true'` is not a valid `char`."
+  },
+  {
+    "prompt": "How do you declare a variable that holds a single letter `A`?",
+    "options": [
+      "`char letter = \"A\";`",
+      "`char letter = 'A';`",
+      "`String letter = 'A';`",
+      "`letter char = 'A';`"
+    ],
+    "answerIndex": 1,
+    "explanation": "A `char` uses single quotes around exactly one character. Double quotes would make a `String`."
+  },
+  {
+    "prompt": "Which variable name is valid Java?",
+    "options": [
+      "`2ndPlace`",
+      "`total-price`",
+      "`totalPrice`",
+      "`class`"
+    ],
+    "answerIndex": 2,
+    "explanation": "Names cannot start with a digit, cannot contain a hyphen, and cannot be a reserved word such as `class`. `totalPrice` follows camelCase convention."
+  },
+  {
+    "prompt": "What happens if you try to assign a new value to a variable declared `final`?",
+    "options": [
+      "The value changes, but a warning is printed",
+      "The assignment is ignored",
+      "The code does not compile",
+      "The variable becomes a `String`"
+    ],
+    "answerIndex": 2,
+    "explanation": "`final` means the variable can be assigned once. A later assignment is a compile-time error, which is useful for constants."
+  }
+]

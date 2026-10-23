@@ -1,0 +1,57 @@
+[
+  {
+    "prompt": "What does `-7 / 2` evaluate to in C99 and later?",
+    "options": [
+      "-4",
+      "-3",
+      "-3.5",
+      "It depends on the compiler"
+    ],
+    "answerIndex": 1,
+    "explanation": "Integer division truncates toward zero in C99 and later, so `-7 / 2` is `-3`. Floor division, which would give `-4`, is what some other languages do."
+  },
+  {
+    "prompt": "Why should you not compare two `double` results with `==`?",
+    "options": [
+      "Because `==` only works on integers",
+      "Because many decimal values, such as 0.1, are stored as approximations, so tiny differences are common",
+      "Because the comparison always returns true",
+      "Because `double` values are always negative"
+    ],
+    "answerIndex": 1,
+    "explanation": "Binary floating point cannot store many decimal values exactly. Two results that look equal can differ in the last bits, so compare the difference against a small tolerance instead."
+  },
+  {
+    "prompt": "Given `int i = 5;`, what is the value of `i` after `int a = i++;`?",
+    "options": [
+      "5",
+      "6",
+      "4",
+      "It is undefined"
+    ],
+    "answerIndex": 1,
+    "explanation": "The postfix `i++` yields the old value, 5, which is assigned to `a`, and then increments `i` to 6. Only the variable `i` ends up as 6."
+  },
+  {
+    "prompt": "In `if (x != 0 && 100 / x > 2)`, what happens when `x` is 0?",
+    "options": [
+      "The division runs and the program crashes",
+      "The division is skipped because `&&` short-circuits",
+      "The condition is always true",
+      "The compiler rejects the program"
+    ],
+    "answerIndex": 1,
+    "explanation": "When the left side of `&&` is false, the right side is never evaluated. That protects the division from running with a zero divisor."
+  },
+  {
+    "prompt": "Which format specifier prints an `int` as an 8-character field, right-aligned with leading zeros?",
+    "options": [
+      "%-8d",
+      "%08d",
+      "%8.2d",
+      "%x8"
+    ],
+    "answerIndex": 1,
+    "explanation": "`%08d` pads with leading zeros to a width of 8. `%-8d` left-aligns with trailing spaces, `%8.2d` is valid but pads with spaces and sets a minimum of two digits rather than zero padding, and `%x8` is not a valid pattern."
+  }
+]

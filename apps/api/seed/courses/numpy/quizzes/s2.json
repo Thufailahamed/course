@@ -1,0 +1,79 @@
+[
+  {
+    "prompt": "You run `np.zeros(3, 4)`. What happens?",
+    "options": [
+      "It creates a 3 × 4 array of zeros",
+      "It creates a 1-D array of 3 zeros with dtype int",
+      "It raises a TypeError, because 4 is interpreted as the dtype argument",
+      "It creates a 4 × 3 array of zeros"
+    ],
+    "answerIndex": 2,
+    "explanation": "Factory functions take the shape as a single argument. Here 3 is the shape and 4 lands in the `dtype` parameter, which is not a valid data type. Write `np.zeros((3, 4))`."
+  },
+  {
+    "prompt": "`counts` is an integer array. You create `out = np.zeros_like(counts)` and assign `out[0] = 0.75`. What is stored in `out[0]`?",
+    "options": [
+      "0.75",
+      "1",
+      "0",
+      "NaN"
+    ],
+    "answerIndex": 2,
+    "explanation": "`zeros_like` copies the dtype of its input, so `out` is an integer array. Assigning 0.75 truncates it to 0. Pass `dtype=float` to avoid this."
+  },
+  {
+    "prompt": "You need exactly 11 evenly spaced points from 0.0 to 1.0, with both endpoints included. Which call is the most reliable?",
+    "options": [
+      "np.arange(0, 1.0, 0.1)",
+      "np.arange(0, 1.1, 0.1)",
+      "np.linspace(0, 1, 11)",
+      "np.linspace(0, 1, 10)"
+    ],
+    "answerIndex": 2,
+    "explanation": "`linspace` lets you specify the number of points and includes the endpoint by default. `arange` excludes `stop`, and with float steps its length depends on rounding error."
+  },
+  {
+    "prompt": "With `x` of length 3 and `y` of length 5, what is the shape of `X` in `X, Y = np.meshgrid(x, y)`?",
+    "options": [
+      "(3, 5)",
+      "(5, 3)",
+      "(15,)",
+      "(3, 3)"
+    ],
+    "answerIndex": 1,
+    "explanation": "With the default `indexing=\"xy\"`, rows follow `y` and columns follow `x`, so the grid has shape `(len(y), len(x)) = (5, 3)`. Pass `indexing=\"ij\"` for `(3, 5)`."
+  },
+  {
+    "prompt": "A simulation creates `rng = np.random.default_rng(0)` inside a loop and draws one number per iteration. What goes wrong?",
+    "options": [
+      "Nothing, it is the recommended pattern",
+      "Every iteration draws the same number, because the generator is reset to the same state each time",
+      "It raises an error because a generator can only be created once",
+      "The numbers are no longer reproducible between runs"
+    ],
+    "answerIndex": 1,
+    "explanation": "Re-seeding resets the generator, so each iteration starts from the identical state and produces the same value. Create the generator once, outside the loop, and keep drawing from it."
+  },
+  {
+    "prompt": "`a = np.array([250], dtype=np.uint8)`. What is `a + 10`?",
+    "options": [
+      "array([260])",
+      "array([255]), clipped to the maximum",
+      "array([4]), wrapped around modulo 256",
+      "It raises an OverflowError"
+    ],
+    "answerIndex": 2,
+    "explanation": "The Python int 10 fits in uint8, so the addition runs in 8-bit arithmetic and 260 wraps around to 260 − 256 = 4. NumPy neither clips nor raises for array overflow; widen the dtype first if you need the true result."
+  },
+  {
+    "prompt": "Which statement about NumPy's default integer dtype is correct?",
+    "options": [
+      "It is always int64",
+      "It is always int32",
+      "It depends on the platform: int64 on most 64-bit desktops, but int32 on 32-bit platforms such as WebAssembly",
+      "NumPy has no default integer; you must always pass dtype="
+    ],
+    "answerIndex": 2,
+    "explanation": "The default integer follows the platform's pointer size (`np.intp`). In this browser runtime it is int32, so large sums can overflow. Pass `dtype=np.int64` when the size matters."
+  }
+]

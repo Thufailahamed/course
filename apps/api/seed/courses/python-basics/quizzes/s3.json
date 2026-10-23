@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "Which numbers does `range(1, 10, 3)` produce?",
+    "options": [
+      "1, 4, 7, 10",
+      "3, 6, 9",
+      "1, 4, 7",
+      "1, 2, 3, 4, 5, 6, 7, 8, 9"
+    ],
+    "answerIndex": 2,
+    "explanation": "Start at 1 and add 3 each time: 1, 4, 7. The next value, 10, is not below the stop value, and `range` never includes its stop value."
+  },
+  {
+    "prompt": "`score = 85`. The chain is `if score >= 60:` → `grade = \"D\"`, then `elif score >= 80:` → `grade = \"B\"`, then `else:` → `grade = \"F\"`. What is `grade` afterwards?",
+    "options": [
+      "\"B\"",
+      "\"D\"",
+      "\"D\" and then \"B\", so it ends as \"B\"",
+      "\"F\""
+    ],
+    "answerIndex": 1,
+    "explanation": "In an `if`/`elif`/`else` chain, only the first true branch runs. `85 >= 60` is already true, so `grade` becomes \"D\" and the rest of the chain is skipped. Put the strictest check (the highest threshold) first."
+  },
+  {
+    "prompt": "What does the expression `\"even\" if 7 % 2 == 0 else \"odd\"` evaluate to?",
+    "options": [
+      "\"even\"",
+      "True",
+      "1",
+      "\"odd\""
+    ],
+    "answerIndex": 3,
+    "explanation": "`7 % 2` is 1, so the condition `7 % 2 == 0` is False and the conditional expression produces the value after `else`: \"odd\"."
+  },
+  {
+    "prompt": "A `while` loop's condition is already False the very first time Python checks it. How many times does the loop body run?",
+    "options": [
+      "0 times",
+      "Once, because the body always runs before the check",
+      "Forever",
+      "It raises an error"
+    ],
+    "answerIndex": 0,
+    "explanation": "A `while` loop checks its condition before every pass, including the first. If it's False from the start, the body is skipped entirely and Python moves on."
+  },
+  {
+    "prompt": "This loop never ends: `while balance < goal:` with a body that only does `new_balance = balance * 1.05`. Which fix is right?",
+    "options": [
+      "Change the condition to `while balance <= goal:`",
+      "Add `print(new_balance)` inside the loop",
+      "Update the variable the condition checks: `balance = balance * 1.05`",
+      "Put `balance = 0` inside the loop"
+    ],
+    "answerIndex": 2,
+    "explanation": "The condition looks at `balance`, but the body never changes `balance`, so the condition can never become False. Every loop needs an update that moves it toward ending."
+  },
+  {
+    "prompt": "When does the `else` block of a `for...else` loop run?",
+    "options": [
+      "When the loop body raises an error",
+      "Only when the loop finishes without hitting `break`",
+      "After every iteration where the `if` inside the loop was False",
+      "Always, after the loop ends"
+    ],
+    "answerIndex": 1,
+    "explanation": "Read `for...else` as \"for... if no break\". It runs once, after the loop, only if the loop went through every item without breaking out. That makes it a built-in \"not found\" for searches."
+  },
+  {
+    "prompt": "A program adds up a week of sales with a `for` loop, but the printed total is always just the last day's sales. What is the most likely bug?",
+    "options": [
+      "The `range` stops one day too early",
+      "`+=` should be `=+`",
+      "The `print` is inside the loop",
+      "`total = 0` is inside the loop, so it resets on every pass"
+    ],
+    "answerIndex": 3,
+    "explanation": "An accumulator must be created once, before the loop. If `total = 0` sits inside the body, each pass wipes out everything added so far, leaving only the final day."
+  },
+  {
+    "prompt": "An outer loop `for i in range(4):` contains an inner loop `for j in range(5):`, whose body is `count += 1`. If `count` starts at 0, what is it at the end?",
+    "options": [
+      "20",
+      "9",
+      "5",
+      "4"
+    ],
+    "answerIndex": 0,
+    "explanation": "For each of the 4 outer passes, the inner loop runs all 5 times, so the inner line runs 4 × 5 = 20 times. Nested loops multiply."
+  },
+  {
+    "prompt": "A `break` statement sits inside an inner loop, which is nested inside an outer loop. What happens when it runs?",
+    "options": [
+      "Both loops stop immediately",
+      "The whole program stops",
+      "Only the inner loop stops; the outer loop continues with its next pass",
+      "The inner loop skips to its next item"
+    ],
+    "answerIndex": 2,
+    "explanation": "`break` only leaves the innermost loop it's in. To stop the outer loop as well, set a flag before breaking and check it in the outer loop (or, later, `return` from a function)."
+  },
+  {
+    "prompt": "A search loop has `if city == wanted:` print \"found\", `else:` print \"not found\". For a list where the match is the 3rd city, it prints \"not found\" twice before \"found\". What's the right fix?",
+    "options": [
+      "Swap the `if` and `else` blocks",
+      "Use a flag (or `for...else`) and only decide \"not found\" after the loop has checked every city",
+      "Add `continue` after the \"not found\" print",
+      "Change `==` to `!=`"
+    ],
+    "answerIndex": 1,
+    "explanation": "One mismatch doesn't mean there's no match anywhere. Set `found = False` before the loop, set it to True on a match, and print the result after the loop (or use `break` with `for...else`)."
+  }
+]

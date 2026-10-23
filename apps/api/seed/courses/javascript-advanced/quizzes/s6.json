@@ -1,0 +1,44 @@
+[
+  {
+    "prompt": "What happens when you run `[].reduce((a, b) => a + b)`?",
+    "options": ["It returns 0", "It returns undefined", "It throws a TypeError", "It returns NaN"],
+    "answerIndex": 2,
+    "explanation": "Without a seed, reduce uses the first element as the starting accumulator. An empty array has no first element, so the call throws a TypeError. Passing 0 as the seed makes the empty case return 0 instead."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconsole.log(['1', '2', '3'].map(parseInt));\n```",
+    "options": ["[ 1, 2, 3 ]", "[ 1, NaN, NaN ]", "[ NaN, NaN, NaN ]", "[ 1, 2, NaN ]"],
+    "answerIndex": 1,
+    "explanation": "map calls its callback with (item, index, array), so parseInt receives the index as its radix. Radix 1 is invalid and radix 2 cannot read the digit 3, so the second and third results are NaN. Wrap the call as (s) => parseInt(s, 10) to pass only the intended argument."
+  },
+  {
+    "prompt": "What is the result of `pipe(x => x + 1, x => x * 10)(1)` when pipe runs its steps from left to right?",
+    "options": ["20", "11", "2", "10"],
+    "answerIndex": 0,
+    "explanation": "pipe applies the first step to the input, giving 2, then the second step, giving 20. A compose that ran right to left would give 11 instead. Naming the direction you write matters, because the same two functions produce different answers in each order."
+  },
+  {
+    "prompt": "A curried helper uses `fn.length` to decide when enough arguments have arrived. What are the lengths of `(a, b, c) => a + b + c` and of that function bound with `bind(null, 1)`?",
+    "options": ["3 and 3", "2 and 2", "3 and 2", "2 and 3"],
+    "answerIndex": 2,
+    "explanation": "A function's length counts its declared parameters, so the arrow has length 3. bind fixes leading arguments and reports the remaining count, so binding one argument gives length 2. Default and rest parameters change length as well, which is why a curry built on length needs care."
+  },
+  {
+    "prompt": "What does this function return when called?\n\n```js\nfunction f() {\n  try {\n    return 1;\n  } finally {\n    return 2;\n  }\n}\n```",
+    "options": ["1", "undefined", "It throws an error", "2"],
+    "answerIndex": 3,
+    "explanation": "The try block computes 1, but the finally block runs before the function exits and its return replaces the pending value. A return inside finally also cancels any exception that was in flight, so it should be reserved for deliberate overrides."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconst fns = [];\nfor (var i = 0; i < 3; i++) fns.push(() => i);\nconsole.log(fns.map((f) => f()));\n```",
+    "options": ["[ 0, 1, 2 ]", "[ 1, 2, 3 ]", "[ 3, 3, 3 ]", "[ undefined, undefined, undefined ]"],
+    "answerIndex": 2,
+    "explanation": "var creates one variable for the whole loop, and every closure reads it after the loop has finished, when i is 3. Replacing var with let gives each iteration its own binding, so the closures would return 0, 1 and 2."
+  },
+  {
+    "prompt": "What is `new Error('x', { cause: 'y' }).cause`?",
+    "options": ["undefined", "x", "y", "The Error object itself"],
+    "answerIndex": 2,
+    "explanation": "The second argument to the Error constructor takes an options object, and its cause property is stored on the error. The message 'x' is separate. Attaching the original error as cause is how a wrapper keeps the underlying failure visible for debugging."
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "prompt": "What does `run()` print?\n\n```js\nfunction run() {\n  console.log(typeof later);\n  var later = 1;\n}\nrun();\n```",
+    "options": ["number", "undefined", "ReferenceError", "object"],
+    "answerIndex": 1,
+    "explanation": "`var` is hoisted to the top of its function as a name, with the value `undefined`. The assignment `later = 1` runs only when execution reaches that line, so `typeof later` reads `undefined` on the first line. The tempting `ReferenceError` belongs to `let` and `const`, not `var`."
+  },
+  {
+    "prompt": "What does `run()` print?\n\n```js\nfunction run() {\n  try {\n    console.log(value);\n  } catch (e) {\n    console.log(e.name);\n  }\n  let value = 1;\n}\nrun();\n```",
+    "options": ["undefined", "1", "ReferenceError", "null"],
+    "answerIndex": 2,
+    "explanation": "A `let` binding is hoisted but uninitialized until its declaration runs. Reading it inside the temporal dead zone throws a `ReferenceError`. A `var` in the same position would print `undefined`, which is why `let` makes ordering mistakes fail loudly."
+  },
+  {
+    "prompt": "A function calls itself with no base case. Which error does the engine throw when the call stack runs out of room?",
+    "options": ["RangeError", "TypeError", "SyntaxError", "StackOverflowError"],
+    "answerIndex": 0,
+    "explanation": "Engines throw a `RangeError` when the call stack exceeds its limit. `TypeError` means a value had the wrong type, and `StackOverflowError` is a Java name that JavaScript does not use. The limit depends on the engine, so the code should loop instead of recursing on unbounded input."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconsole.log(square(4));\nfunction square(n) {\n  return n * n;\n}\n```",
+    "options": ["undefined", "ReferenceError", "NaN", "16"],
+    "answerIndex": 3,
+    "explanation": "A function declaration is hoisted together with its body, so `square` is callable before the line where it appears. An arrow function or function expression assigned to a `const` would not be, and calling it early would throw a `ReferenceError` instead."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconst fns = [];\nfor (var i = 0; i < 3; i++) {\n  fns.push(() => i);\n}\nconsole.log(fns.map((f) => f()).join(\" \"));\n```",
+    "options": ["0 1 2", "3 3 3", "undefined undefined undefined", "2 2 2"],
+    "answerIndex": 1,
+    "explanation": "All three arrow functions close over the single `var i` of the enclosing function. When they run after the loop, `i` is `3`. Changing the loop to `let i` gives each iteration its own binding, and the output becomes `0 1 2`. The option `0 1 2` is the answer you get with `let`, and `2 2 2` is what you'd see by mistaking the loop's last index for its final value."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nfunction show() {\n  return this.v;\n}\nconst bound = show.bind({ v: 1 });\nconsole.log(bound.call({ v: 2 }));\n```",
+    "options": ["1", "2", "undefined", "TypeError"],
+    "answerIndex": 0,
+    "explanation": "`bind` permanently fixes the receiver of a function. A later `call` with a different receiver has no effect, so `this.v` still reads `1`. Explicit binding made by `bind` takes priority over the receiver passed to `call`."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nif (false) {\n  var secret = \"hi\";\n}\nconsole.log(secret);\n```",
+    "options": ["hi", "ReferenceError", "undefined", "null"],
+    "answerIndex": 2,
+    "explanation": "`var` is scoped to the whole function (here, the top level), not to the `if` block. The declaration is hoisted, and since the block never runs, `secret` exists with the value `undefined`. Had it been `let secret`, the name would be scoped to the block and reading it outside would throw a `ReferenceError`."
+  }
+]

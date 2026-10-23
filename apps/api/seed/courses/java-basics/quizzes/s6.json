@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "What happens when code inside a `try` block throws an exception that matches a `catch`?",
+    "options": [
+      "The rest of the `try` block still runs",
+      "Control jumps to the matching `catch` block",
+      "The program always exits",
+      "The exception is ignored"
+    ],
+    "answerIndex": 1,
+    "explanation": "The remaining statements in `try` are skipped. Execution moves to the first matching `catch`, then continues after the try/catch."
+  },
+  {
+    "prompt": "When does a `finally` block run?",
+    "options": [
+      "Only when the `try` succeeds",
+      "Only when an exception is caught",
+      "Whether the `try` succeeds, throws, or returns",
+      "Only if there is no `catch`"
+    ],
+    "answerIndex": 2,
+    "explanation": "`finally` is for cleanup, so it runs on every path out of the try/catch structure, including an early `return`."
+  },
+  {
+    "prompt": "Which statement about checked exceptions is true?",
+    "options": [
+      "They never need to be handled",
+      "The compiler requires callers to catch or declare them",
+      "They only occur in loops",
+      "They are the same as `RuntimeException`"
+    ],
+    "answerIndex": 1,
+    "explanation": "A checked exception is part of a method's contract. The compiler ensures every caller catches it or declares it with `throws`."
+  },
+  {
+    "prompt": "Why must `catch (NumberFormatException e)` come before `catch (Exception e)`?",
+    "options": [
+      "Java checks catch blocks alphabetically",
+      "The broader `Exception` catch would make the specific one unreachable",
+      "`NumberFormatException` is not an `Exception`",
+      "It makes the program run faster"
+    ],
+    "answerIndex": 1,
+    "explanation": "A specific subclass must be caught before its superclass. Otherwise the broad catch would handle everything and the compiler rejects the unreachable one."
+  },
+  {
+    "prompt": "What does `throw new IllegalArgumentException(\"bad input\");` do?",
+    "options": [
+      "Prints the message and continues",
+      "Creates an exception and immediately raises it",
+      "Returns `\"bad input\"` to the caller",
+      "Only works inside a `catch` block"
+    ],
+    "answerIndex": 1,
+    "explanation": "`throw` raises the exception immediately. It travels up the call stack until a matching `catch` handles it."
+  },
+  {
+    "prompt": "What does `Files.write(path, lines)` do by default?",
+    "options": [
+      "Appends to the file without changing existing content",
+      "Creates or replaces the file and writes the lines",
+      "Only writes if the file already exists",
+      "Returns the file's contents"
+    ],
+    "answerIndex": 1,
+    "explanation": "The default options create the file if needed and truncate an existing file, so the result contains exactly the supplied lines."
+  },
+  {
+    "prompt": "What type does `Files.readAllLines(path)` return?",
+    "options": [
+      "`String`",
+      "`String[]`",
+      "`List<String>`",
+      "`ArrayList<String>`"
+    ],
+    "answerIndex": 2,
+    "explanation": "It returns a `List<String>`, one string per line. You can call `size()` or iterate over it."
+  },
+  {
+    "prompt": "Which option adds text to the end of an existing file?",
+    "options": [
+      "`StandardOpenOption.CREATE`",
+      "`StandardOpenOption.TRUNCATE_EXISTING`",
+      "`StandardOpenOption.APPEND`",
+      "`StandardOpenOption.READ`"
+    ],
+    "answerIndex": 2,
+    "explanation": "`APPEND` writes after the existing content. Combine it with `CREATE` if the file may not exist yet."
+  },
+  {
+    "prompt": "Where do `import` statements go?",
+    "options": [
+      "Inside `main`",
+      "After the class declaration",
+      "After the package declaration and before the class",
+      "At the end of the file"
+    ],
+    "answerIndex": 2,
+    "explanation": "Imports come after the package statement and before any class declarations. The runtime adds the package line for you."
+  },
+  {
+    "prompt": "Why is no import needed for `System.out.println`?",
+    "options": [
+      "`System` is a primitive type",
+      "`java.lang` is imported automatically",
+      "`println` is a keyword",
+      "Every class is in the default package"
+    ],
+    "answerIndex": 1,
+    "explanation": "`System`, `String`, `Math`, `Integer` and the other core classes live in `java.lang`, which every Java file imports implicitly."
+  }
+]

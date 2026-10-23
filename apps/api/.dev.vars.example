@@ -1,0 +1,7 @@
+# Copy to .dev.vars for local development. All are optional.
+# Without STRIPE_SECRET_KEY, checkout runs in "demo" mode and completes instantly.
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+# Without RESEND_API_KEY, emails (password reset, receipts) are logged to the console.
+RESEND_API_KEY=
+EMAIL_FROM="Latent <hello@example.com>"

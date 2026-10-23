@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "A grade report method returns `sum / scores.length` and the average is always a whole number. What is the fix?",
+    "options": [
+      "Use `Math.round(sum / scores.length)`",
+      "Cast before dividing: `(double) sum / scores.length`",
+      "Store `sum` in a `String`",
+      "Use `%` instead of `/`"
+    ],
+    "answerIndex": 1,
+    "explanation": "Both operands are integers, so the division truncates. Casting `sum` to `double` forces decimal division."
+  },
+  {
+    "prompt": "Why does a `for` loop that removes items from an `ArrayList` often skip elements?",
+    "options": [
+      "`ArrayList` cannot remove items",
+      "Each removal shifts later elements left, so the next index is skipped",
+      "The loop variable is always reset",
+      "`remove` only works on the last element"
+    ],
+    "answerIndex": 1,
+    "explanation": "Removing an element closes the gap by shifting later elements left. Iterating backwards, or using an `Iterator`, avoids skipping."
+  },
+  {
+    "prompt": "What is the safest way to read a count from a `HashMap<String, Integer>` when the key may be missing?",
+    "options": [
+      "`map.get(key) + 1`",
+      "`map.getOrDefault(key, 0)`",
+      "`map.containsKey(key) + 1`",
+      "`map.remove(key)`"
+    ],
+    "answerIndex": 1,
+    "explanation": "`get` returns `null` for a missing key, and unboxing `null` for arithmetic throws `NullPointerException`. `getOrDefault` supplies a real number."
+  },
+  {
+    "prompt": "What is the main guarantee of a `HashSet`?",
+    "options": [
+      "Elements stay in insertion order",
+      "Elements are sorted automatically",
+      "It contains no duplicate values",
+      "Every element has an integer key"
+    ],
+    "answerIndex": 2,
+    "explanation": "A set stores each distinct value once. It does not promise order; use a `TreeSet` for sorted order or a `LinkedHashSet` for insertion order."
+  },
+  {
+    "prompt": "What happens if a recursive method has no base case?",
+    "options": [
+      "It returns `null`",
+      "It runs until the JVM throws `StackOverflowError`",
+      "It automatically becomes a loop",
+      "It compiles but never runs"
+    ],
+    "answerIndex": 1,
+    "explanation": "Each call adds a frame to the call stack. Without a base case the stack eventually runs out of space."
+  },
+  {
+    "prompt": "In a `try / catch / finally` block, which parts run when the `try` throws a caught exception?",
+    "options": [
+      "Only the `try`",
+      "The `catch` and then the `finally`",
+      "Only the `finally`",
+      "The `try` again, then the `finally`"
+    ],
+    "answerIndex": 1,
+    "explanation": "The matching `catch` handles the exception, and `finally` runs afterwards on the way out."
+  },
+  {
+    "prompt": "Why does a bank account keep its `balance` field `private`?",
+    "options": [
+      "Private fields use less memory",
+      "So changes go through methods that can enforce the account rules",
+      "So the field cannot be printed",
+      "Because `double` fields must be private"
+    ],
+    "answerIndex": 1,
+    "explanation": "Encapsulation protects the invariant that the balance never goes negative. A public field could be changed to any value by any code."
+  },
+  {
+    "prompt": "`Animal a = new Dog();` where `Dog` extends `Animal` and overrides `speak()`. Which `speak()` runs?",
+    "options": [
+      "`Animal.speak()`",
+      "`Dog.speak()`",
+      "Both, one after the other",
+      "Neither; the call is ambiguous"
+    ],
+    "answerIndex": 1,
+    "explanation": "The declared type controls what you can call, but the runtime object controls which override executes. The `Dog` version runs."
+  },
+  {
+    "prompt": "Why use a `StringBuilder` instead of joining many pieces with `+` in a loop?",
+    "options": [
+      "`StringBuilder` can store numbers without conversion",
+      "Strings are immutable, so each `+` creates a new string",
+      "`+` does not work inside loops",
+      "`StringBuilder` sorts the pieces"
+    ],
+    "answerIndex": 1,
+    "explanation": "Because strings cannot change, repeated concatenation allocates a new string each time. `StringBuilder` appends into one growing buffer."
+  },
+  {
+    "prompt": "What does this print? `for (int i = 0; i < 3; i++) { System.out.print(i); }`",
+    "options": [
+      "`123`",
+      "`012`",
+      "`0123`",
+      "`0 1 2`"
+    ],
+    "answerIndex": 1,
+    "explanation": "The loop runs for 0, 1 and 2. `print` keeps them on one line, producing `012`."
+  }
+]

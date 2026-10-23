@@ -1,0 +1,57 @@
+[
+  {
+    "prompt": "Why is a multi-statement macro wrapped in do { ... } while (0)?",
+    "options": [
+      "It makes the macro run faster at run time",
+      "It makes the macro behave as a single statement, so an if without braces works",
+      "It forces the macro to evaluate its arguments only once",
+      "It is required for the # operator to work"
+    ],
+    "answerIndex": 1,
+    "explanation": "The wrapper turns several statements into one, so the semicolon after the macro completes it and an if/else pairs correctly. It does not change speed, and it does not stop multiple evaluation of arguments."
+  },
+  {
+    "prompt": "Why does a generic container store its element size?",
+    "options": [
+      "So the compiler can check each element's type at run time",
+      "So every operation computes correct byte offsets and copies, with no way for a caller to pass a wrong size",
+      "Because void pointers cannot be dereferenced without a size",
+      "So the container can sort its elements automatically"
+    ],
+    "answerIndex": 1,
+    "explanation": "A void pointer has no type, so the element size is the only information the container has for addressing and copying elements. Storing it in the container keeps every call consistent."
+  },
+  {
+    "prompt": "What does snprintf return when the output is truncated to fit the buffer?",
+    "options": [
+      "-1, to signal the error",
+      "The number of characters that were actually written",
+      "The number of characters the complete output would have needed",
+      "Zero, because the buffer is full"
+    ],
+    "answerIndex": 2,
+    "explanation": "snprintf returns the length the complete output would need, not the length written. Comparing that value with the buffer size tells you whether truncation happened."
+  },
+  {
+    "prompt": "Which practice most directly keeps a module's internal struct layout private?",
+    "options": [
+      "Declaring every field with the const qualifier",
+      "Declaring the struct only in the source file and exposing a pointer to it in the header",
+      "Adding a comment that says the fields are private",
+      "Using a global variable to store each field"
+    ],
+    "answerIndex": 1,
+    "explanation": "An opaque type is declared in the header without its definition. Only the source file knows the fields, so callers must use the functions the module provides."
+  },
+  {
+    "prompt": "What is the main purpose of an include guard?",
+    "options": [
+      "To stop the linker from finding duplicate functions",
+      "To stop a header from being processed twice in the same translation unit",
+      "To hide a header's contents from other files",
+      "To make the header compile faster on every build"
+    ],
+    "answerIndex": 1,
+    "explanation": "An include guard uses a macro to skip a header's contents on a second inclusion. Without it, repeated declarations or definitions can cause compile errors."
+  }
+]

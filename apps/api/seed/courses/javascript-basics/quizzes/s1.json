@@ -1,0 +1,90 @@
+[
+  {
+    "prompt": "What does `console.log(\"Score:\", 42)` print?",
+    "options": [
+      "\"Score:\" 42",
+      "Score:42",
+      "Score 42 with quotes",
+      "Score: 42"
+    ],
+    "answerIndex": 3,
+    "explanation": "Strings print without their quotation marks, and `console.log` puts a single space between the values it receives. `\"Score:\" 42` is the tempting trap, because it keeps the quotes, but quotes only mark where text starts and ends in your code."
+  },
+  {
+    "prompt": "Which line is a comment that JavaScript ignores?",
+    "options": [
+      "# note",
+      "// note",
+      "' note",
+      "-- note"
+    ],
+    "answerIndex": 1,
+    "explanation": "Two slashes start a single-line comment. `#` and `--` are comments in other languages such as Python and SQL, so JavaScript would try to run them as code. A leading single quote starts a string, which is an error here because nothing closes it."
+  },
+  {
+    "prompt": "The code `console.log(totl);` runs, but `totl` was never declared. Which error name does JavaScript report?",
+    "options": [
+      "SyntaxError",
+      "TypeError",
+      "ReferenceError",
+      "RangeError"
+    ],
+    "answerIndex": 2,
+    "explanation": "Using a name that does not exist produces a `ReferenceError`, with the message `totl is not defined`. A `SyntaxError` means the code cannot be parsed at all, and a `TypeError` means a value was used in a way its type does not allow."
+  },
+  {
+    "prompt": "Which statement about `const` is true?",
+    "options": [
+      "It stops the contents of an array from changing",
+      "It stops the name from being assigned a new value",
+      "It lets the variable be used before its declaration line",
+      "It only works for numbers"
+    ],
+    "answerIndex": 1,
+    "explanation": "`const` fixes the binding: the name cannot be reassigned. An array or object bound to a `const` name can still change its contents, so the first option is a common misconception. A `const` is also still subject to the temporary dead zone, so it cannot be used before its line runs."
+  },
+  {
+    "prompt": "What does this print?\n\n```\nlet score = 10;\nscore = score + 5;\nconsole.log(score);\n```",
+    "options": [
+      "10",
+      "Error: score is constant",
+      "score + 5",
+      "15"
+    ],
+    "answerIndex": 3,
+    "explanation": "`let` allows reassignment, so `score` becomes 15 and the log shows `15`. The error option is what you would get if the declaration were `const`, which is why the choice between `let` and `const` matters. The text `score + 5` would appear only if the code were inside quotation marks."
+  },
+  {
+    "prompt": "What does this print?\n\n```\nconst tags = [\"js\"];\ntags.push(\"code\");\nconsole.log(tags.length);\n```",
+    "options": [
+      "1",
+      "TypeError: Assignment to constant variable.",
+      "3",
+      "2"
+    ],
+    "answerIndex": 3,
+    "explanation": "`const` stops the name from pointing at a different array, but `push` changes the contents of the same array. The length goes from 1 to 2. The `TypeError` option would happen only if the code assigned a new array to `tags`, and `3` miscounts the single push."
+  },
+  {
+    "prompt": "Which expression produces the text `Total: 12` when `const total = 12;`?",
+    "options": [
+      "`Total: ${total}`",
+      "\"Total: \" + \"total\"",
+      "Total: total",
+      "console.log(total)"
+    ],
+    "answerIndex": 0,
+    "explanation": "A template literal in backticks puts the value of `total` into the text, giving `Total: 12`. The option `\"Total: \" + \"total\"` joins the word `total` as text rather than its value. `Total: total` is not valid JavaScript, and `console.log` prints a value rather than returning the text."
+  },
+  {
+    "prompt": "What happens when this code runs?\n\n```\nconsole.log(later);\nlet later = 1;\n```",
+    "options": [
+      "It prints undefined",
+      "It prints 1",
+      "It throws a ReferenceError about accessing 'later' before initialization",
+      "It prints nothing and continues silently"
+    ],
+    "answerIndex": 2,
+    "explanation": "A `let` variable cannot be read before its declaration line runs. JavaScript reports `ReferenceError: Cannot access 'later' before initialization`. The `undefined` option describes the older `var` keyword, which is why the course avoids `var`. The `1` option assumes the value is available before the line that sets it."
+  }
+]

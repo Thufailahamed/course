@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "What does a `void` return type mean?",
+    "options": [
+      "The method returns `null`",
+      "The method returns no value",
+      "The method cannot take parameters",
+      "The method is private"
+    ],
+    "answerIndex": 1,
+    "explanation": "`void` means the method performs an action but does not send a value back. You cannot assign its result to a variable."
+  },
+  {
+    "prompt": "In `static int add(int a, int b)`, what are `a` and `b` called?",
+    "options": [
+      "Arguments",
+      "Parameters",
+      "Return values",
+      "Fields"
+    ],
+    "answerIndex": 1,
+    "explanation": "The names in the method declaration are parameters. The values supplied at the call site, such as `add(2, 3)`, are arguments."
+  },
+  {
+    "prompt": "Why can `main` call a method marked `static` without creating an object?",
+    "options": [
+      "`static` methods are copied into `main`",
+      "`static` members belong to the class itself",
+      "`main` is not really a method",
+      "Java creates a hidden object automatically"
+    ],
+    "answerIndex": 1,
+    "explanation": "A static method belongs to the class, not to an instance. `main` is static too, so it can call other static methods directly."
+  },
+  {
+    "prompt": "A non-void method has an `if` with a `return` but no `return` after it. What does the compiler do?",
+    "options": [
+      "Returns `0` automatically",
+      "Returns `null` automatically",
+      "Reports that a return value is missing on some path",
+      "Runs the `if` branch twice"
+    ],
+    "answerIndex": 2,
+    "explanation": "Every possible path through a non-void method must return a value. The compiler checks this before the program runs."
+  },
+  {
+    "prompt": "Where can a variable declared inside a `for` loop body be used?",
+    "options": [
+      "Anywhere in the method",
+      "Only inside that loop body block",
+      "Only after the loop",
+      "In other methods of the same class"
+    ],
+    "answerIndex": 1,
+    "explanation": "A local variable's scope is the block where it is declared. It disappears at the closing brace of that block."
+  },
+  {
+    "prompt": "When an `int` is passed to a method and the method changes its parameter, what happens to the caller's variable?",
+    "options": [
+      "It changes too",
+      "It is unchanged, because Java passes a copy",
+      "It becomes `null`",
+      "The program does not compile"
+    ],
+    "answerIndex": 1,
+    "explanation": "Java is pass-by-value. The method receives a copy of the value, so reassigning the parameter does not affect the caller's variable."
+  },
+  {
+    "prompt": "Which two methods correctly overload each other?",
+    "options": [
+      "`int area(int s)` and `double area(int s)`",
+      "`int area(int s)` and `int area(int w, int h)`",
+      "`int area(int s)` and `int area(int side)`",
+      "`void area(int s)` and `int area(int s)`"
+    ],
+    "answerIndex": 1,
+    "explanation": "Overloads must differ in their parameter lists. Differing only by return type or parameter names is not enough."
+  },
+  {
+    "prompt": "What is the essential part of every recursive method?",
+    "options": [
+      "A loop",
+      "A base case that stops the recursion",
+      "A `static` modifier",
+      "An array parameter"
+    ],
+    "answerIndex": 1,
+    "explanation": "Without a base case, the method keeps calling itself until the stack overflows. Each recursive call must also move closer to that base case."
+  },
+  {
+    "prompt": "What does the parameter `int... numbers` accept?",
+    "options": [
+      "Exactly one integer",
+      "Zero or more integers, packed into an array",
+      "Only an `int[]` variable",
+      "Any object type"
+    ],
+    "answerIndex": 1,
+    "explanation": "Varargs accepts a variable number of arguments. Inside the method, `numbers` behaves like an `int[]`."
+  },
+  {
+    "prompt": "What is a guard clause?",
+    "options": [
+      "A loop that protects an array",
+      "An early return for an invalid or edge case",
+      "A `try` block around every method",
+      "A `static` field used as a lock"
+    ],
+    "answerIndex": 1,
+    "explanation": "A guard clause handles the invalid case first and returns early, leaving the main path unindented and easier to read."
+  }
+]

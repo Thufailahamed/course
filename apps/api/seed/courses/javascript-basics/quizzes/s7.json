@@ -1,0 +1,62 @@
+[
+  {
+    "prompt": "What does this print?\n\n```js\nlet total = 10;\ntotal += 5;\nconst label = `Total: ${total}`;\nconsole.log(label);\n```",
+    "options": ["Total: 10", "Total: 15", "Total: 105", "total: 15"],
+    "answerIndex": 1,
+    "explanation": "`total += 5` updates the `let` variable to 15, and the template literal inserts it into the text. The tempting `Total: 10` forgets that the `+=` line ran before the label was built, and `Total: 105` would come from joining strings instead of adding numbers."
+  },
+  {
+    "prompt": "What does `console.log(7 / 2, 7 % 2)` print?",
+    "options": ["3.5 1", "3 1", "3.5 0", "4 1"],
+    "answerIndex": 0,
+    "explanation": "The `/` operator always gives a decimal result, so `7 / 2` is `3.5`. The `%` operator gives the remainder, which is `1`. The tempting `3 1` uses floor division, which is `//`, not `/`."
+  },
+  {
+    "prompt": "The date `Date.UTC(2026, 11, 25)` is 25 December 2026. What does `console.log(new Date(Date.UTC(2026, 11, 25)).getUTCMonth())` print?",
+    "options": ["12", "11", "25", "0"],
+    "answerIndex": 1,
+    "explanation": "`getUTCMonth` is zero-based, so December is month `11`, not `12`. The tempting `12` is the calendar number of the month. Always remember the zero-based rule when reading or building dates."
+  },
+  {
+    "prompt": "What does `console.log(JSON.stringify({ n: undefined, ok: true }))` print?",
+    "options": ["{\"n\":null,\"ok\":true}", "{\"n\":undefined,\"ok\":true}", "{\"ok\":true}", "{}"],
+    "answerIndex": 2,
+    "explanation": "JSON can't represent `undefined`, so the `n` property is dropped from the object. The `null` answer confuses this with what happens to `undefined` inside an array, where the position must be kept."
+  },
+  {
+    "prompt": "What does `console.log(name || \"guest\")` print when `const name = \"\";`?",
+    "options": ["", "undefined", "false", "guest"],
+    "answerIndex": 3,
+    "explanation": "An empty string is falsy, so `||` moves on to its right side and prints `guest`. The tempting empty output assumes `||` returns the left value, which only happens when that value is truthy."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nlet sum = 0;\nfor (let i = 1; i <= 4; i++) {\n  if (i === 3) continue;\n  sum += i;\n}\nconsole.log(sum);\n```",
+    "options": ["6", "10", "7", "3"],
+    "answerIndex": 2,
+    "explanation": "`continue` skips the rest of the body when `i` is `3`, so `sum` adds `1`, `2` and `4`, which is `7`. The tempting `10` forgets the `continue`, and `6` misses the `4`."
+  },
+  {
+    "prompt": "What does `console.log([10, 9, 1].sort().join(\",\"))` print?",
+    "options": ["1,9,10", "9,10,1", "1,10,9", "10,9,1"],
+    "answerIndex": 2,
+    "explanation": "Without a comparison function, `sort` compares items as text. `\"1\"` comes first, then `\"10\"`, then `\"9\"`, because `\"1\"` is less than `\"9\"` and the first character decides. Pass `(a, b) => a - b` to sort numbers by value."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconst result = [1, 2, 3, 4]\n  .filter((n) => n % 2 === 0)\n  .map((n) => n * 10)\n  .reduce((a, b) => a + b, 0);\nconsole.log(result);\n```",
+    "options": ["20", "60", "6", "40"],
+    "answerIndex": 1,
+    "explanation": "`filter` keeps `2` and `4`, `map` turns them into `20` and `40`, and `reduce` adds them to get `60`. The tempting `40` takes only the last value, and `20` takes only the first."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nfunction counter() {\n  let n = 0;\n  return () => ++n;\n}\nconst next = counter();\nnext();\nnext();\nconsole.log(next());\n```",
+    "options": ["0", "1", "2", "3"],
+    "answerIndex": 3,
+    "explanation": "The returned arrow function keeps access to `n` from the scope where `counter` ran. Each call increases `n`, so the third call prints `3`. The tempting `1` assumes `n` is created again on each call, but it's created once."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nclass Account {\n  constructor() { this.total = 0; }\n  add(amount) {\n    if (amount <= 0) throw new Error(\"bad\");\n    this.total += amount;\n  }\n}\nconst account = new Account();\ntry {\n  account.add(5);\n  account.add(-1);\n} catch (e) {\n  console.log(e.message, account.total);\n}\n```",
+    "options": ["bad 5", "bad 0", "undefined 5", "bad -1"],
+    "answerIndex": 0,
+    "explanation": "`add(5)` succeeds and sets `total` to `5`. `add(-1)` throws the error with the message `bad`, and the catch block prints it along with the total, which is still `5`. The tempting `bad 0` assumes the total resets, and it never does."
+  }
+]

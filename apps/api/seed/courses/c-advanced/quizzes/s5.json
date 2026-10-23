@@ -1,0 +1,57 @@
+[
+  {
+    "prompt": "Why does the dynamic array double its capacity when it is full?",
+    "options": [
+      "Doubling makes each append take time proportional to the array's current size",
+      "Doubling makes the total cost of n appends proportional to n, because the copies are paid for by the cheap appends before them",
+      "Doubling keeps the struct small enough to fit in one cache line",
+      "Doubling is required by realloc before it will move a block"
+    ],
+    "answerIndex": 1,
+    "explanation": "Geometric growth means the copies needed when the array grows are rare and large, so the average cost per append stays constant. Growing by a fixed amount would make the total cost quadratic."
+  },
+  {
+    "prompt": "In the key-value store's decoder, why is each length checked against the available bytes before any memcpy?",
+    "options": [
+      "memcpy is faster when the lengths have been checked",
+      "A truncated or corrupt record would otherwise make the copy write or read past the end of a buffer",
+      "The file format requires the check for compatibility",
+      "It keeps the file from growing when records are saved again"
+    ],
+    "answerIndex": 1,
+    "explanation": "A length taken from a damaged file can claim more bytes than exist. Validating it first means the decoder rejects the record instead of reading past the end of the input or writing past the end of a buffer."
+  },
+  {
+    "prompt": "Why does the expression parser handle * and / inside parse_term, below the + and - loop in parse_expr?",
+    "options": [
+      "Because the loops run in alphabetical order of their operators",
+      "Because the grammar gives multiplication higher precedence by calling a lower level for its operands",
+      "Because the compiler checks * before + in every function",
+      "Because + is a unary operator that must be read last"
+    ],
+    "answerIndex": 1,
+    "explanation": "parse_expr calls parse_term for each operand, so a term is fully grouped before any addition or subtraction sees it. That is how multiplication binds tighter than addition, with no precedence table needed."
+  },
+  {
+    "prompt": "Why does a safe save write the new store to a temporary file and then rename it over the original?",
+    "options": [
+      "rename is always faster than writing the file directly",
+      "A crash during the save must not leave a half-written store in place of the previous good copy",
+      "It makes the file readable by other programs",
+      "The C standard forbids overwriting an existing file"
+    ],
+    "answerIndex": 1,
+    "explanation": "The original file stays intact until the new one is complete and closed successfully. The rename then replaces it in one step, so a crash leaves either the old store or the new one, never a mixture."
+  },
+  {
+    "prompt": "Why is a qsort comparator written as (a > b) - (a < b) instead of a - b?",
+    "options": [
+      "Because it is shorter to type",
+      "Because the subtraction can overflow, which is undefined, while the comparison form always yields -1, 0 or 1",
+      "Because it sorts faster than the subtraction form",
+      "Because qsort requires comparators to return only -1 or 1"
+    ],
+    "answerIndex": 1,
+    "explanation": "A difference of two large values can exceed the range of int, and signed overflow is undefined behavior. The comparison form gives the correct sign for every pair of values without any arithmetic that can overflow."
+  }
+]

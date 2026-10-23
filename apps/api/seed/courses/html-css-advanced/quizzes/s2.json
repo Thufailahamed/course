@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "What does `flex-basis` set?",
+    "options": [
+      "The minimum width of every child",
+      "The initial main-size of a flex item before free space is distributed",
+      "The cross-axis alignment",
+      "The number of items per row"
+    ],
+    "answerIndex": 1,
+    "explanation": "`flex-basis` is the item's starting size along the main axis. Growth and shrinkage are calculated from that basis. It behaves like a width for a row, but is axis-aware, and `flex: 1` sets it to `0%`."
+  },
+  {
+    "prompt": "A flex item with a long unbreakable word overflows its container. Which fix targets the usual cause?",
+    "options": [
+      "Add `overflow: hidden` to every child",
+      "Set `min-width: 0` on the flex item so it can shrink below its min-content size",
+      "Change `display: flex` to `display: block`",
+      "Add `flex-wrap: nowrap`"
+    ],
+    "answerIndex": 1,
+    "explanation": "Flex items have `min-width: auto`, which prevents them from shrinking below their min-content size. A long word sets that size. `min-width: 0` (or `overflow: hidden`/`overflow-wrap`) lets the item shrink. `overflow: hidden` alone hides content instead of solving the sizing."
+  },
+  {
+    "prompt": "Three items have `flex-grow: 1`, `2` and `1` with `flex-basis: 0`. How is the free space divided?",
+    "options": [
+      "Equally, one third each",
+      "25%, 50%, 25%",
+      "50%, 25%, 25%",
+      "It depends only on content size"
+    ],
+    "answerIndex": 1,
+    "explanation": "With a zero basis, the grow factors share the free space in proportion: 1 + 2 + 1 = 4, so the items get 1/4, 2/4 and 1/4 of the space. If the basis were `auto`, existing content size would be added before distributing the remainder."
+  },
+  {
+    "prompt": "What is the difference between `auto-fit` and `auto-fill` in a grid?",
+    "options": [
+      "They are identical",
+      "`auto-fit` collapses empty tracks; `auto-fill` keeps them, so items may not expand to fill the row",
+      "`auto-fill` only works with flexbox",
+      "`auto-fit` disables `minmax()`"
+    ],
+    "answerIndex": 1,
+    "explanation": "Both create as many tracks as fit. `auto-fill` leaves empty tracks in place, so the existing items keep their track width. `auto-fit` collapses the empty tracks and lets the remaining tracks grow, which is usually what you want for a responsive card grid."
+  },
+  {
+    "prompt": "Why does `grid-template-columns: repeat(3, 1fr)` sometimes overflow?",
+    "options": [
+      "`1fr` is not a valid unit",
+      "The `1fr` minimum is `auto`, so a long word can force a track wider than its share; use `minmax(0, 1fr)`",
+      "Grid always overflows with three columns",
+      "You must add `grid-auto-flow: column`"
+    ],
+    "answerIndex": 1,
+    "explanation": "A bare `1fr` is effectively `minmax(auto, 1fr)`. The `auto` minimum respects min-content, so unbreakable content can push a track wider and overflow the grid. `minmax(0, 1fr)` sets a zero minimum and allows the track to shrink, with wrapping or truncation handling the content."
+  },
+  {
+    "prompt": "What does `grid-template-areas` give you that line numbers do not?",
+    "options": [
+      "Faster rendering",
+      "A visual, named map of the layout that is easier to read and rearrange",
+      "Automatic responsive behaviour",
+      "The ability to use flexbox inside grid"
+    ],
+    "answerIndex": 1,
+    "explanation": "Named areas let you draw the layout as a grid of names and assign children with `grid-area`. The CSS visually resembles the result, and rearranging areas for a breakpoint is less error-prone than editing line numbers. It does not add responsiveness by itself."
+  },
+  {
+    "prompt": "Which condition is required for `position: sticky` to work?",
+    "options": [
+      "A parent with `overflow: visible` and a specified inset such as `top: 0`",
+      "`z-index: 9999`",
+      "`display: flex` on the parent",
+      "A fixed height on the element"
+    ],
+    "answerIndex": 0,
+    "explanation": "Sticky positioning needs a scroll container and an inset (`top`, `bottom`, etc.) to know when to stick. An ancestor with `overflow: hidden`, `auto` or `scroll` can become the scroll container and change the behaviour. `z-index` may affect stacking but is not what enables sticking."
+  },
+  {
+    "prompt": "A child with `z-index: 9999` still appears behind a sibling. What is the likely reason?",
+    "options": [
+      "z-index only accepts values below 100",
+      "The child is inside a parent that creates a stacking context, so it cannot paint above elements outside that context",
+      "The child needs `position: fixed`",
+      "z-index does not apply to positioned elements"
+    ],
+    "answerIndex": 1,
+    "explanation": "A stacking context is an isolated painting layer. If an ancestor creates one (for example with `transform`, `opacity` below 1, `filter` or `isolation`), descendants' z-index values are resolved inside it and cannot escape above sibling contexts. Raise or restructure the context rather than inflating the number."
+  },
+  {
+    "prompt": "What does a container query respond to?",
+    "options": [
+      "The viewport width only",
+      "The size of the nearest ancestor with `container-type` set",
+      "The number of children in the container",
+      "The user's color scheme"
+    ],
+    "answerIndex": 1,
+    "explanation": "Container queries let a component respond to its own available space rather than the viewport. You declare `container-type: inline-size` on an ancestor and use `@container (min-width: …)`. This makes components reusable in sidebars and wide main columns without viewport-specific overrides."
+  },
+  {
+    "prompt": "Which pair are logical properties?",
+    "options": [
+      "`margin-left` and `margin-right`",
+      "`margin-inline-start` and `padding-block-end`",
+      "`top` and `left`",
+      "`width` and `height`"
+    ],
+    "answerIndex": 1,
+    "explanation": "Logical properties map to the writing mode and direction rather than physical sides. `margin-inline-start` is the start edge of the inline axis, which may be left or right depending on direction. `padding-block-end` is the end of the block axis. They make layouts work across languages more naturally."
+  }
+]

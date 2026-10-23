@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "What is the relationship between a class and an object?",
+    "options": [
+      "A class is one instance of an object",
+      "An object is one instance created from a class blueprint",
+      "They are two names for the same thing",
+      "An object must contain at least one `main` method"
+    ],
+    "answerIndex": 1,
+    "explanation": "The class describes the fields and methods. Each object is a separate instance with its own field values."
+  },
+  {
+    "prompt": "Which statement about a constructor is true?",
+    "options": [
+      "It must return `void`",
+      "It has the same name as the class and no return type",
+      "It can only be called once per program",
+      "It must be `static`"
+    ],
+    "answerIndex": 1,
+    "explanation": "A constructor shares the class name, has no return type, and runs when `new` creates an object."
+  },
+  {
+    "prompt": "Why is `this.name = name;` useful in a constructor?",
+    "options": [
+      "It creates a second field",
+      "It assigns the parameter to the field when both have the same name",
+      "It makes the field `static`",
+      "It calls the parent constructor"
+    ],
+    "answerIndex": 1,
+    "explanation": "`this.name` refers to the object's field, while `name` on the right is the parameter. Without `this`, the assignment would target the parameter."
+  },
+  {
+    "prompt": "What does marking a field `private` do?",
+    "options": [
+      "Prevents the field from being initialized",
+      "Allows access only from inside the same class",
+      "Makes the field read-only everywhere",
+      "Stores the field in a file"
+    ],
+    "answerIndex": 1,
+    "explanation": "`private` hides the field from other classes. Code outside the class must use public methods, which can validate values."
+  },
+  {
+    "prompt": "What is `toString()` used for?",
+    "options": [
+      "Converting a class to a file",
+      "Providing a readable string when an object is printed or concatenated",
+      "Deleting an object from memory",
+      "Comparing two objects for equality"
+    ],
+    "answerIndex": 1,
+    "explanation": "`println` and string concatenation call `toString` automatically. Overriding it gives objects a useful display form."
+  },
+  {
+    "prompt": "How do you call a `static` method named `origin` on a class named `Point`?",
+    "options": [
+      "`new Point().origin()`",
+      "`Point.origin()`",
+      "`Point->origin()`",
+      "`origin(Point)`"
+    ],
+    "answerIndex": 1,
+    "explanation": "A static method belongs to the class, so it is called with the class name. An instance is not required."
+  },
+  {
+    "prompt": "Which keyword establishes inheritance?",
+    "options": [
+      "`implements`",
+      "`extends`",
+      "`inherits`",
+      "`super`"
+    ],
+    "answerIndex": 1,
+    "explanation": "A class inherits from another class with `extends`. `implements` is for interfaces."
+  },
+  {
+    "prompt": "What does overriding a method mean?",
+    "options": [
+      "Declaring two methods with the same name in one class",
+      "Providing a subclass version of a method inherited from the parent",
+      "Making a method `static`",
+      "Calling the parent method twice"
+    ],
+    "answerIndex": 1,
+    "explanation": "An override has the same signature as a parent method and replaces its behaviour for the subclass."
+  },
+  {
+    "prompt": "When must a subclass call `super(...)`?",
+    "options": [
+      "Always, in every constructor",
+      "When the parent has no no-argument constructor",
+      "Only when the subclass has no constructor",
+      "Only for static methods"
+    ],
+    "answerIndex": 1,
+    "explanation": "Java calls the parent's no-argument constructor automatically. If the parent only has a constructor with parameters, the subclass must call it explicitly."
+  },
+  {
+    "prompt": "What does this print? `Animal a = new Dog(); System.out.println(a.speak());` where `Dog` overrides `speak()`.",
+    "options": [
+      "The `Animal` version, because the variable type is `Animal`",
+      "The `Dog` version, because the object is a `Dog`",
+      "A compile error",
+      "`null`"
+    ],
+    "answerIndex": 1,
+    "explanation": "Java dispatches overridden methods based on the object's runtime type, not the variable's declared type. The `Dog` override runs."
+  }
+]

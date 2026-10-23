@@ -1,0 +1,56 @@
+[
+  {
+    "prompt": "Which stage of the build replaces each #include line with the contents of the header?",
+    "options": [
+      "The compiler proper",
+      "The preprocessor",
+      "The assembler",
+      "The linker"
+    ],
+    "answerIndex": 1,
+    "explanation": "The preprocessor works on text before the compiler sees the code. It pastes #include files, expands #define macros and chooses #if branches. Run gcc -E to see its output."
+  },
+  {
+    "prompt": "Which of these is undefined behavior in C?",
+    "options": [
+      "Adding 1 to an unsigned int that holds its maximum value",
+      "Writing one element past the end of an array",
+      "Passing a const pointer to a function that only reads through it",
+      "Printing an int with the %d format specifier"
+    ],
+    "answerIndex": 1,
+    "explanation": "Writing past the end of an array has no rules in the standard, so the compiler may assume it never happens. Unsigned wraparound is defined, and the other two are ordinary valid code."
+  },
+  {
+    "prompt": "What does the declaration int (*op)(int, int); introduce?",
+    "options": [
+      "A function that returns a pointer to int",
+      "A pointer to a function taking two ints and returning an int",
+      "An array of two function pointers",
+      "A pointer to an int that takes two arguments"
+    ],
+    "answerIndex": 1,
+    "explanation": "The parentheses around *op make op a pointer first. The rest of the declaration says what it points to: a function taking (int, int) and returning int. Without the parentheses, int *op(int, int) would declare a function."
+  },
+  {
+    "prompt": "Given const char *p, which operation is allowed?",
+    "options": [
+      "Writing to p[0] without a cast",
+      "Reassigning p to point at a different string",
+      "Passing p to a function that takes char * without a cast"
+    ],
+    "answerIndex": 1,
+    "explanation": "The const applies to the characters p points at, so they cannot be written through p. The pointer p itself is not const, so it can be reassigned. Passing p to a char * parameter would discard the const qualifier, which needs a cast and is almost always a bug."
+  },
+  {
+    "prompt": "Which phase of the build reports the error 'undefined reference to helper'?",
+    "options": [
+      "Preprocessing",
+      "Compilation",
+      "Linking",
+      "Execution"
+    ],
+    "answerIndex": 2,
+    "explanation": "The compiler has already checked the declaration of helper. The linker is the phase that looks for a definition to connect each undefined name to, so a missing definition shows up there."
+  }
+]

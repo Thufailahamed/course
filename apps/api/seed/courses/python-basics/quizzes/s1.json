@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "In this course, what happens when the **last line** of a cell is a value or calculation, like `365 * 24`?",
+    "options": [
+      "Nothing, because you must always use `print()` to see a result",
+      "Python shows the value automatically, with a small label showing its type",
+      "Python raises an error because the value isn't stored anywhere",
+      "The value is saved to a file"
+    ],
+    "answerIndex": 1,
+    "explanation": "A cell displays the value of its last line automatically, along with a type chip such as `int`. Any earlier lines only show output if they call `print()`."
+  },
+  {
+    "prompt": "What does `print(\"7 * 6\")` display?",
+    "options": [
+      "42",
+      "\"7 * 6\"",
+      "7 6",
+      "7 * 6"
+    ],
+    "answerIndex": 3,
+    "explanation": "Anything in quotes is text, and Python prints text exactly as written, without the quotes. To calculate, leave out the quotes: `print(7 * 6)` shows `42`."
+  },
+  {
+    "prompt": "What does `print(\"Total:\", 4 + 6, sep=\"\")` display?",
+    "options": [
+      "Total:10",
+      "Total: 10",
+      "Total: 4 + 6",
+      "Total:4+6"
+    ],
+    "answerIndex": 0,
+    "explanation": "The calculation `4 + 6` becomes `10`, and `sep=\"\"` replaces the usual space between values with nothing, so the two pieces are joined directly: `Total:10`."
+  },
+  {
+    "prompt": "A cell contains three `print` lines. Line 2 is missing its closing parenthesis. What do you see when you run it?",
+    "options": [
+      "Line 1 prints, then a SyntaxError appears",
+      "Lines 1 and 3 print, and line 2 is skipped",
+      "Nothing prints at all; only a SyntaxError appears",
+      "All three lines print, with a warning about line 2"
+    ],
+    "answerIndex": 2,
+    "explanation": "Python checks the grammar of the whole cell before running anything. A SyntaxError anywhere means no line runs, not even the correct ones before it."
+  },
+  {
+    "prompt": "You see `NameError: name 'totl' is not defined` on line 5. What is the most likely cause?",
+    "options": [
+      "Line 5 is missing a closing quote",
+      "You divided by zero on line 5",
+      "Python has run out of memory",
+      "A typo: you probably meant a variable such as `total`, or `totl` was never assigned"
+    ],
+    "answerIndex": 3,
+    "explanation": "A NameError means Python reached a name it doesn't know. It's almost always a typo, a capitalization difference, or using a variable before assigning it. Every line before line 5 has already run."
+  },
+  {
+    "prompt": "What does this print? `a = 4; b = a; a = a + 1; print(a, b)`",
+    "options": [
+      "5 5",
+      "5 4",
+      "4 4",
+      "4 5"
+    ],
+    "answerIndex": 1,
+    "explanation": "`b = a` puts the name `b` on the value `a` has *at that moment* (4). Moving `a` to 5 afterwards doesn't affect `b`. Assignment never creates a permanent link between two names."
+  },
+  {
+    "prompt": "`lives` starts at 3. Which line correctly takes one life away?",
+    "options": [
+      "`lives - 1`",
+      "`lives = - 1`",
+      "`lives -= 1`",
+      "`lives - 1 = lives`"
+    ],
+    "answerIndex": 2,
+    "explanation": "`lives -= 1` is short for `lives = lives - 1`. On its own, `lives - 1` calculates 2 but doesn't store it, `lives = - 1` sets `lives` to negative one, and `lives - 1 = lives` is a SyntaxError because the name must be on the left of `=`."
+  },
+  {
+    "prompt": "Which of these is a valid **and** well-styled Python variable name?",
+    "options": [
+      "`high_score`",
+      "`high-score`",
+      "`2nd_score`",
+      "`class`"
+    ],
+    "answerIndex": 0,
+    "explanation": "`high_score` follows the snake_case convention. `high-score` is read as a subtraction, `2nd_score` starts with a digit, and `class` is a reserved word, so all three are SyntaxErrors when you assign to them."
+  },
+  {
+    "prompt": "`x = \"cat\"` and `y = \"dog\"`. Which line swaps them so that `x` is `\"dog\"` and `y` is `\"cat\"`?",
+    "options": [
+      "`x = y` then `y = x` on the next line",
+      "`x, y = y, x`",
+      "`x == y`",
+      "`x, y = x, y`"
+    ],
+    "answerIndex": 1,
+    "explanation": "Multiple assignment works out all the values on the right first, then assigns them, so `x, y = y, x` swaps cleanly. Two separate lines would lose the original `x` before it's copied, leaving both names on `\"dog\"`."
+  },
+  {
+    "prompt": "After running `price = 19.99` and then `price = \"sold out\"`, what does `type(price)` give?",
+    "options": [
+      "`<class 'float'>`, because a variable keeps its first type",
+      "An error: a variable can't change type",
+      "`<class 'str'>`",
+      "`<class 'int'>`"
+    ],
+    "answerIndex": 2,
+    "explanation": "Python is dynamically typed: a name is just a tag that can be moved onto any value. After the second assignment, `price` refers to a string, so its type is `str`."
+  }
+]

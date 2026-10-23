@@ -1,0 +1,50 @@
+[
+  {
+    "prompt": "What does `console.log(user.age)` print, given `const user = { name: \"Ada\" };`?",
+    "options": ["null", "false", "undefined", "Error"],
+    "answerIndex": 2,
+    "explanation": "A missing property reads as `undefined`, and it doesn't throw. That silent behavior is why missing data can slip through unnoticed. Check with `\"age\" in user` when the difference matters."
+  },
+  {
+    "prompt": "After `const a = { n: 1 }; const b = a; b.n = 2;`, what does `console.log(a.n)` print?",
+    "options": ["1", "2", "undefined", "It throws a TypeError"],
+    "answerIndex": 1,
+    "explanation": "`b = a` doesn't copy the object; both names refer to the same object. Changing it through `b` changes what `a` sees. The tempting `1` assumes assignment makes a copy, which only happens for primitive values like numbers."
+  },
+  {
+    "prompt": "What does `console.log(Object.keys({ x: 1, y: 2 }).length)` print?",
+    "options": ["1", "x,y", "2", "[ 'x', 'y' ]"],
+    "answerIndex": 2,
+    "explanation": "`Object.keys` returns an array of the property names, `[\"x\", \"y\"]`, and `.length` counts them, giving `2`. The tempting `x,y` is what the array looks like as text, but it's the count that's asked for."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconst { city = \"Leeds\", age } = { age: 30 };\nconsole.log(city, age);\n```",
+    "options": ["undefined 30", "Leeds", "Leeds undefined", "Leeds 30"],
+    "answerIndex": 3,
+    "explanation": "`city` is missing from the object, so its default `\"Leeds\"` is used. `age` is `30`. The tempting `undefined 30` forgets that a default applies when a destructured property is missing or `undefined`."
+  },
+  {
+    "prompt": "What does this print?\n\n```js\nconst base = { a: 1, b: 2 };\nconst next = { ...base, b: 5 };\nconsole.log(next.b, base.b);\n```",
+    "options": ["2 5", "5 5", "5 2", "2 2"],
+    "answerIndex": 2,
+    "explanation": "Spread copies every property of `base` into a new object, and the later `b: 5` overrides the copied value in `next` only. `base.b` stays `2`. The tempting `2 5` reverses the two values, which would happen if the override went into `base` instead."
+  },
+  {
+    "prompt": "What does `console.log(new Box(4).double)` print, given a class with `constructor(w) { this.w = w; }` and `get double() { return this.w * 2; }`?",
+    "options": ["8", "4", "undefined", "TypeError"],
+    "answerIndex": 0,
+    "explanation": "`double` is a getter, so it's read like a property and runs the function body with the current `this.w`. `4 * 2` is `8`. The tempting `undefined` assumes the getter has to be called with parentheses, but getters are read without them."
+  },
+  {
+    "prompt": "What happens when you run `Dog(\"Rex\")` without `new`, if `Dog` is a class with a constructor?",
+    "options": ["It creates a new Dog and returns it", "It returns undefined silently", "It returns null", "It throws a TypeError"],
+    "answerIndex": 3,
+    "explanation": "A class constructor can only run with `new`. JavaScript refuses the call and throws a `TypeError`, which is a helpful failure. The silent `undefined` answer describes a plain function, which doesn't have this rule."
+  },
+  {
+    "prompt": "Inside a method, `const bump = counter.increment; bump();` is called. What is the problem with `this`?",
+    "options": ["Nothing, `this` always refers to the object that holds the method", "`this` no longer points at `counter`, because `this` depends on how a function is called", "The method is deleted from `counter`", "`this` becomes the array of arguments"],
+    "answerIndex": 1,
+    "explanation": "`this` is decided by how a function is called, not where it's written. Copying the method out and calling it alone loses the link to `counter`. Call methods with the object in front, like `counter.increment()`, to keep `this` correct."
+  }
+]

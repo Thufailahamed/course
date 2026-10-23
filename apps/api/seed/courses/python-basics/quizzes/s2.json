@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "What does `print(7 / 2, 7 // 2, 7 % 2)` print?",
+    "options": [
+      "3 3 1",
+      "3.5 3.5 1",
+      "3.5 3 1",
+      "3.5 3 0.5"
+    ],
+    "answerIndex": 2,
+    "explanation": "`/` always gives a float (3.5). `//` is floor division: how many whole 2s fit into 7 (3). `%` is the remainder left over (1)."
+  },
+  {
+    "prompt": "Why is `0.1 + 0.2 == 0.3` False in Python?",
+    "options": [
+      "Python adds floats left to right and loses the last digit",
+      "Floats are stored in binary, so 0.1 and 0.2 are tiny approximations and their sum is 0.30000000000000004",
+      "`==` only works on whole numbers",
+      "It's a bug that was fixed in newer versions of Python"
+    ],
+    "answerIndex": 1,
+    "explanation": "Most decimal fractions can't be stored exactly in binary, so floats carry tiny rounding errors. Compare floats after rounding (or check that the difference is tiny), and use `round()` or `:.2f` for display."
+  },
+  {
+    "prompt": "Given `word = \"Python\"`, what is `word[1:4]`?",
+    "options": [
+      "'yth'",
+      "'Pyt'",
+      "'ytho'",
+      "'Pyth'"
+    ],
+    "answerIndex": 0,
+    "explanation": "Indexing starts at 0, so index 1 is `y`. A slice includes the start but stops *before* the stop index, giving indexes 1, 2 and 3: `'yth'`."
+  },
+  {
+    "prompt": "`name = \"Jim\"` and you want `\"Tim\"`. Running `name[0] = \"T\"` raises a TypeError. Which line works?",
+    "options": [
+      "`name[0] == \"T\"`",
+      "`name.replace(\"J\", \"T\")` on its own line",
+      "`name[0:1] = \"T\"`",
+      "`name = \"T\" + name[1:]`"
+    ],
+    "answerIndex": 3,
+    "explanation": "Strings are immutable, so you can't change a character in place. Build a new string and move the label onto it: `\"T\" + name[1:]`. A bare `name.replace(...)` returns a new string but throws it away unless you save it."
+  },
+  {
+    "prompt": "After running `city = \"  oslo \"` and then `city.strip().title()` on its own line, what does `print(\"[\" + city + \"]\")` show?",
+    "options": [
+      "[Oslo]",
+      "[  oslo ]",
+      "[oslo]",
+      "[  Oslo ]"
+    ],
+    "answerIndex": 1,
+    "explanation": "String methods return a **new** string; they never change the original. The cleaned result was never saved, so `city` is unchanged. Write `city = city.strip().title()` to keep it."
+  },
+  {
+    "prompt": "With `total = 1234.5`, what does `f\"${total:,.2f}\"` produce?",
+    "options": [
+      "'$1234.5'",
+      "'$1,234.5'",
+      "'$1234.50'",
+      "'$1,234.50'"
+    ],
+    "answerIndex": 3,
+    "explanation": "In the format spec, `,` adds thousands separators and `.2f` shows exactly two decimals, so you get `$1,234.50`. The variable itself keeps its full value; only the display changes."
+  },
+  {
+    "prompt": "`day = \"Tuesday\"`, but `is_weekend = day == \"Saturday\" or \"Sunday\"` gives a truthy result. Which line is correct?",
+    "options": [
+      "`is_weekend = day == (\"Saturday\" or \"Sunday\")`",
+      "`is_weekend = day == \"Saturday\" or day == \"Sunday\"`",
+      "`is_weekend = day == \"Saturday\" and \"Sunday\"`",
+      "`is_weekend = (day == \"Saturday\" or \"Sunday\") == True`"
+    ],
+    "answerIndex": 1,
+    "explanation": "Each side of `or` must be a complete comparison. The buggy version is read as `(day == \"Saturday\") or \"Sunday\"`, and the non-empty string `\"Sunday\"` is always truthy. `(\"Saturday\" or \"Sunday\")` is just `\"Saturday\"`, so the first option never matches Sunday."
+  },
+  {
+    "prompt": "What does `print(True or False and False, bool(\"False\"), bool(0))` print?",
+    "options": [
+      "False False False",
+      "True False False",
+      "True True False",
+      "False True True"
+    ],
+    "answerIndex": 2,
+    "explanation": "`and` binds tighter than `or`, so the first is `True or (False and False)`, which is `True`. `bool(\"False\")` is `True` because any non-empty string is truthy. `bool(0)` is `False` because zero is falsy."
+  },
+  {
+    "prompt": "A program runs `a = input(\"First: \")` and `b = input(\"Second: \")`. The user types 2 and then 3. What does `print(a + b)` show?",
+    "options": [
+      "5",
+      "23",
+      "2 3",
+      "A TypeError"
+    ],
+    "answerIndex": 1,
+    "explanation": "`input()` always returns a string, so `a` is `\"2\"` and `b` is `\"3\"`, and `+` glues text together: `\"23\"`. Convert first with `int(input(...))` to add them as numbers."
+  },
+  {
+    "prompt": "`price = int(input(\"Price: \"))` crashes with `ValueError: invalid literal for int() with base 10: '4.99'`. What is the right fix?",
+    "options": [
+      "Use `float(input(\"Price: \"))`, because `int()` only accepts whole-number text",
+      "Use `bool(input(\"Price: \"))` to check the input first",
+      "Use `str(input(\"Price: \"))`, because the input isn't a string yet",
+      "Use `int(input(\"Price: \").strip())`, because the problem is extra spaces"
+    ],
+    "answerIndex": 0,
+    "explanation": "`int()` refuses text with a decimal point. `float()` understands `\"4.99\"`. `str()` changes nothing (input is already text), `bool()` would just give True, and `int()` already ignores surrounding spaces."
+  }
+]
