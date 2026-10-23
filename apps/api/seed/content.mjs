@@ -320,40 +320,6 @@ export const courses = [
       ["Latent diffusion runs the diffusion process…", ["In pixel space", "In a compressed autoencoder latent space", "On text tokens", "In frequency space only"], 1, "Working in latent space makes generation far cheaper."],
     ],
   },
-  {
-    slug: "reinforcement-learning-essentials",
-    title: "Reinforcement Learning Essentials",
-    subtitle: "From bandits and Q-learning to policy gradients and RLHF.",
-    category: "machine-learning",
-    instructor: "daniel",
-    level: "advanced",
-    price: 0,
-    compareAt: null,
-    accent: 8,
-    featured: false,
-    students: 9870,
-    tags: ["Reinforcement Learning", "Q-Learning", "PPO", "RLHF"],
-    learn: [
-      "Formulate problems as Markov decision processes",
-      "Implement Q-learning and deep Q-networks",
-      "Understand policy gradients and PPO",
-      "See how RLHF aligns language models",
-    ],
-    requirements: ["Probability basics", "PyTorch experience"],
-    audience: ["ML engineers curious about RL", "Researchers", "Game and robotics developers"],
-    snippet: `q[s, a] += alpha * (r + gamma * q[s_next].max() - q[s, a])`,
-    sections: [
-      ["Foundations", ["v|Agents, environments and rewards|13", "v|Multi-armed bandits|15", "a|Markov decision processes|14"]],
-      ["Value-based Methods", ["v|Dynamic programming|16", "v|Q-learning|18", "v|Deep Q-networks|20", "q|Checkpoint: value methods"]],
-      ["Policy-based Methods", ["v|Policy gradients|19", "v|Actor-critic and PPO|21"]],
-      ["RL for LLMs", ["v|RLHF explained|17", "a|Preference optimization (DPO)|12", "q|Final assessment"]],
-    ],
-    quiz: [
-      ["The discount factor γ controls…", ["Learning rate", "How much future rewards are valued relative to immediate ones", "Exploration rate", "Batch size"], 1, "γ near 1 → far-sighted; near 0 → myopic."],
-      ["Q-learning is…", ["On-policy", "Off-policy", "Supervised", "Unsupervised"], 1, "It learns the greedy policy's values while following another policy."],
-      ["RLHF uses a reward model trained on…", ["Random labels", "Human preference comparisons", "Image data", "Code compilation results"], 1, "Humans rank outputs; the reward model learns those preferences."],
-    ],
-  },
 ];
 
 export const paths = [

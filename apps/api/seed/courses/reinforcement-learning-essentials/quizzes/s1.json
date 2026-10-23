@@ -1,0 +1,52 @@
+[
+  {
+    "prompt": "With discount factor 0.9, what is the return of rewards 0, 0, 10 starting at time 0?",
+    "options": ["10.0", "8.1", "9.0", "0.0"],
+    "answerIndex": 1,
+    "explanation": "The reward of 10 arrives at time 2, so it is discounted by 0.9 squared, which is 0.81. 10 × 0.81 = 8.1."
+  },
+  {
+    "prompt": "In Q-learning, the target for a non-terminal transition uses…",
+    "options": [
+      "The value of the action actually taken next",
+      "The maximum over actions of Q in the next state",
+      "The reward alone",
+      "The average of all Q values in the table"
+    ],
+    "answerIndex": 1,
+    "explanation": "Q-learning bootstraps from the best next action, which makes it learn the optimal policy even while exploring."
+  },
+  {
+    "prompt": "What is the main difference between SARSA and Q-learning?",
+    "options": [
+      "SARSA learns the value of the policy actually followed, including exploration; Q-learning learns the greedy optimal policy",
+      "SARSA cannot use a discount factor",
+      "Q-learning requires a neural network",
+      "There is no difference"
+    ],
+    "answerIndex": 0,
+    "explanation": "SARSA is on-policy and uses the next action taken. Q-learning is off-policy and uses the maximum over next actions."
+  },
+  {
+    "prompt": "Why does a DQN use a target network?",
+    "options": [
+      "To make the network smaller",
+      "To keep the regression target from moving with every update, which stabilizes training",
+      "To replace the replay buffer",
+      "To remove the discount factor"
+    ],
+    "answerIndex": 1,
+    "explanation": "A separate, slowly updated copy of the weights provides a stable target, which damps oscillations in learning."
+  },
+  {
+    "prompt": "A bandit agent that always picks the arm with the highest estimate, from the start, can get stuck because…",
+    "options": [
+      "Its estimates never change",
+      "It may never try the best arm after an early unlucky result, so it lacks exploration",
+      "Bandits have no rewards",
+      "The arms are always identical"
+    ],
+    "answerIndex": 1,
+    "explanation": "Without exploration an early poor estimate can lock the agent onto a worse arm. Epsilon-greedy and upper confidence bounds address this."
+  }
+]
