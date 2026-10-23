@@ -1,0 +1,46 @@
+[
+  {
+    "prompt": "What does lowering the temperature do to the next-token distribution?",
+    "options": [
+      "It sharpens it toward the most likely tokens",
+      "It flattens it toward uniform",
+      "It removes the vocabulary",
+      "It doubles every logit"
+    ],
+    "answerIndex": 0,
+    "explanation": "Dividing the logits by a temperature below one makes the highest-scoring tokens dominate."
+  },
+  {
+    "prompt": "What is the nucleus selected by top-p sampling?",
+    "options": [
+      "The smallest set of most likely tokens whose probability reaches p",
+      "The top 50 tokens regardless of probability",
+      "The least likely tokens",
+      "The tokens that appear in the prompt"
+    ],
+    "answerIndex": 0,
+    "explanation": "Top-p keeps the smallest prefix of the sorted distribution whose total reaches p."
+  },
+  {
+    "prompt": "Why validate a model's JSON output even when it usually parses?",
+    "options": [
+      "Parsing success does not guarantee the fields and types your code uses are correct",
+      "Parsing always fails",
+      "Validation makes the model faster",
+      "JSON cannot contain numbers"
+    ],
+    "answerIndex": 0,
+    "explanation": "Valid JSON can still have missing fields or wrong types, which breaks downstream code."
+  },
+  {
+    "prompt": "Why does Python's isinstance(True, int) return True, and what does it mean for validation?",
+    "options": [
+      "bool is a subclass of int, so integer checks must exclude booleans explicitly",
+      "True is stored as the string 'True'",
+      "Integers and booleans are unrelated",
+      "isinstance never works on booleans"
+    ],
+    "answerIndex": 0,
+    "explanation": "A strict integer check must exclude bool, or a boolean will pass as a score."
+  }
+]

@@ -8,6 +8,7 @@ import * as data from "./content.mjs";
 import * as numpyCourse from "./courses/numpy/course.mjs";
 import * as mathForMachineLearningCourse from "./courses/math-for-machine-learning/course.mjs";
 import * as deepLearningFoundationsCourse from "./courses/deep-learning-foundations/course.mjs";
+import * as llmEngineeringCourse from "./courses/llm-engineering/course.mjs";
 import * as generativeAiDiffusionCourse from "./courses/generative-ai-diffusion/course.mjs";
 import * as computerVisionBootcampCourse from "./courses/computer-vision-bootcamp/course.mjs";
 import * as nlpWithTransformersCourse from "./courses/nlp-with-transformers/course.mjs";
@@ -32,6 +33,7 @@ const interactiveCourses = [
   ["numpy", numpyCourse],
   ["math-for-machine-learning", mathForMachineLearningCourse],
   ["deep-learning-foundations", deepLearningFoundationsCourse],
+  ["llm-engineering", llmEngineeringCourse],
   ["generative-ai-diffusion", generativeAiDiffusionCourse],
   ["computer-vision-bootcamp", computerVisionBootcampCourse],
   ["nlp-with-transformers", nlpWithTransformersCourse],

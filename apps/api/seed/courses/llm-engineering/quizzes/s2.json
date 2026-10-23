@@ -1,0 +1,46 @@
+[
+  {
+    "prompt": "Why use overlap when chunking documents?",
+    "options": [
+      "So that a fact split across a boundary still appears whole in one chunk",
+      "To make the chunks larger than the document",
+      "To remove duplicate words from the document",
+      "To avoid storing metadata"
+    ],
+    "answerIndex": 0,
+    "explanation": "Overlap keeps sentences that straddle a boundary retrievable in full."
+  },
+  {
+    "prompt": "What does reciprocal rank fusion combine?",
+    "options": [
+      "Several rankings, scoring each document by the sum of 1 divided by its rank plus a constant",
+      "The text of several documents into one",
+      "The token probabilities of several models",
+      "The prices of several providers"
+    ],
+    "answerIndex": 0,
+    "explanation": "RRF rewards documents that rank highly in any list, without needing comparable scores."
+  },
+  {
+    "prompt": "What does recall at k measure?",
+    "options": [
+      "The share of relevant documents that appear in the top k results",
+      "The number of tokens in the top k results",
+      "The speed of retrieval",
+      "The share of retrieved documents that are relevant"
+    ],
+    "answerIndex": 0,
+    "explanation": "Recall at k counts how many of the relevant documents were found within the first k results."
+  },
+  {
+    "prompt": "Why is cosine similarity preferred to a raw dot product for comparing embeddings?",
+    "options": [
+      "It ignores vector length, so long documents do not win by size alone",
+      "It is always faster",
+      "It makes vectors larger",
+      "It removes the need for embeddings"
+    ],
+    "answerIndex": 0,
+    "explanation": "Normalizing by length compares direction, which is what semantic similarity needs."
+  }
+]
