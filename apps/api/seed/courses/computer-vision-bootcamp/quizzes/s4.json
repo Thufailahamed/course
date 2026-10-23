@@ -1,0 +1,68 @@
+[
+  {
+    "prompt": "How many tokens does a ViT produce for a 224 by 224 image with 16 by 16 patches, including the class token?",
+    "options": [
+      "196",
+      "197",
+      "256",
+      "14"
+    ],
+    "answerIndex": 1,
+    "explanation": "There are 14 × 14 = 196 patches, plus one class token."
+  },
+  {
+    "prompt": "How does CLIP classify an image without new training?",
+    "options": [
+      "It retrains the last layer on the new labels",
+      "It picks the label whose text embedding is most similar to the image embedding",
+      "It counts the colours in the image",
+      "It segments the image first"
+    ],
+    "answerIndex": 1,
+    "explanation": "Image and text share an embedding space, so the closest prompt gives the label."
+  },
+  {
+    "prompt": "Two of four detections are correct and there are three ground-truth objects. What is the recall?",
+    "options": [
+      "0.5",
+      "0.67",
+      "0.75",
+      "0.33"
+    ],
+    "answerIndex": 1,
+    "explanation": "Recall is the share of ground-truth objects found, 2 out of 3."
+  },
+  {
+    "prompt": "Why does average precision penalize missed objects?",
+    "options": [
+      "It divides by the number of ground-truth objects, so a miss lowers the score",
+      "It counts only the detections",
+      "It ignores the ranking",
+      "It is computed from the image size"
+    ],
+    "answerIndex": 0,
+    "explanation": "The sum of precisions is divided by the number of ground truths, so unfound objects reduce the result."
+  },
+  {
+    "prompt": "What does the receptive field of an output describe?",
+    "options": [
+      "The region of the input that can influence that output",
+      "The number of parameters in the layer",
+      "The batch size used in training",
+      "The class with the highest score"
+    ],
+    "answerIndex": 0,
+    "explanation": "It is the input area that feeds the output through the stacked layers."
+  },
+  {
+    "prompt": "Why is a linear probe a good baseline before fine-tuning?",
+    "options": [
+      "It shows how much the frozen features already explain, so fine-tuning is only needed if they fall short",
+      "It always beats full fine-tuning",
+      "It requires no labels",
+      "It changes the backbone weights"
+    ],
+    "answerIndex": 0,
+    "explanation": "A probe measures the quality of the frozen features at low cost."
+  }
+]
