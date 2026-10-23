@@ -1,0 +1,46 @@
+[
+  {
+    "prompt": "In DDPM training, what does the network typically learn to predict?",
+    "options": [
+      "The class label",
+      "The noise that was added to the image",
+      "The next pixel in the image",
+      "The image caption"
+    ],
+    "answerIndex": 1,
+    "explanation": "Predicting the noise is the standard, stable parameterization of the DDPM loss."
+  },
+  {
+    "prompt": "Why is the closed form of the forward process useful?",
+    "options": [
+      "It lets any noise level be sampled in one step, without simulating the chain",
+      "It removes the need for a schedule",
+      "It doubles the number of steps",
+      "It makes the image larger"
+    ],
+    "answerIndex": 0,
+    "explanation": "The closed form x_t = sqrt(abar) x_0 + sqrt(1 − abar) ε makes training samples cheap to draw."
+  },
+  {
+    "prompt": "What is the main advantage of DDIM over ancestral DDPM sampling?",
+    "options": [
+      "It is deterministic and can use far fewer steps",
+      "It needs no network",
+      "It trains a GAN",
+      "It removes noise from the training data"
+    ],
+    "answerIndex": 0,
+    "explanation": "DDIM has no fresh noise at each step, so it maps noise to images deterministically and can skip steps."
+  },
+  {
+    "prompt": "Why is a cosine schedule often preferred to a linear one?",
+    "options": [
+      "It spreads the signal more evenly across the steps",
+      "It removes the need for alpha-bar",
+      "It gives the largest noise at step zero",
+      "It always uses the fewest parameters"
+    ],
+    "answerIndex": 0,
+    "explanation": "The cosine curve keeps more signal in the middle steps, where a linear schedule has already added much noise."
+  }
+]

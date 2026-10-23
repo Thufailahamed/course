@@ -1,0 +1,46 @@
+[
+  {
+    "prompt": "Why report latency as a percentile rather than an average?",
+    "options": [
+      "A few very slow requests can hide behind a good average, but show up in the 95th percentile",
+      "Averages cannot be computed",
+      "Percentiles are always smaller",
+      "Averages measure cost"
+    ],
+    "answerIndex": 0,
+    "explanation": "Tail latency is what users feel when something is slow, and averages hide it."
+  },
+  {
+    "prompt": "What does micro-batching trade off?",
+    "options": [
+      "Throughput and cost against a short added wait per request",
+      "Accuracy against memory",
+      "Training speed against storage",
+      "Security against cost"
+    ],
+    "answerIndex": 0,
+    "explanation": "Grouping requests uses hardware better, but each request may wait for its batch."
+  },
+  {
+    "prompt": "Which metric is usually checked against a latency budget?",
+    "options": [
+      "A high percentile of the response time, such as p95",
+      "The number of model parameters",
+      "The size of the training set",
+      "The number of developers"
+    ],
+    "answerIndex": 0,
+    "explanation": "Budgets are set on tail percentiles, so most users are served within the target."
+  },
+  {
+    "prompt": "What is the nearest-rank p50 of the values 1, 2, 3, 4, 5?",
+    "options": [
+      "3",
+      "2",
+      "4",
+      "2.5"
+    ],
+    "answerIndex": 0,
+    "explanation": "The median of five sorted values is the third one, which is 3."
+  }
+]

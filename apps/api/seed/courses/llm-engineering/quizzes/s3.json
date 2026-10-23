@@ -1,0 +1,46 @@
+[
+  {
+    "prompt": "What is the purpose of a golden set?",
+    "options": [
+      "A fixed set of inputs with expected properties, used to catch regressions when prompts or models change",
+      "A set of prices for the model",
+      "A training set for the base model",
+      "A set of random prompts used once"
+    ],
+    "answerIndex": 0,
+    "explanation": "Golden sets make changes measurable by re-running the same cases after every change."
+  },
+  {
+    "prompt": "What does Cohen's kappa correct for that raw agreement does not?",
+    "options": [
+      "Agreement expected by chance from the label frequencies",
+      "Differences in answer length",
+      "Speed of the judge",
+      "The number of labels"
+    ],
+    "answerIndex": 0,
+    "explanation": "Kappa subtracts the agreement two raters would reach by chance, which can be large for skewed labels."
+  },
+  {
+    "prompt": "When is fine-tuning usually the better choice than retrieval?",
+    "options": [
+      "When the task needs a consistent style or format that prompts and retrieval cannot reliably enforce",
+      "When the facts change every day",
+      "When there is no data at all",
+      "When the answer must cite sources"
+    ],
+    "answerIndex": 0,
+    "explanation": "Fine-tuning changes behaviour, while retrieval supplies facts that change often."
+  },
+  {
+    "prompt": "Why remove near-duplicate examples from an instruction dataset?",
+    "options": [
+      "Duplicates over-weight a few patterns and can inflate measured quality",
+      "Duplicates make the model smaller",
+      "Duplicates are required for training",
+      "Duplicates slow down the tokenizer only"
+    ],
+    "answerIndex": 0,
+    "explanation": "Repeated examples bias training and can make evaluation look better than it is."
+  }
+]

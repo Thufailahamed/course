@@ -1,0 +1,68 @@
+[
+  {
+    "prompt": "A project reports 94% accuracy on the test set, but the base churn rate is 6%. What is the most important thing to check before trusting the number?",
+    "options": [
+      "Whether precision and recall on the churn class are good, compared with a baseline that never predicts churn",
+      "Whether the model has more than 100 features",
+      "Whether the test set was used to choose the threshold",
+      "Whether the scaler was fitted on the full dataset"
+    ],
+    "answerIndex": 0,
+    "explanation": "A model that never predicts churn already gets 94% accuracy. Precision and recall on the positive class, against a baseline, show whether the model does real work."
+  },
+  {
+    "prompt": "Why is the threshold of 0.5 usually not the right one for a retention campaign?",
+    "options": [
+      "0.5 is always wrong for probabilities",
+      "The threshold should match the number of customers the team can call and the cost of wrong calls",
+      "0.5 can only be used with neural networks",
+      "Thresholds must be negative"
+    ],
+    "answerIndex": 1,
+    "explanation": "The threshold is a business decision. It trades how many customers are flagged against precision and recall, and should match the budget."
+  },
+  {
+    "prompt": "A linear model's coefficient on a standardized feature is 0.8. What does that mean?",
+    "options": [
+      "The feature causes a change of 0.8 in the target",
+      "A one standard deviation increase in the feature is associated with a 0.8 increase in the predicted score, holding the others fixed",
+      "The feature explains 80% of the variance",
+      "The feature is 80% of the prediction"
+    ],
+    "answerIndex": 1,
+    "explanation": "After standardization, coefficients compare features on one scale. The effect is an association with the other features held fixed, not a proof of causation."
+  },
+  {
+    "prompt": "Which sequence respects the rules of a clean machine-learning project?",
+    "options": [
+      "Scale all data, split, tune on the test set, report the test score",
+      "Split, fit preprocessing on training rows, tune with validation, report the test score once",
+      "Train on everything, then split to report",
+      "Tune on the test set, then split again"
+    ],
+    "answerIndex": 1,
+    "explanation": "Splitting first and fitting every step on training rows keeps information from the test set out. Tuning on validation data and reporting the test score once gives an honest estimate."
+  },
+  {
+    "prompt": "Gradient boosting and random forests both combine many trees. What is the key difference?",
+    "options": [
+      "Boosting trains trees independently; forests train them in sequence",
+      "Forests average independent trees trained on bootstrap samples; boosting fits each new tree to the residuals of the ensemble so far",
+      "Forests cannot be used for classification",
+      "Boosting never uses a learning rate"
+    ],
+    "answerIndex": 1,
+    "explanation": "Forests reduce variance by averaging independent trees. Boosting reduces bias by fitting each new tree to what the ensemble still gets wrong."
+  },
+  {
+    "prompt": "A model's training error is very low, and its validation error is much higher. Which change is most likely to help?",
+    "options": [
+      "Use the training error to choose the model",
+      "Constrain the model: simpler trees, regularization, or more data",
+      "Add more features that were only known after the outcome",
+      "Remove the validation set so the model sees more data"
+    ],
+    "answerIndex": 1,
+    "explanation": "A large gap between training and validation error means the model is overfitting. Constraining it or adding data narrows that gap."
+  }
+]

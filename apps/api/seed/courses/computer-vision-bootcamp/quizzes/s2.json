@@ -1,0 +1,46 @@
+[
+  {
+    "prompt": "What is the IoU of two identical boxes?",
+    "options": [
+      "0",
+      "0.5",
+      "1",
+      "The area of the box"
+    ],
+    "answerIndex": 2,
+    "explanation": "The intersection equals the union when the boxes are identical, so IoU is 1."
+  },
+  {
+    "prompt": "What does non-maximum suppression do?",
+    "options": [
+      "It removes lower-scoring boxes that overlap a higher-scoring kept box",
+      "It removes the highest-scoring box",
+      "It enlarges every box",
+      "It normalizes the image"
+    ],
+    "answerIndex": 0,
+    "explanation": "NMS keeps the best detection in each cluster of overlapping boxes."
+  },
+  {
+    "prompt": "Which anchors are positive in a typical anchor-based detector?",
+    "options": [
+      "Anchors with IoU of at least 0.5 with a ground-truth box",
+      "Every anchor in the image",
+      "Anchors with IoU below 0.4",
+      "The anchors at the image border"
+    ],
+    "answerIndex": 0,
+    "explanation": "Positive anchors overlap an object strongly, and negative anchors overlap none."
+  },
+  {
+    "prompt": "Why is smooth L1 used for box regression?",
+    "options": [
+      "It is quadratic for small errors and linear for large ones, so outliers have less effect",
+      "It is always zero",
+      "It removes the need for anchors",
+      "It doubles the box size"
+    ],
+    "answerIndex": 0,
+    "explanation": "The loss behaves like squared error near zero and like absolute error for large errors."
+  }
+]

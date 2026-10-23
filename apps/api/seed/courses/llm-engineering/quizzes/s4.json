@@ -1,0 +1,68 @@
+[
+  {
+    "prompt": "What does temperature zero mean in principle?",
+    "options": [
+      "The most likely token is chosen at each step",
+      "The model stops generating",
+      "The tokens are chosen uniformly",
+      "The model is retrained"
+    ],
+    "answerIndex": 0,
+    "explanation": "Greedy decoding picks the highest-probability token at each step."
+  },
+  {
+    "prompt": "How many tokens does a 500-word document take at roughly 1.3 tokens per word?",
+    "options": [
+      "500",
+      "650",
+      "130",
+      "1300"
+    ],
+    "answerIndex": 1,
+    "explanation": "500 words at about 1.3 tokens per word is roughly 650 tokens."
+  },
+  {
+    "prompt": "What should a judge model be checked against before its scores are trusted?",
+    "options": [
+      "Agreement with human labels on a sample of the same task",
+      "The length of its name",
+      "Its training date only",
+      "The colour of the interface"
+    ],
+    "answerIndex": 0,
+    "explanation": "A judge is only as useful as its agreement with people on the actual task."
+  },
+  {
+    "prompt": "Why screen inputs for prompt injection?",
+    "options": [
+      "Retrieved or user text can contain instructions that try to override the system prompt",
+      "Injection makes the model faster",
+      "Injection is only a formatting issue",
+      "It replaces the need for validation"
+    ],
+    "answerIndex": 0,
+    "explanation": "Untrusted text in the context can carry instructions, so it needs screening and separation from the rules."
+  },
+  {
+    "prompt": "Why does caching reduce average latency?",
+    "options": [
+      "Repeated requests are answered from storage without a model call",
+      "Caching makes the model larger",
+      "Caching removes the answer",
+      "Caching increases the number of tokens"
+    ],
+    "answerIndex": 0,
+    "explanation": "A hit returns quickly from cache, so the average is pulled down by the hit rate."
+  },
+  {
+    "prompt": "In a RAG system, what is the first thing to check when answers are wrong?",
+    "options": [
+      "Whether the retrieved context contains the answer",
+      "The font of the interface",
+      "The model's name",
+      "The number of users"
+    ],
+    "answerIndex": 0,
+    "explanation": "If the context lacks the fact, no generation step can recover it, so retrieval comes first."
+  }
+]

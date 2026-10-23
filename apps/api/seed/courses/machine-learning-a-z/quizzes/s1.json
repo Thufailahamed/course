@@ -1,0 +1,57 @@
+[
+  {
+    "prompt": "A model scores 98% accuracy on a dataset where only 2% of cases are positive. What is the most important next check?",
+    "options": [
+      "Report the accuracy, since it is high",
+      "Check precision and recall on the positive class",
+      "Add more features",
+      "Increase the training set size"
+    ],
+    "answerIndex": 1,
+    "explanation": "With rare positives, a model that always predicts negative scores 98%. Precision and recall show whether the positive cases are actually found."
+  },
+  {
+    "prompt": "What does a bootstrap sample of n rows contain?",
+    "options": [
+      "A random permutation of the rows, each appearing once",
+      "n rows drawn with replacement, so some repeat and about 63% of distinct rows appear",
+      "Only the rows that the model got wrong",
+      "The first n rows in the file"
+    ],
+    "answerIndex": 1,
+    "explanation": "Drawing with replacement repeats some rows and skips others. About 63% of distinct rows appear, and the rest are out of bag."
+  },
+  {
+    "prompt": "In gradient boosting, each new tree is fitted to…",
+    "options": [
+      "The original target values",
+      "The residuals of the current ensemble",
+      "A random subset of features only",
+      "The test set"
+    ],
+    "answerIndex": 1,
+    "explanation": "Each round fits the errors still left after the ensemble so far, and the learning rate controls how much of that correction is added."
+  },
+  {
+    "prompt": "Why should the test set be used only once, at the end?",
+    "options": [
+      "Because it is the smallest set",
+      "Because using it to choose settings makes the reported score optimistic",
+      "Because it must be deleted after use",
+      "Because it contains no features"
+    ],
+    "answerIndex": 1,
+    "explanation": "Every decision made by looking at the test score fits it a little. Only one final evaluation gives an honest estimate."
+  },
+  {
+    "prompt": "A tree model's training accuracy is 100%, but its validation accuracy is 70%. Which change most directly reduces the variance?",
+    "options": [
+      "Grow the tree deeper",
+      "Limit the tree's depth or require more rows per leaf",
+      "Remove the validation set",
+      "Use the training accuracy to choose the model"
+    ],
+    "answerIndex": 1,
+    "explanation": "A large gap between training and validation scores signals overfitting. Limiting depth or leaf size makes the tree simpler and reduces its variance."
+  }
+]

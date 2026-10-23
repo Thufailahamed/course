@@ -1,0 +1,46 @@
+[
+  {
+    "prompt": "What is a trajectory in agent evaluation?",
+    "options": [
+      "The sequence of actions the agent took, not only its final answer",
+      "The speed of the model",
+      "The list of tools in the registry",
+      "The price of the model"
+    ],
+    "answerIndex": 0,
+    "explanation": "Evaluating the trajectory reveals wrong tools, forbidden actions and wasted steps that a final answer hides."
+  },
+  {
+    "prompt": "Why track steps and cost per task, not only success?",
+    "options": [
+      "A task can succeed at a high cost or with many wasted steps, which matters in production",
+      "Steps and cost are always identical",
+      "Success is never measured",
+      "Cost is only relevant for training"
+    ],
+    "answerIndex": 0,
+    "explanation": "Efficiency and cost decide whether a successful agent is affordable to run."
+  },
+  {
+    "prompt": "What does a forbidden-tool check in a trajectory detect?",
+    "options": [
+      "Any use of a tool that the policy does not allow for that task",
+      "Slow responses",
+      "Missing documentation",
+      "Long answers"
+    ],
+    "answerIndex": 0,
+    "explanation": "A safety check on the trajectory catches policy violations even when the final answer looks right."
+  },
+  {
+    "prompt": "Why should an agent's logs record each tool call and result?",
+    "options": [
+      "So failures can be traced to the step that caused them",
+      "So the model is retrained every night",
+      "So the tools become faster",
+      "So the logs can be deleted sooner"
+    ],
+    "answerIndex": 0,
+    "explanation": "Per-step records turn an unexplained bad answer into a specific, fixable step."
+  }
+]

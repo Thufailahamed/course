@@ -1,0 +1,57 @@
+[
+  {
+    "prompt": "In PyTorch, why must you call optimizer.zero_grad() before loss.backward() in each training step?",
+    "options": [
+      "backward() fails if gradients already exist",
+      "Gradients accumulate by default, so old gradients would be added to the new ones",
+      "zero_grad() loads the next batch",
+      "It switches the model into evaluation mode"
+    ],
+    "answerIndex": 1,
+    "explanation": "PyTorch adds each new gradient to the .grad buffer. Without zero_grad(), the update would use the sum of every batch so far."
+  },
+  {
+    "prompt": "What does torch.no_grad() do?",
+    "options": [
+      "It disables the optimizer",
+      "It stops autograd from building the graph, so no gradients are stored",
+      "It freezes the learning rate",
+      "It shuffles the data"
+    ],
+    "answerIndex": 1,
+    "explanation": "Inside a no_grad block, operations are not recorded for backpropagation. It saves memory and time, and is the right choice for evaluation."
+  },
+  {
+    "prompt": "Dropout is active in training but not at evaluation time. Which call switches the behavior?",
+    "options": [
+      "model.train() and model.eval()",
+      "loss.backward() and loss.step()",
+      "torch.cuda.empty_cache()",
+      "optimizer.zero_grad()"
+    ],
+    "answerIndex": 0,
+    "explanation": "model.train() and model.eval() toggle layers such as dropout and batch normalization between their training and inference behavior."
+  },
+  {
+    "prompt": "Your loss turns into NaN after a few steps. Which change is the most direct first fix to try?",
+    "options": [
+      "Add more layers",
+      "Lower the learning rate and check for log(0) or division by zero",
+      "Increase the batch size to 1",
+      "Remove the validation set"
+    ],
+    "answerIndex": 1,
+    "explanation": "A learning rate that is too large can make weights explode, and a log of zero or division by zero produces NaN. Both are checked quickly."
+  },
+  {
+    "prompt": "What is the purpose of an overfit-one-batch test?",
+    "options": [
+      "To measure final accuracy",
+      "To confirm that the model and loss can drive the loss toward zero on a tiny dataset, which proves the training code works",
+      "To choose the batch size",
+      "To tune the learning rate schedule"
+    ],
+    "answerIndex": 1,
+    "explanation": "If a model cannot memorize a handful of examples, the bug is in the code, the loss or the wiring, not in the data or the hyperparameters."
+  }
+]

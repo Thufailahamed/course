@@ -7,8 +7,18 @@ import { fileURLToPath } from "node:url";
 import * as data from "./content.mjs";
 import * as numpyCourse from "./courses/numpy/course.mjs";
 import * as mathForMachineLearningCourse from "./courses/math-for-machine-learning/course.mjs";
-import * as pythonBasicsCourse from "./courses/python-basics/course.mjs";
+import * as deepLearningFoundationsCourse from "./courses/deep-learning-foundations/course.mjs";
+import * as mlopsInProductionCourse from "./courses/mlops-in-production/course.mjs";
+import * as buildingAiAgentsCourse from "./courses/building-ai-agents/course.mjs";
+import * as llmEngineeringCourse from "./courses/llm-engineering/course.mjs";
+import * as generativeAiDiffusionCourse from "./courses/generative-ai-diffusion/course.mjs";
+import * as computerVisionBootcampCourse from "./courses/computer-vision-bootcamp/course.mjs";
+import * as nlpWithTransformersCourse from "./courses/nlp-with-transformers/course.mjs";
+import * as transformersFromScratchCourse from "./courses/transformers-from-scratch/course.mjs";
+import * as reinforcementLearningEssentialsCourse from "./courses/reinforcement-learning-essentials/course.mjs";
+import * as machineLearningAZCourse from "./courses/machine-learning-a-z/course.mjs";
 import * as pythonForDataScienceCourse from "./courses/python-for-data-science/course.mjs";
+import * as pythonBasicsCourse from "./courses/python-basics/course.mjs";
 import * as javascriptBasicsCourse from "./courses/javascript-basics/course.mjs";
 import * as javascriptAdvancedCourse from "./courses/javascript-advanced/course.mjs";
 import * as javaBasicsCourse from "./courses/java-basics/course.mjs";
@@ -24,8 +34,18 @@ const here = dirname(fileURLToPath(import.meta.url));
 const interactiveCourses = [
   ["numpy", numpyCourse],
   ["math-for-machine-learning", mathForMachineLearningCourse],
-  ["python-basics", pythonBasicsCourse],
+  ["deep-learning-foundations", deepLearningFoundationsCourse],
+  ["mlops-in-production", mlopsInProductionCourse],
+  ["building-ai-agents", buildingAiAgentsCourse],
+  ["llm-engineering", llmEngineeringCourse],
+  ["generative-ai-diffusion", generativeAiDiffusionCourse],
+  ["computer-vision-bootcamp", computerVisionBootcampCourse],
+  ["nlp-with-transformers", nlpWithTransformersCourse],
+  ["transformers-from-scratch", transformersFromScratchCourse],
+  ["reinforcement-learning-essentials", reinforcementLearningEssentialsCourse],
+  ["machine-learning-a-z", machineLearningAZCourse],
   ["python-for-data-science", pythonForDataScienceCourse],
+  ["python-basics", pythonBasicsCourse],
   ["javascript-basics", javascriptBasicsCourse],
   ["javascript-advanced", javascriptAdvancedCourse],
   ["java-basics", javaBasicsCourse],

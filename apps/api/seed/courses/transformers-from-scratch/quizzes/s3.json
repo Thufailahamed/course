@@ -1,0 +1,68 @@
+[
+  {
+    "prompt": "Why does a pre-norm transformer block add its sublayer outputs back to the unnormalized stream?",
+    "options": [
+      "So that the stream grows without bound",
+      "So that the input signal survives through many layers, and each sublayer learns a correction",
+      "To remove the need for normalization",
+      "Because softmax requires an additive input"
+    ],
+    "answerIndex": 1,
+    "explanation": "Residual connections preserve the signal through depth. Each block only needs to learn an update to what is already there."
+  },
+  {
+    "prompt": "In a causal language model, what must hold for the first position's output?",
+    "options": [
+      "It must depend on every later token",
+      "It must depend only on the first token, since no later token may influence it",
+      "It must be zero",
+      "It must equal the last position's output"
+    ],
+    "answerIndex": 1,
+    "explanation": "The causal mask guarantees each position sees only itself and earlier tokens, so the first output is determined by the first token alone."
+  },
+  {
+    "prompt": "What does weight tying of the output projection to the embedding table achieve?",
+    "options": [
+      "It doubles the vocabulary",
+      "It saves parameters and ties the input and output representations of tokens",
+      "It removes positional information",
+      "It makes training deterministic"
+    ],
+    "answerIndex": 1,
+    "explanation": "Reusing the embedding matrix for the output projection removes a large block of parameters and often helps generalization."
+  },
+  {
+    "prompt": "A model's perplexity on held-out text is 40 while a bigram baseline gets 35. What is the honest conclusion?",
+    "options": [
+      "The transformer is better",
+      "The transformer is worse than the baseline on this text, so it has not yet earned its complexity",
+      "The perplexity cannot be compared",
+      "The baseline must have cheated"
+    ],
+    "answerIndex": 1,
+    "explanation": "Lower perplexity is better. On held-out text the bigram baseline is ahead, so the larger model is not justified by this evidence."
+  },
+  {
+    "prompt": "Rotary position embeddings make the attention score depend on…",
+    "options": [
+      "The absolute position of each token",
+      "The relative distance between the two tokens",
+      "The vocabulary size",
+      "The learning rate"
+    ],
+    "answerIndex": 1,
+    "explanation": "Rotating queries and keys by their positions makes their dot product depend only on the difference between positions."
+  },
+  {
+    "prompt": "Why is temperature applied by dividing the logits?",
+    "options": [
+      "Dividing keeps the logits negative",
+      "A temperature below one sharpens the distribution towards the most likely token, and above one flattens it",
+      "Dividing removes the need for softmax",
+      "It makes sampling faster"
+    ],
+    "answerIndex": 1,
+    "explanation": "Dividing by a small temperature magnifies the differences between logits, which concentrates probability on the top choice."
+  }
+]

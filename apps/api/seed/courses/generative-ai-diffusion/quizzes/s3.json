@@ -1,0 +1,46 @@
+[
+  {
+    "prompt": "Why does latent diffusion run the diffusion process in a compressed space?",
+    "options": [
+      "It is far cheaper, since the latent has fewer elements than the pixel image",
+      "Pixels cannot be noised",
+      "It removes the need for a decoder",
+      "It makes the images black and white"
+    ],
+    "answerIndex": 0,
+    "explanation": "A latent with a factor of 8 compression has many fewer values, so each step costs much less."
+  },
+  {
+    "prompt": "How many parameters does a LoRA update of rank r add to a d by k weight matrix?",
+    "options": [
+      "d × k",
+      "r × (d + k)",
+      "r × d × k",
+      "d + k"
+    ],
+    "answerIndex": 1,
+    "explanation": "LoRA adds two low-rank factors, of sizes d × r and r × k, so the count is r times d plus k."
+  },
+  {
+    "prompt": "Why is the LoRA matrix B initialized to zero?",
+    "options": [
+      "So the adapted model starts identical to the pretrained model",
+      "So the rank becomes zero",
+      "So the learning rate is zero",
+      "So the weights of A are ignored"
+    ],
+    "answerIndex": 0,
+    "explanation": "With B zero the update B A is zero at the start, so fine-tuning begins from the pretrained behaviour."
+  },
+  {
+    "prompt": "What does prior preservation in DreamBooth protect against?",
+    "options": [
+      "Forgetting the general class, when the model learns a new subject",
+      "Slow inference",
+      "Large image sizes",
+      "Lost training data"
+    ],
+    "answerIndex": 0,
+    "explanation": "A loss on generated images of the class keeps the model able to draw ordinary examples of that class."
+  }
+]

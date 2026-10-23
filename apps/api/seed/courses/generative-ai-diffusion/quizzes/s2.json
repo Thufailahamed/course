@@ -1,0 +1,46 @@
+[
+  {
+    "prompt": "In cross-attention conditioning, where do the queries come from?",
+    "options": [
+      "The text tokens",
+      "The image features of the denoiser",
+      "The noise schedule",
+      "The learning rate"
+    ],
+    "answerIndex": 1,
+    "explanation": "The image features ask the text tokens what they should attend to, so the queries come from the image side."
+  },
+  {
+    "prompt": "What does classifier-free guidance trade off?",
+    "options": [
+      "Speed and memory",
+      "Sample diversity against adherence to the condition",
+      "Resolution and colour",
+      "Training data against test data"
+    ],
+    "answerIndex": 1,
+    "explanation": "A larger guidance scale pushes samples closer to the prompt, at the cost of diversity."
+  },
+  {
+    "prompt": "With guidance scale w, the guided noise is ε_u + w (ε_c − ε_u). What is the result at w = 0?",
+    "options": [
+      "The conditional prediction",
+      "The unconditional prediction",
+      "Zero",
+      "The average of the two"
+    ],
+    "answerIndex": 1,
+    "explanation": "At w = 0 the conditional term vanishes, leaving the unconditional prediction ε_u."
+  },
+  {
+    "prompt": "Why is the condition randomly dropped during training?",
+    "options": [
+      "So the model learns both conditional and unconditional predictions for guidance",
+      "To make the model smaller",
+      "To speed up the optimizer",
+      "Because prompts are never useful"
+    ],
+    "answerIndex": 0,
+    "explanation": "A single network trained with dropped conditions can produce both predictions needed for guidance."
+  }
+]

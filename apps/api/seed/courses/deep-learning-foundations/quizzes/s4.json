@@ -1,0 +1,47 @@
+[
+  {
+    "prompt": "An input is 28 × 28, a kernel is 5 × 5, the stride is 1 and there is no padding. What is the output size of the convolution?",
+    "options": ["23 × 23", "24 × 24", "28 × 28", "27 × 27"],
+    "answerIndex": 1,
+    "explanation": "The output size is (n - k + 2p) / s + 1 = (28 - 5 + 0) / 1 + 1 = 24."
+  },
+  {
+    "prompt": "Why do CNNs share the same kernel weights across every position in the image?",
+    "options": [
+      "To make the network smaller and to detect a pattern wherever it appears",
+      "To avoid computing gradients",
+      "Because images are always square",
+      "To make the output the same size as the input"
+    ],
+    "answerIndex": 0,
+    "explanation": "Weight sharing gives translation equivariance with far fewer parameters: a feature detector learned in one corner works everywhere."
+  },
+  {
+    "prompt": "A recurrent network multiplies the gradient by a recurrent weight of about 0.9 at each of 50 time steps. Roughly how big is the gradient?",
+    "options": ["About 0.9", "About 0.5", "About 0.005", "About 50"],
+    "answerIndex": 2,
+    "explanation": "0.9^50 is about 0.005. Repeated multiplication by numbers below one makes the gradient vanish, which is why long-range memory is hard to learn."
+  },
+  {
+    "prompt": "In scaled dot-product attention, why is each score divided by the square root of the key dimension d?",
+    "options": [
+      "To make the softmax output sum to d",
+      "To keep the dot products from growing with d, which would push softmax into saturated regions with tiny gradients",
+      "To normalize the input embeddings",
+      "Because the square root is required by the Transformer paper's notation"
+    ],
+    "answerIndex": 1,
+    "explanation": "For random vectors, the variance of a dot product grows with d. Dividing by sqrt(d) keeps the scores at a scale where softmax still has useful gradients."
+  },
+  {
+    "prompt": "What does each row of the attention weight matrix represent after softmax?",
+    "options": [
+      "How much each query is used across the batch",
+      "A probability distribution over the keys for one query",
+      "The loss for one token",
+      "The learned embedding of a token"
+    ],
+    "answerIndex": 1,
+    "explanation": "Softmax makes every row non-negative and sum to one. Row i says how much query i attends to each key."
+  }
+]

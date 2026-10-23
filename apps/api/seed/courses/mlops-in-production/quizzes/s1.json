@@ -1,0 +1,46 @@
+[
+  {
+    "prompt": "Why fingerprint a dataset by its contents rather than its file name?",
+    "options": [
+      "A changed row changes the fingerprint, even when the name stays the same",
+      "File names are always longer than fingerprints",
+      "Fingerprints compress the data",
+      "Names cannot be stored"
+    ],
+    "answerIndex": 0,
+    "explanation": "A content fingerprint detects silent changes that a name would hide."
+  },
+  {
+    "prompt": "Why should a dataset fingerprint not depend on the order of its rows?",
+    "options": [
+      "The same data in a different order is still the same data, so it should match",
+      "Order is never stored",
+      "Fingerprints must be random",
+      "Row order is always wrong"
+    ],
+    "answerIndex": 0,
+    "explanation": "Order-independent fingerprints recognize identical content however it is stored."
+  },
+  {
+    "prompt": "What does experiment tracking let a team do?",
+    "options": [
+      "Compare runs by their parameters and metrics, and reproduce the best one",
+      "Delete failed runs without a record",
+      "Train without data",
+      "Skip evaluation"
+    ],
+    "answerIndex": 0,
+    "explanation": "Recording parameters and metrics for each run makes results comparable and repeatable."
+  },
+  {
+    "prompt": "When two runs tie on the metric you choose, what is the sensible rule?",
+    "options": [
+      "Pick by a fixed, documented rule, such as the earlier run, so the choice is repeatable",
+      "Pick at random",
+      "Always pick the newest run",
+      "Refuse to pick"
+    ],
+    "answerIndex": 0,
+    "explanation": "A documented tie-break keeps the choice reproducible."
+  }
+]

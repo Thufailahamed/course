@@ -1,0 +1,47 @@
+[
+  {
+    "prompt": "In a softmax policy, what is the gradient of log π(a) with respect to the preferences θ?",
+    "options": [
+      "The one-hot vector of a minus the probabilities",
+      "The probabilities only",
+      "The reward of action a",
+      "A vector of zeros"
+    ],
+    "answerIndex": 0,
+    "explanation": "For a softmax policy the score of action a is the one-hot vector of a minus the probability vector."
+  },
+  {
+    "prompt": "Why does subtracting a state-dependent baseline from the return reduce variance without biasing the gradient?",
+    "options": [
+      "The baseline has the same expected score as zero, so its contribution averages out",
+      "The baseline makes the returns larger",
+      "The baseline removes the reward entirely",
+      "The baseline depends on the chosen action"
+    ],
+    "answerIndex": 0,
+    "explanation": "A baseline that depends only on the state has zero expected score-weighted contribution, so the expected gradient is unchanged while the noise falls."
+  },
+  {
+    "prompt": "In PPO, what does the clipped objective prevent?",
+    "options": [
+      "Any update from being computed",
+      "Improvements from being credited when the policy moves too far from the old policy",
+      "The advantage from being positive",
+      "The value function from being learned"
+    ],
+    "answerIndex": 1,
+    "explanation": "Clipping the probability ratio removes the incentive for updates beyond a narrow band, keeping each step close to the previous policy."
+  },
+  {
+    "prompt": "A PPO ratio of 1.5 with a positive advantage of 1, and clip epsilon 0.2, gives an objective of…",
+    "options": ["1.5", "1.2", "0.8", "1.0"],
+    "answerIndex": 1,
+    "explanation": "The ratio is clipped to 1.2, and the minimum of 1.5 and 1.2 times the advantage is 1.2."
+  },
+  {
+    "prompt": "What is the advantage of an action that returned 3 in a state whose value is 5?",
+    "options": ["8", "2", "−2", "15"],
+    "answerIndex": 2,
+    "explanation": "The advantage is the return minus the baseline, 3 − 5 = −2, so the action performed worse than expected."
+  }
+]

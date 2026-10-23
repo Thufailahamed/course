@@ -1,0 +1,46 @@
+[
+  {
+    "prompt": "What distinguishes instance segmentation from semantic segmentation?",
+    "options": [
+      "It predicts boxes instead of pixels",
+      "It separates individual objects of the same class",
+      "It uses no class labels",
+      "It is always faster"
+    ],
+    "answerIndex": 1,
+    "explanation": "A semantic map gives all people one label, while an instance map gives each person a separate id."
+  },
+  {
+    "prompt": "Why report per-class IoU alongside pixel accuracy?",
+    "options": [
+      "Pixel accuracy is dominated by large classes and can hide failures on small ones",
+      "Pixel accuracy cannot be computed",
+      "Per-class IoU is always higher",
+      "Per-class IoU ignores the background"
+    ],
+    "answerIndex": 0,
+    "explanation": "A model that ignores a small but important class can still score high pixel accuracy."
+  },
+  {
+    "prompt": "What is the purpose of skip connections in U-Net?",
+    "options": [
+      "They restore fine spatial detail lost during downsampling",
+      "They remove the need for a decoder",
+      "They make the network smaller",
+      "They replace the loss function"
+    ],
+    "answerIndex": 0,
+    "explanation": "Concatenating encoder features gives the decoder the detail that pooling discarded."
+  },
+  {
+    "prompt": "When is Dice loss a good choice?",
+    "options": [
+      "For small foreground regions, where overlap matters more than background accuracy",
+      "Only for classification",
+      "Only for images without labels",
+      "Never, because it is always zero"
+    ],
+    "answerIndex": 0,
+    "explanation": "Dice measures overlap directly, so it is not overwhelmed by the large background."
+  }
+]

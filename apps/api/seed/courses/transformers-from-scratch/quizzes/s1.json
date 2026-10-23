@@ -1,0 +1,52 @@
+[
+  {
+    "prompt": "Why are attention scores divided by the square root of the key dimension?",
+    "options": [
+      "To make the weights sum to two",
+      "To keep the variance of the scores near one, so softmax keeps useful gradients",
+      "To remove the need for a mask",
+      "To make the output the same size as the input"
+    ],
+    "answerIndex": 1,
+    "explanation": "The variance of a dot product grows with the dimension. Scaling by the square root keeps softmax out of its saturated regime."
+  },
+  {
+    "prompt": "In a causal language model, which positions may token 2 attend to?",
+    "options": [
+      "Only token 2",
+      "Tokens 0, 1 and 2",
+      "Tokens 2 and 3 only",
+      "All tokens, including future ones"
+    ],
+    "answerIndex": 1,
+    "explanation": "The causal mask hides future positions, so token 2 sees itself and everything before it."
+  },
+  {
+    "prompt": "What does multi-head attention compute?",
+    "options": [
+      "One attention over the full features, repeated h times",
+      "Several attentions on separate slices of the features, concatenated and projected",
+      "A recurrent update for each head",
+      "The average of the token embeddings"
+    ],
+    "answerIndex": 1,
+    "explanation": "Each head attends on its own subspace, which lets different heads capture different relationships. The results are concatenated and projected back."
+  },
+  {
+    "prompt": "Why do transformers need positional information?",
+    "options": [
+      "Attention is invariant to the order of the tokens, so position must be added",
+      "Attention cannot compute dot products",
+      "Softmax requires position indices",
+      "Positional encodings speed up training"
+    ],
+    "answerIndex": 0,
+    "explanation": "Permuting the tokens permutes the attention outputs but otherwise leaves them unchanged, so the model has no notion of order unless it is given one."
+  },
+  {
+    "prompt": "A sinusoidal positional encoding gives position 0 the pattern…",
+    "options": ["[1, 0, 1, 0]", "[0, 1, 0, 1]", "[0, 0, 0, 0]", "[1, 1, 1, 1]"],
+    "answerIndex": 1,
+    "explanation": "At position zero every sine is zero and every cosine is one, so the even entries are 0 and the odd entries are 1."
+  }
+]

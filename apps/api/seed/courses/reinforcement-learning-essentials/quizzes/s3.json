@@ -1,0 +1,68 @@
+[
+  {
+    "prompt": "Dynamic programming needs something that model-free methods do not. What is it?",
+    "options": [
+      "A large dataset of past episodes",
+      "A known model of the transition probabilities and rewards",
+      "A neural network",
+      "An exploration schedule"
+    ],
+    "answerIndex": 1,
+    "explanation": "Dynamic programming solves the Bellman equations exactly, which requires the full transition model. Model-free methods learn from experience instead."
+  },
+  {
+    "prompt": "In RLHF, the Bradley–Terry model gives P(A preferred to B) as…",
+    "options": [
+      "The sum of the two rewards",
+      "The sigmoid of the reward difference r(A) − r(B)",
+      "The maximum of the two rewards",
+      "A uniform one half always"
+    ],
+    "answerIndex": 1,
+    "explanation": "The probability depends on the difference of the rewards through the sigmoid, so a large difference means a near-certain preference."
+  },
+  {
+    "prompt": "What does the KL penalty in RLHF do?",
+    "options": [
+      "It increases the reward model's accuracy",
+      "It keeps the trained policy close to the original reference model",
+      "It removes the need for preference data",
+      "It sets the discount factor"
+    ],
+    "answerIndex": 1,
+    "explanation": "The penalty trades reward for fidelity, so the policy does not drift into text that scores well on the reward model but reads badly."
+  },
+  {
+    "prompt": "In DPO, what does a margin of zero mean for the loss?",
+    "options": [
+      "The loss is zero",
+      "The loss is log 2, because the policy has not moved relative to the reference",
+      "The loss is infinite",
+      "The policy has perfectly learned the preferences"
+    ],
+    "answerIndex": 1,
+    "explanation": "A zero margin gives −log σ(0) = log 2. Training increases the margin by favouring the chosen answer relative to the reference."
+  },
+  {
+    "prompt": "An agent's optimized reward rises steadily, but an independent quality check stays flat or falls. What is the most likely explanation?",
+    "options": [
+      "The agent is learning faster",
+      "Reward hacking: the agent exploits the gap between the proxy reward and the true goal",
+      "The discount factor is too large",
+      "The evaluation is too precise"
+    ],
+    "answerIndex": 1,
+    "explanation": "A proxy that keeps rising while the true goal does not is the classic signature of Goodhart's law and reward hacking."
+  },
+  {
+    "prompt": "Why should an agent be evaluated over several seeds with an interval rather than with its single best run?",
+    "options": [
+      "Because a single run is always wrong",
+      "Because one run can be lucky, and an interval shows how much the average could vary",
+      "Because intervals are always narrower",
+      "Because seeds change the environment's rules"
+    ],
+    "answerIndex": 1,
+    "explanation": "The best of many runs overstates typical performance. Repeated runs with an interval describe how reliably the method works."
+  }
+]

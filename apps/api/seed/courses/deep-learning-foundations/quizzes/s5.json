@@ -1,0 +1,79 @@
+[
+  {
+    "prompt": "A network is trained on a training set, and its hyperparameters are tuned on a validation set. Why must the final accuracy be reported on a separate test set?",
+    "options": [
+      "Because the test set is larger",
+      "Because the validation set was used to make choices, so its score is optimistically biased",
+      "Because the test set has the labels removed",
+      "Because test sets are always smaller"
+    ],
+    "answerIndex": 1,
+    "explanation": "Every time you pick a setting based on validation performance, you fit the validation set a little. Only a held-out test set gives an honest estimate of performance on new data."
+  },
+  {
+    "prompt": "Standardizing features with the mean and standard deviation of the training set should be applied to the validation set using…",
+    "options": [
+      "The validation set's own mean and standard deviation",
+      "The training set's mean and standard deviation",
+      "The mean of both sets combined",
+      "No scaling at all"
+    ],
+    "answerIndex": 1,
+    "explanation": "Using statistics from the validation or test data leaks information about it into training. The same training-set statistics must be applied everywhere."
+  },
+  {
+    "prompt": "The output of the final layer of a 4-class classifier is passed through softmax. What does the cross-entropy loss need from it?",
+    "options": [
+      "The raw class labels",
+      "A probability for each class that sums to one",
+      "A single number between 0 and 1",
+      "The gradient of the labels"
+    ],
+    "answerIndex": 1,
+    "explanation": "Cross-entropy compares a predicted probability distribution with the true class. Softmax turns the raw scores into that distribution."
+  },
+  {
+    "prompt": "A convolutional network is evaluated on a new image with the same size as its training images but a different lighting condition. Which technique most directly builds robustness to this kind of change?",
+    "options": [
+      "Training longer on the same images",
+      "Data augmentation, such as brightness and contrast changes during training",
+      "Removing all convolutional layers",
+      "Using a larger learning rate"
+    ],
+    "answerIndex": 1,
+    "explanation": "Augmentation exposes the model to plausible variations of the data during training, so it learns features that survive them."
+  },
+  {
+    "prompt": "A model's training loss decreases steadily, but its validation loss starts rising after epoch 8. What is the best next step?",
+    "options": [
+      "Train for 100 more epochs",
+      "Stop training around epoch 8, or add regularization such as weight decay or dropout",
+      "Remove the validation set",
+      "Double the learning rate"
+    ],
+    "answerIndex": 1,
+    "explanation": "Rising validation loss while training loss falls is overfitting. Early stopping or regularization keeps the model from memorizing the training set."
+  },
+  {
+    "prompt": "Why does a deep network generally need the activation function's derivative during backpropagation?",
+    "options": [
+      "To choose the batch size",
+      "Because the chain rule multiplies the local derivative of each activation into the gradient",
+      "To normalize the input data",
+      "To count the number of parameters"
+    ],
+    "answerIndex": 1,
+    "explanation": "Every activation sits on the path from the loss back to the weights. Its local derivative is one of the factors the chain rule multiplies together."
+  },
+  {
+    "prompt": "Which change would most likely make a shape classifier generalize better to shapes drawn at a different size?",
+    "options": [
+      "Using a smaller training set",
+      "Training with randomly scaled examples and adding a validation split",
+      "Removing the bias terms",
+      "Setting the learning rate to zero"
+    ],
+    "answerIndex": 1,
+    "explanation": "Training on varied sizes teaches the model the shape rather than its absolute scale, and a validation split tells you whether it worked."
+  }
+]

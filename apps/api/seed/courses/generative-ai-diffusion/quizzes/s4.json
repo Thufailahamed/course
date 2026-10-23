@@ -1,0 +1,68 @@
+[
+  {
+    "prompt": "What does the forward diffusion process do to an image?",
+    "options": [
+      "It gradually adds Gaussian noise until the image is nearly pure noise",
+      "It sharpens the image",
+      "It converts the image to text",
+      "It removes the background"
+    ],
+    "answerIndex": 0,
+    "explanation": "The forward process adds small amounts of noise over many steps, ending near a standard normal."
+  },
+  {
+    "prompt": "Why is noise prediction the common training target?",
+    "options": [
+      "It is stable across all noise levels",
+      "It needs no network",
+      "It predicts the caption",
+      "It avoids the schedule"
+    ],
+    "answerIndex": 0,
+    "explanation": "The noise target has a consistent scale across noise levels, which makes the regression stable."
+  },
+  {
+    "prompt": "In a toy diffusion capstone, what fraction of samples inside a radius of the centres indicates success?",
+    "options": [
+      "The share of samples near a data centre",
+      "The number of training steps",
+      "The learning rate",
+      "The size of the noise schedule"
+    ],
+    "answerIndex": 0,
+    "explanation": "Coverage and quality are judged by how many samples land near the true data regions."
+  },
+  {
+    "prompt": "What does the classifier-free guidance formula reduce to when w = 1?",
+    "options": [
+      "The unconditional prediction",
+      "The conditional prediction",
+      "Zero",
+      "The average of both"
+    ],
+    "answerIndex": 1,
+    "explanation": "At w = 1 the formula gives ε_u + (ε_c − ε_u) = ε_c, the plain conditional prediction."
+  },
+  {
+    "prompt": "Why does DDIM need no fresh noise at each sampling step?",
+    "options": [
+      "It is a deterministic mapping from noise to image",
+      "It has no network",
+      "It uses the training set directly",
+      "It samples from the prompt"
+    ],
+    "answerIndex": 0,
+    "explanation": "Without fresh noise each step is determined by the previous sample and the noise prediction."
+  },
+  {
+    "prompt": "What does the reverse process approximate?",
+    "options": [
+      "The reverse of the forward noising, learned from data",
+      "A fixed blur filter",
+      "The image resolution",
+      "A lookup table of captions"
+    ],
+    "answerIndex": 0,
+    "explanation": "The denoiser is trained to undo each forward step, so sampling approximates the reverse of the noising."
+  }
+]
