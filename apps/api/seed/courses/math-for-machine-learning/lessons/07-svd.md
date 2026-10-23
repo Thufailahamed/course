@@ -69,7 +69,7 @@ for k in [1, 2, 3, 10]:
     print(f"{k:>2} components: error against the true signal = {np.linalg.norm(signal - approx):.3f}")
 ```
 
-The error drops sharply up to rank 2, the true rank of the signal, and then barely improves. Keeping more components than that mostly adds noise back in. The Eckart–Young theorem says this truncated SVD is the **best** rank-$k$ approximation possible, in the least-squares sense.
+The error drops sharply up to rank 2, the true rank of the signal. Past that point it rises again, because each extra component brings noise back in. The Eckart–Young theorem says this truncated SVD is the **best** rank-$k$ approximation possible, in the least-squares sense.
 
 ## Charts of the singular values
 
