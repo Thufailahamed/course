@@ -8,6 +8,7 @@ import * as data from "./content.mjs";
 import * as numpyCourse from "./courses/numpy/course.mjs";
 import * as mathForMachineLearningCourse from "./courses/math-for-machine-learning/course.mjs";
 import * as pythonBasicsCourse from "./courses/python-basics/course.mjs";
+import * as pythonForDataScienceCourse from "./courses/python-for-data-science/course.mjs";
 import * as javascriptBasicsCourse from "./courses/javascript-basics/course.mjs";
 import * as javascriptAdvancedCourse from "./courses/javascript-advanced/course.mjs";
 import * as javaBasicsCourse from "./courses/java-basics/course.mjs";
@@ -24,6 +25,7 @@ const interactiveCourses = [
   ["numpy", numpyCourse],
   ["math-for-machine-learning", mathForMachineLearningCourse],
   ["python-basics", pythonBasicsCourse],
+  ["python-for-data-science", pythonForDataScienceCourse],
   ["javascript-basics", javascriptBasicsCourse],
   ["javascript-advanced", javascriptAdvancedCourse],
   ["java-basics", javaBasicsCourse],
@@ -394,6 +396,21 @@ for (const e of enrollments) {
     updated_at: e.created_at,
   });
 }
+
+// The published Python for Data Science page shows a stable 4.6 from 40
+// ratings. Keep that catalog identity independent of the random review sample
+// used for the rest of the seed data.
+const pdsId = courseBySlug["python-for-data-science"];
+const pdsReviewers = [...new Set(enrollments.filter((e) => e.course_id === pdsId).map((e) => e.user_id))];
+if (pdsReviewers.length < 40) throw new Error(`python-for-data-science needs 40 reviewers, found ${pdsReviewers.length}`);
+for (let i = reviews.length - 1; i >= 0; i--) if (reviews[i].course_id === pdsId) reviews.splice(i, 1);
+const pdsRatings = [...Array(24).fill(5), ...Array(16).fill(4)];
+pdsReviewers.slice(0, pdsRatings.length).forEach((userId, i) => {
+  const rating = pdsRatings[i];
+  const [title, body] = data.reviewTemplates[i % 9];
+  const enrollment = enrollments.find((e) => e.course_id === pdsId && e.user_id === userId);
+  reviews.push({ id: id("rev"), user_id: userId, course_id: pdsId, rating, title, body, created_at: enrollment.created_at, updated_at: enrollment.created_at });
+});
 
 /* ── demo student: enrolled, mid-way, with a streak ─────── */
 const demoCourses = [

@@ -36,6 +36,7 @@ Ten fully interactive courses ship with the seed data:
 | Course | Folder | Content |
 |---|---|---|
 | **Python Basics** | `apps/api/seed/courses/python-basics` | 30 lessons (3 capstone projects) and 8 quizzes, for complete beginners |
+| **Python for Data Science** | `apps/api/seed/courses/python-for-data-science` | 10 interactive lessons and a checkpoint quiz: NumPy, pandas, matplotlib and an end-to-end EDA |
 | **NumPy Mastery** | `apps/api/seed/courses/numpy` | 28 lessons and 8 quizzes |
 | **Mathematics for Machine Learning** | `apps/api/seed/courses/math-for-machine-learning` | 16 lessons and 4 quizzes: vectors, matrices, eigenvalues, SVD and PCA, calculus and gradient descent, probability and maximum likelihood |
 | **JavaScript Basics** | `apps/api/seed/courses/javascript-basics` | 25 lessons (3 capstone projects) and 7 quizzes, from `console.log` to JSON and classes |
@@ -51,10 +52,12 @@ See [`apps/api/seed/courses/AUTHORING.md`](apps/api/seed/courses/AUTHORING.md) f
 ```bash
 cd apps/api && node seed/courses/validate.mjs numpy           # all lessons; add a file filter and --verbose
 cd apps/api && node seed/courses/validate.mjs python-basics
+cd apps/api && node seed/courses/validate.mjs python-for-data-science
 cd apps/api && node seed/courses/validate.mjs math-for-machine-learning      # NumPy cells, same runtime as the course
 cd apps/api && node seed/courses/validate.mjs html-css-basics 04 --verbose   # headless Chrome
 pnpm --filter @latent/api db:course:math-for-machine-learning:local           # add or refresh one course without re-seeding everything
 pnpm --filter @latent/api db:course:python-basics:local       # add or refresh one course without re-seeding everything
+pnpm --filter @latent/api db:course:python-for-data-science:local
 pnpm --filter @latent/api db:course:javascript-basics:local   # same for javascript-basics and javascript-advanced
 pnpm --filter @latent/api db:course:html-css-basics:local     # HTML/CSS courses have the same one-course refresh
 cd apps/api && node seed/courses/validate.mjs javascript-advanced   # JavaScript cells run in Node with the browser kernel
