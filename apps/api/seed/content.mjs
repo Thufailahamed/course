@@ -181,40 +181,6 @@ export const courses = [
       ["Shadow deployment means…", ["Deploying at night", "Running a new model on live traffic without affecting responses", "Deleting old models", "Training on production data"], 1, "Compare predictions safely before switching."],
     ],
   },
-  {
-    slug: "generative-ai-diffusion",
-    title: "Generative AI: Diffusion Models",
-    subtitle: "Understand and build the models behind modern image generation.",
-    category: "generative-ai",
-    instructor: "sofia",
-    level: "advanced",
-    price: 0,
-    compareAt: null,
-    accent: 275,
-    featured: false,
-    students: 11640,
-    tags: ["Diffusion", "Image Generation", "U-Net", "Generative AI"],
-    learn: [
-      "Understand the forward and reverse diffusion processes",
-      "Implement DDPM training and sampling",
-      "Add text conditioning and classifier-free guidance",
-      "Fine-tune with DreamBooth and LoRA",
-    ],
-    requirements: ["Deep Learning Foundations", "Comfort with probability basics"],
-    audience: ["ML engineers and researchers", "Creative technologists"],
-    snippet: `t = torch.randint(0, T, (x0.size(0),))\nnoise = torch.randn_like(x0)\nxt = sqrt_alpha_bar[t] * x0 + sqrt_one_minus_alpha_bar[t] * noise\nloss = F.mse_loss(model(xt, t), noise)`,
-    sections: [
-      ["Generative Modeling", ["v|The generative landscape: VAEs, GANs, diffusion|16", "a|Intuition for diffusion|10"]],
-      ["DDPM", ["v|The forward noising process|15", "v|Learning to denoise|19", "v|Sampling|14", "q|Checkpoint: diffusion"]],
-      ["Conditioning", ["v|Text conditioning with cross-attention|17", "v|Classifier-free guidance|12"]],
-      ["Customization", ["v|Latent diffusion|15", "a|DreamBooth and LoRA fine-tuning|14", "q|Final assessment"]],
-    ],
-    quiz: [
-      ["In DDPM training, the network typically learns to predict…", ["The class label", "The noise added to the image", "The next pixel", "The image caption"], 1, "Predicting ε is the standard, stable parameterization."],
-      ["Classifier-free guidance trades off…", ["Speed and memory", "Sample diversity and adherence to the condition", "Resolution and color", "Training and inference"], 1, "Higher guidance → closer to the prompt, less diverse."],
-      ["Latent diffusion runs the diffusion process…", ["In pixel space", "In a compressed autoencoder latent space", "On text tokens", "In frequency space only"], 1, "Working in latent space makes generation far cheaper."],
-    ],
-  },
 ];
 
 export const paths = [

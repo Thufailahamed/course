@@ -31,7 +31,7 @@ Lessons of type `interactive` are Markdown with live cells. Learners write, run 
 - **Progress:** solved challenges are stored per learner (`exercise_progress`). Solving every challenge completes the lesson. Solutions are stripped from learner payloads and fetched on demand.
 - **Authoring:** in the studio, set the lesson type to *Interactive*, insert cells from the toolbar, then **Preview & run** and **Validate**.
 
-Seventeen fully interactive courses ship with the seed data:
+Eighteen fully interactive courses ship with the seed data:
 
 | Course | Folder | Content |
 |---|---|---|
@@ -39,6 +39,7 @@ Seventeen fully interactive courses ship with the seed data:
 | **NumPy Mastery** | `apps/api/seed/courses/numpy` | 28 lessons and 8 quizzes |
 | **Mathematics for Machine Learning** | `apps/api/seed/courses/math-for-machine-learning` | 16 lessons and 4 quizzes: vectors, matrices, eigenvalues, SVD and PCA, calculus and gradient descent, probability and maximum likelihood |
 | **Deep Learning Foundations** | `apps/api/seed/courses/deep-learning-foundations` | 21 lessons and 5 quizzes: neurons, backpropagation from scratch, training networks, PyTorch in practice, CNNs, attention and a capstone image classifier. PyTorch code is shown for you to run locally; each idea also has a runnable NumPy version |
+| **Generative AI: Diffusion Models** | `apps/api/seed/courses/generative-ai-diffusion` | 12 lessons and 4 quizzes: the forward noising process, noise prediction, DDPM and DDIM sampling, noise schedules, cross-attention conditioning, classifier-free guidance, latent diffusion, LoRA, a DreamBooth recipe and a toy diffusion capstone. U-Net, cross-attention and LoRA layers are shown as PyTorch code for you to run locally; each idea also has a runnable NumPy version |
 | **Computer Vision Bootcamp** | `apps/api/seed/courses/computer-vision-bootcamp` | 14 lessons and 4 quizzes: pixels and convolutions, augmentation, CNN architectures and receptive fields, transfer learning with a linear probe, IoU and NMS, anchors, training a detector, semantic and instance segmentation, U-Net, vision transformer patches, CLIP zero-shot classification and a detector capstone. PyTorch, torchvision and CLIP code is shown for you to run locally; each idea also has a runnable NumPy version |
 | **Modern NLP with Transformers** | `apps/api/seed/courses/nlp-with-transformers` | 13 lessons and 3 quizzes: tokenization, bag-of-words and TF-IDF, word and sentence embeddings, semantic search, masked language models and pooling, named entities with span F1, imbalanced classes, overlap metrics such as ROUGE, error analysis, and a capstone text classifier that learns its features from training text only. Hugging Face model code is shown for you to run locally; each idea also has a runnable NumPy version |
 | **Transformers from Scratch** | `apps/api/seed/courses/transformers-from-scratch` | 15 lessons and 3 quizzes: scaled and multi-head attention, causal masks and positions, byte-pair encoding, embeddings and layer normalization, the transformer block, a tiny GPT, next-token loss, schedules, mixed precision, sampling with a KV-cache, rotary positions and RMSNorm, and an evaluated capstone. The GPT training loop is shown as PyTorch code for local use |
@@ -60,6 +61,7 @@ cd apps/api && node seed/courses/validate.mjs numpy           # all lessons; add
 cd apps/api && node seed/courses/validate.mjs python-basics
 cd apps/api && node seed/courses/validate.mjs math-for-machine-learning      # NumPy cells, same runtime as the course
 cd apps/api && node seed/courses/validate.mjs deep-learning-foundations       # NumPy cells; PyTorch snippets are static
+cd apps/api && node seed/courses/validate.mjs generative-ai-diffusion
 cd apps/api && node seed/courses/validate.mjs computer-vision-bootcamp
 cd apps/api && node seed/courses/validate.mjs nlp-with-transformers
 cd apps/api && node seed/courses/validate.mjs transformers-from-scratch
@@ -69,6 +71,7 @@ cd apps/api && node seed/courses/validate.mjs python-for-data-science
 cd apps/api && node seed/courses/validate.mjs html-css-basics 04 --verbose   # headless Chrome
 pnpm --filter @latent/api db:course:math-for-machine-learning:local           # add or refresh one course without re-seeding everything
 pnpm --filter @latent/api db:course:deep-learning-foundations:local            # same for deep-learning-foundations
+pnpm --filter @latent/api db:course:generative-ai-diffusion:local
 pnpm --filter @latent/api db:course:computer-vision-bootcamp:local
 pnpm --filter @latent/api db:course:nlp-with-transformers:local
 pnpm --filter @latent/api db:course:transformers-from-scratch:local
