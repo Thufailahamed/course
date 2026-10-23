@@ -31,7 +31,7 @@ Lessons of type `interactive` are Markdown with live cells. Learners write, run 
 - **Progress:** solved challenges are stored per learner (`exercise_progress`). Solving every challenge completes the lesson. Solutions are stripped from learner payloads and fetched on demand.
 - **Authoring:** in the studio, set the lesson type to *Interactive*, insert cells from the toolbar, then **Preview & run** and **Validate**.
 
-Fourteen fully interactive courses ship with the seed data:
+Fifteen fully interactive courses ship with the seed data:
 
 | Course | Folder | Content |
 |---|---|---|
@@ -39,6 +39,7 @@ Fourteen fully interactive courses ship with the seed data:
 | **NumPy Mastery** | `apps/api/seed/courses/numpy` | 28 lessons and 8 quizzes |
 | **Mathematics for Machine Learning** | `apps/api/seed/courses/math-for-machine-learning` | 16 lessons and 4 quizzes: vectors, matrices, eigenvalues, SVD and PCA, calculus and gradient descent, probability and maximum likelihood |
 | **Deep Learning Foundations** | `apps/api/seed/courses/deep-learning-foundations` | 21 lessons and 5 quizzes: neurons, backpropagation from scratch, training networks, PyTorch in practice, CNNs, attention and a capstone image classifier. PyTorch code is shown for you to run locally; each idea also has a runnable NumPy version |
+| **Transformers from Scratch** | `apps/api/seed/courses/transformers-from-scratch` | 15 lessons and 3 quizzes: scaled and multi-head attention, causal masks and positions, byte-pair encoding, embeddings and layer normalization, the transformer block, a tiny GPT, next-token loss, schedules, mixed precision, sampling with a KV-cache, rotary positions and RMSNorm, and an evaluated capstone. The GPT training loop is shown as PyTorch code for local use |
 | **Reinforcement Learning Essentials** | `apps/api/seed/courses/reinforcement-learning-essentials` | 16 lessons and 3 quizzes: agents and returns, bandits, Markov decision processes, dynamic programming, TD learning, Q-learning and SARSA, deep Q-networks, policy gradients, PPO, RLHF, DPO and reward hacking, with a capstone agent. Environments and algorithms run in NumPy; deep-learning code is shown for local use |
 | **Practical Machine Learning with scikit-learn** | `apps/api/seed/courses/machine-learning-a-z` | 17 lessons and 3 quizzes: the ML workflow, linear and logistic regression, trees, forests, boosting and nearest neighbours built in NumPy, honest evaluation, leak-free pipelines, tuning, explanations and a churn capstone. scikit-learn and XGBoost code is shown for local use |
 | **Python for Data Science** | `apps/api/seed/courses/python-for-data-science` | 17 lessons and 2 quizzes: Python containers and functions, NumPy arrays and missing values, pandas from loading to time series, honest charts with matplotlib, and a complete sales analysis capstone. Runs in the page with pandas and matplotlib |
@@ -57,12 +58,14 @@ cd apps/api && node seed/courses/validate.mjs numpy           # all lessons; add
 cd apps/api && node seed/courses/validate.mjs python-basics
 cd apps/api && node seed/courses/validate.mjs math-for-machine-learning      # NumPy cells, same runtime as the course
 cd apps/api && node seed/courses/validate.mjs deep-learning-foundations       # NumPy cells; PyTorch snippets are static
+cd apps/api && node seed/courses/validate.mjs transformers-from-scratch
 cd apps/api && node seed/courses/validate.mjs reinforcement-learning-essentials
 cd apps/api && node seed/courses/validate.mjs machine-learning-a-z
 cd apps/api && node seed/courses/validate.mjs python-for-data-science
 cd apps/api && node seed/courses/validate.mjs html-css-basics 04 --verbose   # headless Chrome
 pnpm --filter @latent/api db:course:math-for-machine-learning:local           # add or refresh one course without re-seeding everything
 pnpm --filter @latent/api db:course:deep-learning-foundations:local            # same for deep-learning-foundations
+pnpm --filter @latent/api db:course:transformers-from-scratch:local
 pnpm --filter @latent/api db:course:reinforcement-learning-essentials:local
 pnpm --filter @latent/api db:course:machine-learning-a-z:local
 pnpm --filter @latent/api db:course:python-for-data-science:local

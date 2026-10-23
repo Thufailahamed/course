@@ -1,0 +1,57 @@
+[
+  {
+    "prompt": "Why is the BPE merge rule applied in order of frequency during training?",
+    "options": [
+      "Because frequent pairs are the cheapest to store",
+      "So that common pieces become single tokens first, keeping the vocabulary compact for typical text",
+      "Because the tokenizer must sort the corpus",
+      "Because rare words are never encoded"
+    ],
+    "answerIndex": 1,
+    "explanation": "Merging the most frequent pair first builds tokens that cover the most text, so common words become one token while rare words split into known pieces."
+  },
+  {
+    "prompt": "A learning-rate warmup is used because…",
+    "options": [
+      "The loss is always largest at the start",
+      "Early gradients are noisy and the weights are random, so large steps can be destructive",
+      "The optimizer does not support large rates",
+      "The schedule must end at zero"
+    ],
+    "answerIndex": 1,
+    "explanation": "Warmup protects the first updates, when the model is least stable, and lets the rate rise once the gradients are more informative."
+  },
+  {
+    "prompt": "What does gradient accumulation over micro-batches reproduce?",
+    "options": [
+      "A smaller batch with more noise",
+      "The gradient of one large batch, when each micro-batch gradient is weighted by its size",
+      "Only the last micro-batch's gradient",
+      "A random direction"
+    ],
+    "answerIndex": 1,
+    "explanation": "The weighted sum of micro-batch gradients equals the full-batch mean gradient, so accumulation gives a large effective batch without the memory cost."
+  },
+  {
+    "prompt": "Why does mixed precision use loss scaling?",
+    "options": [
+      "To make the model larger",
+      "So that small gradients stay within the range of 16-bit floats instead of rounding to zero",
+      "To remove the need for an optimizer",
+      "To speed up the tokenizer"
+    ],
+    "answerIndex": 1,
+    "explanation": "Scaling the loss scales the gradients up before they are rounded to 16 bits. The scale is divided out before the update, so the mathematics is unchanged."
+  },
+  {
+    "prompt": "A KV-cache stores the keys and values of previous tokens. Why does this help during generation?",
+    "options": [
+      "It makes the model more accurate",
+      "Past keys and values never change, so each new token needs only its own key and value computed",
+      "It removes the need for attention",
+      "It replaces the softmax"
+    ],
+    "answerIndex": 1,
+    "explanation": "In a causal model the past does not change, so caching its keys and values avoids recomputing them at every step."
+  }
+]
