@@ -304,7 +304,7 @@ courseRows.push({
   category_id: catIds["generative-ai"],
   instructor_id: instructorIds.sofia,
   level: "intermediate",
-  price_cents: 9900,
+  price_cents: 0,
   compare_at_price_cents: null,
   accent: 185,
   status: "draft",
@@ -340,7 +340,6 @@ insert("coupons", [
 ]);
 
 /* ── orders, enrollments, reviews ───────────────────────── */
-const paidCourses = allCourses.filter((c) => c.price > 0);
 const orders = [];
 const orderItems = [];
 const enrollments = [];
@@ -367,40 +366,13 @@ function addEnrollment(userId, courseId, createdAt, source, progress = 0) {
 }
 
 for (const u of learners) {
-  const nOrders = int(1, 3);
-  for (let k = 0; k < nOrders; k++) {
-    // Skew purchases toward recent days so the revenue chart trends up.
+  // Every course is free, so learners join by enrolling: the seed has no orders, coupons or revenue.
+  const nEnrollments = int(1, 3);
+  for (let k = 0; k < nEnrollments; k++) {
+    // Skew enrollments toward recent days so the activity chart trends up.
     const age = Math.floor(Math.pow(rand(), 1.6) * 90);
-    const createdAt = daysAgo(age, int(0, 23));
-    const items = [pick(paidCourses)];
-    if (rand() < 0.25) items.push(pick(paidCourses));
-    const unique = [...new Map(items.map((c) => [c.slug, c])).values()].filter((c) => !enrolledPairs.has(`${u.id}:${courseBySlug[c.slug]}`));
-    if (!unique.length) continue;
-    const subtotal = unique.reduce((s, c) => s + c.price, 0);
-    const coupon = rand() < 0.2 ? (rand() < 0.6 ? ["LAUNCH30", 30] : ["STUDENT50", 50]) : null;
-    const discount = coupon ? Math.round((subtotal * coupon[1]) / 100) : 0;
-    if (coupon) couponUse[coupon[0]] = (couponUse[coupon[0]] ?? 0) + 1;
-    const orderId = id("ord");
-    const refunded = rand() < 0.03;
-    orders.push({
-      id: orderId,
-      user_id: u.id,
-      kind: "courses",
-      status: refunded ? "refunded" : "paid",
-      subtotal_cents: subtotal,
-      discount_cents: discount,
-      total_cents: subtotal - discount,
-      currency: "USD",
-      coupon_code: coupon?.[0] ?? null,
-      stripe_session_id: null,
-      stripe_payment_intent: null,
-      paid_at: createdAt,
-      created_at: createdAt,
-    });
-    for (const c of unique) {
-      orderItems.push({ id: id("oi"), order_id: orderId, course_id: courseBySlug[c.slug], title: c.title, price_cents: c.price });
-      if (!refunded) addEnrollment(u.id, courseBySlug[c.slug], createdAt, "purchase", pick([0, 8, 25, 40, 60, 85, 100]));
-    }
+    const course = pick(allCourses);
+    addEnrollment(u.id, courseBySlug[course.slug], daysAgo(age, int(0, 23)), "free", pick([0, 8, 25, 40, 60, 85, 100]));
   }
   if (rand() < 0.5) addEnrollment(u.id, courseBySlug["python-for-data-science"], daysAgo(int(0, 120)), "free", pick([0, 30, 100]));
 }
@@ -440,7 +412,7 @@ for (const [slug, frac] of demoCourses) {
   const cid = courseBySlug[slug];
   const lids = courseLessons[cid];
   const done = Math.round(lids.length * frac);
-  addEnrollment(student.id, cid, daysAgo(60), slug === "python-for-data-science" ? "free" : "purchase", Math.round((done / lids.length) * 100));
+  addEnrollment(student.id, cid, daysAgo(60), "free", Math.round((done / lids.length) * 100));
   const enr = enrollments[enrollments.length - 1];
   enr.last_lesson_id = lids[Math.min(done, lids.length - 1)];
   enr.last_activity_at = daysAgo(slug === "deep-learning-foundations" ? 0 : 3);
@@ -451,12 +423,6 @@ for (const [slug, frac] of demoCourses) {
       exerciseRows.push({ user_id: student.id, lesson_id: lid, cell_id: cell.id, code: cell.solution, passed: true, attempts: 2, solved_at: daysAgo(Math.max(0, 50 - i)), updated_at: daysAgo(Math.max(0, 50 - i)) });
   });
   if (frac === 1) certRows.push({ id: "LT-DEMO7Q2K9X", user_id: student.id, course_id: cid, issued_at: daysAgo(20) });
-  if (slug !== "python-for-data-science") {
-    const total = paidCourses.find((c) => c.slug === slug).price;
-    const oid = id("ord");
-    orders.push({ id: oid, user_id: student.id, kind: "courses", status: "paid", subtotal_cents: total, discount_cents: 0, total_cents: total, currency: "USD", coupon_code: null, stripe_session_id: null, stripe_payment_intent: null, paid_at: daysAgo(60), created_at: daysAgo(60) });
-    orderItems.push({ id: id("oi"), order_id: oid, course_id: cid, title: paidCourses.find((c) => c.slug === slug).title, price_cents: total });
-  }
 }
 
 const activityRows = [];
