@@ -6,6 +6,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import * as data from "./content.mjs";
 import * as numpyCourse from "./courses/numpy/course.mjs";
+import * as mathForMachineLearningCourse from "./courses/math-for-machine-learning/course.mjs";
 import * as pythonBasicsCourse from "./courses/python-basics/course.mjs";
 import * as javascriptBasicsCourse from "./courses/javascript-basics/course.mjs";
 import * as javascriptAdvancedCourse from "./courses/javascript-advanced/course.mjs";
@@ -21,6 +22,7 @@ const here = dirname(fileURLToPath(import.meta.url));
 /* Interactive courses are authored as files: seed/courses/<name>/{course.mjs, lessons/*.md, quizzes/*.json}. */
 const interactiveCourses = [
   ["numpy", numpyCourse],
+  ["math-for-machine-learning", mathForMachineLearningCourse],
   ["python-basics", pythonBasicsCourse],
   ["javascript-basics", javascriptBasicsCourse],
   ["javascript-advanced", javascriptAdvancedCourse],

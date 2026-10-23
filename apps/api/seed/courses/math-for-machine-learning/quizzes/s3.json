@@ -1,0 +1,47 @@
+[
+  {
+    "prompt": "At a point x, the gradient of a function f points in the direction of…",
+    "options": ["Steepest decrease", "Steepest increase", "No change at all", "The minimum of f"],
+    "answerIndex": 1,
+    "explanation": "The gradient is the direction of steepest increase. Gradient descent therefore steps in the opposite direction, which is the negative gradient."
+  },
+  {
+    "prompt": "Which expression is the central-difference estimate of f'(x)?",
+    "options": [
+      "(f(x + h) - f(x)) / h",
+      "(f(x + h) - f(x - h)) / h",
+      "(f(x + h) - f(x - h)) / (2h)",
+      "f(x + h) * f(x - h)"
+    ],
+    "answerIndex": 2,
+    "explanation": "The central difference uses points on both sides of x, and divides by the full width 2h. Its error shrinks with h², much faster than the one-sided version."
+  },
+  {
+    "prompt": "In gradient descent, what typically happens if the learning rate is set too large?",
+    "options": [
+      "The updates become exactly zero",
+      "The loss can oscillate or diverge instead of decreasing",
+      "The model finds the minimum in one step with certainty",
+      "The gradient is recomputed with more accuracy"
+    ],
+    "answerIndex": 1,
+    "explanation": "If a step overshoots the minimum by more than it gains, each update moves further away. For the quadratic in the lesson, a learning rate of 1.1 diverges."
+  },
+  {
+    "prompt": "The chain rule states that the derivative of f(g(x)) is…",
+    "options": [
+      "f'(x) · g'(x)",
+      "f'(g(x)) · g'(x)",
+      "f(g'(x))",
+      "f'(g(x)) + g'(x)"
+    ],
+    "answerIndex": 1,
+    "explanation": "Differentiate the outside function, evaluated at the inside, then multiply by the derivative of the inside function."
+  },
+  {
+    "prompt": "The derivative of the sigmoid σ(z) = 1 / (1 + e⁻ᶻ) is…",
+    "options": ["σ(z)", "1 - σ(z)", "σ(z) · (1 - σ(z))", "σ(z)² + 1"],
+    "answerIndex": 2,
+    "explanation": "σ'(z) = σ(z)(1 - σ(z)). Its largest value is 0.25 at z = 0, which contributes to the vanishing-gradient problem in deep networks."
+  }
+]

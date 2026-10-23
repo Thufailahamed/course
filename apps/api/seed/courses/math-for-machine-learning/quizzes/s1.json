@@ -1,0 +1,42 @@
+[
+  {
+    "prompt": "What is the dot product of (2, -1) and (3, 6)?",
+    "options": ["0", "12", "-3", "6"],
+    "answerIndex": 0,
+    "explanation": "2·3 + (-1)·6 = 6 - 6 = 0. The vectors are perpendicular, so their cosine similarity is 0."
+  },
+  {
+    "prompt": "A is a 3 × 2 matrix and B is a 2 × 4 matrix. What is the shape of A @ B?",
+    "options": ["(2, 2)", "(3, 2)", "(3, 4)", "The product is undefined"],
+    "answerIndex": 2,
+    "explanation": "The inner dimensions (2 and 2) match, so the product exists. The outer dimensions give the result shape: (3, 4)."
+  },
+  {
+    "prompt": "What do the columns of a matrix A tell you?",
+    "options": [
+      "The length of each row",
+      "The sum of all entries",
+      "Where the standard basis vectors e1 and e2 land after the transformation A",
+      "The eigenvalues of A"
+    ],
+    "answerIndex": 2,
+    "explanation": "A @ e1 is the first column of A, and A @ e2 is the second column. Knowing where the axes go tells you where every point goes."
+  },
+  {
+    "prompt": "Which statement about matrix multiplication is true in general?",
+    "options": [
+      "AB and BA are always equal",
+      "AB and BA are generally different",
+      "AB is always the same as the elementwise product A * B",
+      "The order of the factors never changes the result of a composed transformation"
+    ],
+    "answerIndex": 1,
+    "explanation": "Matrix multiplication is not commutative. Rotating then stretching differs from stretching then rotating, so the order of the factors matters."
+  },
+  {
+    "prompt": "Cosine similarity between two non-zero vectors equals 0 exactly when the vectors are…",
+    "options": ["Identical", "Parallel", "Perpendicular", "Of equal length"],
+    "answerIndex": 2,
+    "explanation": "cos θ = 0 means θ = 90°. For vectors, that is the same as a dot product of zero, which is orthogonality."
+  }
+]
