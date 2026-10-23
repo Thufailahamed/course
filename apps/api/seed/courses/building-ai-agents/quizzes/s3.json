@@ -1,0 +1,46 @@
+[
+  {
+    "prompt": "In an orchestrator-worker design, what does the orchestrator do?",
+    "options": [
+      "It routes tasks to workers and combines their results",
+      "It answers every task itself with no workers",
+      "It stores the model weights",
+      "It replaces the tools"
+    ],
+    "answerIndex": 0,
+    "explanation": "The orchestrator decides which worker handles each task and assembles the outcome."
+  },
+  {
+    "prompt": "When is a single agent usually the better choice?",
+    "options": [
+      "When the task is sequential and the coordination cost of several agents outweighs their benefit",
+      "When every task is completely independent and large",
+      "Always, because multi-agent systems are never useful",
+      "When the agents need to share a single tool"
+    ],
+    "answerIndex": 0,
+    "explanation": "Coordination adds tokens and failure modes, which a simple task does not repay."
+  },
+  {
+    "prompt": "How should ties between equally suited workers be broken?",
+    "options": [
+      "By a fixed, documented rule, such as alphabetical order, so routing is repeatable",
+      "Randomly on every request",
+      "By the order the workers were started",
+      "By always choosing the most expensive worker"
+    ],
+    "answerIndex": 0,
+    "explanation": "A deterministic tie-break keeps routing reproducible, which makes failures easier to debug."
+  },
+  {
+    "prompt": "Why does a multi-agent design usually cost more tokens?",
+    "options": [
+      "Each agent and the orchestrator make their own model calls with their own context",
+      "The tools become larger",
+      "The memory is deleted",
+      "The prompts are shorter"
+    ],
+    "answerIndex": 0,
+    "explanation": "Every agent call is billed, so the total grows with the number of calls and contexts."
+  }
+]

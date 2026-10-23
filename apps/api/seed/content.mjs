@@ -71,42 +71,6 @@ export const sampleVideo = (i) => VID[i % VID.length];
 
 export const courses = [
   {
-    slug: "building-ai-agents",
-    title: "Building Reliable AI Agents",
-    subtitle: "Tool use, planning, memory and evaluation for agents that actually work in production.",
-    category: "ai-agents",
-    instructor: "lena",
-    level: "intermediate",
-    price: 0,
-    compareAt: null,
-    accent: 165,
-    featured: true,
-    students: 17920,
-    tags: ["Agents", "Tool Use", "MCP", "Evaluation"],
-    learn: [
-      "Design agent loops with tools, planning and reflection",
-      "Expose tools safely with schemas and permissions",
-      "Add short- and long-term memory",
-      "Orchestrate multi-agent workflows",
-      "Evaluate agents with trajectories and task suites",
-    ],
-    requirements: ["LLM Engineering or equivalent experience calling LLM APIs"],
-    audience: ["AI engineers", "Backend developers adding automation", "Product teams exploring agents"],
-    snippet: `while True:\n    response = llm.chat(messages, tools=TOOLS)\n    if not response.tool_calls:\n        break\n    for call in response.tool_calls:\n        result = TOOLS[call.name](**call.arguments)\n        messages.append(tool_result(call.id, result))`,
-    sections: [
-      ["Agent Fundamentals", ["v|What makes something an agent?|11", "a|The agent loop|9", "v|Tool calling deep dive|18"]],
-      ["Tools & Environments", ["v|Designing great tool interfaces|16", "v|Sandboxing and permissions|14", "a|Model Context Protocol (MCP) primer|12", "q|Checkpoint: tools"]],
-      ["Planning & Memory", ["v|Planning strategies|17", "v|Memory architectures|15", "v|Context management for long tasks|13"]],
-      ["Multi-agent Systems", ["v|Orchestrator–worker patterns|19", "a|When multi-agent is worth it|8"]],
-      ["Shipping Agents", ["v|Evaluating agent trajectories|20", "v|Observability, cost and safety|15", "q|Final assessment"]],
-    ],
-    quiz: [
-      ["What most distinguishes an agent from a single LLM call?", ["A larger model", "A loop where the model chooses actions, observes results and continues", "A longer prompt", "Fine-tuning"], 1, "Agents iterate: act, observe, decide."],
-      ["Good tool design emphasizes…", ["As many parameters as possible", "Clear names, tight schemas and helpful error messages", "Returning raw HTML", "Hiding errors from the model"], 1, "Models use tools better when interfaces are clear and errors are actionable."],
-      ["Agent evaluation should primarily look at…", ["Token count only", "Task success and the trajectory taken", "Response length", "Model temperature"], 1, "Outcome plus process reveals both failures and inefficiencies."],
-    ],
-  },
-  {
     slug: "mlops-in-production",
     title: "MLOps: Shipping Models to Production",
     subtitle: "Pipelines, feature stores, CI/CD for ML, serving, monitoring and drift detection.",

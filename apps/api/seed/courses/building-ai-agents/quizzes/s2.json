@@ -1,0 +1,46 @@
+[
+  {
+    "prompt": "What is the purpose of a retry budget in a plan?",
+    "options": [
+      "It limits how many times a failing step is attempted before the plan stops",
+      "It sets the speed of the model",
+      "It removes failing steps from memory",
+      "It doubles the cost of every step"
+    ],
+    "answerIndex": 0,
+    "explanation": "A bounded retry budget recovers from transient failures without looping forever."
+  },
+  {
+    "prompt": "What does short-term memory usually hold?",
+    "options": [
+      "The most recent messages that fit in the context window",
+      "Every message ever sent",
+      "Only the system prompt",
+      "The tools' source code"
+    ],
+    "answerIndex": 0,
+    "explanation": "Short-term memory is the recent window of the conversation, trimmed to fit."
+  },
+  {
+    "prompt": "When trimming context to a budget, what should always be kept?",
+    "options": [
+      "The system message, and the most recent messages that fit",
+      "The oldest message only",
+      "The longest message only",
+      "Nothing, because trimming removes everything"
+    ],
+    "answerIndex": 0,
+    "explanation": "The rules stay in place, and the most recent turns carry the current task."
+  },
+  {
+    "prompt": "What does long-term memory recall do?",
+    "options": [
+      "It retrieves stored facts relevant to the current query",
+      "It replays every past conversation",
+      "It trains the model",
+      "It deletes old facts"
+    ],
+    "answerIndex": 0,
+    "explanation": "Long-term memory is a store that is searched for facts relevant to the request."
+  }
+]

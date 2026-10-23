@@ -31,7 +31,7 @@ Lessons of type `interactive` are Markdown with live cells. Learners write, run 
 - **Progress:** solved challenges are stored per learner (`exercise_progress`). Solving every challenge completes the lesson. Solutions are stripped from learner payloads and fetched on demand.
 - **Authoring:** in the studio, set the lesson type to *Interactive*, insert cells from the toolbar, then **Preview & run** and **Validate**.
 
-Nineteen fully interactive courses ship with the seed data:
+Twenty fully interactive courses ship with the seed data:
 
 | Course | Folder | Content |
 |---|---|---|
@@ -39,6 +39,7 @@ Nineteen fully interactive courses ship with the seed data:
 | **NumPy Mastery** | `apps/api/seed/courses/numpy` | 28 lessons and 8 quizzes |
 | **Mathematics for Machine Learning** | `apps/api/seed/courses/math-for-machine-learning` | 16 lessons and 4 quizzes: vectors, matrices, eigenvalues, SVD and PCA, calculus and gradient descent, probability and maximum likelihood |
 | **Deep Learning Foundations** | `apps/api/seed/courses/deep-learning-foundations` | 21 lessons and 5 quizzes: neurons, backpropagation from scratch, training networks, PyTorch in practice, CNNs, attention and a capstone image classifier. PyTorch code is shown for you to run locally; each idea also has a runnable NumPy version |
+| **Building Reliable AI Agents** | `apps/api/seed/courses/building-ai-agents` | 12 lessons and 4 quizzes: the agent loop, tool calling and argument validation, tool interfaces that recover from errors, permissions and sandboxes, planning with retries, memory and context budgets, orchestrator-worker routing, the cost of multi-agent designs, trajectory evaluation, and an observability capstone. Agents run on a scripted model so every step works in the page; hosted-model and Model Context Protocol clients are shown as static code |
 | **LLM Engineering: From Prompt to Production** | `apps/api/seed/courses/llm-engineering` | 12 lessons and 4 quizzes: sampling with temperature and top-p, prompt anatomy and token budgets, validated structured outputs, chunking, retrieval ranking with fusion, recall and reciprocal rank for RAG, instruction data, golden sets, LLM-as-a-judge calibration with Cohen's kappa, cost and latency, and guardrails. Calls to hosted models are shown as static code to run with your own key; every other step runs in the page |
 | **Generative AI: Diffusion Models** | `apps/api/seed/courses/generative-ai-diffusion` | 12 lessons and 4 quizzes: the forward noising process, noise prediction, DDPM and DDIM sampling, noise schedules, cross-attention conditioning, classifier-free guidance, latent diffusion, LoRA, a DreamBooth recipe and a toy diffusion capstone. U-Net, cross-attention and LoRA layers are shown as PyTorch code for you to run locally; each idea also has a runnable NumPy version |
 | **Computer Vision Bootcamp** | `apps/api/seed/courses/computer-vision-bootcamp` | 14 lessons and 4 quizzes: pixels and convolutions, augmentation, CNN architectures and receptive fields, transfer learning with a linear probe, IoU and NMS, anchors, training a detector, semantic and instance segmentation, U-Net, vision transformer patches, CLIP zero-shot classification and a detector capstone. PyTorch, torchvision and CLIP code is shown for you to run locally; each idea also has a runnable NumPy version |
@@ -62,6 +63,7 @@ cd apps/api && node seed/courses/validate.mjs numpy           # all lessons; add
 cd apps/api && node seed/courses/validate.mjs python-basics
 cd apps/api && node seed/courses/validate.mjs math-for-machine-learning      # NumPy cells, same runtime as the course
 cd apps/api && node seed/courses/validate.mjs deep-learning-foundations       # NumPy cells; PyTorch snippets are static
+cd apps/api && node seed/courses/validate.mjs building-ai-agents
 cd apps/api && node seed/courses/validate.mjs llm-engineering
 cd apps/api && node seed/courses/validate.mjs generative-ai-diffusion
 cd apps/api && node seed/courses/validate.mjs computer-vision-bootcamp
@@ -73,6 +75,7 @@ cd apps/api && node seed/courses/validate.mjs python-for-data-science
 cd apps/api && node seed/courses/validate.mjs html-css-basics 04 --verbose   # headless Chrome
 pnpm --filter @latent/api db:course:math-for-machine-learning:local           # add or refresh one course without re-seeding everything
 pnpm --filter @latent/api db:course:deep-learning-foundations:local            # same for deep-learning-foundations
+pnpm --filter @latent/api db:course:building-ai-agents:local
 pnpm --filter @latent/api db:course:llm-engineering:local
 pnpm --filter @latent/api db:course:generative-ai-diffusion:local
 pnpm --filter @latent/api db:course:computer-vision-bootcamp:local

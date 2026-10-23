@@ -1,0 +1,46 @@
+[
+  {
+    "prompt": "Why should a tool return an error result instead of raising an exception?",
+    "options": [
+      "So the loop can show the error to the model and let it recover",
+      "Because exceptions are faster",
+      "Because the model cannot read strings",
+      "So the tool never runs"
+    ],
+    "answerIndex": 0,
+    "explanation": "A readable error lets the agent correct its arguments or choose another action, instead of stopping."
+  },
+  {
+    "prompt": "What should happen when the model names a tool that does not exist?",
+    "options": [
+      "The dispatcher returns an error without indexing the tools table",
+      "The program crashes",
+      "The tool is created automatically",
+      "The loop runs the closest tool"
+    ],
+    "answerIndex": 0,
+    "explanation": "Checking the name first turns a typo into a readable error."
+  },
+  {
+    "prompt": "Which tier should a tool that sends an email to an external address use?",
+    "options": [
+      "Write, so the user confirms before it runs",
+      "Read, so it runs automatically",
+      "Dangerous, so it is never available",
+      "No tier, because email is harmless"
+    ],
+    "answerIndex": 0,
+    "explanation": "Sending a message changes the outside world, so the user should confirm it."
+  },
+  {
+    "prompt": "Why is a plain prefix check unsafe for a sandbox?",
+    "options": [
+      "/database starts with /data, so a sibling directory would pass",
+      "Prefix checks are too slow",
+      "Paths cannot be strings",
+      "Prefix checks never match"
+    ],
+    "answerIndex": 0,
+    "explanation": "The directory boundary must be checked, so sibling directories with the same prefix are excluded."
+  }
+]
