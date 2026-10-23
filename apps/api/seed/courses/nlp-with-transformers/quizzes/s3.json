@@ -1,0 +1,68 @@
+[
+  {
+    "prompt": "Why do overlap metrics such as ROUGE clip repeated words?",
+    "options": [
+      "To make the metric faster",
+      "So that a candidate cannot earn credit for repeating a word more times than the reference uses it",
+      "To remove stop words automatically",
+      "Because the reference is always shorter"
+    ],
+    "answerIndex": 1,
+    "explanation": "Without clipping, a candidate that repeats a common word would score well regardless of content."
+  },
+  {
+    "prompt": "A classifier scores 95% accuracy on a dataset that is 95% negative. What should you check next?",
+    "options": [
+      "Per-class recall and macro-F1, to see whether the positive class is found at all",
+      "The learning rate only",
+      "The number of training epochs only",
+      "Nothing, 95% is excellent"
+    ],
+    "answerIndex": 0,
+    "explanation": "A model that always predicts the majority class scores 95% here. Per-class measures reveal whether it finds the minority class."
+  },
+  {
+    "prompt": "Why is a confusion matrix more useful than accuracy during error analysis?",
+    "options": [
+      "It replaces the test set",
+      "It removes the need for labels",
+      "It is always symmetric",
+      "It shows which true classes are confused with which predicted classes, pointing to specific fixes"
+    ],
+    "answerIndex": 3,
+    "explanation": "The off-diagonal entries name the specific mistakes, which is where analysis begins."
+  },
+  {
+    "prompt": "Which step in the capstone pipeline must happen before any vocabulary or idf is computed?",
+    "options": [
+      "Computing the macro-F1",
+      "Training the model",
+      "Splitting the data into training and test sets",
+      "Printing the first example"
+    ],
+    "answerIndex": 2,
+    "explanation": "Learning features from the test data leaks information. The split must come first, and the features learned from the training part only."
+  },
+  {
+    "prompt": "Why report macro-F1 alongside accuracy?",
+    "options": [
+      "Because macro-F1 is always higher",
+      "Because it gives each class equal weight, so a weak minority class cannot hide behind a strong majority class",
+      "Because accuracy cannot be computed for two classes",
+      "Because macro-F1 uses the test set twice"
+    ],
+    "answerIndex": 1,
+    "explanation": "Macro-F1 averages the per-class scores, so a poor class pulls the summary down however large it is."
+  },
+  {
+    "prompt": "A span prediction gets the label right but the end boundary one token too early. How is it scored under exact span F1?",
+    "options": [
+      "As a miss and a false alarm",
+      "As half a correct span",
+      "It is ignored",
+      "As a correct span"
+    ],
+    "answerIndex": 0,
+    "explanation": "Exact span F1 requires matching boundaries and label, so a boundary error counts as a missed gold span and a wrong prediction."
+  }
+]

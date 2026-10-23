@@ -8,6 +8,7 @@ import * as data from "./content.mjs";
 import * as numpyCourse from "./courses/numpy/course.mjs";
 import * as mathForMachineLearningCourse from "./courses/math-for-machine-learning/course.mjs";
 import * as deepLearningFoundationsCourse from "./courses/deep-learning-foundations/course.mjs";
+import * as nlpWithTransformersCourse from "./courses/nlp-with-transformers/course.mjs";
 import * as transformersFromScratchCourse from "./courses/transformers-from-scratch/course.mjs";
 import * as reinforcementLearningEssentialsCourse from "./courses/reinforcement-learning-essentials/course.mjs";
 import * as machineLearningAZCourse from "./courses/machine-learning-a-z/course.mjs";
@@ -29,6 +30,7 @@ const interactiveCourses = [
   ["numpy", numpyCourse],
   ["math-for-machine-learning", mathForMachineLearningCourse],
   ["deep-learning-foundations", deepLearningFoundationsCourse],
+  ["nlp-with-transformers", nlpWithTransformersCourse],
   ["transformers-from-scratch", transformersFromScratchCourse],
   ["reinforcement-learning-essentials", reinforcementLearningEssentialsCourse],
   ["machine-learning-a-z", machineLearningAZCourse],

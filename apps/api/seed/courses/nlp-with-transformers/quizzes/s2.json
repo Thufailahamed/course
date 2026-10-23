@@ -1,0 +1,57 @@
+[
+  {
+    "prompt": "Why does BERT-style masked language modelling read context on both sides of a gap?",
+    "options": [
+      "Because the mask token is placed at the end of the sequence",
+      "Because the model sees the whole sequence, so a masked word can be predicted from the words before and after it",
+      "Because the model reads backwards",
+      "Because masking removes the need for context"
+    ],
+    "answerIndex": 1,
+    "explanation": "The encoder attends in both directions, so the words after a gap are as available as the words before it."
+  },
+  {
+    "prompt": "A pooled vector averages over padding positions. What goes wrong?",
+    "options": [
+      "Nothing, padding is always zero",
+      "The representation of a text depends on how much padding its batch needed, so the same text can get different predictions",
+      "The softmax stops working",
+      "The learning rate must be lowered"
+    ],
+    "answerIndex": 1,
+    "explanation": "Padding changes the average, so the same text gets different vectors in different batches. Pooling must use only the real tokens."
+  },
+  {
+    "prompt": "Why is NER scored at the span level rather than the token level?",
+    "options": [
+      "Token scores are impossible to compute",
+      "Most tokens are outside any entity, so token accuracy hides errors on the entities themselves",
+      "Spans are always longer than tokens",
+      "Span scores are always higher"
+    ],
+    "answerIndex": 1,
+    "explanation": "Token accuracy is dominated by the O tags. Span F1 measures whether each entity is found with the right boundaries and label."
+  },
+  {
+    "prompt": "A dataset has 98% negative examples. A model that always predicts negative has high accuracy. Which metric exposes the failure?",
+    "options": [
+      "Accuracy, since it is high",
+      "Recall on the positive class, or macro-F1",
+      "The number of tokens",
+      "The learning rate"
+    ],
+    "answerIndex": 1,
+    "explanation": "Recall on the rare class, and macro-F1, reveal that the model finds none of the positives, which accuracy hides."
+  },
+  {
+    "prompt": "Why should oversampling a rare class happen after the train/test split?",
+    "options": [
+      "Because oversampling is slower after the split",
+      "Because duplicates of the same text on both sides of the split inflate the test scores",
+      "Because the test set must be balanced by design",
+      "Because the split creates the classes"
+    ],
+    "answerIndex": 1,
+    "explanation": "Copies of a text in both training and test data let the model memorize answers it will be tested on, so the score is optimistic."
+  }
+]

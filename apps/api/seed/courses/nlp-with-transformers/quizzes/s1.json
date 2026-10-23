@@ -1,0 +1,52 @@
+[
+  {
+    "prompt": "Why does TF-IDF give almost zero weight to the word 'the' in a collection of English documents?",
+    "options": [
+      "Because 'the' is always removed by the tokenizer",
+      "Because 'the' appears in nearly every document, so its inverse document frequency is near zero",
+      "Because counts of 'the' are always zero",
+      "Because TF-IDF only uses nouns"
+    ],
+    "answerIndex": 1,
+    "explanation": "A word in almost every document has a document frequency close to N, so log(N / df) is close to zero."
+  },
+  {
+    "prompt": "Why is PPMI clipped at zero?",
+    "options": [
+      "Because negative counts are impossible",
+      "Because negative association is unreliable with sparse counts, and the positive part captures the informative pairs",
+      "Because the SVD requires non-negative inputs only",
+      "Because zero is the most common value"
+    ],
+    "answerIndex": 1,
+    "explanation": "Co-occurrence counts are too sparse to estimate negative association reliably, so PPMI keeps only the positive part."
+  },
+  {
+    "prompt": "Why is cosine similarity preferred to Euclidean distance for comparing text vectors?",
+    "options": [
+      "It is faster to compute on any vector",
+      "It compares direction and ignores length, so a long and a short text about the same topic still match",
+      "Euclidean distance cannot be computed for text",
+      "Cosine always returns integers"
+    ],
+    "answerIndex": 1,
+    "explanation": "Text vectors often differ in magnitude because of length, and cosine focuses on the direction that carries the topic."
+  },
+  {
+    "prompt": "A search system returns the relevant document in position 4 for a query. What is its reciprocal rank?",
+    "options": ["4", "0.25", "0.5", "1.0"],
+    "answerIndex": 1,
+    "explanation": "The reciprocal rank is one divided by the position, so one quarter."
+  },
+  {
+    "prompt": "Why should search queries used for evaluation be kept separate from those used to tune the system?",
+    "options": [
+      "Because tuning queries are always wrong",
+      "Because a system tuned on its own test queries looks better on them than it really is",
+      "Because evaluation queries must be longer",
+      "Because the ranking must be random during evaluation"
+    ],
+    "answerIndex": 1,
+    "explanation": "Tuning on the evaluation queries fits the system to them, so the measured quality is optimistic."
+  }
+]
