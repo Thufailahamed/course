@@ -1,5 +1,6 @@
-// Python for Data Science: a fully interactive course. Lesson bodies live in ./lessons/*.md,
-// checkpoint quizzes in ./quizzes/*.json. Validate with: node seed/courses/validate.mjs python-for-data-science
+// Python for Data Science: a fully interactive course. Lesson bodies live in
+// ./lessons/*.md, the checkpoint quiz in ./quizzes/s1.json. Validate with:
+//   node seed/courses/validate.mjs python-for-data-science
 export const course = {
   slug: "python-for-data-science",
   title: "Python for Data Science",
@@ -12,54 +13,50 @@ export const course = {
   accent: 210,
   featured: false,
   students: 88420,
-  tags: ["Python", "pandas", "NumPy", "Free"],
+  tags: ["Python", "pandas", "NumPy", "Matplotlib", "Interactive", "Data Analysis", "Free"],
   learn: [
-    "Write clean, idiomatic Python for data work",
-    "Select, filter, clean and reshape tabular data with pandas",
-    "Group, join and summarize data the way analysts do every day",
-    "Work with time series: parse dates, resample and smooth",
-    "Plot honest, readable charts with matplotlib and pandas",
-    "Run a complete exploratory data analysis and report what you found",
+    "Write clean, idiomatic Python for real data work — types, control flow, functions and comprehensions",
+    "Think in arrays: index, slice, reshape and broadcast NumPy data without loops",
+    "Load, clean, filter, group, join and reshape tables with pandas",
+    "Choose the right chart and build clear, publication-ready visualizations with matplotlib",
+    "Run a complete exploratory analysis, from a messy CSV to written, evidence-backed conclusions",
+    "Read shape, dtype, merge and missing-value errors, then fix them with a real debugger",
   ],
   requirements: [
-    "No programming experience required. You will learn Python as you go",
-    "A modern browser. Python, NumPy, pandas and matplotlib run in the page",
+    "No data-science experience required — we start with the Python you need",
+    "A modern browser. Python, pandas, NumPy and matplotlib run inside the page; nothing to install",
   ],
   audience: [
-    "Complete beginners who want a career in data",
-    "Analysts moving from spreadsheets to code",
-    "Engineers who need to explore data before building models",
+    "Complete beginners moving from spreadsheets to code",
+    "Analysts who want to turn one-off Excel work into repeatable Python",
+    "Students preparing for machine learning, statistics or a data role",
+    "Developers who know Python but want practical NumPy, pandas and EDA fluency",
   ],
-  description: `Data science starts with a simple question and a messy table. This course teaches the everyday craft of turning raw data into answers: writing clear Python, reshaping tables with pandas, cleaning the mistakes that every real dataset contains, drawing charts that tell the truth, and presenting what you found.
+  description: `Most data-science courses show you a finished notebook and ask you to believe it. This one hands you the keyboard: **every lesson is a live coding environment** with Python, pandas, NumPy and matplotlib running inside your browser.
 
-## Learn by doing
+## Learn by doing, not by watching
 
-- **Runnable code everywhere.** Every idea is a cell you can edit, run and break in the page.
-- **Real analysis workflows.** You clean a messy sales table, reshape it, and answer business questions with it.
-- **Challenges with hidden tests.** Your functions are checked on new data, so a hard-coded answer will not pass.
-- **Debug challenges.** You fix the mistakes analysts actually make: chained assignment that silently does nothing, joins that duplicate rows, averages over missing values, and charts with misleading axes.
-- **Predict-the-output questions** that build a feel for how pandas behaves before you run it.
+- **Ten hands-on lessons, one checkpoint quiz.** Every concept is followed by runnable code you can edit and break.
+- **30 auto-checked challenges.** Hidden tests check behaviour, not one specific answer, and progressive hints meet you where you're stuck.
+- **Debug challenges.** Real analyst bugs — a string column that should be numeric, a merge that duplicates rows, a broadcast that silently subtracts from the wrong axis — that you track down and fix.
+- **Predict-the-output questions** train you to read code before you run it.
+- **A real step-through debugger.** Watch variables change line by line instead of guessing.
+- **Atlas, your AI tutor,** explains any error in plain language without spoiling the exercise.
 
-## What you'll cover
+## From first variable to first insight
 
-- **Python for data:** clean containers, comprehensions and functions you can test.
-- **NumPy for data:** arrays, boolean masks and missing values, as the engine under pandas.
-- **pandas:** DataFrames, selection, cleaning, grouping, joining, reshaping and time series.
-- **Visualization:** matplotlib from first principles, pandas plotting, and the design rules behind honest charts.
-- **Exploratory analysis:** a repeatable workflow, outliers, relationships, and a capstone analysis from start to finish.
+You'll start with the Python primitives that every DataFrame column is built from, then move through NumPy arrays, pandas tables, grouping, joins and reshaping, and finish by running a complete exploratory analysis on a messy subscription dataset and defending your conclusions with charts.
 
-## Why this course?
+## Built for what comes next
 
-Every machine-learning project begins here. Most of the hours in a data job go into loading, checking, cleaning and understanding data, not into fancy models. This course gives you those skills in the order you will use them.
-
-No prior experience is needed. You will get the most from it by running every cell and trying to predict the output first.`,
+NumPy and pandas are the substrate under scikit-learn, PyTorch, Jupyter, BI tools and almost every production ML pipeline. The habits you build here — vectorize, inspect shapes, validate joins, plot the distribution before modelling — will stay useful long after this course ends.`,
 };
 
 // Links attached to the first lesson.
 export const resources = [
-  { title: "pandas documentation: getting started", url: "https://pandas.pydata.org/docs/getting_started/index.html" },
-  { title: "Python for Data Analysis (Wes McKinney, free online chapters)", url: "https://wesmckinney.com/book/" },
-  { title: "Matplotlib tutorials", url: "https://matplotlib.org/stable/tutorials/index.html" },
+  { title: "pandas: 10 minutes to pandas", url: "https://pandas.pydata.org/docs/user_guide/10min.html" },
+  { title: "NumPy: the absolute basics for beginners", url: "https://numpy.org/doc/stable/user/absolute_beginners.html" },
+  { title: "Matplotlib: anatomy of a figure", url: "https://matplotlib.org/stable/users/explain/figure/figure_intro.html" },
 ];
 
 const lesson = (file, title, minutes, extra = {}) => ({ file, title, minutes, ...extra });
@@ -67,47 +64,34 @@ const quiz = (file, title) => ({ quiz: file, title });
 
 export const sections = [
   {
-    title: "Python for Data Work",
+    title: "Python Essentials",
     lessons: [
-      lesson("01-welcome.md", "How this course works", 8, { preview: true }),
-      lesson("02-python-for-data.md", "Containers, loops and comprehensions for data", 16),
-      lesson("03-functions-clean-code.md", "Functions you can trust", 16),
+      lesson("01-welcome.md", "Welcome: how this course works", 8, { preview: true }),
+      lesson("02-variables-control-flow.md", "Variables, types and control flow", 16, { preview: true }),
+      lesson("03-functions-comprehensions.md", "Functions and comprehensions", 14),
     ],
   },
   {
-    title: "NumPy for Data",
+    title: "NumPy",
     lessons: [
-      lesson("04-arrays-and-masks.md", "Arrays, boolean masks and vectorized thinking", 16),
-      lesson("05-missing-values.md", "Missing values with NumPy", 14),
+      lesson("04-arrays-broadcasting.md", "Arrays and broadcasting", 17),
+      lesson("05-vectorization.md", "Vectorization in practice", 12),
     ],
   },
   {
-    title: "pandas Essentials",
+    title: "pandas",
     lessons: [
-      lesson("06-dataframes.md", "DataFrames: load, inspect and summarize", 18),
-      lesson("07-selecting-filtering.md", "Selecting, filtering and assigning", 18),
-      lesson("08-cleaning-data.md", "Cleaning data: types, duplicates and gaps", 20),
-      lesson("09-grouping-aggregation.md", "Grouping and aggregation", 18),
-      lesson("10-joining-reshaping.md", "Joining and reshaping tables", 18),
-      lesson("11-time-series.md", "Time series: dates, resampling and rolling windows", 18),
-      quiz("s1.json", "Checkpoint: pandas essentials"),
+      lesson("06-dataframes.md", "DataFrames 101", 17),
+      lesson("07-grouping.md", "Grouping and aggregation", 14),
+      lesson("08-joining-reshaping.md", "Joining and reshaping", 14),
+      quiz("s1.json", "Checkpoint: pandas"),
     ],
   },
   {
-    title: "Visualization",
+    title: "Visualization & EDA",
     lessons: [
-      lesson("12-matplotlib-basics.md", "Plotting with matplotlib from first principles", 16),
-      lesson("13-plotting-dataframes.md", "Plotting DataFrames and choosing the right chart", 16),
-      lesson("14-honest-charts.md", "Charts that tell the truth", 14),
-    ],
-  },
-  {
-    title: "Exploratory Data Analysis",
-    lessons: [
-      lesson("15-eda-workflow.md", "A repeatable exploratory workflow", 18),
-      lesson("16-relationships-outliers.md", "Relationships, correlation and outliers", 18),
-      lesson("17-capstone-sales-analysis.md", "Capstone: a complete sales analysis", 30),
-      quiz("s2.json", "Final assessment: Python for Data Science"),
+      lesson("09-plotting.md", "Plotting with matplotlib and seaborn", 14),
+      lesson("10-end-to-end-eda.md", "An end-to-end EDA", 19),
     ],
   },
 ];

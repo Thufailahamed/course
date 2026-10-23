@@ -417,6 +417,21 @@ for (const e of enrollments) {
   });
 }
 
+// The published Python for Data Science page shows a stable 4.6 from 40
+// ratings. Keep that catalog identity independent of the random review sample
+// used for the rest of the seed data.
+const pdsId = courseBySlug["python-for-data-science"];
+const pdsReviewers = [...new Set(enrollments.filter((e) => e.course_id === pdsId).map((e) => e.user_id))];
+if (pdsReviewers.length < 40) throw new Error(`python-for-data-science needs 40 reviewers, found ${pdsReviewers.length}`);
+for (let i = reviews.length - 1; i >= 0; i--) if (reviews[i].course_id === pdsId) reviews.splice(i, 1);
+const pdsRatings = [...Array(24).fill(5), ...Array(16).fill(4)];
+pdsReviewers.slice(0, pdsRatings.length).forEach((userId, i) => {
+  const rating = pdsRatings[i];
+  const [title, body] = data.reviewTemplates[i % 9];
+  const enrollment = enrollments.find((e) => e.course_id === pdsId && e.user_id === userId);
+  reviews.push({ id: id("rev"), user_id: userId, course_id: pdsId, rating, title, body, created_at: enrollment.created_at, updated_at: enrollment.created_at });
+});
+
 /* ── demo student: enrolled, mid-way, with a streak ─────── */
 const demoCourses = [
   ["deep-learning-foundations", 0.45],

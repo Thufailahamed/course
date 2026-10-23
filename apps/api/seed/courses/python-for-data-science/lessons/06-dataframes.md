@@ -1,186 +1,269 @@
-A **DataFrame** is a table: rows are observations, columns are named variables, and each column holds one type of value. It is the central object of pandas, and most of your analysis will begin with loading one and asking what it contains. This lesson shows how to load data, how to look at it before you trust it, and how to summarize it.
+# DataFrames 101
 
-The examples use a small sales export, stored as text so the page needs no files. Reading from `io.StringIO` is the same as reading a real CSV file.
+A NumPy array is a grid of values. A pandas **DataFrame** is a grid of values *with names*: named columns, a row index, and a dtype per column. That sounds like a small difference. In practice it is the difference between remembering that column 3 is price and writing `orders["unit_price"]`.
 
-## Load a table
+In this lesson you'll create a DataFrame, inspect it before touching it, select rows and columns, derive new columns, parse dates and handle missing values. These are the moves you will repeat in every analysis.
+
+## A table with names
 
 ```python run
-import io
 import pandas as pd
 
-CSV = """date,city,product,units,price
-2026-01-03,Lyon,Tea,4,6.50
-2026-01-03,Paris,Coffee,2,9.00
-2026-01-04,Lyon,Coffee,1,9.00
-2026-01-05,Nice,Tea,,6.50
-2026-01-06,Paris,Tea,5,6.50
-2026-02-01,Nice,Coffee,3,9.50
-2026-02-02,Lyon,Tea,2,6.50
-2026-02-02,Paris,Coffee,4,9.50
-"""
+orders = pd.DataFrame({
+    "order_id": ["A-100", "A-101", "A-102", "A-103", "A-104", "A-105"],
+    "city": ["Lisbon", " Porto ", "Lisbon", "Madrid", "porto", "Madrid"],
+    "units": [2, 1, 4, 3, 2, 5],
+    "unit_price": [19.99, 5.50, 12.00, 8.25, 4.25, 2.00],
+    "status": ["delivered", "delivered", "cancelled", "delivered", "pending", "delivered"],
+    "ordered_at": ["2026-01-03", "2026-01-04", "2026-01-09", "2026-02-01", "2026-02-02", "2026-02-08"],
+})
 
-sales = pd.read_csv(io.StringIO(CSV))
-sales
+orders
 ```
 
-`read_csv` read the header row for the column names and guessed a type for each column. Notice that the empty units cell on 5 January became a missing value, shown as `NaN`.
+A DataFrame has an **index** on the left (0–5 here) and a **column index** across the top. The index is a label, not data — but it can carry meaning, and it participates in alignment when you combine tables.
 
-## Look before you trust
-
-Three methods answer most first questions about a new table: what it looks like, what types it has, and whether anything is missing.
+## Inspect before you analyze
 
 ```python run
-print(sales.shape)
-sales.head(3)
+print("shape:", orders.shape)
+print("\ndtypes:")
+print(orders.dtypes)
+print("\nfirst three rows:")
+print(orders.head(3))
 ```
+
+`shape` is `(rows, columns)`. `dtypes` tells you whether `units` is a number or text. `head()` shows the first rows without dumping the whole table. For a new dataset, also run `orders.info()` and `orders.describe()`: the first reports non-null counts and memory, the second summarizes numeric columns.
+
+> **Tip:** Do not skip this step. A numeric-looking column stored as `object` will break arithmetic later, and a date stored as text cannot be filtered by month.
+
+## Select rows and columns
+
+`[]` with a column name returns a Series. `.loc` selects by **label**; `.iloc` selects by **position**. The distinction matters once your index is not 0, 1, 2…
 
 ```python run
-sales.info()
+print(orders["city"].head())
+print("\nlabel selection:")
+print(orders.loc[1, ["order_id", "city", "units"]])
+print("\nposition selection:")
+print(orders.iloc[:3, :3])
 ```
 
-`info` lists every column with its type and how many values are not missing. A column with fewer non-null values than rows has gaps, and you now know which.
+`.loc[1, ["order_id", "city", "units"]]` means "row with index label 1, these columns". `.iloc[0:3, 0:3]` means "the first three rows and the first three columns". Mixing them up is a classic source of wrong-row bugs.
 
-## Summaries
+## Filter rows
 
-`describe` gives count, mean, spread and quartiles for every numeric column in one table.
+A boolean Series selects the rows where it is true. Combine conditions with `&` and `|`, and wrap each comparison in parentheses.
 
 ```python run
-sales.describe()
+delivered = orders[(orders["status"] == "delivered") & (orders["units"] >= 2)]
+delivered = delivered.sort_values("units", ascending=False)
+delivered
 ```
 
-Read it critically. The count of `units` is smaller than the number of rows because of the missing value, and `describe` quietly skips it. An average of a column always tells you how many values it used.
+`orders["units"] >= 2` is a Series of booleans, one per row. The outer `orders[...]` keeps the rows whose value is `True`. The result keeps the original index labels; that is normal and useful for tracing rows back.
 
-## Single columns and simple statistics
+## Derive columns
+
+New columns are assigned like dictionary keys. String columns have a `.str` accessor; dates need `pd.to_datetime` before `.dt` works.
 
 ```python run
-print("units total:", sales["units"].sum())
-print("average price:", round(sales["price"].mean(), 2))
-print("distinct products:", sales["product"].nunique())
-print("most common city:", sales["city"].value_counts().index[0])
+orders["revenue"] = orders["units"] * orders["unit_price"]
+orders["city"] = orders["city"].str.strip().str.title()
+orders["ordered_at"] = pd.to_datetime(orders["ordered_at"])
+orders["month"] = orders["ordered_at"].dt.to_period("M")
+
+orders.sort_values("revenue", ascending=False).head()
 ```
 
-`value_counts` is the quick way to see how often each category appears, and it is the first thing to check on any text column.
+Every operation is vectorized: the multiplication happens across the whole column at once. `dt.to_period("M")` produces a month label such as `2026-01`, which is ideal for grouping later.
 
-## Create and check a new column
-
-You can derive new columns from existing ones. Each new column is a vectorized calculation, the same idea you saw with NumPy arrays.
+## Missing values are information
 
 ```python run
-sales["revenue"] = sales["units"] * sales["price"]
-print(sales[["city", "units", "price", "revenue"]])
+messy = pd.DataFrame({
+    "order_id": ["B-1", "B-2", "B-3"],
+    "quantity": [2, None, 4],
+    "unit_price": [10.0, 5.0, 2.5],
+})
+
+print(messy.isna())
+print("\nrows with any missing value:")
+print(messy[messy.isna().any(axis=1)])
+
+messy["quantity"] = messy["quantity"].fillna(0).astype(int)
+messy["revenue"] = messy["quantity"] * messy["unit_price"]
+messy
 ```
 
-Notice that the missing units produced a missing revenue. pandas propagates gaps through calculations rather than inventing values, which is the honest behavior.
+`fillna(0)` is a decision, not a default. For a missing quantity, zero may mean "nothing shipped"; for a missing price, zero would silently erase revenue. Sometimes `dropna()` is the honest choice. Decide with the business meaning in mind.
 
-## Challenge: load orders from text
+> **Pitfall:** `astype(int)` on a column with `NaN` raises. Fill or drop the missing values first. And `int` is not always right: a count can be integer; a price should stay float.
 
-```python exercise id=load-orders title="Load a CSV with parsed dates"
-import io
+## Your turn: clean the order export
+
+The export has padded city names, quantities stored as text, a missing quantity and dates stored as text. Produce `clean` with:
+
+- `city` stripped and title-cased
+- `quantity` as an integer, with missing values filled as 0
+- `revenue = quantity * unit_price`
+- `ordered_at` parsed as a datetime
+- `month` as a `Period` such as `2026-01`
+
+```python exercise id=clean-orders title="Clean the order export"
 import pandas as pd
 
-# TODO: `load_orders(text)` takes CSV text with a "date" column and returns a DataFrame. The "date"
-# column must be parsed as datetimes (not plain text). All other columns keep the types pandas gives them.
-def load_orders(text):
-    ...
+raw = pd.DataFrame({
+    "order_id": ["A-1", "A-2", "A-3", "A-4"],
+    "city": [" lisbon ", "PORTO", "Lisbon", " porto "],
+    "quantity": ["2", "1", None, "3"],
+    "unit_price": [19.99, 5.50, 12.00, 4.25],
+    "ordered_at": ["2026-01-03", "2026-01-04", "2026-02-01", "2026-02-02"],
+    "status": ["delivered", "cancelled", "delivered", "delivered"],
+})
+
+clean = raw.copy()
+
+# TODO: transform the columns in `clean`.
+clean["city"] = ...
+clean["quantity"] = ...
+clean["revenue"] = ...
+clean["ordered_at"] = ...
+clean["month"] = ...
 --- solution
-import io
 import pandas as pd
 
-def load_orders(text):
-    return pd.read_csv(io.StringIO(text), parse_dates=["date"])
+raw = pd.DataFrame({
+    "order_id": ["A-1", "A-2", "A-3", "A-4"],
+    "city": [" lisbon ", "PORTO", "Lisbon", " porto "],
+    "quantity": ["2", "1", None, "3"],
+    "unit_price": [19.99, 5.50, 12.00, 4.25],
+    "ordered_at": ["2026-01-03", "2026-01-04", "2026-02-01", "2026-02-02"],
+    "status": ["delivered", "cancelled", "delivered", "delivered"],
+})
+
+clean = raw.copy()
+clean["city"] = clean["city"].str.strip().str.title()
+clean["quantity"] = clean["quantity"].fillna(0).astype(int)
+clean["revenue"] = clean["quantity"] * clean["unit_price"]
+clean["ordered_at"] = pd.to_datetime(clean["ordered_at"])
+clean["month"] = clean["ordered_at"].dt.to_period("M")
 --- test
-import io
-import pandas as pd
-text = "date,amount\n2026-03-01,10\n2026-03-02,20\n"
-result = load_orders(text)
-assert result is not None, "Replace the `...` in `load_orders` with code that returns the DataFrame."
-assert isinstance(result, pd.DataFrame), "load_orders should return a DataFrame."
-assert pd.api.types.is_datetime64_any_dtype(result["date"]), "The date column should be parsed as datetimes. Use parse_dates=['date'] in read_csv."
-assert result["amount"].sum() == 30, "The amounts should be read as numbers and sum to 30."
-assert len(result) == 2, "There are two rows of data."
+assert clean["city"].tolist() == ["Lisbon", "Porto", "Lisbon", "Porto"], f"City values should be cleaned, but are {clean['city'].tolist()}."
+assert pd.api.types.is_integer_dtype(clean["quantity"]), f"`quantity` should be an integer column, but has dtype {clean['quantity'].dtype}. Convert the text and fill the missing value."
+assert clean["quantity"].tolist() == [2, 1, 0, 3], f"`quantity` should be [2, 1, 0, 3], but is {clean['quantity'].tolist()}."
+assert clean["revenue"].round(2).tolist() == [39.98, 5.50, 0.0, 12.75], f"Revenue should be [39.98, 5.5, 0.0, 12.75], but is {clean['revenue'].round(2).tolist()}."
+assert str(clean["month"].iloc[0]) == "2026-01" and str(clean["month"].iloc[2]) == "2026-02", "`month` should be a Period column such as 2026-01."
+assert clean.shape == (4, 8), f"`clean` should have 4 rows and 8 columns, but has shape {clean.shape}."
 --- hint
-`pd.read_csv` accepts a `parse_dates` argument, a list of column names to convert to dates. Wrap the text in `io.StringIO`.
+String methods live on `.str`: `clean["city"].str.strip().str.title()`.
 --- hint
-`return pd.read_csv(io.StringIO(text), parse_dates=["date"])`.
+For `quantity`, fill first, then convert: `clean["quantity"].fillna(0).astype(int)`. For the date, use `pd.to_datetime`, then `.dt.to_period("M")`.
 ```
 
-## Challenge: profile a table
+## Your turn: the top delivered orders
 
-```python exercise id=column-profile title="Profile a DataFrame"
+Filter to delivered orders with revenue at least 50, sort by revenue from highest to lowest, and keep the first two rows in `result`.
+
+```python exercise id=top-orders title="Find the top delivered orders"
 import pandas as pd
 
-# TODO: `column_profile(df)` returns a dictionary with three keys: "rows" (the number of rows), "columns"
-# (the list of column names, in order) and "missing" (the total number of missing cells in the whole table).
-def column_profile(df):
-    ...
+orders = pd.DataFrame({
+    "order_id": ["A", "B", "C", "D", "E"],
+    "status": ["delivered", "delivered", "cancelled", "delivered", "delivered"],
+    "revenue": [80.0, 20.0, 100.0, 60.0, 50.0],
+})
+
+# TODO: filter, sort, and take the top two.
+result = ...
 --- solution
 import pandas as pd
 
-def column_profile(df):
-    return {"rows": len(df), "columns": list(df.columns), "missing": int(df.isna().sum().sum())}
+orders = pd.DataFrame({
+    "order_id": ["A", "B", "C", "D", "E"],
+    "status": ["delivered", "delivered", "cancelled", "delivered", "delivered"],
+    "revenue": [80.0, 20.0, 100.0, 60.0, 50.0],
+})
+
+result = (
+    orders[(orders["status"] == "delivered") & (orders["revenue"] >= 50)]
+    .sort_values("revenue", ascending=False)
+    .head(2)
+)
 --- test
-import numpy as np
-import pandas as pd
-df = pd.DataFrame({"a": [1, np.nan, 3], "b": ["x", None, "z"]})
-result = column_profile(df)
-assert result is not None, "Replace the `...` in `column_profile` with code that returns the dictionary."
-assert result["rows"] == 3, "The table has three rows."
-assert result["columns"] == ["a", "b"], f"The column names should be a and b, in order, but you returned {result['columns']}."
-assert result["missing"] == 2, "There are two missing cells: one in a and one in b."
+assert result is not ..., "Replace the `...` after `result =`."
+assert result.shape[0] == 2, f"`result` should have 2 rows, but has {result.shape[0]}. Did you sort before taking the top two?"
+assert result["order_id"].tolist() == ["A", "D"], f"The top two delivered orders should be A and D, but got {result['order_id'].tolist()}."
+assert result["revenue"].tolist() == [80.0, 60.0], f"Revenue should be [80.0, 60.0], but is {result['revenue'].tolist()}."
 --- hint
-`len(df)` gives the number of rows, and `list(df.columns)` the names. For the missing total, `df.isna().sum()` gives one count per column, and summing that gives the total.
+Build the boolean mask first: status is delivered **and** revenue is at least 50. Use `&` with parentheses.
 --- hint
-`int(df.isna().sum().sum())` counts all missing cells.
+Chain `.sort_values("revenue", ascending=False)` and `.head(2)` after filtering.
 ```
 
-## Debug the header
+## The column that is secretly text
 
-This code is meant to read the file and find the `units` column, but it fails.
+This table looks numeric, but the quantity column holds strings. The multiplication fails before the lesson can print. Fix the type at the boundary, then verify the revenue.
 
-```python debug id=header-row title="Use the header row"
-import io
+```python debug id=string-revenue title="Numbers stored as text"
 import pandas as pd
 
-CSV = "date,city,units\n2026-01-03,Lyon,4\n2026-01-04,Paris,2\n"
-df = pd.read_csv(io.StringIO(CSV), header=None)     # bug: this treats the header as data
-print(df["units"].sum())
+orders = pd.DataFrame({
+    "order_id": ["B-1", "B-2", "B-3"],
+    "quantity": ["2", "3", "1"],
+    "unit_price": [10.0, 5.0, 20.0],
+})
+
+orders["revenue"] = orders["quantity"] * orders["unit_price"]
+print(orders)
 --- solution
-import io
 import pandas as pd
 
-CSV = "date,city,units\n2026-01-03,Lyon,4\n2026-01-04,Paris,2\n"
-df = pd.read_csv(io.StringIO(CSV))
-print(df["units"].sum())
+orders = pd.DataFrame({
+    "order_id": ["B-1", "B-2", "B-3"],
+    "quantity": ["2", "3", "1"],
+    "unit_price": [10.0, 5.0, 20.0],
+})
+
+orders["quantity"] = orders["quantity"].astype(int)
+orders["revenue"] = orders["quantity"] * orders["unit_price"]
+print(orders)
 --- test
-assert "units" in df.columns, f"The columns should be named from the header row, but they are {list(df.columns)}. Remove header=None."
-assert df["units"].sum() == 6, "The units should sum to 6."
+assert pd.api.types.is_integer_dtype(orders["quantity"]), f"`quantity` should be an integer column, but has dtype {orders['quantity'].dtype}."
+assert orders["quantity"].tolist() == [2, 3, 1], "The numeric values should stay 2, 3 and 1."
+assert orders["revenue"].tolist() == [20.0, 15.0, 20.0], f"Revenue should be [20.0, 15.0, 20.0], but is {orders['revenue'].tolist()}."
 --- hint
-`header=None` tells pandas there is no header row, so the names become numbers and the first line is treated as data.
+Read the error. Is pandas multiplying numbers, or trying to repeat a string?
 --- hint
-Remove the `header=None` argument. The default reads the first row as column names.
+Convert the column before multiplying: `orders["quantity"] = orders["quantity"].astype(int)`.
 ```
 
-## Predict the shape
+## Predict the filter
 
-```python predict id=predict-shape title="What is the shape of the table?"
-import io
+```python predict id=predict-row-count title="How many Lisbon rows?"
 import pandas as pd
-df = pd.read_csv(io.StringIO("a,b\n1,2\n3,4\n5,6\n"))
-print(df.shape)
+
+df = pd.DataFrame({
+    "city": ["Lisbon", "Porto", "Lisbon"],
+    "units": [2, 3, 4],
+})
+
+print(df[df["city"] == "Lisbon"].shape[0])
 --- options
-* (3, 2)
-(2, 3)
-(4, 2)
-(3, 3)
+1
+* 2
+3
+4
 --- explain
-The header gives two columns, and the three data rows give three rows. The header is not counted as a row, so the shape is (3, 2) for rows and columns in that order.
+The boolean mask is `[True, False, True]`, so two rows survive. `.shape[0]` then reads the number of rows in the filtered frame.
 ```
 
 ## Recap
 
-- `read_csv` turns text or a file into a DataFrame, and `parse_dates` converts date columns.
-- Look before you trust: `head`, `info`, `describe` and `value_counts` answer the first questions.
-- Missing values are visible in `info`, and pandas carries them through calculations.
-- Create new columns with vectorized expressions over existing ones.
+- A DataFrame has named columns, an index and a dtype per column. Inspect `shape`, `dtypes`, `head()` and `info()` before analysis.
+- Use `[]` for columns, `.loc` for labels, `.iloc` for positions, and boolean masks for filtering.
+- Derive columns with vectorized arithmetic; use `.str` for text and `pd.to_datetime` + `.dt` for dates.
+- Missing values are a decision: fill them only when the substitute is meaningful.
+- Convert text to numbers before arithmetic. A dtype bug is not a formatting problem.
 
-**Up next:** selecting and filtering rows and columns, which is how you ask a table specific questions.
+**Up next:** you'll stop looking at individual rows and start answering questions about groups: revenue by region, average order by plan, share of total by month.

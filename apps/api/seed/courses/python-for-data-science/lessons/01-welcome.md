@@ -1,123 +1,169 @@
-Welcome to **Python for Data Science**. Almost every data question you will ever answer follows the same path: load a table, check that it means what you think it means, clean it, reshape it, look at it, and then say something true about it. This course walks that path with you, one step at a time, using the tools the profession uses: Python, NumPy, pandas and matplotlib.
+# Welcome: how this course works
 
-You will not just read about these tools. Every example is a live cell, and every challenge is a function you write and test. By the end you will have analyzed a messy sales dataset from start to finish.
+You are about to do data science the way it is actually done: in a notebook, with real code, making mistakes and fixing them. This page is the orientation. In the next ten minutes you'll run your first pandas table, learn the four moves every lesson uses, and finish with a checked challenge and a realistic bug.
 
-> **How to use this lesson:** read a little, run a little. Edit a value in a cell and run it again to see what changes.
+There are no videos to sit through and nothing to install. Python 3, NumPy, pandas and matplotlib run inside this page, in your browser. Every grey block is a live cell: edit it, press **Run**, and the result appears underneath.
 
-## Run your first cell
+## The loop: read, run, break, fix
 
-Click **Run** on the cell below, or click inside it and press **Shift + Enter**.
+Here is a tiny dataset. It describes four learners and how many lessons they finished.
 
 ```python run
 import pandas as pd
 
-sales = pd.DataFrame({
-    "city": ["Lyon", "Paris", "Lyon", "Nice"],
-    "units": [3, 7, 2, 5],
-    "price": [9.5, 8.0, 9.5, 12.0],
+cohort = pd.DataFrame({
+    "learner": ["Amina", "Ben", "Chloe", "Diego"],
+    "hours": [4.5, 2.0, 6.0, 3.5],
+    "completed": [7, 3, 10, 5],
 })
-print(sales)
+
+cohort
 ```
 
-The first run can take a few seconds, because the browser downloads pandas the first time you import it. Later cells reuse it.
+A DataFrame is a table with named columns. The value of the last expression is displayed, so you don't need `print` just to inspect something.
 
-## Cells share memory, like a notebook
-
-Variables you create in one cell are available in the cells below it, once you have run the earlier cell.
+Now change the cell. Add a column, sort it, break it — the kernel is yours. The variables you create persist for the rest of the lesson, like a Jupyter notebook.
 
 ```python run
-sales["revenue"] = sales["units"] * sales["price"]
-sales
+cohort["lessons_per_hour"] = (cohort["completed"] / cohort["hours"]).round(2)
+
+cohort.sort_values("lessons_per_hour", ascending=False)
 ```
 
-The last line of a cell is shown automatically, so ending with a table is a quick way to look at it. **Run all** executes every cell in order, and **Restart** clears memory.
+That is already the shape of most analysis: create a column, derive a rate, rank it, and ask whether the ranking makes sense. (Chloe finishes 1.67 lessons per hour; Ben finishes 1.5. The difference is small, which is itself a finding worth noticing.)
 
-## Errors are information
+## The four moves
 
-Analysts meet errors all day. Here is one on purpose:
+Every lesson follows the same rhythm.
 
-```python run error
-sales["discount"]
-```
+| Move | What you do | What it is for |
+|---|---|---|
+| **Run** | Execute an example and read the output | Build intuition by changing one thing |
+| **Check** | Attempt a challenge, then run the hidden tests | Prove the idea works on fresh data |
+| **Debug** | Fix code that already runs but is wrong | Learn the failure modes you'll meet at work |
+| **Predict** | Commit to an answer *before* running | Read code like an analyst, not a spectator |
 
-Read the message: pandas says the column does not exist. The error card explains the problem in plain language. Most of the time, the fix is to look at the data you actually have, which is the habit this course is built around.
+> **Tip:** Predict first, then run. Being wrong is useful; it shows you exactly which mental model needs updating.
 
-## Predict before you run
+Challenges run in a **fresh** namespace, so they can't peek at variables from the examples above. A challenge that needs a table must define that table in the starter code — just like a function should not depend on a global it doesn't own.
 
-Experienced analysts predict a result before running it. Read the code, choose an answer, then run it.
+## How progress works
 
-```python predict id=predict-filter title="How many rows survive the filter?"
+- A coding challenge is complete when its hidden tests pass. You can retry as many times as you like.
+- The **Debug** button steps through code line by line, forwards and backwards, showing every variable at each stop.
+- **Atlas**, the AI tutor, can explain an error or a concept. It is instructed not to hand you the answer to an exercise.
+- Each lesson ends with a short recap and a single **Up next** line. The checkpoint quiz needs 70% to pass.
+- The course is finished when every lesson is complete and the checkpoint passes.
+
+## Your first check
+
+Complete the cell so `average` holds the mean number of hours across the cohort. The test will check the value, not how you calculated it.
+
+```python exercise id=average-hours title="Find the average study time"
 import pandas as pd
-df = pd.DataFrame({"price": [5, 12, 20, 9]})
-print(len(df[df["price"] > 9]))
+
+cohort = pd.DataFrame({
+    "learner": ["Amina", "Ben", "Chloe", "Diego"],
+    "hours": [4.5, 2.0, 6.0, 3.5],
+})
+
+hours = cohort["hours"]
+
+# TODO: compute the mean of `hours`
+average = ...
+--- solution
+import pandas as pd
+
+cohort = pd.DataFrame({
+    "learner": ["Amina", "Ben", "Chloe", "Diego"],
+    "hours": [4.5, 2.0, 6.0, 3.5],
+})
+
+hours = cohort["hours"]
+average = hours.mean()
+--- test
+assert average is not ..., "Replace the `...` after `average =` with your calculation."
+assert abs(float(average) - 4.0) < 1e-9, f"`average` should be 4.0, but it is {average!r}. Add the four values and divide by how many there are."
+assert len(hours) == 4, "Use all four values in `hours`; don't hard-code a smaller subset."
+--- hint
+`hours` is a pandas Series. It knows how to compute its own mean.
+--- hint
+Call `hours.mean()` and assign the result to `average`.
+```
+
+## Your first debug
+
+This one already runs. That is the dangerous kind. The loop adds a price and a quantity instead of multiplying them, so the reported revenue is nonsense but looks plausible.
+
+Run it, read the output, then fix the operator. Keep the loop and the `zip`.
+
+```python debug id=revenue-miscalculation title="Revenue that doesn't add up"
+prices = [12.50, 8.00, 5.25]
+quantities = [2, 3, 4]
+
+revenue = 0
+for price, quantity in zip(prices, quantities):
+    revenue += price + quantity   # price * quantity is what we mean
+
+print(round(revenue, 2))
+--- solution
+prices = [12.50, 8.00, 5.25]
+quantities = [2, 3, 4]
+
+revenue = 0
+for price, quantity in zip(prices, quantities):
+    revenue += price * quantity
+
+print(round(revenue, 2))
+--- test
+assert revenue == 70.0, f"`revenue` should be 70.0 (25 + 24 + 21), but it is {revenue!r}. What does price + quantity represent?"
+assert _stdout.strip() == "70.0", f"The printed revenue should be 70.0, but the output was {_stdout.strip()!r}."
+--- hint
+Read the loop body literally. `price + quantity` adds $12.50 to 2 units, which is not the same as selling 2 units at $12.50 each.
+--- hint
+Change the `+` in `revenue +=` to `*`. Leave the rest of the loop alone.
+```
+
+## Predict the output
+
+Before running anything, decide what this cell prints.
+
+```python predict id=predict-cohort-size title="How many rows?"
+import pandas as pd
+
+cohort = pd.DataFrame({
+    "learner": ["Amina", "Ben", "Chloe", "Diego"],
+    "hours": [4.5, 2.0, 6.0, 3.5],
+})
+
+print(len(cohort))
 --- options
-* 2
 3
-4
-1
+* 4
+5
+Error: a DataFrame has no length
 --- explain
-Only 12 and 20 are strictly greater than 9. The 9 is excluded because `>` is a strict comparison. The filter keeps two rows, so `len` returns 2.
+`len(df)` returns the number of rows, not the number of columns. There are four learners, so the answer is 4. Use `df.shape` when you want both dimensions: `(4, 2)`.
 ```
 
-## Your first challenge
+## One last look at the data
 
-A **challenge** asks you to write a function. The course runs it against hidden tests on new data, so it has to be correct in general, not only for the example. Press **Check** to test your code, and use the hints if you get stuck.
+You can always ask a table how big it is and what types it holds. `shape` is `(rows, columns)`; `dtypes` tells you which columns are numbers, text or booleans.
 
-```python exercise id=total-revenue title="Total revenue"
-import pandas as pd
-
-# TODO: `total_revenue(df)` should return the sum of the `units * price` for every row, as one number.
-def total_revenue(df):
-    ...
---- solution
-import pandas as pd
-
-def total_revenue(df):
-    return (df["units"] * df["price"]).sum()
---- test
-import pandas as pd
-sample = pd.DataFrame({"units": [2, 1], "price": [3.0, 10.0]})
-result = total_revenue(sample)
-assert result is not None, "Replace the `...` in `total_revenue` with code that returns the total."
-assert abs(result - 16.0) < 1e-9, f"2 × 3 + 1 × 10 = 16, but you returned {result!r}."
-other = pd.DataFrame({"units": [4, 0, 5], "price": [2.5, 99.0, 1.0]})
-assert abs(total_revenue(other) - 15.0) < 1e-9, "Rows with zero units add nothing. Check that you multiply column by column."
---- hint
-Multiply the two columns elementwise: `df["units"] * df["price"]`. Then add up the result with `.sum()`.
---- hint
-`return (df["units"] * df["price"]).sum()`.
+```python run
+print("shape:", cohort.shape)
+print("\ntypes:")
+print(cohort.dtypes)
 ```
 
-## Debug a silent mistake
-
-A **debug challenge** starts with code that runs but does the wrong thing. Here, a discount is meant to apply to expensive items only, but the assignment goes to a copy and changes nothing.
-
-```python debug id=chained-assign title="Make the discount stick"
-import pandas as pd
-
-df = pd.DataFrame({"item": ["pen", "lamp", "desk"], "price": [2.0, 40.0, 150.0]})
-df[df["price"] > 30]["price"] = df["price"] * 0.9      # does this change df?
-print(df)
---- solution
-import pandas as pd
-
-df = pd.DataFrame({"item": ["pen", "lamp", "desk"], "price": [2.0, 40.0, 150.0]})
-df.loc[df["price"] > 30, "price"] = df["price"] * 0.9
-print(df)
---- test
-expected = [2.0, 36.0, 135.0]
-assert list(df["price"].round(6)) == expected, f"Prices should be {expected} after a 10% discount on items over 30, but they are {list(df['price'].round(6))}. Use one `.loc` call that selects rows and the column together."
---- hint
-Chained indexing, `df[mask]["price"] = ...`, can assign to a temporary copy. A single `.loc[rows, column]` assignment updates the original DataFrame.
---- hint
-`df.loc[df["price"] > 30, "price"] = df["price"] * 0.9`, but note the right side is the full column; `.loc` assigns it only to the selected rows.
-```
+Those two lines are the first thing to run on any unfamiliar dataset. A numeric column stored as text is one of the most common causes of a "correct" analysis that is quietly wrong.
 
 ## Recap
 
-- A pandas DataFrame is a table whose columns are series. Operations on columns are vectorized.
-- The last line of a cell is shown automatically, so end with a table to look at it.
-- Read error messages: they usually name the column or line at fault.
-- Write functions that take data and return answers, then test them on fresh data.
+- Cells are live: edit, run, and read the output. Variables persist across run cells.
+- A challenge runs in a fresh namespace and is checked by hidden tests, so it must define everything it needs.
+- Debug challenges are bugs that already run; predict questions force you to commit before executing.
+- `df.shape` gives rows and columns; `df.dtypes` tells you whether the columns mean what you think.
+- Progress is earned by passing tests, not by scrolling.
 
-**Up next:** Python's core data containers, and the comprehensions that turn one table of records into another.
+**Up next:** you'll build the Python foundation every pandas operation rests on — variables, types, conditions and loops — using a messy orders dataset.
